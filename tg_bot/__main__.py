@@ -19,7 +19,7 @@ from tg_bot.modules.helper_funcs.chat_status import is_user_admin
 from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 PM_START_TEXT = """
-Hi {}, my name is {}! If you have any questions on how to use me, read /help - and then head to @MarieSupport.
+안녕 {}, 내 이름은 {}이야! 만약 네가 나를 사용하는데 어떤 문제가 있다면, /help - 를 읽어줘. 그래도 해결이 안되면 @MarieSupport 로 와줘.
 
 I'm a group manager bot built in python3, using the python-telegram-bot library, and am fully opensource; \
 you can find what makes me tick [here](github.com/PaulSonOfLars/tgbot)!
@@ -39,7 +39,7 @@ I'm a modular group management bot with a few fun extras! Have a look at the fol
 the things I can help you with.
 
 *Main* commands available:
- - /start: start the bot
+ - /start: 봇을 시작합니다.
  - /help: PM's you this message.
  - /help <module name>: PM's you info about that module.
  - /donate: information about how to donate!
