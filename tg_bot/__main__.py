@@ -28,7 +28,7 @@ Feel free to submit pull requests on github, or to contact my support group, @Ma
 or feature requests you might have :)
 I also have a news channel, @MarieNews for announcements on new features, downtime, etc.
 
-넌 /help 를 사용하여 사용 가능한 명령 목록을 찾을 수 있습니다.
+당신은 /help 를 사용하여 사용 가능한 명령 목록을 찾을 수 있습니다.
 
 If you're enjoying using me, and/or would like to help me survive in the wild, hit /donate to help fund/upgrade my VPS!
 """
@@ -40,7 +40,7 @@ the things I can help you with.
 
 *Main* commands available:
  - /start: 봇을 시작합니다.
- - /help: PM's you this message.
+ - /help: 개인메시지로 메시지를 보냅니다.
  - /help <module name>: PM's you info about that module.
  - /donate: information about how to donate!
  - /settings:
