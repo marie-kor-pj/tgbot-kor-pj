@@ -15,7 +15,7 @@ from tg_bot.modules.helper_funcs.misc import split_message
 
 BLACKLIST_GROUP = 11
 
-BASE_BLACKLIST_STRING = "Current <b>blacklisted</b> words:\n"
+BASE_BLACKLIST_STRING = "현재 <b>blacklisted</b> 단어들 :\n"
 
 
 @run_async
@@ -37,7 +37,7 @@ def blacklist(bot: Bot, update: Update, args: List[str]):
     split_text = split_message(filter_list)
     for text in split_text:
         if text == BASE_BLACKLIST_STRING:
-            msg.reply_text("There are no blacklisted messages here!")
+            msg.reply_text("Blacklist 메시지가 존재하지 않습니다!")
             return
         msg.reply_text(text, parse_mode=ParseMode.HTML)
 
@@ -55,7 +55,7 @@ def add_blacklist(bot: Bot, update: Update):
             sql.add_to_blacklist(chat.id, trigger.lower())
 
         if len(to_blacklist) == 1:
-            msg.reply_text("Added <code>{}</code> to the blacklist!".format(html.escape(to_blacklist[0])),
+            msg.reply_text("<code>{}</code> 가 Blacklist에 추가되었습니다!".format(html.escape(to_blacklist[0])),
                            parse_mode=ParseMode.HTML)
 
         else:
@@ -83,10 +83,10 @@ def unblacklist(bot: Bot, update: Update):
 
         if len(to_unblacklist) == 1:
             if successful:
-                msg.reply_text("Removed <code>{}</code> from the blacklist!".format(html.escape(to_unblacklist[0])),
+                msg.reply_text("<code>{}</code> 가 Blacklist에서 제거되었습니다!".format(html.escape(to_unblacklist[0])),
                                parse_mode=ParseMode.HTML)
             else:
-                msg.reply_text("This isn't a blacklisted trigger...!")
+                msg.reply_text("이 단어는 Blacklist에 오른 단어가 아닙니다...!")
 
         elif successful == len(to_unblacklist):
             msg.reply_text(
@@ -126,7 +126,7 @@ def del_blacklist(bot: Bot, update: Update):
                 if excp.message == "Message to delete not found":
                     pass
                 else:
-                    LOGGER.exception("Error while deleting blacklist message.")
+                    LOGGER.exception("Blacklist 메시지 제거중 에러발생!")
             break
 
 
