@@ -60,10 +60,10 @@ def add_blacklist(bot: Bot, update: Update):
 
         else:
             msg.reply_text(
-                "Added <code>{}</code> triggers to the blacklist.".format(len(to_blacklist)), parse_mode=ParseMode.HTML)
+                "<code>{}</code> 가 Blacklist 단어로 추가되었습니다.".format(len(to_blacklist)), parse_mode=ParseMode.HTML)
 
     else:
-        msg.reply_text("Tell me which words you would like to add to the blacklist.")
+        msg.reply_text("블랙리스트에 추가할 단어를 알려주십시오.")
 
 
 @run_async
