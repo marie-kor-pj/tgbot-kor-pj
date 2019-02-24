@@ -184,7 +184,7 @@ def invite(bot: Bot, update: Update):
         else:
             update.effective_message.reply_text("I don't have access to the invite link, try changing my permissions!")
     else:
-        update.effective_message.reply_text("I can only give you invite links for supergroups and channels, sorry!")
+        update.effective_message.reply_text("슈퍼그룹과 채널에서만 초대 링크를 얻을 수 있습니다. 죄송합니다.")
 
 
 @run_async
@@ -207,14 +207,14 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- - /adminlist: list of admins in the chat
+ - /adminlist: 채팅방의 관리자 목록
 
-*Admin only:*
- - /pin: silently pins the message replied to - add 'loud' or 'notify' to give notifs to users.
- - /unpin: unpins the currently pinned message
- - /invitelink: gets invitelink
- - /promote: promotes the user replied to
- - /demote: demotes the user replied to
+*관리자용 명령어:*
+ - /pin: 답장 처리된 메시지를 고정합니다- 'loud'나 'notify'로 유저들에게 알림을 표시할 수 있습니다
+ - /unpin: 현재 고정된 메시지를 고정해제 시킵니다.
+ - /invitelink: 초대 링크를 불러옵니다.
+ - /promote: 답장처리된 메시지의 작성자를 관리자로 임명합니다.
+ - /demote: 답장처리된 메시지의 작성자를 관리자로부터 해임시킵니다.
 """
 
 __mod_name__ = "Admin"
