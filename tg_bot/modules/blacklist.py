@@ -15,7 +15,7 @@ from tg_bot.modules.helper_funcs.misc import split_message
 
 BLACKLIST_GROUP = 11
 
-BASE_BLACKLIST_STRING = "현재 <b>blacklisted</b> 단어들 :\n"
+BASE_BLACKLIST_STRING = "현재 <b>blacklisted</b> 에 추가된 단어들 :\n"
 
 
 @run_async
@@ -37,7 +37,7 @@ def blacklist(bot: Bot, update: Update, args: List[str]):
     split_text = split_message(filter_list)
     for text in split_text:
         if text == BASE_BLACKLIST_STRING:
-            msg.reply_text("Blacklist 메시지가 존재하지 않습니다!")
+            msg.reply_text("블랙리스트에 오른 메세지가 없습니다!")
             return
         msg.reply_text(text, parse_mode=ParseMode.HTML)
 
@@ -60,7 +60,7 @@ def add_blacklist(bot: Bot, update: Update):
 
         else:
             msg.reply_text(
-                "<code>{}</code> 가 Blacklist 단어로 추가되었습니다.".format(len(to_blacklist)), parse_mode=ParseMode.HTML)
+                "<code>{}</code> 가 Blacklist에 추가되었습니다!".format(len(to_blacklist)), parse_mode=ParseMode.HTML)
 
     else:
         msg.reply_text("블랙리스트에 추가할 단어를 알려주십시오.")
@@ -86,25 +86,25 @@ def unblacklist(bot: Bot, update: Update):
                 msg.reply_text("<code>{}</code> 가 Blacklist에서 제거되었습니다!".format(html.escape(to_unblacklist[0])),
                                parse_mode=ParseMode.HTML)
             else:
-                msg.reply_text("이 단어는 Blacklist에 오른 단어가 아닙니다...!")
+                msg.reply_text("이 단어는 Blacklist에 오른 메시지가 아닙니다...!")
 
         elif successful == len(to_unblacklist):
             msg.reply_text(
-                "Removed <code>{}</code> triggers from the blacklist.".format(
+                "<code>{}</code> 가 Blacklist에서 제거되었습니다.".format(
                     successful), parse_mode=ParseMode.HTML)
 
         elif not successful:
             msg.reply_text(
-                "None of these triggers exist, so they weren't removed.".format(
+                "이 메시지들은 모두 존재하지 않기 때문에 제거되지 않았습니다.".format(
                     successful, len(to_unblacklist) - successful), parse_mode=ParseMode.HTML)
 
         else:
             msg.reply_text(
-                "Removed <code>{}</code> triggers from the blacklist. {} did not exist, "
-                "so were not removed.".format(successful, len(to_unblacklist) - successful),
+                "<code>{}</code> 가 Blacklist에서 제거되었습니다. {} 라는 단어는 존재하지 않습니다."
+                "그래서 우리는 삭제할 수 없습니다.".format(successful, len(to_unblacklist) - successful),
                 parse_mode=ParseMode.HTML)
     else:
-        msg.reply_text("Tell me which words you would like to remove from the blacklist.")
+        msg.reply_text("Blacklist에서 어떤 단어를 삭제하고 싶은지 말해주십시오.")
 
 
 @run_async
@@ -123,10 +123,10 @@ def del_blacklist(bot: Bot, update: Update):
             try:
                 message.delete()
             except BadRequest as excp:
-                if excp.message == "Message to delete not found":
+                if excp.message == "삭제할 메시지를 찾을 수 없습니다":
                     pass
                 else:
-                    LOGGER.exception("Blacklist 메시지 제거중 에러발생!")
+                    LOGGER.exception("Blacklist 메시지 삭제 중 오류 발생!")
             break
 
 
@@ -136,7 +136,7 @@ def __migrate__(old_chat_id, new_chat_id):
 
 def __chat_settings__(chat_id, user_id):
     blacklisted = sql.num_blacklist_chat_filters(chat_id)
-    return "There are {} blacklisted words.".format(blacklisted)
+    return "{} 이란 단어는 Blacklist에 오른 단어입니다.".format(blacklisted)
 
 
 def __stats__():
@@ -149,11 +149,8 @@ __mod_name__ = "Word Blacklists"
 __help__ = """
 Blacklists are used to stop certain triggers from being said in a group. Any time the trigger is mentioned, \
 the message will immediately be deleted. A good combo is sometimes to pair this up with warn filters!
-
 *NOTE:* blacklists do not affect group admins.
-
  - /blacklist: View the current blacklisted words.
-
 *Admin only:*
  - /addblacklist <triggers>: Add a trigger to the blacklist. Each line is considered one trigger, so using different \
 lines will allow you to add multiple triggers.
