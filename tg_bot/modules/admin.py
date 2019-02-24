@@ -28,16 +28,16 @@ def promote(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_id = extract_user(message, args)
     if not user_id:
-        message.reply_text("You don't seem to be referring to a user.")
+        message.reply_text("사용자를 말해주세요!")
         return ""
 
     user_member = chat.get_member(user_id)
     if user_member.status == 'administrator' or user_member.status == 'creator':
-        message.reply_text("How am I meant to promote someone that's already an admin?")
+        message.reply_text("이미 관리자네요!")
         return ""
 
     if user_id == bot.id:
-        message.reply_text("I can't promote myself! Get an admin to do it for me.")
+        message.reply_text("저를 승급할 수 없어요! 방 관리자를 한명 불러주세요.")
         return ""
 
     # set same perms as bot - bot can't assign higher perms than itself!
@@ -74,20 +74,20 @@ def demote(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_id = extract_user(message, args)
     if not user_id:
-        message.reply_text("You don't seem to be referring to a user.")
+        message.reply_text("원하는 사용자를 답장하기를 사용해 알려주세요.")
         return ""
 
     user_member = chat.get_member(user_id)
     if user_member.status == 'creator':
-        message.reply_text("This person CREATED the chat, how would I demote them?")
+        message.reply_text("이 사람은 방을 만든 생성자네요! 전 생성자를 강등할 수 없어요.")
         return ""
 
     if not user_member.status == 'administrator':
-        message.reply_text("Can't demote what wasn't promoted!")
+        message.reply_text("일반 멤버는 강등하실 수 없어요.")
         return ""
 
     if user_id == bot.id:
-        message.reply_text("I can't demote myself! Get an admin to do it for me.")
+        message.reply_text("저를 강등할 수 없어요! 방 관리자를 한명 불러주세요.")
         return ""
 
     try:
@@ -109,8 +109,8 @@ def demote(bot: Bot, update: Update, args: List[str]) -> str:
                                           mention_html(user_member.user.id, user_member.user.first_name))
 
     except BadRequest:
-        message.reply_text("Could not demote. I might not be admin, or the admin status was appointed by another "
-                           "user, so I can't act upon them!")
+        message.reply_text("강등햘수 없어요. promote 명령어 로 권한을 주지 않았고, 다른사람이 관리자를 임명한 것 같아요. "
+                           "그래서 전 그분을 강등시킬 수 없어요.")
         return ""
 
 
@@ -182,7 +182,7 @@ def invite(bot: Bot, update: Update):
             invitelink = bot.exportChatInviteLink(chat.id)
             update.effective_message.reply_text(invitelink)
         else:
-            update.effective_message.reply_text("I don't have access to the invite link, try changing my permissions!")
+            update.effective_message.reply_text("초대 링크를 불러올 수 없어요. 저에게 권한을 주세요!")
     else:
         update.effective_message.reply_text("슈퍼그룹과 채널에서만 초대 링크를 얻을 수 있습니다. 죄송합니다.")
 
