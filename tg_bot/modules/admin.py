@@ -109,7 +109,7 @@ def demote(bot: Bot, update: Update, args: List[str]) -> str:
                                           mention_html(user_member.user.id, user_member.user.first_name))
 
     except BadRequest:
-        message.reply_text("강등햘수 없어요. promote 명령어 로 권한을 주지 않았고, 다른사람이 관리자를 임명한 것 같아요. "
+        message.reply_text("강등햘수 없어요. promote 명령어로 권한을 주지 않았고, 다른사람이 관리자를 임명한 것 같아요. "
                            "그래서 전 그분을 강등시킬 수 없어요.")
         return ""
 
@@ -214,7 +214,7 @@ __help__ = """
  - /unpin: 현재 고정된 메시지를 고정해제 시킵니다.
  - /invitelink: 초대 링크를 불러옵니다.
  - /promote: 답장처리된 메시지의 작성자를 관리자로 임명합니다.
- - /demote: 답장처리된 메시지의 작성자를 관리자로부터 해임시킵니다.
+ - /demote: 답장처리된 메시지의 작성자를 관리자로부터 시킵니다.
 """
 
 __mod_name__ = "Admin"
