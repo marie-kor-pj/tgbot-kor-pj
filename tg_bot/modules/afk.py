@@ -22,7 +22,7 @@ def afk(bot: Bot, update: Update):
         reason = ""
 
     sql.set_afk(update.effective_user.id, reason)
-    update.effective_message.reply_text("{} is now AFK!".format(update.effective_user.first_name))
+    update.effective_message.reply_text("{}님이 키보드를 떠났습니다!".format(update.effective_user.first_name))
 
 
 @run_async
@@ -34,7 +34,7 @@ def no_longer_afk(bot: Bot, update: Update):
 
     res = sql.rm_afk(user.id)
     if res:
-        update.effective_message.reply_text("{} is no longer AFK!".format(update.effective_user.first_name))
+        update.effective_message.reply_text("{}님이 다시 돌아왔습니다!".format(update.effective_user.first_name))
 
 
 @run_async
@@ -62,9 +62,9 @@ def reply_afk(bot: Bot, update: Update):
                 valid, reason = sql.check_afk_status(user_id)
                 if valid:
                     if not reason:
-                        res = "{} is AFK!".format(fst_name)
+                        res = "{}님은 현재 키보드를 떠나있습니다!".format(fst_name)
                     else:
-                        res = "{} is AFK! says its because of:\n{}".format(fst_name, reason)
+                        res = "{}님은 현재 키보드를 떠나있습니다! 떠난 이유 :\n{}".format(fst_name, reason)
                     message.reply_text(res)
 
 
@@ -73,10 +73,10 @@ def __gdpr__(user_id):
 
 
 __help__ = """
- - /afk <reason>: mark yourself as AFK.
- - brb <reason>: same as the afk command - but not a command.
+ - /afk <reason>: 키보드를 떠남으로 표시하기.
+ - brb <reason>: afk 명령어와 같다 - 하지만 명령어는 아니다.
 
-When marked as AFK, any mentions will be replied to with a message to say you're not available!
+AFK로 표시되었을 때, 어떤 언급도 당신이 이용할 수 없다는 메시지와 함께 응답될 것입니다!
 """
 
 __mod_name__ = "AFK"
