@@ -184,7 +184,7 @@ def invite(bot: Bot, update: Update):
         else:
             update.effective_message.reply_text("초대 링크를 불러올 수 없어요. 저에게 권한을 주세요!")
     else:
-        update.effective_message.reply_text("슈퍼그룹과 채널에서만 초대 링크를 얻을 수 있습니다. 죄송합니다.")
+        update.effective_message.reply_text("슈퍼그룹과 채널에서만 초대 링크를 얻을 수 있어요.")
 
 
 @run_async
