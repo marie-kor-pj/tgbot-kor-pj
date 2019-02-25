@@ -100,7 +100,7 @@ def unblacklist(bot: Bot, update: Update):
 
         else:
             msg.reply_text(
-                "<code>{}</code> 가 Blacklist에서 제거됬어요. {} 라는 단어는 존재하지 않네요!"
+                "<code>{}</code> 가 Blacklist에서 제거되었어요. {} 라는 단어는 존재하지 않네요!"
                 "그래서 삭제할 수 없어요.".format(successful, len(to_unblacklist) - successful),
                 parse_mode=ParseMode.HTML)
     else:
