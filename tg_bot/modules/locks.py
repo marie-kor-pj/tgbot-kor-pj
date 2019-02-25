@@ -128,7 +128,7 @@ def lock(bot: Bot, update: Update, args: List[str]) -> str:
                                                           mention_html(user.id, user.first_name), args[0])
 
             else:
-                message.reply_text("What are you trying to lock...? Try /locktypes for the list of lockables")
+                message.reply_text("무엇을 잠그려는 것입니까...? Try /locktypes for the list of lockables")
 
     else:
         message.reply_text("I'm not an administrator, or haven't got delete rights.")
