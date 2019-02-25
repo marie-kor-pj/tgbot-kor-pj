@@ -45,7 +45,7 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
         return ""
 
     if user_id == bot.id:
-        message.reply_text("나는 날 Ban할 수 없어요, 너 미쳤니?")
+        message.reply_text("저는 절 Ban할 수 없어요, 너 미쳤니?")
         return ""
 
     log = "<b>{}:</b>" \
@@ -56,7 +56,7 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
                                                        mention_html(member.user.id, member.user.first_name),
                                                        member.user.id)
     if reason:
-        log += "\n<b>Reason:</b> {}".format(reason)
+        log += "\n<b>이유 :</b> {}".format(reason)
 
     try:
         chat.kick_member(user_id)
@@ -138,7 +138,7 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
                                      member.user.id,
                                      time_val)
     if reason:
-        log += "\n<b>Reason:</b> {}".format(reason)
+        log += "\n<b>이유 :</b> {}".format(reason)
 
     try:
         chat.kick_member(user_id, until_date=bantime)
@@ -195,7 +195,7 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
     res = chat.unban_member(user_id)  # unban on current user = kick
     if res:
         bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
-        message.reply_text("Kicked!")
+        message.reply_text("넌 추방이야!")
         log = "<b>{}:</b>" \
               "\n#KICKED" \
               "\n<b>Admin:</b> {}" \
@@ -204,12 +204,12 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
                                                            mention_html(member.user.id, member.user.first_name),
                                                            member.user.id)
         if reason:
-            log += "\n<b>Reason:</b> {}".format(reason)
+            log += "\n<b>이유 :</b> {}".format(reason)
 
         return log
 
     else:
-        message.reply_text("이런...! 난 그 사용자를 추방할 수 없어요!")
+        message.reply_text("이런...! 전  사용자를 추방할 수 없어요!")
 
     return ""
 
@@ -259,11 +259,11 @@ def unban(bot: Bot, update: Update, args: List[str]) -> str:
         return ""
 
     if is_user_in_chat(chat, user_id):
-        message.reply_text("왜 Ban 되지 않은 사람을 Unban하려는거에요?")
+        message.reply_text("왜 Ban 되지 않은 사람을 Unban 하려는 거에요?")
         return ""
 
     chat.unban_member(user_id)
-    message.reply_text("Yep, this user can join!")
+    message.reply_text("예, 해당 유저는 이제 이 방에 들어올 수 있습니다!")
 
     log = "<b>{}:</b>" \
           "\n#UNBANNED" \
