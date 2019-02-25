@@ -74,7 +74,7 @@ def set_flood(bot: Bot, update: Update, args: List[str]) -> str:
                 return "<b>{}:</b>" \
                        "\n#SETFLOOD" \
                        "\n<b>Admin:</b> {}" \
-                       "\nDisabled antiflood.".format(html.escape(chat.title), mention_html(user.id, user.first_name))
+                       "\n도배방지가 비활성화 되었어요.".format(html.escape(chat.title), mention_html(user.id, user.first_name))
 
             elif amount < 3:
                 message.reply_text("Antiflood has to be either 0 (disabled), or a number bigger than 3!")
@@ -82,7 +82,7 @@ def set_flood(bot: Bot, update: Update, args: List[str]) -> str:
 
             else:
                 sql.set_flood(chat.id, amount)
-                message.reply_text("도배방지가 업데이트 되었고, {} 로 맞춰졌어요.".format(amount))
+                message.reply_text("도배방지가 업데이트 되었고, {} 로 설정되었어요.".format(amount))
                 return "<b>{}:</b>" \
                        "\n#SETFLOOD" \
                        "\n<b>Admin:</b> {}" \
@@ -90,7 +90,7 @@ def set_flood(bot: Bot, update: Update, args: List[str]) -> str:
                                                                     mention_html(user.id, user.first_name), amount)
 
         else:
-            message.reply_text("Unrecognised argument - please use a number, 'off', or 'no'.")
+            message.reply_text("올바르지 않은 명령어예요! - 숫자를 사용하여 도배방지 기능을 키거나, 'off' 나 'no' 를 이용하여 도배 방지 기능을 비활성화 하실 수 있어요.")
 
     return ""
 
@@ -101,10 +101,10 @@ def flood(bot: Bot, update: Update):
 
     limit = sql.get_flood_limit(chat.id)
     if limit == 0:
-        update.effective_message.reply_text("I'm not currently enforcing flood control!")
+        update.effective_message.reply_text("현재 도배방지 기능을 사용하지 않고 있어요. 먼저 /setflood를 이용하여 도배방지 기능을 활성화 해 주세요.")
     else:
         update.effective_message.reply_text(
-            "I'm currently banning users if they send more than {} consecutive messages.".format(limit))
+            "도배방지가 {}개로 설정되어있어요!".format(limit))
 
 
 def __migrate__(old_chat_id, new_chat_id):
@@ -114,19 +114,19 @@ def __migrate__(old_chat_id, new_chat_id):
 def __chat_settings__(chat_id, user_id):
     limit = sql.get_flood_limit(chat_id)
     if limit == 0:
-        return "*Not* currently enforcing flood control."
+        return "현재 도배 방지 기능 실행중이 아니예요!"
     else:
-        return "Antiflood is set to `{}` messages.".format(limit)
+        return "도배방지가 {}개로 설정되어있어요!".format(limit)
 
 
 __help__ = """
- - /flood: Get the current flood control setting
+ - /flood: 현재 설정된 도배방지 관련 내용을 확인하실 수 있어요.
 
-*Admin only:*
- - /setflood <int/'no'/'off'>: enables or disables flood control
+*관리자용 명령어*
+ - /setflood <숫자/'no'/'off'>: 도배방지를 활성화하거나 비활성화 하실 수 있어요.
 """
 
-__mod_name__ = "AntiFlood"
+__mod_name__ = "도배방지"
 
 FLOOD_BAN_HANDLER = MessageHandler(Filters.all & ~Filters.status_update & Filters.group, check_flood)
 SET_FLOOD_HANDLER = CommandHandler("setflood", set_flood, pass_args=True, filters=Filters.group)
