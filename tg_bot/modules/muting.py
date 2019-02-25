@@ -25,22 +25,22 @@ def mute(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_id = extract_user(message, args)
     if not user_id:
-        message.reply_text("You'll need to either give me a username to mute, or reply to someone to be muted.")
+        message.reply_text("당신은 제게 Mute를 할 사용자 id를 주거나, 또는 Mute될 누군가를 답장으로 알려주세요.")
         return ""
 
     if user_id == bot.id:
-        message.reply_text("I'm not muting myself!")
+        message.reply_text("전 제 자신을 Mute할 수 없어요!")
         return ""
 
     member = chat.get_member(int(user_id))
 
     if member:
         if is_user_admin(chat, user_id, member=member):
-            message.reply_text("Afraid I can't stop an admin from talking!")
+            message.reply_text("두렵게도 전 관리자가 말을 하는 것을 막을 수 없어요!")
 
         elif member.can_send_messages is None or member.can_send_messages:
             bot.restrict_chat_member(chat.id, user_id, can_send_messages=False)
-            message.reply_text("Muted!")
+            message.reply_text("Mute되었습니다!")
             return "<b>{}:</b>" \
                    "\n#MUTE" \
                    "\n<b>Admin:</b> {}" \
@@ -49,9 +49,9 @@ def mute(bot: Bot, update: Update, args: List[str]) -> str:
                                               mention_html(member.user.id, member.user.first_name))
 
         else:
-            message.reply_text("This user is already muted!")
+            message.reply_text("해당 유저는 이미 Mute 되어 있어요!")
     else:
-        message.reply_text("This user isn't in the chat!")
+        message.reply_text("해당 유저는 이 채팅방에 포함되어있지 않아요!")
 
     return ""
 
@@ -74,7 +74,7 @@ def unmute(bot: Bot, update: Update, args: List[str]) -> str:
 
     if member:
         if is_user_admin(chat, user_id, member=member):
-            message.reply_text("This is an admin, what do you expect me to do?")
+            message.reply_text("해당 유저는 관리자인데, 제가 어떻게 해야 할까요?")
             return ""
 
         elif member.status != 'kicked' and member.status != 'left':
