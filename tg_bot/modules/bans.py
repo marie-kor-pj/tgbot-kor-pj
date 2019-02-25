@@ -34,14 +34,14 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
     try:
         member = chat.get_member(user_id)
     except BadRequest as excp:
-        if excp.message == "해당 유저가 존재하지 않음":
-            message.reply_text("I can't seem to find this user")
+        if excp.message == "User not found":
+            message.reply_text("해당 유저를 찾을수 없어요!")
             return ""
         else:
             raise
 
     if is_user_ban_protected(chat, user_id, member):
-        message.reply_text("나는 정말 내가 관리자들을 추방할 수 있기를 바랍니다...")
+        message.reply_text("관리자는 추방할 수 없어요!")
         return ""
 
     if user_id == bot.id:
@@ -67,7 +67,7 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
     except BadRequest as excp:
         if excp.message == "Reply message not found":
             # Do not reply
-            message.reply_text('Banned!', quote=False)
+            message.reply_text('넌 추방이야!', quote=False)
             return log
         else:
             LOGGER.warning(update)
@@ -98,13 +98,13 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
         member = chat.get_member(user_id)
     except BadRequest as excp:
         if excp.message == "User not found":
-            message.reply_text("I can't seem to find this user")
+            message.reply_text("해당 유저를 찾을 수 없어요!")
             return ""
         else:
             raise
 
     if is_user_ban_protected(chat, user_id, member):
-        message.reply_text("I really wish I could ban admins...")
+        message.reply_text("관리자는 추방할 수 없어요!")
         return ""
 
     if user_id == bot.id:
