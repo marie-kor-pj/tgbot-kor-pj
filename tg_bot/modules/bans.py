@@ -34,7 +34,7 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
     try:
         member = chat.get_member(user_id)
     except BadRequest as excp:
-        if excp.message == "User not found":
+        if excp.message == "해당 유저가 존재하지 않음":
             message.reply_text("I can't seem to find this user")
             return ""
         else:
