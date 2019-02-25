@@ -73,7 +73,7 @@ def filters(bot: Bot, update: Update):
         content, buttons = button_markdown_parser(extracted[1], entities=msg.parse_entities(), offset=offset)
         content = content.strip()
         if not content:
-            msg.reply_text("There is no note message - You can't JUST have buttons, you need a message to go with it!")
+            msg.reply_text("노트 글자가 없어요 - 버튼만 사용하실 수 없고, 함께 보낼 메시지가 꼭 필요해요!")
             return
 
     elif msg.reply_to_message and msg.reply_to_message.sticker:
@@ -101,7 +101,7 @@ def filters(bot: Bot, update: Update):
         is_video = True
 
     else:
-        msg.reply_text("You didn't specify what to reply with!")
+        msg.reply_text("무엇으로 답해드려야 할지 구체적으로 알려주세요!")
         return
 
     # Add the filter
@@ -176,10 +176,10 @@ def reply_filter(bot: Bot, update: Update):
                                        disable_web_page_preview=True,
                                        reply_markup=keyboard)
                 except BadRequest as excp:
-                    if excp.message == "Unsupported url protocol":
-                        message.reply_text("You seem to be trying to use an unsupported url protocol. Telegram "
-                                           "doesn't support buttons for some protocols, such as tg://. Please try "
-                                           "again, or ask in @MarieSupport for help.")
+                    if excp.message == "URL프로토콜이 지원되지 않아요.":
+                        message.reply_text("지원되지 않는 URL프로토콜을 사용하시는것 같네요. tg:// "
+                                           "와 같은 일부 프로토콜은 텔레그램에서 버튼을 지원하지 않아요. 다시 "
+                                           "시도해보시거나, @MarieSupport 에 도움을 요청하세요.")
                     elif excp.message == "Reply message not found":
                         bot.send_message(chat.id, filt.reply, parse_mode=ParseMode.MARKDOWN,
                                          disable_web_page_preview=True,
