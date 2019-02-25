@@ -41,11 +41,11 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
             raise
 
     if is_user_ban_protected(chat, user_id, member):
-        message.reply_text("I really wish I could ban admins...")
+        message.reply_text("나는 정말 내가 관리자들을 추방할 수 있기를 바랍니다...")
         return ""
 
     if user_id == bot.id:
-        message.reply_text("I'm not gonna BAN myself, are you crazy?")
+        message.reply_text("나는 날 추방할수 없어, 너 미쳤니?")
         return ""
 
     log = "<b>{}:</b>" \
@@ -61,7 +61,7 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
     try:
         chat.kick_member(user_id)
         bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
-        message.reply_text("Banned!")
+        message.reply_text("넌 추방이야!")
         return log
 
     except BadRequest as excp:
