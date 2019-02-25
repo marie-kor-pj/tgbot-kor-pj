@@ -136,27 +136,27 @@ def __migrate__(old_chat_id, new_chat_id):
 
 def __chat_settings__(chat_id, user_id):
     blacklisted = sql.num_blacklist_chat_filters(chat_id)
-    return "{} 이란 단어는 Blacklist에 오른 단어예요!".format(blacklisted)
+    return "{} 이란 단어는 Blacklist에 오른 단어에요!".format(blacklisted)
 
 
 def __stats__():
-    return "{} blacklist triggers, across {} chats.".format(sql.num_blacklist_filters(),
+    return "{} 이란 단어는 Blacklist 단어이다, {} 채팅방에서.".format(sql.num_blacklist_filters(),
                                                             sql.num_blacklist_filter_chats())
 
 
 __mod_name__ = "Word Blacklists"
 
 __help__ = """
-Blacklists are used to stop certain triggers from being said in a group. Any time the trigger is mentioned, \
-the message will immediately be deleted. A good combo is sometimes to pair this up with warn filters!
-*NOTE:* blacklists do not affect group admins.
- - /blacklist: View the current blacklisted words.
+블랙리스트는 특정 단어가 그룹에서 언급되는 것을 방지하는 데 사용됩니다.
+특정 단어를 언급할 때마다 메시지가 즉시 삭제됩니다. 좋은 콤비는 때때로 경고 필터와 짝을 짓습니다!
+*NOTE:* Blacklist는 그룹 관리자에게 영향을 미치지 않습니다.
+ - /blacklist: 현재 Blacklist에 나열된 단어 보기.
 *Admin only:*
- - /addblacklist <triggers>: Add a trigger to the blacklist. Each line is considered one trigger, so using different \
-lines will allow you to add multiple triggers.
- - /unblacklist <triggers>: Remove triggers from the blacklist. Same newline logic applies here, so you can remove \
-multiple triggers at once.
- - /rmblacklist <triggers>: Same as above.
+ - /addblacklist <단어들>: Blacklist에 단어를 추가합니다. 각 라인은 하나의 단어로 간주되므로 다른 단어를 추가할 경우 \ 를 사용합니다.
+라인을 사용하면 여러 단어들을 추가할 수 있습니다.
+ - /unblacklist <단어들>: Blacklist에서 단어를 제거합니다. 여기에 동일한 새 라인 논리가 적용되므로 \을(를) 제거할 수 있습니다.
+여러 단어들을 한 번에 제거합니다.
+ - /rmblacklist <triggers>: 위와 같습니다.
 """
 
 BLACKLIST_HANDLER = DisableAbleCommandHandler("blacklist", blacklist, filters=Filters.group, pass_args=True,
