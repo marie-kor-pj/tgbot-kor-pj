@@ -35,8 +35,7 @@ def check_flood(bot: Bot, update: Update) -> str:
 
     try:
         chat.kick_member(user.id)
-        msg.reply_text("I like to leave the flooding to natural disasters. But you, you were just a "
-                       "disappointment. Get out.")
+        msg.reply_text("메시지를 한번에 너무 많이 보낸 이유로 강퇴당하셨습니다!")
 
         return "<b>{}:</b>" \
                "\n#BANNED" \
@@ -45,11 +44,11 @@ def check_flood(bot: Bot, update: Update) -> str:
                                              mention_html(user.id, user.first_name))
 
     except BadRequest:
-        msg.reply_text("I can't kick people here, give me permissions first! Until then, I'll disable antiflood.")
+        msg.reply_text("강퇴 시킬 수 없어요! 저에게 권한을 주실때까지 도배방지 기능은 사용할 수 없어요.")
         sql.set_flood(chat.id, 0)
         return "<b>{}:</b>" \
                "\n#INFO" \
-               "\nDon't have kick permissions, so automatically disabled antiflood.".format(chat.title)
+               "\n저에게 사용자 차단 권한이 없기 때문에 도배방지 기능이 자동으로 비활성화 됩니다!".format(chat.title)
 
 
 @run_async
@@ -65,13 +64,13 @@ def set_flood(bot: Bot, update: Update, args: List[str]) -> str:
         val = args[0].lower()
         if val == "off" or val == "no" or val == "0":
             sql.set_flood(chat.id, 0)
-            message.reply_text("Antiflood has been disabled.")
+            message.reply_text("도배방지가 비활성화 되었어요.")
 
         elif val.isdigit():
             amount = int(val)
             if amount <= 0:
                 sql.set_flood(chat.id, 0)
-                message.reply_text("Antiflood has been disabled.")
+                message.reply_text("도배방지가 비활성화 되었어요.")
                 return "<b>{}:</b>" \
                        "\n#SETFLOOD" \
                        "\n<b>Admin:</b> {}" \
@@ -83,11 +82,11 @@ def set_flood(bot: Bot, update: Update, args: List[str]) -> str:
 
             else:
                 sql.set_flood(chat.id, amount)
-                message.reply_text("Antiflood has been updated and set to {}".format(amount))
+                message.reply_text("도배방지가 업데이트 되었고, {} 로 맞춰졌어요.".format(amount))
                 return "<b>{}:</b>" \
                        "\n#SETFLOOD" \
                        "\n<b>Admin:</b> {}" \
-                       "\nSet antiflood to <code>{}</code>.".format(html.escape(chat.title),
+                       "\nSet 도배방지가 업데이트 되었어요! : <code>{}</code>.".format(html.escape(chat.title),
                                                                     mention_html(user.id, user.first_name), amount)
 
         else:
