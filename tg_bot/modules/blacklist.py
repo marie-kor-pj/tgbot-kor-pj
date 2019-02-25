@@ -60,10 +60,10 @@ def add_blacklist(bot: Bot, update: Update):
 
         else:
             msg.reply_text(
-                "<code>{}</code> 가 Blacklist에 추가되었습니다!".format(len(to_blacklist)), parse_mode=ParseMode.HTML)
+                "<code>{}</code> 가 Blacklist에 추가되었어요!".format(len(to_blacklist)), parse_mode=ParseMode.HTML)
 
     else:
-        msg.reply_text("블랙리스트에 추가할 단어를 알려주십시오.")
+        msg.reply_text("블랙리스트에 추가할 단어를 알려주세요.")
 
 
 @run_async
@@ -86,25 +86,25 @@ def unblacklist(bot: Bot, update: Update):
                 msg.reply_text("<code>{}</code> 가 Blacklist에서 제거되었습니다!".format(html.escape(to_unblacklist[0])),
                                parse_mode=ParseMode.HTML)
             else:
-                msg.reply_text("이 단어는 Blacklist에 오른 메시지가 아닙니다...!")
+                msg.reply_text("이 단어는 Blacklist에 오른 메시지가 아니예요...!")
 
         elif successful == len(to_unblacklist):
             msg.reply_text(
-                "<code>{}</code> 가 Blacklist에서 제거되었습니다.".format(
+                "<code>{}</code> 가 Blacklist에서 제거되었어요.".format(
                     successful), parse_mode=ParseMode.HTML)
 
         elif not successful:
             msg.reply_text(
-                "이 메시지들은 모두 존재하지 않기 때문에 제거되지 않았습니다.".format(
+                "이 메시지들은 모두 존재하지 않기 때문에 제거되지 않았어요.".format(
                     successful, len(to_unblacklist) - successful), parse_mode=ParseMode.HTML)
 
         else:
             msg.reply_text(
-                "<code>{}</code> 가 Blacklist에서 제거되었습니다. {} 라는 단어는 존재하지 않습니다."
-                "그래서 우리는 삭제할 수 없습니다.".format(successful, len(to_unblacklist) - successful),
+                "<code>{}</code> 가 Blacklist에서 제거됬어요. {} 라는 단어는 존재하지 않네요!"
+                "그래서 삭제할 수 없어요.".format(successful, len(to_unblacklist) - successful),
                 parse_mode=ParseMode.HTML)
     else:
-        msg.reply_text("Blacklist에서 어떤 단어를 삭제하고 싶은지 말해주십시오.")
+        msg.reply_text("Blacklist에서 어떤 단어를 삭제하고 싶은지 말해주세요.")
 
 
 @run_async
@@ -123,7 +123,7 @@ def del_blacklist(bot: Bot, update: Update):
             try:
                 message.delete()
             except BadRequest as excp:
-                if excp.message == "삭제할 메시지를 찾을 수 없습니다":
+                if excp.message == "삭제할 메시지를 찾을 수 없어요.:
                     pass
                 else:
                     LOGGER.exception("Blacklist 메시지 삭제 중 오류 발생!")
@@ -136,7 +136,7 @@ def __migrate__(old_chat_id, new_chat_id):
 
 def __chat_settings__(chat_id, user_id):
     blacklisted = sql.num_blacklist_chat_filters(chat_id)
-    return "{} 이란 단어는 Blacklist에 오른 단어입니다.".format(blacklisted)
+    return "{} 이란 단어는 Blacklist에 오른 단어예요!".format(blacklisted)
 
 
 def __stats__():
