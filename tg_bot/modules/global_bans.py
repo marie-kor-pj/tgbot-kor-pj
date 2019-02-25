@@ -73,7 +73,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
         return
 
     if user_chat.type != 'private':
-        message.reply_text("That's not a user!")
+        message.reply_text("유저가 아닙니다!")
         return
 
     if sql.is_user_gbanned(user_id):
@@ -283,7 +283,7 @@ def __chat_settings__(chat_id, user_id):
 
 __help__ = """
 *Admin only:*
- - /gbanstat <on/off/yes/no>: Will disable the effect of global bans on your group, or return your current settings.
+ - /gbanstat <on/off/yes/no>: 글로벌 Ban 조치가 그룹에 미치는 영향을 사용하지 않도록 설정하거나 현재 설정을 반환합니다.
 
 Gbans, also known as global bans, are used by the bot owners to ban spammers across all groups. This helps protect \
 you and your groups by removing spam flooders as quickly as possible. They can be disabled for you group by calling \
