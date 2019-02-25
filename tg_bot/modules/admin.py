@@ -217,7 +217,7 @@ __help__ = """
  - /demote: 답장처리된 메시지의 작성자를 관리자로부터 강등시켜요.
 """
 
-__mod_name__ = "Admin"
+__mod_name__ = "관리자"
 
 PIN_HANDLER = CommandHandler("pin", pin, pass_args=True, filters=Filters.group)
 UNPIN_HANDLER = CommandHandler("unpin", unpin, filters=Filters.group)
