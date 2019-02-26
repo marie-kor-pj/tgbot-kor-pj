@@ -34,7 +34,7 @@
 
 sample_config를 가져가서 Config 클래스를 확장하는것이 권장됩니다. 이렇게 하는 것은 당신의 Config이 sample_config 안에 있는 모든 기본 설정들을 포함한다는 것을 보장할 수 있습니다.게다가 업그레이드까지 더 쉽게 해줍니다.
 
-An example `config.py` file could be:
+config.py 예시:
 ```
 from tg_bot.sample_config import Config
 
