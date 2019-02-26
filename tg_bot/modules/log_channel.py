@@ -24,8 +24,8 @@ if is_module_loaded(FILENAME):
             message = update.effective_message  # type: Optional[Message]
             if result:
                 if chat.type == chat.SUPERGROUP and chat.username:
-                    result += "\n<b>Link:</b> " \
-                              "<a href=\"http://telegram.me/{}/{}\">click here</a>".format(chat.username,
+                    result += "\n<b>링크:</b> " \
+                              "<a href=\"http://telegram.me/{}/{}\">여기를 눌러주세요</a>".format(chat.username,
                                                                                            message.message_id)
                 log_chat = sql.get_chat_log_channel(chat.id)
                 if log_chat:
@@ -45,7 +45,7 @@ if is_module_loaded(FILENAME):
             bot.send_message(log_chat_id, result, parse_mode=ParseMode.HTML)
         except BadRequest as excp:
             if excp.message == "Chat not found":
-                bot.send_message(orig_chat_id, "This log channel has been deleted - unsetting.")
+                bot.send_message(orig_chat_id, "이 로그 채널이 삭제되었습니다 - 설정되지 않음.")
                 sql.stop_chat_logging(orig_chat_id)
             else:
                 LOGGER.warning(excp.message)
@@ -65,12 +65,12 @@ if is_module_loaded(FILENAME):
         if log_channel:
             log_channel_info = bot.get_chat(log_channel)
             message.reply_text(
-                "This group has all it's logs sent to: {} (`{}`)".format(escape_markdown(log_channel_info.title),
+                "해당 그룹으로부터 전송된 모든 로그가 있습니다 : {} (`{}`)".format(escape_markdown(log_channel_info.title),
                                                                          log_channel),
                 parse_mode=ParseMode.MARKDOWN)
 
         else:
-            message.reply_text("No log channel has been set for this group!")
+            message.reply_text("이 그룹에 대해 설정된 로그 채널이 없어요!")
 
 
     @run_async
@@ -79,7 +79,7 @@ if is_module_loaded(FILENAME):
         message = update.effective_message  # type: Optional[Message]
         chat = update.effective_chat  # type: Optional[Chat]
         if chat.type == chat.CHANNEL:
-            message.reply_text("Now, forward the /setlog to the group you want to tie this channel to!")
+            message.reply_text("이제, forward the /setlog to the group you want to tie this channel to!")
 
         elif message.forward_from_chat:
             sql.set_chat_log_channel(chat.id, message.forward_from_chat.id)
@@ -89,7 +89,7 @@ if is_module_loaded(FILENAME):
                 if excp.message == "Message to delete not found":
                     pass
                 else:
-                    LOGGER.exception("Error deleting message in log channel. Should work anyway though.")
+                    LOGGER.exception("로그 채널에서 메시지를 삭제하는 동안 오류가 발생했어요. Should work anyway though.")
 
             try:
                 bot.send_message(message.forward_from_chat.id,
@@ -122,7 +122,7 @@ if is_module_loaded(FILENAME):
             message.reply_text("Log channel has been un-set.")
 
         else:
-            message.reply_text("No log channel has been set yet!")
+            message.reply_text("로그 채널이 아직 설정되지 않았어요!")
 
 
     def __stats__():
