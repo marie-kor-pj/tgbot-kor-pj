@@ -46,7 +46,7 @@ def set_about_me(bot: Bot, update: Update):
             message.reply_text("info 를 업데이트 했어요!")
         else:
             message.reply_text(
-                "Your info needs to be under {} characters! You have {}.".format(MAX_MESSAGE_LENGTH // 4, len(info[1])))
+                "me의 글자수는 {} 자 아래여야 해요! 그러나 당신은 {} 자를 입력했어요.".format(MAX_MESSAGE_LENGTH // 4, len(info[1])))
 
 
 @run_async
@@ -66,7 +66,7 @@ def about_bio(bot: Bot, update: Update, args: List[str]):
                                             parse_mode=ParseMode.MARKDOWN)
     elif message.reply_to_message:
         username = user.first_name
-        update.effective_message.reply_text("{} hasn't had a message set about themselves yet!".format(username))
+        update.effective_message.reply_text("아직 {}남에 대한 메시지를 설정하지 못했습니다!".format(username))
     else:
         update.effective_message.reply_text("아직 자신의 Bio를 가지고 있지 않아요!")
 
@@ -93,7 +93,7 @@ def set_about_bio(bot: Bot, update: Update):
                 message.reply_text("{}님의 Bio를 업데이트 했어요!" ,format(repl_message.from_user.first_name))
             else:
                 message.reply_text(
-                    "A bio needs to be under {} characters! You tried to set {}.".format(
+                    "Bio는 {} 자 아래여야 해요! 그러나 당신은 {} 자를 입력했어요.".format(
                         MAX_MESSAGE_LENGTH // 4, len(bio[1])))
     else:
         message.reply_text("답장으로 Bio를 설정하려는 사용자를 알려주세요!")
