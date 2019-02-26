@@ -59,10 +59,10 @@ def broadcast(bot: Bot, update: Update):
                 sleep(0.1)
             except TelegramError:
                 failed += 1
-                LOGGER.warning("Couldn't send broadcast to %s, group name %s", str(chat.chat_id), str(chat.chat_name))
+                LOGGER.warning("%s 의 그룹에 방송하지 못했습니다. 해당 그룹명은 %s 입니다.", str(chat.chat_id), str(chat.chat_name))
 
-        update.effective_message.reply_text("Broadcast complete. {} groups failed to receive the message, probably "
-                                            "due to being kicked.".format(failed))
+        update.effective_message.reply_text("완벽하게 방송되었습니다. 아마도 {} 그룹은 메시지를 받지 못했을 것입니다."
+                                            "추방되었기 때문이죠.".format(failed))
 
 
 @run_async
