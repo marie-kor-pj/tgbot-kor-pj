@@ -14,14 +14,14 @@
 
 ## 봇 시작.
 
-Once you've setup your database and your configuration (see below) is complete, simply run:
+데이터베이스 설정과 환경 설정을 끝마쳤다면, (하단 참고), 이 명령어를 실행하세요:
 
 `python3 -m tg_bot`
 
 
 ## 봇 설정 (사용하기 전에 이 내용을 읽어보십시오!):
-Please make sure to use python3.6, as I cannot guarantee everything will work as expected on older python versions!
-This is because markdown parsing is done by iterating through a dict, which are ordered by default in 3.6.
+파이썬 3.6 사용을 권장합니다. 구버전 파이썬에서 모든것이 정상 작동하리라고는 장담할 수 없어요!
+이건 마크다운 파싱이 dict를 통해 진행되었기 때문입니다.dict는 파이썬 3.6이 기본으로 합니다.
 
 ### 환경 설정
 
