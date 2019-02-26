@@ -59,7 +59,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
         return
 
     if int(user_id) in SUPPORT_USERS:
-        message.reply_text("OOOH someone's trying to gban a support user! *grabs popcorn*")
+        message.reply_text("어머... 누군가가 유저를 글로벌밴하려고 하고 있네요! *팝콘을 집어듬*")
         return
 
     if user_id == bot.id:
