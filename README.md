@@ -8,8 +8,8 @@
 
 ### 봇을 한글화한 개발자들
 
-    1. [천상의나무 Github](https://github.com/NewPremium)
-    2. [KCPIT Github](https://github.com/kgu090716)
+  1. [천상의나무 Github](https://github.com/NewPremium)
+  2. [KCPIT Github](https://github.com/kgu090716)
 
 ## Starting the bot.
 
