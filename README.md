@@ -25,7 +25,7 @@
 
 ### 환경 설정
 
-There are two possible ways of configuring your bot: a config.py file, or ENV variables.
+당신의 봇을 설정하는 방법으로는 두 가지가 있습니다. config.py를 사용하는 방법과 환경 변수를 사용하는 방법입니다.
 
 The prefered version is to use a `config.py` file, as it makes it easier to see all your settings grouped together.
 This file should be placed in your `tg_bot` folder, alongside the `__main__.py` file . 
