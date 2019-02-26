@@ -143,10 +143,10 @@ def runs(bot: Bot, update: Update):
 def slap(bot: Bot, update: Update, args: List[str]):
     msg = update.effective_message  # type: Optional[Message]
 
-    # reply to correct message
+    # 올바른 메시지에 답장
     reply_text = msg.reply_to_message.reply_text if msg.reply_to_message else msg.reply_text
 
-    # get user who sent message
+    # 누가 메시지를 보냈는지 확인
     if msg.from_user.username:
         curr_user = "@" + escape_markdown(msg.from_user.username)
     else:
@@ -162,7 +162,7 @@ def slap(bot: Bot, update: Update, args: List[str]):
             user2 = "[{}](tg://user?id={})".format(slapped_user.first_name,
                                                    slapped_user.id)
 
-    # if no target found, bot targets the sender
+    # 대상을 찾을 수 없는 경우 봇은 보낸 사람을 대상으로 한다
     else:
         user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
         user2 = curr_user
@@ -202,16 +202,16 @@ def get_id(bot: Bot, update: Update, args: List[str]):
                 parse_mode=ParseMode.MARKDOWN)
         else:
             user = bot.get_chat(user_id)
-            update.effective_message.reply_text("{}'s id is `{}`.".format(escape_markdown(user.first_name), user.id),
+            update.effective_message.reply_text("{}'의 ID는 `{}` 입니다.".format(escape_markdown(user.first_name), user.id),
                                                 parse_mode=ParseMode.MARKDOWN)
     else:
         chat = update.effective_chat  # type: Optional[Chat]
         if chat.type == "private":
-            update.effective_message.reply_text("Your id is `{}`.".format(chat.id),
+            update.effective_message.reply_text("당신의 ID는 `{}` 입니다.".format(chat.id),
                                                 parse_mode=ParseMode.MARKDOWN)
 
         else:
-            update.effective_message.reply_text("This group's id is `{}`.".format(chat.id),
+            update.effective_message.reply_text("이 그룹의 ID는 `{}` 입니다.".format(chat.id),
                                                 parse_mode=ParseMode.MARKDOWN)
 
 
@@ -229,26 +229,26 @@ def info(bot: Bot, update: Update, args: List[str]):
     elif not msg.reply_to_message and (not args or (
             len(args) >= 1 and not args[0].startswith("@") and not args[0].isdigit() and not msg.parse_entities(
         [MessageEntity.TEXT_MENTION]))):
-        msg.reply_text("I can't extract a user from this.")
+        msg.reply_text("사용자의 ID를 추출할 수 없습니다.")
         return
 
     else:
         return
 
-    text = "<b>User info</b>:" \
+    text = "<b>사용자 정보</b>:" \
            "\nID: <code>{}</code>" \
-           "\nFirst Name: {}".format(user.id, html.escape(user.first_name))
+           "\n이름: {}".format(user.id, html.escape(user.first_name))
 
     if user.last_name:
-        text += "\nLast Name: {}".format(html.escape(user.last_name))
+        text += "\n성: {}".format(html.escape(user.last_name))
 
     if user.username:
-        text += "\nUsername: @{}".format(html.escape(user.username))
+        text += "\n닉네임: @{}".format(html.escape(user.username))
 
-    text += "\nPermanent user link: {}".format(mention_html(user.id, "link"))
+    text += "\n영구 사용자 링크: {}".format(mention_html(user.id, "link"))
 
     if user.id == OWNER_ID:
-        text += "\n\nThis person is my owner - I would never do anything against them!"
+        text += "\n\n이 사람은 저의 주인입니다. - 전 절대 그들에게 나쁜 짓을 하지 않을 것입니다!"
     else:
         if user.id in SUDO_USERS:
             text += "\nThis person is one of my sudo users! " \
