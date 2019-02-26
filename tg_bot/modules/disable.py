@@ -113,7 +113,7 @@ if is_module_loaded(FILENAME):
             update.effective_message.reply_text("다음 명령은 전환할 수 있어요 :\n{}".format(result),
                                                 parse_mode=ParseMode.MARKDOWN)
         else:
-            update.effective_message.reply_text("No commands can be disabled.")
+            update.effective_message.reply_text("사용하지 않도록 설정할 수 있는 명령어가 없어요.")
 
 
     # do not async
@@ -149,11 +149,11 @@ if is_module_loaded(FILENAME):
     __mod_name__ = "Command disabling"
 
     __help__ = """
- - /cmds: check the current status of disabled commands
+ - /cmds: 비활성화된 명령어의 현재 상태를 확인합니다.
 
 *Admin only:*
- - /enable <cmd name>: enable that command
- - /disable <cmd name>: disable that command
+ - /enable <cmd name>: 명령어를 활성화 합니다.
+ - /disable <cmd name>: 명령어를 비활성화 합니다.
  - /listcmds: list all possible toggleable commands
     """
 
