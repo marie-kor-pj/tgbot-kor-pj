@@ -1,7 +1,7 @@
 if not __name__.endswith("sample_config"):
     import sys
-    print("The README is there to be read. Extend this sample config to a config file, don't just rename and change "
-          "values here. Doing that WILL backfire on you.\nBot quitting.", file=sys.stderr)
+    print("README는 읽기 전용입니다. 이 샘플 Config를 Config 파일로 확장하되, 그냥 이름만 바꾸고 여기에 있는 요소들을 바꿔서는 안됩니다."
+          "만약 이 경고를 무시할 경우, 당신에게 나쁜 영향을 끼칠 것이란걸 알려드립니다.\n봇 종료.", file=sys.stderr)
     quit(1)
 
 
