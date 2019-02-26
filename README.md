@@ -1,19 +1,15 @@
 # tgbot
-A modular telegram Python bot running on python3 with an sqlalchemy database.
 
-Originally a simple group management bot with multiple admin features, it has evolved, becoming extremely modular and 
-simple to use.
+이 봇은 [Marie 봇](https://github.com/PaulSonOfLars/tgbot) 을 한글화한것 입니다.
 
-Can be found on telegram as [Marie](https://t.me/BanhammerMarie_bot).
+* 원본 봇은 [Marie](https://t.me/BanhammerMarie_bot) 입니다.
+* 원본 Marie 봇에 대한 궁금한 점은 [support group](https://t.me/MarieSupport) 에서 물어주세요.
+* Marie 봇에 대한 새 소식은 [news channel](https://t.me/MarieNews) 에서 확인하세요.
 
-Marie and I are moderating a [support group](https://t.me/MarieSupport), where you can ask for help setting up your
-bot, discover/request new features, report bugs, and stay in the loop whenever a new update is available. Of course
-I'll also help when a database schema changes, and some table column needs to be modified/added. Note to maintainers that all schema changes will be found in the commit messages, and its their responsibility to read any new commits.
+### 봇을 한글화한 개발자들
 
-Join the [news channel](https://t.me/MarieNews) if you just want to stay in the loop about new features or
-announcements.
-
-Alternatively, [find me on telegram](https://t.me/SonOfLars)! (Keep all support questions in the support chat, where more people can help you.)
+    1. [천상의나무 Github](https://github.com/NewPremium)
+    2. [KCPIT Github](https://github.com/kgu090716)
 
 ## Starting the bot.
 
