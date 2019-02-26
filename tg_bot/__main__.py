@@ -19,7 +19,7 @@ from tg_bot.modules.helper_funcs.chat_status import is_user_admin
 from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 PM_START_TEXT = """
-안녕하세요! {}님, 제 이름은 {}입니다! 만약 네가 나를 사용하는데 어떤 문제가 있다면, /help - 를 읽어주세요. 그래도 해결이 안된다면 @MarieSupport 로 와주세요.
+안녕하세요! {}님, 제 이름은 {}입니다! 만약 당신이 저를 사용하는데 어떤 문제가 있다면, /help - 를 읽어주세요. 그래도 해결이 안된다면 @MarieSupport 로 와주세요.
 
 I'm a group manager bot built in python3, using the python-telegram-bot library, and am fully opensource; \
 you can find what makes me tick [here](github.com/PaulSonOfLars/tgbot)!
@@ -28,7 +28,7 @@ Feel free to submit pull requests on github, or to contact my support group, @Ma
 or feature requests you might have :)
 I also have a news channel, @MarieNews for announcements on new features, downtime, etc.
 
-당신은 /help 를 사용하여 사용 가능한 명령 목록을 찾을 수 있습니다.
+/help 를 사용하여 사용 가능한 명령 목록을 찾을 수 있어요.
 
 If you're enjoying using me, and/or would like to help me survive in the wild, hit /donate to help fund/upgrade my VPS!
 """
@@ -42,7 +42,7 @@ the things I can help you with.
  - /start: 봇을 시작합니다.
  - /help: 개인메시지로 메시지를 보냅니다.
  - /help <module name>: PM's you info about that module.
- - /donate: information about how to donate!
+ - /donate: 기부 방법에 대한 정보를 알려줘요!
  - /settings:
    - in PM: will send you your settings for all supported modules.
    - in a group: will redirect you to pm, with all that chat's settings.
@@ -123,7 +123,7 @@ def send_help(chat_id, text, keyboard=None):
 def test(bot: Bot, update: Update):
     # pprint(eval(str(update)))
     # update.effective_message.reply_text("Hola tester! _I_ *have* `markdown`", parse_mode=ParseMode.MARKDOWN)
-    update.effective_message.reply_text("This person edited a message")
+    update.effective_message.reply_text("이 사람이 메시지를 편집했어요.")
     print(update.effective_message)
 
 
@@ -264,7 +264,7 @@ def send_settings(chat_id, user_id, user=False):
         if USER_SETTINGS:
             settings = "\n\n".join(
                 "*{}*:\n{}".format(mod.__mod_name__, mod.__user_settings__(user_id)) for mod in USER_SETTINGS.values())
-            dispatcher.bot.send_message(user_id, "These are your current settings:" + "\n\n" + settings,
+            dispatcher.bot.send_message(user_id, "이것은 현재 당신의 설정이에요 :" + "\n\n" + settings,
                                         parse_mode=ParseMode.MARKDOWN)
 
         else:
