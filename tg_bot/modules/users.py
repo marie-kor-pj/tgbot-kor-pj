@@ -42,7 +42,7 @@ def get_user_id(username):
                 if excp.message == 'Chat not found':
                     pass
                 else:
-                    LOGGER.exception("Error extracting user ID")
+                    LOGGER.exception("사용자 ID를 추출하는 중 에러발생")
 
     return None
 
@@ -96,14 +96,14 @@ def chats(bot: Bot, update: Update):
     with BytesIO(str.encode(chatfile)) as output:
         output.name = "chatlist.txt"
         update.effective_message.reply_document(document=output, filename="chatlist.txt",
-                                                caption="Here is the list of chats in my database.")
+                                                caption="제 데이터베이스의 채팅 목록입니다.")
 
 
 def __user_info__(user_id):
     if user_id == dispatcher.bot.id:
-        return """I've seen them in... Wow. Are they stalking me? They're in all the same places I am... oh. It's me."""
+        return """전 그들을 본 적이 있어요... 와. 그들이 저를 스토킹하고 있는거에요? They're in all the same places I am... 오, 그건 저에요."""
     num_chats = sql.get_user_num_chats(user_id)
-    return """I've seen them in <code>{}</code> chats in total.""".format(num_chats)
+    return """<code>{}</code> 개의 채팅방에서 봤어요.""".format(num_chats)
 
 
 def __stats__():
