@@ -65,7 +65,7 @@ def export_data(bot: Bot, update: Update):
     msg.reply_text("")
 
 
-__mod_name__ = "Backups"
+    __mod_name__ = "백업"
 
 __help__ = """
 *관리자용 명령어*
