@@ -110,7 +110,7 @@ def lock(bot: Bot, update: Update, args: List[str]) -> str:
 
                 return "<b>{}:</b>" \
                        "\n#LOCK" \
-                       "\n<b>Admin:</b> {}" \
+                       "\n<b>관리자:</b> {}" \
                        "\nLocked <code>{}</code>.".format(html.escape(chat.title),
                                                           mention_html(user.id, user.first_name), args[0])
 
@@ -123,15 +123,15 @@ def lock(bot: Bot, update: Update, args: List[str]) -> str:
                 message.reply_text("Locked {} for all non-admins!".format(args[0]))
                 return "<b>{}:</b>" \
                        "\n#LOCK" \
-                       "\n<b>Admin:</b> {}" \
+                       "\n<b>관리자:</b> {}" \
                        "\nLocked <code>{}</code>.".format(html.escape(chat.title),
                                                           mention_html(user.id, user.first_name), args[0])
 
             else:
-                message.reply_text("무엇을 잠그려는 것입니까...? Try /locktypes for the list of lockables")
+                message.reply_text("무엇을 잠그려는 것입니까...? 잠금 목록을 보기위해 /locktypes 을 시도하세요.")
 
     else:
-        message.reply_text("I'm not an administrator, or haven't got delete rights.")
+        message.reply_text("제가 관리자가 아니거나 메시지를 삭제할 권한이 없습니다..")
 
     return ""
 
@@ -181,10 +181,10 @@ def unlock(bot: Bot, update: Update, args: List[str]) -> str:
                        "\nUnlocked <code>{}</code>.".format(html.escape(chat.title),
                                                             mention_html(user.id, user.first_name), args[0])
             else:
-                message.reply_text("What are you trying to unlock...? Try /locktypes for the list of lockables")
+                message.reply_text("무엇의 잠금을 해제하시려는 건가요...? 잠금 목록을 보기위해 /locktypes 을 시도하세요")
 
         else:
-            bot.sendMessage(chat.id, "What are you trying to unlock...?")
+            bot.sendMessage(chat.id, "무엇의 잠금을 해제하시려는 건가요...?")
 
     return ""
 
@@ -202,8 +202,8 @@ def del_lockables(bot: Bot, update: Update):
                 for new_mem in new_members:
                     if new_mem.is_bot:
                         if not is_bot_admin(chat, bot.id):
-                            message.reply_text("I see a bot, and I've been told to stop them joining... "
-                                               "but I'm not admin!")
+                            message.reply_text("전 봇이 보여요, and I've been told to stop them joining... "
+                                               "하지만 전 관리자가 아니에요!")
                             return
 
                         chat.kick_member(new_mem.id)
