@@ -28,7 +28,7 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
     user_id, reason = extract_user_and_text(message, args)
 
     if not user_id:
-        message.reply_text("Ban할 사용자를 지칭하는 것 같지 않습니다.")
+        message.reply_text("Ban할 사용자를 지칭하는 것 같지 않아요.")
         return ""
 
     try:
@@ -45,7 +45,7 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
         return ""
 
     if user_id == bot.id:
-        message.reply_text("저는 절 Ban할 수 없어요, 너 미쳤니?")
+        message.reply_text("저는 절 Ban할 수 없어요!")
         return ""
 
     log = "<b>{}:</b>" \
@@ -73,7 +73,7 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
             LOGGER.warning(update)
             LOGGER.exception("ERROR banning user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
                              excp.message)
-            message.reply_text("이런...! 난 그 사용자를 Ban할 수 없어요!")
+            message.reply_text("이런...! 전 그 사용자를 Ban할 수 없어요!")
 
     return ""
 
@@ -91,7 +91,7 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
     user_id, reason = extract_user_and_text(message, args)
 
     if not user_id:
-        message.reply_text("Ban할 사용자를 지칭하는 것 같지 않습니다.")
+        message.reply_text("Ban할 사용자를 지칭하는 것 같지 않아요.")
         return ""
 
     try:
@@ -108,11 +108,11 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
         return ""
 
     if user_id == bot.id:
-        message.reply_text("나는 날 Ban할 수 없어요, 너 미쳤니?")
+        message.reply_text("저는 절 Ban할 수 없어요!")
         return ""
 
     if not reason:
-        message.reply_text("이 사용자를 Ban할 시간을 지정하지 않았습니다!")
+        message.reply_text("이 사용자를 Ban할 시간을 지정하지 않았어요!")
         return ""
 
     split_reason = reason.split(None, 1)
@@ -155,7 +155,7 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
             LOGGER.warning(update)
             LOGGER.exception("ERROR banning user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
                              excp.message)
-            message.reply_text("이런...! 난 그 사용자를 Ban할 수 없어요!")
+            message.reply_text("이런...! 전 그 사용자를 Ban할 수 없어요!")
 
     return ""
 
@@ -179,7 +179,7 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
         member = chat.get_member(user_id)
     except BadRequest as excp:
         if excp.message == "User not found":
-            message.reply_text("해당 유저를 찾을 수 없습니다.")
+            message.reply_text("해당 유저를 찾을 수 없어요.")
             return ""
         else:
             raise
@@ -189,7 +189,7 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
         return ""
 
     if user_id == bot.id:
-        message.reply_text("그래요, 전 그렇게 하지 않을 겁니다!")
+        message.reply_text("그래요, 전 그렇게 하지 않을 거예요!")
         return ""
 
     res = chat.unban_member(user_id)  # unban on current user = kick
@@ -220,7 +220,7 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
 def kickme(bot: Bot, update: Update):
     user_id = update.effective_message.from_user.id
     if is_user_admin(update.effective_chat, user_id):
-        update.effective_message.reply_text("제가 그럴수 있으면 좋겠네요... 그러나 당신은 관리자 입니다.")
+        update.effective_message.reply_text("제가 그럴수 있으면 좋겠네요... 그러나 당신은 관리자예요!")
         return
 
     res = update.effective_chat.unban_member(user_id)  # unban on current user = kick
@@ -281,11 +281,11 @@ def unban(bot: Bot, update: Update, args: List[str]) -> str:
 __help__ = """
  - /kickme: 명령을 실행한 사용자를 추방합니다.
 
-*Admin only:*
- - /ban <userhandle>: 유저를 Ban합니다. (handle, or reply 를 통해서)
- - /tban <userhandle> x(m/h/d): x시간 동안 사용자를 Ban합니다. (handle, or reply 를 통해서). m = 분, h = 시간, d = 날짜.
- - /unban <userhandle>: 유저의 Ban을 취소합니다. (handle, or reply 를 통해서)
- - /kick <userhandle>: 유저를 추방합니다, (handle, or reply 를 통해서)
+*관리자용 명령어*
+ - /ban <사용자명>: 유저를 Ban해요. (@사용자명, 또는 답장을 통해서)
+ - /tban <사용자명> x(m/h/d): x시간 동안 사용자를 Ban해요. (@사용자명, 또는 답장을 통해서). m = 분, h = 시간, d = 날짜.
+ - /unban <사용자명>: 유저의 Ban을 취소해요. (@사용자명, 또는 답장을 통해서)
+ - /kick <사용자명>: 유저를 추방해요 (@사용자명, 또는 답장을 통해서)
 """
 
 __mod_name__ = "Bans"
