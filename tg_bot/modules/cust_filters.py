@@ -27,7 +27,7 @@ def list_handlers(bot: Bot, update: Update):
     all_handlers = sql.get_chat_triggers(chat.id)
 
     if not all_handlers:
-        update.effective_message.reply_text("No filters are active here!")
+        update.effective_message.reply_text("여기 필터가 활성해 있지 않아요!")
         return
 
     filter_list = BASIC_FILTER_STRING
@@ -73,7 +73,7 @@ def filters(bot: Bot, update: Update):
         content, buttons = button_markdown_parser(extracted[1], entities=msg.parse_entities(), offset=offset)
         content = content.strip()
         if not content:
-            msg.reply_text("노트 글자가 없어요 - 버튼만 사용하실 수 없고, 함께 보낼 메시지가 꼭 필요해요!")
+            msg.reply_text("노트에 글자가 없어요 - 버튼만 사용하실 수 없고, 함께 보낼 메시지가 꼭 필요해요!")
             return
 
     elif msg.reply_to_message and msg.reply_to_message.sticker:
@@ -101,7 +101,7 @@ def filters(bot: Bot, update: Update):
         is_video = True
 
     else:
-        msg.reply_text("무엇으로 답해드려야 할지 구체적으로 알려주세요!")
+        msg.reply_text("무엇으로 답해드려야 할지 구체적으로 알려주세요! '예:/filter 제목 내용'")
         return
 
     # Add the filter
@@ -113,7 +113,7 @@ def filters(bot: Bot, update: Update):
     sql.add_filter(chat.id, keyword, content, is_sticker, is_document, is_image, is_audio, is_voice, is_video,
                    buttons)
 
-    msg.reply_text("Handler '{}' added!".format(keyword))
+    msg.reply_text("필터 '{}' 이 추가되었어요!".format(keyword))
     raise DispatcherHandlerStop
 
 
@@ -129,16 +129,16 @@ def stop_filter(bot: Bot, update: Update):
     chat_filters = sql.get_chat_triggers(chat.id)
 
     if not chat_filters:
-        update.effective_message.reply_text("No filters are active here!")
+        update.effective_message.reply_text("여기 필터가 활성해 있지 않아요!")
         return
 
     for keyword in chat_filters:
         if keyword == args[1]:
             sql.remove_filter(chat.id, args[1])
-            update.effective_message.reply_text("Yep, I'll stop replying to that.")
+            update.effective_message.reply_text("네, 이 필터를 삭제할게요!")
             raise DispatcherHandlerStop
 
-    update.effective_message.reply_text("That's not a current filter - run /filters for all active filters.")
+    update.effective_message.reply_text("필터를 찾을 수 없어요 - 활성화 되있는 모든 필터를 보려면 /filters를 입력해주세요.")
 
 
 @run_async
@@ -185,8 +185,8 @@ def reply_filter(bot: Bot, update: Update):
                                          disable_web_page_preview=True,
                                          reply_markup=keyboard)
                     else:
-                        message.reply_text("This note could not be sent, as it is incorrectly formatted. Ask in "
-                                           "@MarieSupport if you can't figure out why!")
+                        message.reply_text("이 노트는 형식이 달라서 보낼 수 없어요. 이유를 알 수 없으면 "
+                                           "@MarieSupport 에 물어보세요!")
                         LOGGER.warning("Message %s could not be parsed", str(filt.reply))
                         LOGGER.exception("Could not parse filter %s in chat %s", str(filt.keyword), str(chat.id))
 
@@ -197,7 +197,7 @@ def reply_filter(bot: Bot, update: Update):
 
 
 def __stats__():
-    return "{} filters, across {} chats.".format(sql.num_filters(), sql.num_chats())
+    return "{} 필터는, {}번 채팅에서 사용됬어요.".format(sql.num_filters(), sql.num_chats())
 
 
 def __migrate__(old_chat_id, new_chat_id):
@@ -206,21 +206,22 @@ def __migrate__(old_chat_id, new_chat_id):
 
 def __chat_settings__(chat_id, user_id):
     cust_filters = sql.get_chat_triggers(chat_id)
-    return "There are `{}` custom filters here.".format(len(cust_filters))
+    return "여기에 `{}` 사용자 필터가 있어요.".format(len(cust_filters))
 
 
 __help__ = """
- - /filters: list all active filters in this chat.
+ - /filters: 활성화 되있는 모든 필터를 알려줘요.
 
-*Admin only:*
- - /filter <keyword> <reply message>: add a filter to this chat. The bot will now reply that message whenever 'keyword'\
-is mentioned. If you reply to a sticker with a keyword, the bot will reply with that sticker. NOTE: all filter \
-keywords are in lowercase. If you want your keyword to be a sentence, use quotes. eg: /filter "hey there" How you \
+*관리자용 명령어*
+ - /filter <제목> <내용>: 이 채팅방에 필터를 추가해요. '제목'을 작성하시면 제가 그 메시지에 대해서 응답을 해드릴게요. \
+스티커를 제목으로 설정하시면 그 스티커로 답장해드려요. 참고: 모든 필터 제목은 소문자로 되어 있어요. \
+키워드를 문장으로 사용하려면 따옴표를 사용해주세요. 
+예: /filter "hey there" How you \
 doin?
- - /stop <filter keyword>: stop that filter.
+ - /stop <필터제목>: 필터를 삭제해요.
 """
 
-__mod_name__ = "Filters"
+__mod_name__ = "필터"
 
 FILTER_HANDLER = CommandHandler("filter", filters)
 STOP_HANDLER = CommandHandler("stop", stop_filter)
