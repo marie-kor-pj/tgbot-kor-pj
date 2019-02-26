@@ -75,13 +75,13 @@ if is_module_loaded(FILENAME):
 
             if disable_cmd in set(DISABLE_CMDS + DISABLE_OTHER):
                 sql.disable_command(chat.id, disable_cmd)
-                update.effective_message.reply_text("Disabled the use of `{}`".format(disable_cmd),
+                update.effective_message.reply_text("`{}`사용을 비활성화합니다.".format(disable_cmd),
                                                     parse_mode=ParseMode.MARKDOWN)
             else:
-                update.effective_message.reply_text("That command can't be disabled")
+                update.effective_message.reply_text("그 명령어는 비활성화 하실 수 없어요.")
 
         else:
-            update.effective_message.reply_text("What should I disable?")
+            update.effective_message.reply_text("비활성화 할 명령어를 입력해주세요")
 
 
     @run_async
@@ -94,13 +94,13 @@ if is_module_loaded(FILENAME):
                 enable_cmd = enable_cmd[1:]
 
             if sql.enable_command(chat.id, enable_cmd):
-                update.effective_message.reply_text("Enabled the use of `{}`".format(enable_cmd),
+                update.effective_message.reply_text("`{}`사용을 활성화합니다".format(enable_cmd),
                                                     parse_mode=ParseMode.MARKDOWN)
             else:
-                update.effective_message.reply_text("Is that even disabled?")
+                update.effective_message.reply_text("이미 활성화 되어 있어요.")
 
         else:
-            update.effective_message.reply_text("What should I enable?")
+            update.effective_message.reply_text("활성화 할 명령어를 입력해주세요.")
 
 
     @run_async
@@ -110,7 +110,7 @@ if is_module_loaded(FILENAME):
             result = ""
             for cmd in set(DISABLE_CMDS + DISABLE_OTHER):
                 result += " - `{}`\n".format(escape_markdown(cmd))
-            update.effective_message.reply_text("The following commands are toggleable:\n{}".format(result),
+            update.effective_message.reply_text("다음 명령은 전환할 수 있어요 :\n{}".format(result),
                                                 parse_mode=ParseMode.MARKDOWN)
         else:
             update.effective_message.reply_text("No commands can be disabled.")
