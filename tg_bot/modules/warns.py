@@ -21,13 +21,13 @@ from tg_bot.modules.log_channel import loggable
 from tg_bot.modules.sql import warns_sql as sql
 
 WARN_HANDLER_GROUP = 9
-CURRENT_WARNING_FILTER_STRING = "<b>Current warning filters in this chat:</b>\n"
+CURRENT_WARNING_FILTER_STRING = "<b>현재 이 채팅방에서 경고 필터로 설정된 단어:</b>\n"
 
 
 # Not async
 def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = None) -> str:
     if is_user_admin(chat, user.id):
-        message.reply_text("Damn admins, can't even be warned!")
+        message.reply_text("빌어먹을 관리들, 경고도 못 해!")
         return ""
 
     if warner:
@@ -54,10 +54,10 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
         keyboard = []
         log_reason = "<b>{}:</b>" \
                      "\n#WARN_BAN" \
-                     "\n<b>Admin:</b> {}" \
-                     "\n<b>User:</b> {} (<code>{}</code>)" \
-                     "\n<b>Reason:</b> {}"\
-                     "\n<b>Counts:</b> <code>{}/{}</code>".format(html.escape(chat.title),
+                     "\n<b>관리자:</b> {}" \
+                     "\n<b>유저:</b> {} (<code>{}</code>)" \
+                     "\n<b>이유:</b> {}"\
+                     "\n<b>횟수:</b> <code>{}/{}</code>".format(html.escape(chat.title),
                                                                   warner_tag,
                                                                   mention_html(user.id, user.first_name),
                                                                   user.id, reason, num_warns, limit)
@@ -73,10 +73,10 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
 
         log_reason = "<b>{}:</b>" \
                      "\n#WARN" \
-                     "\n<b>Admin:</b> {}" \
-                     "\n<b>User:</b> {} (<code>{}</code>)" \
-                     "\n<b>Reason:</b> {}"\
-                     "\n<b>Counts:</b> <code>{}/{}</code>".format(html.escape(chat.title),
+                     "\n<b>관리자:</b> {}" \
+                     "\n<b>유저:</b> {} (<code>{}</code>)" \
+                     "\n<b>이유:</b> {}"\
+                     "\n<b>횟수:</b> <code>{}/{}</code>".format(html.escape(chat.title),
                                                                   warner_tag,
                                                                   mention_html(user.id, user.first_name),
                                                                   user.id, reason, num_warns, limit)
