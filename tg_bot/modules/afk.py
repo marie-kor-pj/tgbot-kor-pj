@@ -50,7 +50,7 @@ def reply_afk(bot: Bot, update: Update):
             elif ent.type == MessageEntity.MENTION:
                 user_id = get_user_id(message.text[ent.offset:ent.offset + ent.length])
                 if not user_id:
-                    # Should never happen, since for a user to become AFK they must have spoken. Maybe changed username?
+                    # 절대 일어나서는 안됩니다. 사용자가 AFK가 되기 위해서는 말을 했어야 합니다. 사용자가 닉네임을 바꾸지 않는한!
                     return
                 chat = bot.get_chat(user_id)
                 fst_name = chat.first_name
