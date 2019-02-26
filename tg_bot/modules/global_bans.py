@@ -83,9 +83,9 @@ def gban(bot: Bot, update: Update, args: List[str]):
 
         old_reason = sql.update_gban_reason(user_id, user_chat.username or user_chat.first_name, reason)
         if old_reason:
-            message.reply_text("This user is already gbanned, for the following reason:\n"
+            message.reply_text("이 유저는 이미 이 이유에 따라 글로벌밴 당했어요:\n"
                                "<code>{}</code>\n"
-                               "I've gone and updated it with your new reason!".format(html.escape(old_reason)),
+                               "제가 가서 새로운 이유로 업데이트했어요!".format(html.escape(old_reason)),
                                parse_mode=ParseMode.HTML)
         else:
             message.reply_text("This user is already gbanned, but had no reason set; I've gone and updated it!")
