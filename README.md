@@ -6,11 +6,6 @@
 * 원본 Marie 봇에 대한 궁금한 점은 [support group](https://t.me/MarieSupport) 에서 물어주세요.
 * Marie 봇에 대한 새 소식은 [news channel](https://t.me/MarieNews) 에서 확인하세요.
 
-## 봇을 한글화한 개발자들
-
-  1. [천상의나무 Github](https://github.com/NewPremium)
-  2. [KCPIT Github](https://github.com/kgu090716)
-
 ## Credit
 
   1. [천상의나무](https://github.com/NewPremium)
