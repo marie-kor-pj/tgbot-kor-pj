@@ -28,9 +28,9 @@
 당신의 봇을 설정하는 방법으로는 두 가지가 있습니다. config.py를 사용하는 방법과 환경 변수를 사용하는 방법입니다.
 
 권장하는 방법은 당신의 모든 설정을 한 곳에 모아 볼 수 있는 config.py를 사용하는 방법입니다.
-This file should be placed in your `tg_bot` folder, alongside the `__main__.py` file . 
-This is where your bot token will be loaded from, as well as your database URI (if you're using a database), and most of 
-your other settings.
+이 파일은 __main__.py 파일과 함께 tg_bot 폴더에 있어야 합니다.
+이곳은 당신의 봇 토큰이 로딩되는 곳이며, 당신의 데이터베이스 URL도 마찬가지입니다.(데이터베이스 사용중일 경우), 
+그리고 대부분의 당신의 설정들이 이곳에 있습니다.
 
 It is recommended to import sample_config and extend the Config class, as this will ensure your config contains all 
 defaults set in the sample_config, hence making it easier to upgrade.
