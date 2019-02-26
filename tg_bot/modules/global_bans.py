@@ -88,7 +88,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
                                "제가 가서 새로운 이유로 업데이트했어요!".format(html.escape(old_reason)),
                                parse_mode=ParseMode.HTML)
         else:
-            message.reply_text("This user is already gbanned, but had no reason set; I've gone and updated it!")
+            message.reply_text("이 유저는 이미 글로벌밴 당했지만, 이유가 세팅되지 않았어요; 제가 가서 업데이트했어요!")
 
         return
 
