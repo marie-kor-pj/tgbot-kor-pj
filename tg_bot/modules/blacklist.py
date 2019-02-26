@@ -37,7 +37,7 @@ def blacklist(bot: Bot, update: Update, args: List[str]):
     split_text = split_message(filter_list)
     for text in split_text:
         if text == BASE_BLACKLIST_STRING:
-            msg.reply_text("블랙리스트에 오른 메세지가 없습니다!")
+            msg.reply_text("블랙리스트에 오른 메세지가 없어요!")
             return
         msg.reply_text(text, parse_mode=ParseMode.HTML)
 
@@ -55,7 +55,7 @@ def add_blacklist(bot: Bot, update: Update):
             sql.add_to_blacklist(chat.id, trigger.lower())
 
         if len(to_blacklist) == 1:
-            msg.reply_text("<code>{}</code> 가 Blacklist에 추가되었습니다!".format(html.escape(to_blacklist[0])),
+            msg.reply_text("<code>{}</code> 가 Blacklist에 추가되었어요!".format(html.escape(to_blacklist[0])),
                            parse_mode=ParseMode.HTML)
 
         else:
@@ -83,7 +83,7 @@ def unblacklist(bot: Bot, update: Update):
 
         if len(to_unblacklist) == 1:
             if successful:
-                msg.reply_text("<code>{}</code> 가 Blacklist에서 제거되었습니다!".format(html.escape(to_unblacklist[0])),
+                msg.reply_text("<code>{}</code> 가 Blacklist에서 제거되었어요!".format(html.escape(to_unblacklist[0])),
                                parse_mode=ParseMode.HTML)
             else:
                 msg.reply_text("이 단어는 Blacklist에 오른 메시지가 아니예요...!")
@@ -140,23 +140,21 @@ def __chat_settings__(chat_id, user_id):
 
 
 def __stats__():
-    return "{} 이란 단어는 Blacklist 단어이다, {} 채팅방에서.".format(sql.num_blacklist_filters(),
+    return "{} 이란 단어는 Blacklist 단어예요, {} 채팅방에서.".format(sql.num_blacklist_filters(),
                                                             sql.num_blacklist_filter_chats())
 
 
-__mod_name__ = "Word Blacklists"
+__mod_name__ = "블랙리스트"
 
 __help__ = """
-블랙리스트는 특정 단어가 그룹에서 언급되는 것을 방지하는 데 사용됩니다.
-특정 단어를 언급할 때마다 메시지가 즉시 삭제됩니다. 좋은 콤비는 때때로 경고 필터와 짝을 짓습니다!
-*NOTE:* Blacklist는 그룹 관리자에게 영향을 미치지 않습니다.
- - /blacklist: 현재 Blacklist에 나열된 단어 보기.
-*Admin only:*
- - /addblacklist <단어들>: Blacklist에 단어를 추가합니다. 각 라인은 하나의 단어로 간주되므로 다른 단어를 추가할 경우 \ 를 사용합니다.
-라인을 사용하면 여러 단어들을 추가할 수 있습니다.
- - /unblacklist <단어들>: Blacklist에서 단어를 제거합니다. 여기에 동일한 새 라인 논리가 적용되므로 \을(를) 제거할 수 있습니다.
-여러 단어들을 한 번에 제거합니다.
- - /rmblacklist <triggers>: 위와 같습니다.
+블랙리스트는 특정 단어가 그룹에서 언급되는 것을 방지하는 데 사용되요.
+특정 단어를 언급할 때마다 메시지가 즉시 삭제되요. 경고 필터와 함께 사용하는 것은 좋은 조합이예요!
+*NOTE:* Blacklist는 그룹 관리자에게 영향을 미치지 않아요.
+ - /blacklist: 현재 Blacklist에 나열된 단어를 보여줘요.
+*관리자용 명령어*
+ - /addblacklist <단어들>: Blacklist에 단어를 추가해요. 여러 단어들을 추가하려면 엔터를(개행) 사용하세요.
+ - /unblacklist <단어들>: Blacklist에서 단어를 제거해요. addblacklist와 마찬가지로 여러 단어들을 한번에 제거하려면 엔터를(개행) 이용하세요.
+ - /rmblacklist <triggers>: 위 명령어와 같.
 """
 
 BLACKLIST_HANDLER = DisableAbleCommandHandler("blacklist", blacklist, filters=Filters.group, pass_args=True,
