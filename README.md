@@ -12,18 +12,18 @@
   2. [KCPIT](https://github.com/kgu090716)
   3. [i0N](https://github.com/i0Ni0N)
 
-## Starting the bot.
+## 봇 시작.
 
 Once you've setup your database and your configuration (see below) is complete, simply run:
 
 `python3 -m tg_bot`
 
 
-## Setting up the bot (Read this before trying to use!):
+## 봇 설정 (사용하기 전에 이 내용을 읽어보십시오!):
 Please make sure to use python3.6, as I cannot guarantee everything will work as expected on older python versions!
 This is because markdown parsing is done by iterating through a dict, which are ordered by default in 3.6.
 
-### Configuration
+### 환경 설정
 
 There are two possible ways of configuring your bot: a config.py file, or ENV variables.
 
@@ -83,7 +83,7 @@ The following env variables are supported:
  - `BAN_STICKER`: Which sticker to use when banning people.
  - `ALLOW_EXCL`: Whether to allow using exclamation marks ! for commands as well as /.
 
-### Python dependencies
+### Python 의존성
 
 Install the necessary python dependencies by moving to the project directory and running:
 
@@ -91,7 +91,7 @@ Install the necessary python dependencies by moving to the project directory and
 
 This will install all necessary python packages.
 
-### Database
+### 데이터베이스
 
 If you wish to use a database-dependent module (eg: locks, notes, userinfo, users, filters, welcomes),
 you'll need to have a database installed on your system. I use postgres, so I recommend using it for optimal compatibility.
@@ -132,8 +132,8 @@ You should now be able to build your database URI. This will be:
 Replace sqldbtype with whichever db youre using (eg postgres, mysql, sqllite, etc)
 repeat for your username, password, hostname (localhost?), port (5432?), and db name.
 
-## Modules
-### Setting load order.
+## 모듈들
+### 로드 순서 설정.
 
 The module load order can be changed via the `LOAD` and `NO_LOAD` configuration settings.
 These should both represent lists.
@@ -144,7 +144,7 @@ If `NO_LOAD` is not present, or is an empty list, all modules selected for loadi
 
 If a module is in both `LOAD` and `NO_LOAD`, the module will not be loaded - `NO_LOAD` takes priority.
 
-### Creating your own modules.
+### 자신만의 모듈 만들기.
 
 Creating a module has been simplified as much as possible - but do not hesitate to suggest further simplification.
 
