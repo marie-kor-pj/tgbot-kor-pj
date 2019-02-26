@@ -120,12 +120,12 @@ if is_module_loaded(FILENAME):
     def build_curr_disabled(chat_id: Union[str, int]) -> str:
         disabled = sql.get_all_disabled(chat_id)
         if not disabled:
-            return "No commands are disabled!"
+            return "사용하지 않도록 설정된 명령어가 없어요!"
 
         result = ""
         for cmd in disabled:
             result += " - `{}`\n".format(escape_markdown(cmd))
-        return "The following commands are currently restricted:\n{}".format(result)
+        return "다음 명령은 현재 비활성화되어 있습니다 :\n{}".format(result)
 
 
     @run_async
@@ -135,7 +135,7 @@ if is_module_loaded(FILENAME):
 
 
     def __stats__():
-        return "{} disabled items, across {} chats.".format(sql.num_disabled(), sql.num_chats())
+        return "{} 개의 비활성화된 항목, {} 개의 채팅.".format(sql.num_disabled(), sql.num_chats())
 
 
     def __migrate__(old_chat_id, new_chat_id):
@@ -154,7 +154,7 @@ if is_module_loaded(FILENAME):
 *Admin only:*
  - /enable <cmd name>: 명령어를 활성화 합니다.
  - /disable <cmd name>: 명령어를 비활성화 합니다.
- - /listcmds: list all possible toggleable commands
+ - /listcmds: 사용가능한 모든 전환 가능한 명령어를 나열해요.
     """
 
     DISABLE_HANDLER = CommandHandler("disable", disable, pass_args=True, filters=Filters.group)
