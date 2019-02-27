@@ -146,14 +146,14 @@ if is_module_loaded(FILENAME):
         return build_curr_disabled(chat_id)
 
 
-    __mod_name__ = "Command disabling"
+    __mod_name__ = "명령어 비활성화"
 
     __help__ = """
- - /cmds: 비활성화된 명령어의 현재 상태를 확인합니다.
+ - /cmds: 비활성화된 명령어를 확인합니다.
 
 *Admin only:*
- - /enable <cmd name>: 명령어를 활성화 합니다.
- - /disable <cmd name>: 명령어를 비활성화 합니다.
+ - /enable <명령어>: 명령어를 활성화 합니다.
+ - /disable <명령어>: 명령어를 비활성화 합니다.
  - /listcmds: 사용가능한 모든 전환 가능한 명령어를 나열해요.
     """
 
