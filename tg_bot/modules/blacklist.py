@@ -123,7 +123,7 @@ def del_blacklist(bot: Bot, update: Update):
             try:
                 message.delete()
             except BadRequest as excp:
-                if excp.message == "삭제할 메시지를 찾을 수 없어요.:
+                if excp.message == "Message to delete not found":
                     pass
                 else:
                     LOGGER.exception("Blacklist 메시지 삭제 중 오류 발생!")
@@ -154,7 +154,7 @@ __help__ = """
 *관리자용 명령어*
  - /addblacklist <단어들>: Blacklist에 단어를 추가해요. 여러 단어들을 추가하려면 엔터를(개행) 사용하세요.
  - /unblacklist <단어들>: Blacklist에서 단어를 제거해요. addblacklist와 마찬가지로 여러 단어들을 한번에 제거하려면 엔터를(개행) 이용하세요.
- - /rmblacklist <triggers>: 위 명령어와 같.
+ - /rmblacklist <triggers>: 위 명령어와 같아요.
 """
 
 BLACKLIST_HANDLER = DisableAbleCommandHandler("blacklist", blacklist, filters=Filters.group, pass_args=True,
