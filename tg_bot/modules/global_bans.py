@@ -148,7 +148,7 @@ def ungban(bot: Bot, update: Update, args: List[str]):
 
     banner = update.effective_user  # type: Optional[User]
 
-    message.reply_text("제가 {} 님에게 기회를 한번더 드릴게요.".format(user_chat.first_name))
+    message.reply_text("제가 {} 님에게 글로벌밴으로 부터 기회를 한번더 드릴게요.".format(user_chat.first_name))
 
     send_to_list(bot, SUDO_USERS + SUPPORT_USERS,
                  "{} UNBAN 사용자. {}".format(mention_html(banner.id, banner.first_name),
@@ -182,7 +182,7 @@ def ungban(bot: Bot, update: Update, args: List[str]):
 
     send_to_list(bot, SUDO_USERS + SUPPORT_USERS, "un-gban 완료!")
 
-    message.reply_text("un-gbanned되었어요.")
+    message.reply_text("글로벌밴이 해제되었어요.")
 
 
 @run_async
@@ -240,11 +240,11 @@ def gbanstat(bot: Bot, update: Update, args: List[str]):
     if len(args) > 0:
         if args[0].lower() in ["on", "yes"]:
             sql.enable_gbans(update.effective_chat.id)
-            update.effective_message.reply_text("이 그룹에서 GBAN을 활성화했어요. 스펨발송자, 불친절한 사람들, "
+            update.effective_message.reply_text("이 그룹에서 GBAN을 활성화했어요. 스펨발송자, 불친절한 사람들"
                                                 "등에서부터 자신을 보호할 수 있어요.")
         elif args[0].lower() in ["off", "no"]:
             sql.disable_gbans(update.effective_chat.id)
-            update.effective_message.reply_text("I've disabled gbans in this group. GBans wont affect your users "
+            update.effective_message.reply_text("이 그룹에서 글로벌밴을 비활성화했어요. GBans wont affect your users "
                                                 "anymore. You'll be less protected from any trolls and spammers "
                                                 "though!")
     else:
