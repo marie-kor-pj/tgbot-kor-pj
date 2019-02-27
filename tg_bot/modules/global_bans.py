@@ -59,11 +59,11 @@ def gban(bot: Bot, update: Update, args: List[str]):
         return
 
     if int(user_id) in SUPPORT_USERS:
-        message.reply_text("어머... 누군가가 유저를 글로벌밴하려고 하고 있네요! *팝콘을 집어듬*")
+        message.reply_text("어머... 누군가가 SUPPORT 유저를 글로벌밴하려고 하고 있네요!")
         return
 
     if user_id == bot.id:
-        message.reply_text("-_- So funny, lets gban myself why don't I? Nice try.")
+        message.reply_text("-_- 저를 GBAN하려고 한거예요...? ㅠㅠ")
         return
 
     try:
@@ -73,7 +73,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
         return
 
     if user_chat.type != 'private':
-        message.reply_text("유저가 아닙니다!")
+        message.reply_text("유저가 아니예요!")
         return
 
     if sql.is_user_gbanned(user_id):
@@ -88,11 +88,11 @@ def gban(bot: Bot, update: Update, args: List[str]):
                                "제가 가서 새로운 이유로 업데이트했어요!".format(html.escape(old_reason)),
                                parse_mode=ParseMode.HTML)
         else:
-            message.reply_text("이 유저는 이미 글로벌밴 당했지만, 이유가 세팅되지 않았어요; 제가 가서 업데이트했어요!")
+            message.reply_text("이 유저는 이미 글로벌밴 당했지만, 이유를 나타내지 않았어요; 제가 가서 업데이트했어요!")
 
         return
 
-    message.reply_text("*Blows dust off of banhammer* 😉")
+    message.reply_text("*GBAN예정이예요! 안녕히가세요!* ;)")
 
     banner = update.effective_user  # type: Optional[User]
     send_to_list(bot, SUDO_USERS + SUPPORT_USERS,
@@ -117,15 +117,15 @@ def gban(bot: Bot, update: Update, args: List[str]):
             if excp.message in GBAN_ERRORS:
                 pass
             else:
-                message.reply_text("Could not gban due to: {}".format(excp.message))
+                message.reply_text("다음 이유로 인해 GBAN할 수 없어요 : {}".format(excp.message))
                 send_to_list(bot, SUDO_USERS + SUPPORT_USERS, "Could not gban due to: {}".format(excp.message))
                 sql.ungban_user(user_id)
                 return
         except TelegramError:
             pass
 
-    send_to_list(bot, SUDO_USERS + SUPPORT_USERS, "gban complete!")
-    message.reply_text("Person has been gbanned.")
+    send_to_list(bot, SUDO_USERS + SUPPORT_USERS, "GBAN 완료!")
+    message.reply_text("그 사람이 GBAN 되었어요.")
 
 
 @run_async
@@ -134,24 +134,24 @@ def ungban(bot: Bot, update: Update, args: List[str]):
 
     user_id = extract_user(message, args)
     if not user_id:
-        message.reply_text("You don't seem to be referring to a user.")
+        message.reply_text("사용자를 알려주세요!")
         return
 
     user_chat = bot.get_chat(user_id)
     if user_chat.type != 'private':
-        message.reply_text("That's not a user!")
+        message.reply_text("사용자가 아니예요!")
         return
 
     if not sql.is_user_gbanned(user_id):
-        message.reply_text("This user is not gbanned!")
+        message.reply_text("이 사용자는 GBAN상태가 아니예요!")
         return
 
     banner = update.effective_user  # type: Optional[User]
 
-    message.reply_text("I'll give {} a second chance, globally.".format(user_chat.first_name))
+    message.reply_text("제가 {} 님에게 기회를 한번더 드릴게요.".format(user_chat.first_name))
 
     send_to_list(bot, SUDO_USERS + SUPPORT_USERS,
-                 "{} has ungbanned user {}".format(mention_html(banner.id, banner.first_name),
+                 "{} UNBAN 사용자. {}".format(mention_html(banner.id, banner.first_name),
                                                    mention_html(user_chat.id, user_chat.first_name)),
                  html=True)
 
@@ -172,17 +172,17 @@ def ungban(bot: Bot, update: Update, args: List[str]):
             if excp.message in UNGBAN_ERRORS:
                 pass
             else:
-                message.reply_text("Could not un-gban due to: {}".format(excp.message))
-                bot.send_message(OWNER_ID, "Could not un-gban due to: {}".format(excp.message))
+                message.reply_text("다음 이유로 인해 BAN을 해제하실 수 없어요 : {}".format(excp.message))
+                bot.send_message(OWNER_ID, "다음 이유로 인해 BAN을 해제하실 수 없어요 : {}".format(excp.message))
                 return
         except TelegramError:
             pass
 
     sql.ungban_user(user_id)
 
-    send_to_list(bot, SUDO_USERS + SUPPORT_USERS, "un-gban complete!")
+    send_to_list(bot, SUDO_USERS + SUPPORT_USERS, "un-gban 완료!")
 
-    message.reply_text("Person has been un-gbanned.")
+    message.reply_text("un-gbanned되었어요.")
 
 
 @run_async
@@ -190,7 +190,7 @@ def gbanlist(bot: Bot, update: Update):
     banned_users = sql.get_gban_list()
 
     if not banned_users:
-        update.effective_message.reply_text("There aren't any gbanned users! You're kinder than I expected...")
+        update.effective_message.reply_text("GBAN 당한 유저가 없어요! 저보다 착하신것 같네요...")
         return
 
     banfile = 'Screw these guys.\n'
@@ -209,7 +209,7 @@ def check_and_ban(update, user_id, should_message=True):
     if sql.is_user_gbanned(user_id):
         update.effective_chat.kick_member(user_id)
         if should_message:
-            update.effective_message.reply_text("This is a bad person, they shouldn't be here!")
+            update.effective_message.reply_text("이 사람은 나쁜사람이라 여기 있으면 안되요!")
 
 
 @run_async
@@ -240,8 +240,8 @@ def gbanstat(bot: Bot, update: Update, args: List[str]):
     if len(args) > 0:
         if args[0].lower() in ["on", "yes"]:
             sql.enable_gbans(update.effective_chat.id)
-            update.effective_message.reply_text("I've enabled gbans in this group. This will help protect you "
-                                                "from spammers, unsavoury characters, and the biggest trolls.")
+            update.effective_message.reply_text("이 그룹에서 GBAN을 활성화했어요. 스펨발송자, 불친절한 사람들, "
+                                                "등에서부터 자신을 보호할 수 있어요.")
         elif args[0].lower() in ["off", "no"]:
             sql.disable_gbans(update.effective_chat.id)
             update.effective_message.reply_text("I've disabled gbans in this group. GBans wont affect your users "
