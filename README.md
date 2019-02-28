@@ -84,7 +84,7 @@ class Development(Config):
 
 ### Python 의존성
 
-프로젝트 디렉토리로 가서 다음 명령어를 입력하여 필수 파이썬 의존성을 설치할 수 :
+프로젝트 디렉토리로 가서 다음 명령어를 입력하여 필수 파이썬 의존성을 설치할 수 있습니다:
 
 `pip3 install -r requirements.txt`.
 
