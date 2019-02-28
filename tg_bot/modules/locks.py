@@ -206,7 +206,7 @@ def del_lockables(bot: Bot, update: Update):
                             return
 
                         chat.kick_member(new_mem.id)
-                        message.reply_text("Only admins are allowed to add bots to this chat! Get outta here.")
+                        message.reply_text("관리자만 이 채팅에서 봇을 추가할 수 있어요. 나가세요!")
             else:
                 try:
                     message.delete()
@@ -289,21 +289,21 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- - /locktypes: a list of possible locktypes
+ - /locktypes: 잠글 수 있는 목록을 알려줘요
 
-*Admin only:*
- - /lock <type>: lock items of a certain type (not available in private)
- - /unlock <type>: unlock items of a certain type (not available in private)
- - /locks: the current list of locks in this chat.
+*관리자용 명령어*
+ - /lock <잠글 내용>: 특정 유형의 항목을 잠금해줘요. (사적으로 사용할 수는 없어요)
+ - /unlock <잠금 해제할 내용>: 특정 유형의 항목을 잠금 해제해줘요. (사적으로 사용할 수는 없어요)
+ - /locks: 현재 이 채팅방에서 잠금된 것이 무엇인지 알려줘요.
 
-Locks can be used to restrict a group's users.
-eg:
-Locking urls will auto-delete all messages with urls, locking stickers will delete all \
-stickers, etc.
-Locking bots will stop non-admins from adding bots to the chat.
+잠금 기능을 사용해서 그룹의 사용자를 제한할 수 있어요.
+예:
+url을 잠그면 url이 있는 모든 메시지가 자동으로 삭제되고, \
+스티커를 잠그면 스티커가있는 모든 메시지가 삭제되요.
+봇을 잠그면 관리자가 아닌 사람이 채팅에 봇 추가하는 것을 막을 수 있어요.
 """
 
-__mod_name__ = "Locks"
+__mod_name__ = "잠금"
 
 LOCKTYPES_HANDLER = DisableAbleCommandHandler("locktypes", locktypes)
 LOCK_HANDLER = CommandHandler("lock", lock, pass_args=True, filters=Filters.group)
