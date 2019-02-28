@@ -52,7 +52,7 @@ class Development(Config):
 ```
 
 당신이 config.py 파일을 가지고 있지 않다면 (EG on heroku), 환경 변수를 사용하는 방법도 사용이 가능합니다.
-다음 환경 변수들이 사용 :
+다음 환경 변수들이 사용 가능합니다:
  - `ENV`: Setting this to ANYTHING will enable env variables
 
  - `TOKEN`: Your bot token, as a string.
