@@ -146,7 +146,7 @@ def unlock(bot: Bot, update: Update, args: List[str]) -> str:
         if len(args) >= 1:
             if args[0] in LOCK_TYPES:
                 sql.update_lock(chat.id, args[0], locked=False)
-                message.reply_text("Unlocked {} for everyone!".format(args[0]))
+                message.reply_text("모두에게 {} 락 해제!".format(args[0]))
                 return "<b>{}:</b>" \
                        "\n#언락" \
                        "\n<b>관리자:</b> {}" \
