@@ -12,51 +12,49 @@ from telegram.utils.helpers import escape_markdown
 
 from tg_bot import dispatcher, updater, TOKEN, WEBHOOK, OWNER_ID, DONATION_LINK, CERT_PATH, PORT, URL, LOGGER, \
     ALLOW_EXCL
-# needed to dynamically load modules
-# NOTE: Module order is not guaranteed, specify that in the config file!
+# 모듈을 동적으로 로드할 필요가 있습니다.
+# NOTE: 모듈 순서는 보장되지 않습니다. config 파일에 기록하여 보증하세요.
 from tg_bot.modules import ALL_MODULES
 from tg_bot.modules.helper_funcs.chat_status import is_user_admin
 from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 PM_START_TEXT = """
-안녕하세요! {}님, 제 이름은 {}입니다! 만약 당신이 저를 사용하는데 어떤 문제가 있다면, /help - 를 읽어주세요.
-그래도 해결이 안된다면 @MarieSupport 로 와주세요.
+안녕하세요! {}님, 제 이름은 {}입니다! 만약 당신이 저를 사용하는데 문제가 있다면, /help - 를 읽어주세요.
+만약 해결이 불가능하다면,  @MarieSupport 로 와주세요.
 
-I'm a group manager bot built in python3, using the python-telegram-bot library, and am fully opensource; \
-you can find what makes me tick [here](github.com/PaulSonOfLars/tgbot)!
+저는 pytyon3으로 빌드된 그룹 관리자 봇입니다. pytyon-telegram 라이브러리를 사용하며, 그리고 모두 오픈소스입니다; \
+너는 소스를 [here](github.com/PaulSonOfLars/tgbot) 여기서 찾을 수 있습니다!
 
-Feel free to submit pull requests on github, or to contact my support group, @MarieSupport, with any bugs, questions \
-or feature requests you might have :)
-I also have a news channel, @MarieNews for announcements on new features, downtime, etc.
+나는 또한 news channel을 운영하고 있습니다., @MarieNews는 모든 소식을 공지합니다.
 
 /help 를 사용하여 사용 가능한 명령 목록을 찾을 수 있어요.
 
-If you're enjoying using me, and/or would like to help me survive in the wild, hit /donate to help fund/upgrade my VPS!
+당신이 만약 이봇을 흥미롭게 사용했거나, 야생에서 생존하게 하고싶다면, /donate를 통해 VPS를 유지하거나 사용하게 해주세요.
 """
 
 HELP_STRINGS = """
-Hey there! My name is *{}*.
-I'm a modular group management bot with a few fun extras! Have a look at the following for an idea of some of \
-the things I can help you with.
+안녕~! 내이름은! *{}*.
+저는 몇가지 재밌는 엑스트라를 가진 모듈식의 그룹 관리 봇입니다! 아이디어를 얻으려면 \
+를 참조하세요.
 
-*Main* commands available:
+사용 가능한 *Main* Command:
  - /start: 봇을 시작합니다.
  - /help: 개인메시지로 메시지를 보냅니다.
- - /help <module name>: PM's you info about that module.
+ - /help <module name>: 모듈에대한 정보를 알려줘요!.
  - /donate: 기부 방법에 대한 정보를 알려줘요!
  - /settings:
-   - in PM: will send you your settings for all supported modules.
-   - in a group: will redirect you to pm, with all that chat's settings.
+   - in PM: 너에게 모든 지원가능한 세팅에대한 정보를 보냅니다.
+   - in a group: PM에 다시 보냅니다.
 
 {}
 And the following:
 """.format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
 
-DONATE_STRING = """Heya, glad to hear you want to donate!
-It took lots of work for my creator to get me to where I am now, and every donation helps \
-motivate him to make me even better. All the donation money will go to a better VPS to host me, and/or beer \
-(see his bio!). He's just a poor student, so every little helps!
-There are two ways of paying him; [PayPal](paypal.me/PaulSonOfLars), or [Monzo](monzo.me/paulnionvestergaardlarsen)."""
+DONATE_STRING = """Heya, 기부하고싶다니 기뻐
+내가 여기까지 오기에 많은 노력이 필요했고, 모든 donation은 \ 
+나를 좋게 만드는데 동기를 부여하였다. 모든 기부금은 VPN 호스트를 좋게하는데 사용될것이며, 또는 내 맥주값으로 사용될껏이다. (Yeah!)
+나는 가난한 학생이라서, 많은 도움을 받고 있습니다.!
+나에게 기부할수있는 두가지 방법이 있습니다; [PayPal](paypal.me/PaulSonOfLars) 또는 [Monzo](monzo.me/paulnionvestergaardlarsen)."""
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -79,12 +77,12 @@ for module_name in ALL_MODULES:
     if not imported_module.__mod_name__.lower() in IMPORTED:
         IMPORTED[imported_module.__mod_name__.lower()] = imported_module
     else:
-        raise Exception("Can't have two modules with the same name! Please change one")
+        raise Exception("두개의 모듈은 같은 이름을 가질 수 없습니다. 하나를 변경하세요.")
 
     if hasattr(imported_module, "__help__") and imported_module.__help__:
         HELPABLE[imported_module.__mod_name__.lower()] = imported_module
 
-    # Chats to migrate on chat_migrated events
+    # chat_migrated events 에서 이동할 채팅
     if hasattr(imported_module, "__migrate__"):
         MIGRATEABLE.append(imported_module)
 
@@ -110,7 +108,7 @@ for module_name in ALL_MODULES:
         USER_SETTINGS[imported_module.__mod_name__.lower()] = imported_module
 
 
-# do not async
+# async 
 def send_help(chat_id, text, keyboard=None):
     if not keyboard:
         keyboard = InlineKeyboardMarkup(paginate_modules(0, HELPABLE, "help"))
@@ -156,33 +154,33 @@ def start(bot: Bot, update: Update, args: List[str]):
         update.effective_message.reply_text("Yo, whadup?")
 
 
-# for test purposes
+# 시험용
 def error_callback(bot, update, error):
     try:
         raise error
     except Unauthorized:
         print("no nono1")
         print(error)
-        # remove update.message.chat_id from conversation list
+        # 대화 목록에서 update.message.chat_id 제거
     except BadRequest:
         print("no nono2")
         print("BadRequest caught")
         print(error)
 
-        # handle malformed requests - read more below!
+        # 잘못된 요청 처리. 다시 읽고 오셈 ^^
     except TimedOut:
         print("no nono3")
-        # handle slow connection problems
+        # 느린 연결 문제 처리
     except NetworkError:
         print("no nono4")
-        # handle other connection problems
+        # 다른 연결 문제 처리
     except ChatMigrated as err:
         print("no nono5")
         print(err)
-        # the chat_id of a group has changed, use e.new_chat_id instead
+        # 그룹의 chat_id가 변경되었습니다. e.new_chat_id를 사용하세요.
     except TelegramError:
         print(error)
-        # handle all other telegram related errors
+        # telegram 관련 오류 처리
 
 
 @run_async
@@ -195,7 +193,7 @@ def help_button(bot: Bot, update: Update):
     try:
         if mod_match:
             module = mod_match.group(1)
-            text = "Here is the help for the *{}* module:\n".format(HELPABLE[module].__mod_name__) \
+            text = "도움말 참조! *{}* module:\n".format(HELPABLE[module].__mod_name__) \
                    + HELPABLE[module].__help__
             query.message.reply_text(text=text,
                                      parse_mode=ParseMode.MARKDOWN,
@@ -221,15 +219,15 @@ def help_button(bot: Bot, update: Update):
                                      parse_mode=ParseMode.MARKDOWN,
                                      reply_markup=InlineKeyboardMarkup(paginate_modules(0, HELPABLE, "help")))
 
-        # ensure no spinny white circle
+        # 희미한 흰 원이 없게 하다. (오류X)
         bot.answer_callback_query(query.id)
         query.message.delete()
     except BadRequest as excp:
-        if excp.message == "Message is not modified":
+        if excp.message == "Message는 수정되지 않습니다.:
             pass
-        elif excp.message == "Query_id_invalid":
+        elif excp.message == "Query_id가 유요하지 않습니다.":
             pass
-        elif excp.message == "Message can't be deleted":
+        elif excp.message == "Message는 지워질 수 없습니다.":
             pass
         else:
             LOGGER.exception("Exception in help buttons. %s", str(query.data))
@@ -252,7 +250,7 @@ def get_help(bot: Bot, update: Update):
 
     elif len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):
         module = args[1].lower()
-        text = "Here is the available help for the *{}* module:\n".format(HELPABLE[module].__mod_name__) \
+        text = "여기에 사용 가능한 도움말이 있습니다. *{}* module:\n".format(HELPABLE[module].__mod_name__) \
                + HELPABLE[module].__help__
         send_help(chat.id, text, InlineKeyboardMarkup([[InlineKeyboardButton(text="Back", callback_data="help_back")]]))
 
@@ -269,20 +267,20 @@ def send_settings(chat_id, user_id, user=False):
                                         parse_mode=ParseMode.MARKDOWN)
 
         else:
-            dispatcher.bot.send_message(user_id, "Seems like there aren't any user specific settings available :'(",
+            dispatcher.bot.send_message(user_id, "사용가능한 사용자별 설정은 없는것 같아요. :'(",
                                         parse_mode=ParseMode.MARKDOWN)
 
     else:
         if CHAT_SETTINGS:
             chat_name = dispatcher.bot.getChat(chat_id).title
             dispatcher.bot.send_message(user_id,
-                                        text="Which module would you like to check {}'s settings for?".format(
+                                        text="어떤 모듈을 점검하시겠습니까? {}'s settings for?".format(
                                             chat_name),
                                         reply_markup=InlineKeyboardMarkup(
                                             paginate_modules(0, CHAT_SETTINGS, "stngs", chat=chat_id)))
         else:
-            dispatcher.bot.send_message(user_id, "Seems like there aren't any chat settings available :'(\nSend this "
-                                                 "in a group chat you're admin in to find its current settings!",
+            dispatcher.bot.send_message(user_id, "이용할 수 있는 채팅 설정이 없는 것 같습니다. :'(\nSend this "
+                                                 "당신이 그룹에서 admin이라면 찾을 수 있습니다!",
                                         parse_mode=ParseMode.MARKDOWN)
 
 
@@ -323,8 +321,8 @@ def settings_button(bot: Bot, update: Update):
             chat_id = next_match.group(1)
             next_page = int(next_match.group(2))
             chat = bot.get_chat(chat_id)
-            query.message.reply_text("안녕! There are quite a few settings for {} - go ahead and pick what "
-                                     "you're interested in.".format(chat.title),
+            query.message.reply_text("안녕! 설정이 꽤나 있습니다. {} - 골라봐요 "
+                                     "재밌어보이는걸로.".format(chat.title),
                                      reply_markup=InlineKeyboardMarkup(
                                          paginate_modules(next_page + 1, CHAT_SETTINGS, "stngs",
                                                           chat=chat_id)))
@@ -332,8 +330,8 @@ def settings_button(bot: Bot, update: Update):
         elif back_match:
             chat_id = back_match.group(1)
             chat = bot.get_chat(chat_id)
-            query.message.reply_text(text="안녕! There are quite a few settings for {} - go ahead and pick what "
-                                          "you're interested in.".format(escape_markdown(chat.title)),
+            query.message.reply_text(text="안녕! 설정이 꽤나 있습니다. {} - 골라봐요 "
+                                          "재밌어보이는걸로.".format(escape_markdown(chat.title)),
                                      parse_mode=ParseMode.MARKDOWN,
                                      reply_markup=InlineKeyboardMarkup(paginate_modules(0, CHAT_SETTINGS, "stngs",
                                                                                         chat=chat_id)))
@@ -342,14 +340,14 @@ def settings_button(bot: Bot, update: Update):
         bot.answer_callback_query(query.id)
         query.message.delete()
     except BadRequest as excp:
-        if excp.message == "Message is not modified":
+        if excp.message == "Message는 수정되지 않았습니다.":
             pass
-        elif excp.message == "Query_id_invalid":
+        elif excp.message == "Query_id가 유효하지 않습니다.":
             pass
-        elif excp.message == "Message can't be deleted":
+        elif excp.message == "Message는 삭제될 수 없습니다.":
             pass
         else:
-            LOGGER.exception("Exception in settings buttons. %s", str(query.data))
+            LOGGER.exception("설정 버튼 예외. %s", str(query.data))
 
 
 @run_async
@@ -362,14 +360,14 @@ def get_settings(bot: Bot, update: Update):
     # ONLY send settings in PM
     if chat.type != chat.PRIVATE:
         if is_user_admin(chat, user.id):
-            text = "Click here to get this chat's settings, as well as yours."
+            text = "클릭하면 채팅 설정을 열람가능합니다. 니꺼만큼 잘.."
             msg.reply_text(text,
                            reply_markup=InlineKeyboardMarkup(
                                [[InlineKeyboardButton(text="Settings",
                                                       url="t.me/{}?start=stngs_{}".format(
                                                           bot.username, chat.id))]]))
         else:
-            text = "Click here to check your settings."
+            text = "클릭해서 너의 설정을 점검하세요."
 
     else:
         send_settings(chat.id, user.id, True)
@@ -384,7 +382,7 @@ def donate(bot: Bot, update: Update):
         update.effective_message.reply_text(DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
         if OWNER_ID != 254318997 and DONATION_LINK:
-            update.effective_message.reply_text("You can also donate to the person currently running me "
+            update.effective_message.reply_text("너는 또한 지금 운영하는 사람에게 기부할 수 있습니다. "
                                                 "[here]({})".format(DONATION_LINK),
                                                 parse_mode=ParseMode.MARKDOWN)
 
@@ -392,9 +390,9 @@ def donate(bot: Bot, update: Update):
         try:
             bot.send_message(user.id, DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
-            update.effective_message.reply_text("I've PM'ed you about donating to my creator!")
+            update.effective_message.reply_text("PM에 제작자 donation에 대한 정보를 알려주고 있다.")
         except Unauthorized:
-            update.effective_message.reply_text("Contact me in PM first to get donation information.")
+            update.effective_message.reply_text("PM에 donation 정보를 얻기위해 연락하세요.")
 
 
 def migrate_chats(bot: Bot, update: Update):
@@ -408,11 +406,11 @@ def migrate_chats(bot: Bot, update: Update):
     else:
         return
 
-    LOGGER.info("Migrating from %s, to %s", str(old_chat), str(new_chat))
+    LOGGER.info("이전되었습니다. 어디서? %s, to %s", str(old_chat), str(new_chat))
     for mod in MIGRATEABLE:
         mod.__migrate__(old_chat, new_chat)
 
-    LOGGER.info("Successfully migrated!")
+    LOGGER.info("이전 성공!")
     raise DispatcherHandlerStop
 
 
@@ -467,12 +465,12 @@ CHATS_TIME = {}
 
 
 def process_update(self, update):
-    # An error happened while polling
+    # 투표 도중 오류가 발생하였습니다.
     if isinstance(update, TelegramError):
         try:
             self.dispatch_error(None, update)
         except Exception:
-            self.logger.exception('An uncaught error was raised while handling the error')
+            self.logger.exception('오류를 처리하는 동안 추가 오류가 발생하였습니다.')
         return
 
     now = datetime.datetime.utcnow()
@@ -495,14 +493,14 @@ def process_update(self, update):
                 handler.handle_update(update, self)
                 break
 
-        # Stop processing with any other handler.
+        # 다른 헨들러와 처리를 중단한다.
         except DispatcherHandlerStop:
-            self.logger.debug('Stopping further handlers due to DispatcherHandlerStop')
+            self.logger.debug('DispatcherHandlerStop으로 인한 추가 핸들러가 중지되었습니다.')
             break
 
-        # Dispatch any error.
+        # 다른 오류에도 Dispatch 하십시오.
         except TelegramError as te:
-            self.logger.warning('A TelegramError was raised while processing the Update')
+            self.logger.warning('업데이트를 처리하는 동안 텔레그램 에러가 발생하였습니다.)
 
             try:
                 self.dispatch_error(update, te)
@@ -510,13 +508,13 @@ def process_update(self, update):
                 self.logger.debug('Error handler stopped further handlers')
                 break
             except Exception:
-                self.logger.exception('An uncaught error was raised while handling the error')
+                self.logger.exception('오류를 처리하는 동안 오류가 발생하였습니다.')
 
-        # Errors should not stop the thread.
+        # 쓰레드를 스탑하지 마세요.
         except Exception:
-            self.logger.exception('An uncaught error was raised while processing the update')
+            self.logger.exception('업데이트를 처리하는 동안 오류가 발생하였습니다.')
 
 
 if __name__ == '__main__':
-    LOGGER.info("Successfully loaded modules: " + str(ALL_MODULES))
+    LOGGER.info("모듈 로드 : " + str(ALL_MODULES))
     main()
