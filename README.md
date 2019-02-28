@@ -60,7 +60,7 @@ class Development(Config):
  - `OWNER_USERNAME`: 당신의 유저네임입니다.
 
  - `DATABASE_URL`: 당신의 데이터베이스 URL입니다. 
- - `MESSAGE_DUMP`: 선택: a chat where your replied saved messages are stored, to stop people deleting their old 
+ - `MESSAGE_DUMP`: 선택: 당신의 답장 처리된 메시지들이 보관된 채팅입니다. 이는 유저들이 이전 메시지를 삭제하는것을 방지해줍니다.  
  - `LOAD`: Space separated list of modules you would like to load
  - `NO_LOAD`: Space separated list of modules you would like NOT to load
  - `WEBHOOK`: Setting this to ANYTHING will enable webhooks when in env mode
