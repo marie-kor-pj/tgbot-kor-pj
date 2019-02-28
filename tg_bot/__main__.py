@@ -345,7 +345,7 @@ def settings_button(bot: Bot, update: Update):
         elif excp.message == "Message can't be deleted":
             pass
         else:
-            LOGGER.exception("도움말에 예외가 . %s", str(query.data))
+            LOGGER.exception("도움말에 예외가 있어요. %s", str(query.data))
 
 
 @run_async
