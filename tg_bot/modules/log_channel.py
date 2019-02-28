@@ -25,7 +25,7 @@ if is_module_loaded(FILENAME):
             if result:
                 if chat.type == chat.SUPERGROUP and chat.username:
                     result += "\n<b>링크:</b> " \
-                              "<a href=\"http://telegram.me/{}/{}\">여기를 눌러주세요</a>".format(chat.username,
+                              "<a href=\"http://telegram.me/{}/{}\"> 를 눌러주세요.</a>".format(chat.username,
                                                                                            message.message_id)
                 log_chat = sql.get_chat_log_channel(chat.id)
                 if log_chat:
@@ -33,7 +33,7 @@ if is_module_loaded(FILENAME):
             elif result == "":
                 pass
             else:
-                LOGGER.warning("%s was set as loggable, but had no return statement.", func)
+                LOGGER.warning("%s 로그가 가능하도록 되어있지만 반환 문장이 없어요.", func)
 
             return result
 
@@ -45,14 +45,14 @@ if is_module_loaded(FILENAME):
             bot.send_message(log_chat_id, result, parse_mode=ParseMode.HTML)
         except BadRequest as excp:
             if excp.message == "Chat not found":
-                bot.send_message(orig_chat_id, "이 로그 채널이 삭제되었습니다 - 설정되지 않음.")
+                bot.send_message(orig_chat_id, "이 로그 채널이 삭제되었어요 - 설정되지 않음")
                 sql.stop_chat_logging(orig_chat_id)
             else:
                 LOGGER.warning(excp.message)
                 LOGGER.warning(result)
                 LOGGER.exception("Could not parse")
 
-                bot.send_message(log_chat_id, result + "\n\nFormatting has been disabled due to an unexpected error.")
+                bot.send_message(log_chat_id, result + "\n\n예기치 않은 오류로 인해 포맷이 비활성화되었어요.")
 
 
     @run_async
@@ -65,7 +65,7 @@ if is_module_loaded(FILENAME):
         if log_channel:
             log_channel_info = bot.get_chat(log_channel)
             message.reply_text(
-                "해당 그룹으로부터 전송된 모든 로그가 있습니다 : {} (`{}`)".format(escape_markdown(log_channel_info.title),
+                "해당 그룹으로부터 전송된 모든 로그가 여기에 있어요 : {} (`{}`)".format(escape_markdown(log_channel_info.title),
                                                                          log_channel),
                 parse_mode=ParseMode.MARKDOWN)
 
@@ -79,7 +79,7 @@ if is_module_loaded(FILENAME):
         message = update.effective_message  # type: Optional[Message]
         chat = update.effective_chat  # type: Optional[Chat]
         if chat.type == chat.CHANNEL:
-            message.reply_text("이제, forward the /setlog to the group you want to tie this channel to!")
+            message.reply_text("이제, 이 채널을 연결할 그룹으로 /setlog를 전달해주세요!")
 
         elif message.forward_from_chat:
             sql.set_chat_log_channel(chat.id, message.forward_from_chat.id)
@@ -89,25 +89,25 @@ if is_module_loaded(FILENAME):
                 if excp.message == "Message to delete not found":
                     pass
                 else:
-                    LOGGER.exception("로그 채널에서 메시지를 삭제하는 동안 오류가 발생했어요. Should work anyway though.")
+                    LOGGER.exception("로그 채널에서 메시지를 삭제하는 동안 오류가 발생했어요. 어쨌든 잘 될거예요.")
 
             try:
                 bot.send_message(message.forward_from_chat.id,
-                                 "This channel has been set as the log channel for {}.".format(
+                                 "이 채널이 로그 채널로 설정되었어요. {}.".format(
                                      chat.title or chat.first_name))
             except Unauthorized as excp:
                 if excp.message == "Forbidden: bot is not a member of the channel chat":
-                    bot.send_message(chat.id, "Successfully set log channel!")
+                    bot.send_message(chat.id, "로그채널 설정이 완료되었어요!")
                 else:
-                    LOGGER.exception("ERROR in setting the log channel.")
+                    LOGGER.exception("로그채널을 설정하는데에 오류가 발생했어요!")
 
-            bot.send_message(chat.id, "Successfully set log channel!")
+            bot.send_message(chat.id, "로그채널 설정이 완료되었어요!")
 
         else:
-            message.reply_text("The steps to set a log channel are:\n"
-                               " - add bot to the desired channel\n"
-                               " - send /setlog to the channel\n"
-                               " - forward the /setlog to the group\n")
+            message.reply_text("로그 채널 설정하는 방법:\n"
+                               " - 원하는 채널에 봇을 추가해주세요.\n"
+                               " - 채널에 /setlog 를 입력해 주세요\n"
+                               " - 로그 채널을 설정하고자 하는 그룹에 채널에서 적었던 /setlog를 전달해주세요.\n")
 
 
     @run_async
@@ -118,15 +118,15 @@ if is_module_loaded(FILENAME):
 
         log_channel = sql.stop_chat_logging(chat.id)
         if log_channel:
-            bot.send_message(log_channel, "Channel has been unlinked from {}".format(chat.title))
-            message.reply_text("Log channel has been un-set.")
+            bot.send_message(log_channel, "채널이 {} 에서 연결이 해제되었어요!".format(chat.title))
+            message.reply_text("로그 채널이 해제되었어요.")
 
         else:
             message.reply_text("로그 채널이 아직 설정되지 않았어요!")
 
 
     def __stats__():
-        return "{} log channels set.".format(sql.num_logchannels())
+        return "{} 로그 채널 설정.".format(sql.num_logchannels())
 
 
     def __migrate__(old_chat_id, new_chat_id):
@@ -137,24 +137,24 @@ if is_module_loaded(FILENAME):
         log_channel = sql.get_chat_log_channel(chat_id)
         if log_channel:
             log_channel_info = dispatcher.bot.get_chat(log_channel)
-            return "This group has all it's logs sent to: {} (`{}`)".format(escape_markdown(log_channel_info.title),
+            return "이 그룹에 모든 로그가 전송되었어요 : {} (`{}`)".format(escape_markdown(log_channel_info.title),
                                                                             log_channel)
-        return "No log channel is set for this group!"
+        return "이 그룹에 설정된 로그 채널이 없어요."
 
 
     __help__ = """
-*Admin only:*
-- /logchannel: get log channel info
-- /setlog: set the log channel.
-- /unsetlog: unset the log channel.
+*관리자용 명령어*
+- /logchannel: 로그 채널 정보를 가져와요.
+- /setlog: 로그 채널을 설정해요.
+- /unsetlog: 로그 채널을 비활성화해요.
 
-Setting the log channel is done by:
-- adding the bot to the desired channel (as an admin!)
-- sending /setlog in the channel
-- forwarding the /setlog to the group
+로그 채널 설정하는 방법 :
+- 원하는 채널에 봇을 추가해주세요. (봇은 관리자로 해주세요!)
+- 채널에 /setlog 를 입력해주세요.
+- 로그 채널을 설정하고자 하는 그룹에 채널에서 적었던 /setlog를 전달해주세요.
 """
 
-    __mod_name__ = "Log Channels"
+    __mod_name__ = "로그 채널"
 
     LOG_HANDLER = CommandHandler("logchannel", logging)
     SET_LOG_HANDLER = CommandHandler("setlog", setlog)
