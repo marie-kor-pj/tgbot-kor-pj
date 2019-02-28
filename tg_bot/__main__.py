@@ -493,7 +493,7 @@ def process_update(self, update):
                 handler.handle_update(update, self)
                 break
 
-        # 다른 헨들러와 처리를 중단한다.
+        # 다른 헨들러와 처리를 중단.
         except DispatcherHandlerStop:
             self.logger.debug('DispatcherHandlerStop으로 인한 추가 핸들러가 중지되었습니다.')
             break
