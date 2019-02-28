@@ -46,7 +46,7 @@ HELP_STRINGS = """
 
 {}
 And the following:
-""".format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
+""".format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\n모든 명령은 / 또는 !와 함께 사용할 수 있어요.\n")
 
 DONATE_STRING = """이야, 기부를하고 싶다니 기뻐요!
 제가 여기까지 오기에 많은 노력이 필요했고, 모든 기부는
@@ -191,7 +191,7 @@ def help_button(bot: Bot, update: Update):
     try:
         if mod_match:
             module = mod_match.group(1)
-            text = "도움말 참조! *{}* module:\n".format(HELPABLE[module].__mod_name__) \
+            text = "도움말 참조! *{}* 모듈 :\n".format(HELPABLE[module].__mod_name__) \
                    + HELPABLE[module].__help__
             query.message.reply_text(text=text,
                                      parse_mode=ParseMode.MARKDOWN,
@@ -228,7 +228,7 @@ def help_button(bot: Bot, update: Update):
         elif excp.message == "Message can't be deleted":
             pass
         else:
-            LOGGER.exception("Exception in help buttons. %s", str(query.data))
+            LOGGER.exception("도움말에 예외가 있어요. %s", str(query.data))
 
 
 @run_async
@@ -272,7 +272,7 @@ def send_settings(chat_id, user_id, user=False):
         if CHAT_SETTINGS:
             chat_name = dispatcher.bot.getChat(chat_id).title
             dispatcher.bot.send_message(user_id,
-                                        text="어떤 모듈을 점검하시겠습니까? {}'s settings for?".format(
+                                        text="{}의 설정을 어느 모듈에 체크하고 싶으신가요?".format(
                                             chat_name),
                                         reply_markup=InlineKeyboardMarkup(
                                             paginate_modules(0, CHAT_SETTINGS, "stngs", chat=chat_id)))
@@ -309,7 +309,7 @@ def settings_button(bot: Bot, update: Update):
             chat_id = prev_match.group(1)
             curr_page = int(prev_match.group(2))
             chat = bot.get_chat(chat_id)
-            query.message.reply_text("안녕! {}에 대한 설정이 꽤 있어요 - go ahead and pick what "
+            query.message.reply_text("안녕! {}에 대한 설정이 꽤 있어요 - 골라봐요 "
                                      "you're interested in.".format(chat.title),
                                      reply_markup=InlineKeyboardMarkup(
                                          paginate_modules(curr_page - 1, CHAT_SETTINGS, "stngs",
@@ -338,14 +338,14 @@ def settings_button(bot: Bot, update: Update):
         bot.answer_callback_query(query.id)
         query.message.delete()
     except BadRequest as excp:
-        if excp.message == "Message는 수정되지 않았습니다.":
+        if excp.message == "Message is not modified":
             pass
-        elif excp.message == "Query_id가 유효하지 않습니다.":
+        elif excp.message == "Query_id_invalid":
             pass
-        elif excp.message == "Message는 삭제될 수 없습니다.":
+        elif excp.message == "Message can't be deleted":
             pass
         else:
-            LOGGER.exception("설정 버튼 예외. %s", str(query.data))
+            LOGGER.exception("도움말에 예외가 . %s", str(query.data))
 
 
 @run_async
@@ -380,7 +380,7 @@ def donate(bot: Bot, update: Update):
         update.effective_message.reply_text(DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
         if OWNER_ID != 254318997 and DONATION_LINK:
-            update.effective_message.reply_text("당신은 지금 저를 운영하는 사람에게 기부할 수 있어요. "
+            update.effective_message.reply_text("당신은 지금 저를 운영하는 사람에게 기부할 수 있어요."
                                                 "[here]({})".format(DONATION_LINK),
                                                 parse_mode=ParseMode.MARKDOWN)
 
@@ -388,7 +388,7 @@ def donate(bot: Bot, update: Update):
         try:
             bot.send_message(user.id, DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
-            update.effective_message.reply_text("개인메시지로 한글화한 사람들에게 기부하기위한 정보를 알려주고 있어요.")
+            update.effective_message.reply_text("개인메시지로 한글화한 사람들에게 기부하기 위한 정보를 알려주고 있어요.")
         except Unauthorized:
             update.effective_message.reply_text("기부에 대한 정보를 얻기 위해서는 개인메시지로 연락해요.")
 
@@ -440,7 +440,7 @@ def main():
     Dispatcher.process_update = process_update
 
     if WEBHOOK:
-        LOGGER.info("Using webhooks.")
+        LOGGER.info("webhooks 사용.")
         updater.start_webhook(listen="127.0.0.1",
                               port=PORT,
                               url_path=TOKEN)
@@ -493,7 +493,7 @@ def process_update(self, update):
 
         # 다른 헨들러와 처리를 중단.
         except DispatcherHandlerStop:
-            self.logger.debug('DispatcherHandlerStop으로 인한 추가 핸들러가 중지되었습니다.')
+            self.logger.debug('DispatcherHandlerStop으로 인한 추가 핸들러가 중지되었어요.')
             break
 
         # 다른 오류에도 Dispatch 하십시오.
@@ -503,14 +503,14 @@ def process_update(self, update):
             try:
                 self.dispatch_error(update, te)
             except DispatcherHandlerStop:
-                self.logger.debug('Error handler stopped further handlers')
+                self.logger.debug('오류를 처리하는 동안 추가 오류가 발생했어요.')
                 break
             except Exception:
-                self.logger.exception('오류를 처리하는 동안 오류가 발생하였습니다.')
+                self.logger.exception('오류를 처리하는 동안 오류가 발생했어요.')
 
         # 쓰레드를 스탑하지 마세요.
         except Exception:
-            self.logger.exception('업데이트를 처리하는 동안 오류가 발생하였습니다.')
+            self.logger.exception('업데이트를 처리하는 동안 오류가 발생했어요.')
 
 
 if __name__ == '__main__':
