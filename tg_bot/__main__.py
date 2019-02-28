@@ -22,8 +22,8 @@ PM_START_TEXT = """
 안녕하세요! {}님, 제 이름은 {}입니다! 만약 당신이 저를 사용하는데 문제가 있다면, /help - 를 읽어주세요.
 만약 해결이 불가능하다면,  @MarieSupport 로 와주세요.
 
-저는 pytyon3으로 빌드된 그룹 관리자 봇입니다. pytyon-telegram 라이브러리를 사용하며, 그리고 모두 오픈소스입니다; \
-너는 소스를 [here](github.com/PaulSonOfLars/tgbot) 여기서 찾을 수 있습니다!
+저는 Pytyon3.6으로 빌드된 그룹 관리자 봇입니다. pytyon-telegram 라이브러리를 사용하며, 그리고 전 오픈소스에요!
+당신은 저의 소스코드를 [here](https://github.com/marie-kor-pj/tgbot-kor-pj) 여기서 볼 수 있어요!
 
 나는 또한 news channel을 운영하고 있습니다., @MarieNews는 모든 소식을 공지합니다.
 
@@ -33,28 +33,28 @@ PM_START_TEXT = """
 """
 
 HELP_STRINGS = """
-안녕~! 내이름은! *{}*.
-저는 몇가지 재밌는 엑스트라를 가진 모듈식의 그룹 관리 봇입니다! 아이디어를 얻으려면 \
-를 참조하세요.
+안녕! 내이름은 {} 이야!
+저는 몇가지 재밌는 모듈을 가진 그룹 관리 봇이에요! 도움을 얻으려면
+아래를 참조하세요.
 
 사용 가능한 *Main* Command:
- - /start: 봇을 시작합니다.
- - /help: 개인메시지로 메시지를 보냅니다.
- - /help <module name>: 모듈에대한 정보를 알려줘요!.
- - /donate: 기부 방법에 대한 정보를 알려줘요!
+ - /start: 봇을 시작해요.
+ - /help: 개인메시지로 메시지를 보내요.
+ - /help <module name>: 모듈에 대한 정보를 알려줘요.
+ - /donate: 기부 방법에 대한 정보를 알려줘요.
  - /settings:
-   - in PM: 너에게 모든 지원가능한 세팅에대한 정보를 보냅니다.
-   - in a group: PM에 다시 보냅니다.
+   - in PM: 너에게 모든 지원가능한 세팅에대한 정보를 보내요.
+   - in a group: 개인메시지로 다시 보내요.
 
 {}
 And the following:
 """.format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
 
-DONATE_STRING = """Heya, 기부하고싶다니 기뻐
-내가 여기까지 오기에 많은 노력이 필요했고, 모든 donation은 \ 
-나를 좋게 만드는데 동기를 부여하였다. 모든 기부금은 VPN 호스트를 좋게하는데 사용될것이며, 또는 내 맥주값으로 사용될껏이다. (Yeah!)
-나는 가난한 학생이라서, 많은 도움을 받고 있습니다.!
-나에게 기부할수있는 두가지 방법이 있습니다; [PayPal](paypal.me/PaulSonOfLars) 또는 [Monzo](monzo.me/paulnionvestergaardlarsen)."""
+DONATE_STRING = """이야, 기부를하고 싶다니 기뻐요!
+제가 여기까지 오기에 많은 노력이 필요했고, 모든 기부는
+절 좋게 만드는데 동기를 부여해요. 모든 기부금은 절 한글화한 개발자에게 갈것이에요.
+저희들은 가난한 학생들이라서, 많은 도움을 받고 있어요!
+저에게 기부할 수 있는 방법이 있어요; [PayPal](https://www.paypal.me/winsub1106) 또는 [Monzo](monzo.me/paulnionvestergaardlarsen)."""
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -77,7 +77,7 @@ for module_name in ALL_MODULES:
     if not imported_module.__mod_name__.lower() in IMPORTED:
         IMPORTED[imported_module.__mod_name__.lower()] = imported_module
     else:
-        raise Exception("두개의 모듈은 같은 이름을 가질 수 없습니다. 하나를 변경하세요.")
+        raise Exception("두개의 모듈은 같은 이름을 가질 수 없어요. 하나를 변경해야되요.")
 
     if hasattr(imported_module, "__help__") and imported_module.__help__:
         HELPABLE[imported_module.__mod_name__.lower()] = imported_module
@@ -151,7 +151,7 @@ def start(bot: Bot, update: Update, args: List[str]):
                 PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(bot.first_name), OWNER_ID),
                 parse_mode=ParseMode.MARKDOWN)
     else:
-        update.effective_message.reply_text("Yo, whadup?")
+        update.effective_message.reply_text("이봐, 왜 그래?")
 
 
 # 시험용
@@ -167,7 +167,7 @@ def error_callback(bot, update, error):
         print("BadRequest caught")
         print(error)
 
-        # 잘못된 요청 처리. 다시 읽고 오셈 ^^
+        # 잘못된 요청 처리. 다시 읽고 와
     except TimedOut:
         print("no nono3")
         # 느린 연결 문제 처리
@@ -238,10 +238,10 @@ def get_help(bot: Bot, update: Update):
     chat = update.effective_chat  # type: Optional[Chat]
     args = update.effective_message.text.split(None, 1)
 
-    # ONLY send help in PM
+    # 도움말은 무조건 개인메시지로!
     if chat.type != chat.PRIVATE:
 
-        update.effective_message.reply_text("사용 가능한 명령어 목록을 보려면 개인메시지로 연락하세요.",
+        update.effective_message.reply_text("사용 가능한 명령어 목록을 보려면 개인메시지로 오세요!",
                                             reply_markup=InlineKeyboardMarkup(
                                                 [[InlineKeyboardButton(text="Help",
                                                                        url="t.me/{}?start=help".format(
@@ -250,7 +250,7 @@ def get_help(bot: Bot, update: Update):
 
     elif len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):
         module = args[1].lower()
-        text = "여기에 사용 가능한 도움말이 있습니다. *{}* module:\n".format(HELPABLE[module].__mod_name__) \
+        text = "여기에 사용 가능한 도움말이 있어요. *{}* module:\n".format(HELPABLE[module].__mod_name__) \
                + HELPABLE[module].__help__
         send_help(chat.id, text, InlineKeyboardMarkup([[InlineKeyboardButton(text="Back", callback_data="help_back")]]))
 
@@ -267,7 +267,7 @@ def send_settings(chat_id, user_id, user=False):
                                         parse_mode=ParseMode.MARKDOWN)
 
         else:
-            dispatcher.bot.send_message(user_id, "사용가능한 사용자별 설정은 없는것 같아요. :'(",
+            dispatcher.bot.send_message(user_id, "사용가능한 사용자별 설정은 없는것 같아요. :(",
                                         parse_mode=ParseMode.MARKDOWN)
 
     else:
@@ -279,8 +279,8 @@ def send_settings(chat_id, user_id, user=False):
                                         reply_markup=InlineKeyboardMarkup(
                                             paginate_modules(0, CHAT_SETTINGS, "stngs", chat=chat_id)))
         else:
-            dispatcher.bot.send_message(user_id, "이용할 수 있는 채팅 설정이 없는 것 같습니다. :'(\nSend this "
-                                                 "당신이 그룹에서 admin이라면 찾을 수 있습니다!",
+            dispatcher.bot.send_message(user_id, "이용할 수 있는 채팅 설정이 없는 것 같아요. :'(\nSend this "
+                                                 "당신이 그룹에서 관리자라면 찾을 수 있어요!",
                                         parse_mode=ParseMode.MARKDOWN)
 
 
@@ -311,7 +311,7 @@ def settings_button(bot: Bot, update: Update):
             chat_id = prev_match.group(1)
             curr_page = int(prev_match.group(2))
             chat = bot.get_chat(chat_id)
-            query.message.reply_text("안녕! There are quite a few settings for {} - go ahead and pick what "
+            query.message.reply_text("안녕! {}에 대한 설정이 꽤 있어요 - go ahead and pick what "
                                      "you're interested in.".format(chat.title),
                                      reply_markup=InlineKeyboardMarkup(
                                          paginate_modules(curr_page - 1, CHAT_SETTINGS, "stngs",
@@ -322,7 +322,7 @@ def settings_button(bot: Bot, update: Update):
             next_page = int(next_match.group(2))
             chat = bot.get_chat(chat_id)
             query.message.reply_text("안녕! 설정이 꽤나 있습니다. {} - 골라봐요 "
-                                     "재밌어보이는걸로.".format(chat.title),
+                                     "재미있어 보이는거로요.".format(chat.title),
                                      reply_markup=InlineKeyboardMarkup(
                                          paginate_modules(next_page + 1, CHAT_SETTINGS, "stngs",
                                                           chat=chat_id)))
@@ -330,7 +330,7 @@ def settings_button(bot: Bot, update: Update):
         elif back_match:
             chat_id = back_match.group(1)
             chat = bot.get_chat(chat_id)
-            query.message.reply_text(text="안녕! 설정이 꽤나 있습니다. {} - 골라봐요 "
+            query.message.reply_text(text="안녕! 설정이 꽤 있어요. {} - 골라봐요 "
                                           "재밌어보이는걸로.".format(escape_markdown(chat.title)),
                                      parse_mode=ParseMode.MARKDOWN,
                                      reply_markup=InlineKeyboardMarkup(paginate_modules(0, CHAT_SETTINGS, "stngs",
@@ -357,7 +357,7 @@ def get_settings(bot: Bot, update: Update):
     msg = update.effective_message  # type: Optional[Message]
     args = msg.text.split(None, 1)
 
-    # ONLY send settings in PM
+    # 개인메시지로만 설정을 전송
     if chat.type != chat.PRIVATE:
         if is_user_admin(chat, user.id):
             text = "클릭하면 채팅 설정을 열람가능합니다. 니꺼만큼 잘.."
@@ -367,7 +367,7 @@ def get_settings(bot: Bot, update: Update):
                                                       url="t.me/{}?start=stngs_{}".format(
                                                           bot.username, chat.id))]]))
         else:
-            text = "클릭해서 너의 설정을 점검하세요."
+            text = "클릭해서 당신의 설정을 점검해요."
 
     else:
         send_settings(chat.id, user.id, True)
@@ -382,7 +382,7 @@ def donate(bot: Bot, update: Update):
         update.effective_message.reply_text(DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
         if OWNER_ID != 254318997 and DONATION_LINK:
-            update.effective_message.reply_text("너는 또한 지금 운영하는 사람에게 기부할 수 있습니다. "
+            update.effective_message.reply_text("당신은 지금 저를 운영하는 사람에게 기부할 수 있어요. "
                                                 "[here]({})".format(DONATION_LINK),
                                                 parse_mode=ParseMode.MARKDOWN)
 
@@ -390,9 +390,9 @@ def donate(bot: Bot, update: Update):
         try:
             bot.send_message(user.id, DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
-            update.effective_message.reply_text("PM에 제작자 donation에 대한 정보를 알려주고 있다.")
+            update.effective_message.reply_text("개인메시지로 한글화한 사람들에게 기부하기위한 정보를 알려주고 있어요.")
         except Unauthorized:
-            update.effective_message.reply_text("PM에 donation 정보를 얻기위해 연락하세요.")
+            update.effective_message.reply_text("기부에 대한 정보를 얻기 위해서는 개인메시지로 연락해요.")
 
 
 def migrate_chats(bot: Bot, update: Update):
@@ -406,7 +406,7 @@ def migrate_chats(bot: Bot, update: Update):
     else:
         return
 
-    LOGGER.info("이전되었습니다. 어디서? %s, to %s", str(old_chat), str(new_chat))
+    LOGGER.info("%s 에서 %s 로 이전되었어요!", str(old_chat), str(new_chat))
     for mod in MIGRATEABLE:
         mod.__migrate__(old_chat, new_chat)
 
@@ -470,7 +470,7 @@ def process_update(self, update):
         try:
             self.dispatch_error(None, update)
         except Exception:
-            self.logger.exception('오류를 처리하는 동안 추가 오류가 발생하였습니다.')
+            self.logger.exception('오류를 처리하는 동안 추가 오류가 발생했어요.')
         return
 
     now = datetime.datetime.utcnow()
@@ -500,7 +500,7 @@ def process_update(self, update):
 
         # 다른 오류에도 Dispatch 하십시오.
         except TelegramError as te:
-            self.logger.warning('업데이트를 처리하는 동안 텔레그램 에러가 발생하였습니다.)
+            self.logger.warning('업데이트를 처리하는 동안 텔레그램 에러가 발생했어요.)
 
             try:
                 self.dispatch_error(update, te)
