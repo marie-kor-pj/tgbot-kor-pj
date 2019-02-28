@@ -55,7 +55,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
         return
 
     if int(user_id) in SUDO_USERS:
-        message.reply_text("I spy, with my little eye... a sudo user war! Why are you guys turning on each other?")
+        message.reply_text("전 제 작은 눈으로 관리자 전쟁은 봤어요... 왜 서로 등을 돌리세요?")
         return
 
     if int(user_id) in SUPPORT_USERS:
@@ -78,7 +78,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
 
     if sql.is_user_gbanned(user_id):
         if not reason:
-            message.reply_text("이 사용자는 이미 글로벌밴 당했어요; I'd change the reason, but you haven't given me one...")
+            message.reply_text("이 사용자는 이미 글로벌밴 당했어요; 제가 이유를 바꾸긴 할거지만 당신은 저에게 아무 이유도 알려주지 않았어요!!! ㅠㅠ")
             return
 
         old_reason = sql.update_gban_reason(user_id, user_chat.username or user_chat.first_name, reason)
@@ -118,7 +118,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
                 pass
             else:
                 message.reply_text("다음 이유로 인해 GBAN할 수 없어요 : {}".format(excp.message))
-                send_to_list(bot, SUDO_USERS + SUPPORT_USERS, "Could not gban due to: {}".format(excp.message))
+                send_to_list(bot, SUDO_USERS + SUPPORT_USERS, "다음 이유로 인해 GBAN할 수 없어요: {}".format(excp.message))
                 sql.ungban_user(user_id)
                 return
         except TelegramError:
@@ -244,15 +244,14 @@ def gbanstat(bot: Bot, update: Update, args: List[str]):
                                                 "등에서부터 자신을 보호할 수 있어요.")
         elif args[0].lower() in ["off", "no"]:
             sql.disable_gbans(update.effective_chat.id)
-            update.effective_message.reply_text("이 그룹에서 글로벌밴을 비활성화했어요. GBans wont affect your users "
-                                                "anymore. You'll be less protected from any trolls and spammers "
-                                                "though!")
+            update.effective_message.reply_text("이 그룹에서 글로벌밴을 비활성화했어요. GBAN이 더이상 사용자에게 영향을 주지 "
+                                                "않아요. 스펨발송자, 불친절한 사람들로부터 보호받지 못할 거예요!")
     else:
-        update.effective_message.reply_text("Give me some arguments to choose a setting! on/off, yes/no!\n\n"
-                                            "Your current setting is: {}\n"
-                                            "When True, any gbans that happen will also happen in your group. "
-                                            "When False, they won't, leaving you at the possible mercy of "
-                                            "spammers.".format(sql.does_chat_gban(update.effective_chat.id)))
+        update.effective_message.reply_text("설정을 주기위해서 on/off, yes/no!라고 해주세요.\n\n"
+                                            "현재는 다음으로 설정되어 있어요: {}\n"
+                                            "True상대이면, 그룹에서 GBAN을 사용하실 수 있어요. "
+                                            "False상대이면, GBAN을 사용하실 수 없고, 스펨발송자로부터 메시지를 "
+                                            "계속 받을 거예요!".format(sql.does_chat_gban(update.effective_chat.id)))
 
 
 def __stats__():
@@ -282,15 +281,15 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
-*Admin only:*
- - /gbanstat <on/off/yes/no>: 글로벌 Ban 조치가 그룹에 미치는 영향을 사용하지 않도록 설정하거나 현재 설정을 반환합니다.
+*관리자용 명령어*
+ - /gbanstat <on/off/yes/no>: 글로벌 Ban을 활성화 하거나 바활성화 해요.
 
-Gbans, also known as global bans, are used by the bot owners to ban spammers across all groups. This helps protect \
-you and your groups by removing spam flooders as quickly as possible. They can be disabled for you group by calling \
-/gbanstat
+전 세계 사용자를 금지시킬 수 있는 Gbans는 모든 그룹의 스팸메일을 금지하기 위해 저를 만드신 분에 의해 사용되요. \
+그래서 스팸발송자를 최대한 빨리 제거하여 사용자와 그룹을 보호할 수 있는 기능이예요. 만약 GBAN을 사용하고 싶지 않으신 분은 \
+/gbanstat 명령어를 통해 GBAN을 비활성화 하실 수 있어요!
 """
 
-__mod_name__ = "Global Bans"
+__mod_name__ = "글로벌 밴"
 
 GBAN_HANDLER = CommandHandler("gban", gban, pass_args=True,
                               filters=CustomFilters.sudo_filter | CustomFilters.support_filter)
