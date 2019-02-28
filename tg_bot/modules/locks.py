@@ -126,12 +126,11 @@ def lock(bot: Bot, update: Update, args: List[str]) -> str:
                        "\n<b>관리자:</b> {}" \
                        "\nLocked <code>{}</code>.".format(html.escape(chat.title),
                                                           mention_html(user.id, user.first_name), args[0])
-
             else:
-                message.reply_text("무엇을 잠그려는 것입니까...? 잠금 목록을 보기위해 /locktypes 을 시도하세요.")
+                message.reply_text("무엇을 잠금 하시려고 는 거예요...? 락 활성화를 할 수 있는 목록을 확인하려면 /locktypes 를 입력해 보세요.")
 
     else:
-        message.reply_text("제가 관리자가 아니거나 메시지를 삭제할 권한이 없습니다..")
+        message.reply_text("제가 관리자가 아니거나 메시지를 삭제할 권한이 없어요...")
 
     return ""
 
@@ -149,9 +148,9 @@ def unlock(bot: Bot, update: Update, args: List[str]) -> str:
                 sql.update_lock(chat.id, args[0], locked=False)
                 message.reply_text("Unlocked {} for everyone!".format(args[0]))
                 return "<b>{}:</b>" \
-                       "\n#UNLOCK" \
-                       "\n<b>Admin:</b> {}" \
-                       "\nUnlocked <code>{}</code>.".format(html.escape(chat.title),
+                       "\n#언락" \
+                       "\n<b>관리자:</b> {}" \
+                       "\n언락 <code>{}</code>.".format(html.escape(chat.title),
                                                             mention_html(user.id, user.first_name), args[0])
 
             elif args[0] in RESTRICTION_TYPES:
@@ -181,7 +180,7 @@ def unlock(bot: Bot, update: Update, args: List[str]) -> str:
                        "\nUnlocked <code>{}</code>.".format(html.escape(chat.title),
                                                             mention_html(user.id, user.first_name), args[0])
             else:
-                message.reply_text("무엇의 잠금을 해제하시려는 건가요...? 잠금 목록을 보기위해 /locktypes 을 시도하세요")
+                message.reply_text("무엇의 잠금을 해제하시려는 건가요...? 잠금 목록을 보기위해 /locktypes 를 입력해 ")
 
         else:
             bot.sendMessage(chat.id, "무엇의 잠금을 해제하시려는 건가요...?")
