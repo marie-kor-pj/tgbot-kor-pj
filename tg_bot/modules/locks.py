@@ -127,7 +127,7 @@ def lock(bot: Bot, update: Update, args: List[str]) -> str:
                        "\nLocked <code>{}</code>.".format(html.escape(chat.title),
                                                           mention_html(user.id, user.first_name), args[0])
             else:
-                message.reply_text("무엇을 잠금 하시려고 는 거예요...? 락 활성화를 할 수 있는 목록을 확인하려면 /locktypes 를 입력해 보세요.")
+                message.reply_text("무엇을 잠금 하시려는 거예요...? 락 활성화를 할 수 있는 목록을 확인하려면 /locktypes 를 입력해 보세요.")
 
     else:
         message.reply_text("제가 관리자가 아니거나 메시지를 삭제할 권한이 없어요...")
@@ -175,12 +175,12 @@ def unlock(bot: Bot, update: Update, args: List[str]) -> str:
                 message.reply_text("Unlocked {} for everyone!".format(args[0]))
 
                 return "<b>{}:</b>" \
-                       "\n#UNLOCK" \
-                       "\n<b>Admin:</b> {}" \
+                       "\n#언락" \
+                       "\n<b>관리자:</b> {}" \
                        "\nUnlocked <code>{}</code>.".format(html.escape(chat.title),
                                                             mention_html(user.id, user.first_name), args[0])
             else:
-                message.reply_text("무엇의 잠금을 해제하시려는 건가요...? 잠금 목록을 보기위해 /locktypes 를 입력해 ")
+                message.reply_text("무엇의 잠금을 해제하시려는 건가요...? 잠금 목록을 보기위해 /locktypes 를 입력하세요")
 
         else:
             bot.sendMessage(chat.id, "무엇의 잠금을 해제하시려는 건가요...?")
@@ -201,8 +201,8 @@ def del_lockables(bot: Bot, update: Update):
                 for new_mem in new_members:
                     if new_mem.is_bot:
                         if not is_bot_admin(chat, bot.id):
-                            message.reply_text("전 봇이 보여요, and I've been told to stop them joining... "
-                                               "하지만 전 관리자가 아니에요!")
+                            message.reply_text("다른 봇이 들어오려고 하네요...들어오지 말라고 하고싶지만..."
+                                               "전 관리자가 아니에요!")
                             return
 
                         chat.kick_member(new_mem.id)
