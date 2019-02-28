@@ -61,11 +61,10 @@ class Development(Config):
 
  - `DATABASE_URL`: 당신의 데이터베이스 URL입니다. 
  - `MESSAGE_DUMP`: 선택: 당신의 답장 처리된 메시지들이 보관된 채팅입니다. 이는 유저들이 이전 메시지를 삭제하는것을 방지해줍니다.  
- - `LOAD`: Space separated list of modules you would like to load
- - `NO_LOAD`: Space separated list of modules you would like NOT to load
- - `WEBHOOK`: Setting this to ANYTHING will enable webhooks when in env mode
- messages
- - `URL`: The URL your webhook should connect to (only needed for webhook mode)
+ - `LOAD`: 당신이 로드하고 싶은 모듈들의 분리된 리스트가 있는 공간.
+ - `NO_LOAD`: 당신이 로드하고 싶지 않은 모듈들의 분리된 리스트가 있는 공간.
+ - `WEBHOOK`: 환경 모드 메세지 안에 있을 때 이것을 무엇으로든 설정하는 것으로 Webhook를 활성화가 가능합니다. 
+ - `URL`: 당신의 Webhook가 연결될 링크 (webhook 모드에만 )
 
  - `SUDO_USERS`: A space separated list of user_ids which should be considered sudo users
  - `SUPPORT_USERS`: A space separated list of user_ids which should be considered support users (can gban/ungban,
