@@ -32,7 +32,7 @@
 이곳은 당신의 봇 토큰이 로딩되는 곳이며, 당신의 데이터베이스 URL도 마찬가지입니다.(데이터베이스 사용중일 경우), 
 그리고 대부분의 당신의 설정들이 이곳에 있습니다.
 
-sample_config를 가져가서 Config 클래스를 확장하는것이 권장됩니다. 이렇게 하는 것은 당신의 Config이 sample_config 안에 있는 모든 기본 설정들을 포함한다는 것을 보장할 수 있습니다. 게다가 업그레이드까지 더 쉽게 해줍니다.
+sample_config를 가져가서 Config 클래스를 확장하는것이 권장됩니다. 이렇게 하는 것으로, 당신의 Config이 sample_config 안에 있는 모든 기본 설정들을 포함한다는 것을 보장할 수 있습니다. 게다가 업그레이드까지 더 쉽게 해줍니다.
 
 config.py 예시:
 ```
@@ -53,14 +53,14 @@ class Development(Config):
 
 당신이 config.py 파일을 가지고 있지 않다면 (EG on heroku), 환경 변수를 사용하는 방법도 사용이 가능합니다.
 다음 환경 변수들이 사용 가능합니다:
- - `ENV`: Setting this to ANYTHING will enable env variables
+ - `ENV`: 이것을 무엇으로든 설정하는 것으로 환경 변수를 활성화할 수 있습니다.
 
- - `TOKEN`: Your bot token, as a string.
- - `OWNER_ID`: An integer of consisting of your owner ID
- - `OWNER_USERNAME`: Your username
+ - `TOKEN`: 당신의 봇 토큰입니다.
+ - `OWNER_ID`: 모두 숫자로 이루어진 당신의 ID 입니다. 
+ - `OWNER_USERNAME`: 당신의 유저네임입니다.
 
- - `DATABASE_URL`: Your database URL
- - `MESSAGE_DUMP`: optional: a chat where your replied saved messages are stored, to stop people deleting their old 
+ - `DATABASE_URL`: 당신의 데이터베이스 URL입니다. 
+ - `MESSAGE_DUMP`: 선택: a chat where your replied saved messages are stored, to stop people deleting their old 
  - `LOAD`: Space separated list of modules you would like to load
  - `NO_LOAD`: Space separated list of modules you would like NOT to load
  - `WEBHOOK`: Setting this to ANYTHING will enable webhooks when in env mode
@@ -88,7 +88,7 @@ class Development(Config):
 
 `pip3 install -r requirements.txt`.
 
-This will install all necessary python packages.
+이게 모든 필수 파이썬 패키지들을 설치할 것입니다. 
 
 ### 데이터베이스
 
