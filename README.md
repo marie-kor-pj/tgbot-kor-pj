@@ -11,6 +11,7 @@
   1. [천상의나무](https://github.com/NewPremium)
   2. [KCPIT](https://github.com/kgu090716)
   3. [i0N](https://github.com/i0Ni0N)
+  4. [SongJH](https://github.com/KRSongJH)
 
 ## 봇 시작.
 
