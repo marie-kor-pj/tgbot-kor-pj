@@ -95,15 +95,15 @@ you'll need to have a database installed on your system. I use postgres, so I re
 
 In the case of postgres, this is how you would set up a the database on a debian/ubuntu system. Other distributions may vary.
 
-- install postgresql:
+- postgresql 설치:
 
 `sudo apt-get update && sudo apt-get install postgresql`
 
-- change to the postgres user:
+- postgres 사용자 변경:
 
 `sudo su - postgres`
 
-- create a new database user (change YOUR_USER appropriately):
+- 새 데이터베이스 사용자 생성(적절하게 YOUR_USER 변경):
 
 `createuser -P -s -e YOUR_USER`
 
@@ -115,7 +115,7 @@ This will be followed by you needing to input your password.
 
 Change YOUR_USER and YOUR_DB_NAME appropriately.
 
-- finally:
+- 마지막으로:
 
 `psql YOUR_DB_NAME -h YOUR_HOST YOUR_USER`
 
