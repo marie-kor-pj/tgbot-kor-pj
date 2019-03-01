@@ -325,7 +325,7 @@ def echo(bot: Bot, update: Update):
 
 @run_async
 def gdpr(bot: Bot, update: Update):
-    update.effective_message.reply_text("별 가능한 데이터 삭제...")
+    update.effective_message.reply_text("식별 가능한 데이터 삭제...")
     for mod in GDPR:
         mod.__gdpr__(update.effective_user.id)
 
