@@ -86,21 +86,21 @@ SLAP_TEMPLATES = (
 ITEMS = (
     "cast iron skillet",
     "large trout",
-    "baseball bat",
-    "cricket bat",
+    "야구 방망이",
+    "크리켓 방망이",
     "wooden cane",
-    "nail",
-    "printer",
-    "shovel",
+    "못",
+    "프린터기",
+    "삽",
     "CRT monitor",
     "physics textbook",
-    "toaster",
+    "토스터기",
     "portrait of Richard Stallman",
     "television",
-    "five ton truck",
+    "5톤 트럭",
     "roll of duct tape",
-    "book",
-    "laptop",
+    "책",
+    "노트북",
     "old television",
     "sack of rocks",
     "rainbow trout",
@@ -111,7 +111,7 @@ ITEMS = (
     "chunk of dirt",
     "beehive",
     "piece of rotten meat",
-    "bear",
+    "곰",
     "ton of bricks",
 )
 
@@ -256,7 +256,7 @@ def info(bot: Bot, update: Update, args: List[str]):
         else:
             if user.id in SUPPORT_USERS:
                 text += "\n이 사람은 제 후원자 중 한 명이에요! " \
-                        "관리자 사용자는 아니지만, 글로벌 밴을 할 수는 있어요."
+                        "해당 사용자가 관리자 아니지만, 글로벌밴을 할 수는 있어요."
 
             if user.id in WHITELIST_USERS:
                 text += "\n이 사람은 화이트리스트에 속해있으신 분이예요! " \
@@ -325,12 +325,12 @@ def echo(bot: Bot, update: Update):
 
 @run_async
 def gdpr(bot: Bot, update: Update):
-    update.effective_message.reply_text("식별 가능한 데이터 삭제...")
+    update.effective_message.reply_text("식별 가능한 데이터 삭제")
     for mod in GDPR:
         mod.__gdpr__(update.effective_user.id)
 
-    update.effective_message.reply_text("개인 데이터가 삭제되었어요.\n\n참고,  Marie데이터가 아닌"
-                                        "Telegram데이터이기 때문에 어느 채팅방에서도 당신을 unban하지 않을 거예요."
+    update.effective_message.reply_text("개인 데이터가 삭제되었어요.\n\n참고,  저의 데이터가 아닌"
+                                        "Telegram 데이터이기 때문에 어느 채팅방에서도 당신을 unban하지 않을 거예요."
                                         "도배방지, 경고, 그리고 GBAN도 계속 남아있을 거예요. "
                                         "[this](https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-to-erasure/), "
                                         "which clearly states that the right to erasure does not apply "
