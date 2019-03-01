@@ -49,10 +49,10 @@ And the following:
 """.format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\n모든 명령은 / 또는 !와 함께 사용할 수 있어요.\n")
 
 DONATE_STRING = """이야, 기부를하고 싶다니 기뻐요!
-제가 여기까지 오기에 많은 노력이 필요했고, 모든 기부는
-절 좋게 만드는데 동기를 부여해요. 모든 기부금은 절 한글화한 개발자에게 갈것이에요.
-저희들은 가난한 학생들이라서, 많은 도움을 받고 있어요!
-저에게 기부할 수 있는 방법이 있어요; [PayPal](https://www.paypal.me/winsub1106) 또는 [Monzo](monzo.me/paulnionvestergaardlarsen)."""
+제가 여기에 오기까지 많은 노력이 필요했고, 모든 기부는
+절 향상시키는데 도움을 줘요. 모든 기부금은 절 한글화한 개발자에게 갈거에요.
+저희들은 가난한 학생들이라서, 많은 도움이 필요해요!
+저에게 기부할 수 있는 방법이 있어요; [PayPal](https://www.paypal.me/winsub1106)"""
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -239,7 +239,7 @@ def get_help(bot: Bot, update: Update):
     # 도움말은 무조건 개인메시지로!
     if chat.type != chat.PRIVATE:
 
-        update.effective_message.reply_text("사용 가능한 명령어 목록을 보려면 개인메시지로 오세요!",
+        update.effective_message.reply_text("사용 가능한 명령어 목록을 보려면 개인 메시지로 오세요!",
                                             reply_markup=InlineKeyboardMarkup(
                                                 [[InlineKeyboardButton(text="Help",
                                                                        url="t.me/{}?start=help".format(
@@ -265,7 +265,7 @@ def send_settings(chat_id, user_id, user=False):
                                         parse_mode=ParseMode.MARKDOWN)
 
         else:
-            dispatcher.bot.send_message(user_id, "사용가능한 사용자별 설정은 없는것 같아요. :(",
+            dispatcher.bot.send_message(user_id, "사용 가능한 사용자별 설정은 없는것 같아요. :(",
                                         parse_mode=ParseMode.MARKDOWN)
 
     else:
@@ -358,7 +358,7 @@ def get_settings(bot: Bot, update: Update):
     # 개인메시지로만 설정을 전송
     if chat.type != chat.PRIVATE:
         if is_user_admin(chat, user.id):
-            text = "클릭하면 채팅 설정을 열람가능합니다. 니꺼만큼 잘.."
+            text = "클릭하면 채팅 설정을 열람가능합니다. 니꺼만큼 잘..."
             msg.reply_text(text,
                            reply_markup=InlineKeyboardMarkup(
                                [[InlineKeyboardButton(text="Settings",
@@ -388,9 +388,9 @@ def donate(bot: Bot, update: Update):
         try:
             bot.send_message(user.id, DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
-            update.effective_message.reply_text("개인메시지로 한글화한 사람들에게 기부하기 위한 정보를 알려주고 있어요.")
+            update.effective_message.reply_text("개인 메시지로 한글화한 사람들에게 기부하기 위한 정보를 알려주고 있어요.")
         except Unauthorized:
-            update.effective_message.reply_text("기부에 대한 정보를 얻기 위해서는 개인메시지로 연락해요.")
+            update.effective_message.reply_text("기부에 대한 정보를 얻기 위해서는 개인 메시지로 연락해요.")
 
 
 def migrate_chats(bot: Bot, update: Update):
@@ -468,7 +468,7 @@ def process_update(self, update):
         try:
             self.dispatch_error(None, update)
         except Exception:
-            self.logger.exception('오류를 처리하는 동안 추가 오류가 발생했어요.')
+            self.logger.exception('오류를 처리하는 동안 추가 오류가 또 발생했어요.')
         return
 
     now = datetime.datetime.utcnow()
@@ -506,7 +506,7 @@ def process_update(self, update):
                 self.logger.debug('오류를 처리하는 동안 추가 오류가 발생했어요.')
                 break
             except Exception:
-                self.logger.exception('오류를 처리하는 동안 오류가 발생했어요.')
+                self.logger.exception('오류를 처리하는 동안 또다른 오류가 발생했어요.')
 
         # 쓰레드를 스탑하지 마세요.
         except Exception:
