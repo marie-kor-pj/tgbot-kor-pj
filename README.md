@@ -67,8 +67,7 @@ class Development(Config):
  - `URL`: 당신의 Webhook이 연결될 링크 (webhook 모드에만)
 
  - `SUDO_USERS`: Sudo 유저로 고려될 유저들의 분리된 리스트가 있는 공간.
- - `SUPPORT_USERS`: A space separated list of user_ids which should be considered support users (can gban/ungban,
- nothing else)
+ - `SUPPORT_USERS`: 서포트 유저로 고려되어야 할 유저 아이디들의 분리된 리스트가 있는 공간 (gban, ungban만 가능)
  - `WHITELIST_USERS`: A space separated list of user_ids which should be considered whitelisted - they can't be banned.
  - `DONATION_LINK`: Optional: link where you would like to receive donations.
  - `CERT_PATH`: Path to your webhook certificate
