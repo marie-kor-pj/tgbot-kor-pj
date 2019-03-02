@@ -33,22 +33,22 @@ def send_rules(update, chat_id, from_pm=False):
             raise
 
     rules = sql.get_rules(chat_id)
-    text = "*{}*를 위한 규칙은:\n\n{}".format(escape_markdown(chat.title), rules)
+    text = "*{}*를 위한 규칙은:\n\n{} 에요.".format(escape_markdown(chat.title), rules)
 
     if from_pm and rules:
         bot.send_message(user.id, text, parse_mode=ParseMode.MARKDOWN)
     elif from_pm:
-        bot.send_message(user.id, "그룹의 관리자가 이 채팅에 어떠한 규칙도 적용하지 않았습니다. "
-                                  "이것이 그룹에 규칙이 없다는것을 의미하지는 않을겁니다!")
+        bot.send_message(user.id, "그룹의 관리자가 이 채팅에 어떠한 규칙도 적용하지 않았어요. "
+                                  "이것은 이그룹에 규칙이 없다는것을 의미하지는 않을거에요!")
     elif rules:
-        update.effective_message.reply_text("이 그룹의 규칙을 확인하시려면 저에게 PM으로 연락해주세요.",
+        update.effective_message.reply_text("이 그룹의 규칙을 확인하시려면 저에게 개인 메시지로 연락해줘요.",
                                             reply_markup=InlineKeyboardMarkup(
                                                 [[InlineKeyboardButton(text="규칙",
                                                                        url="t.me/{}?start={}".format(bot.username,
                                                                                                      chat_id))]]))
     else:
-        update.effective_message.reply_text("그룹의 관리자가 이 채팅에 어떠한 규칙도 적용하지 않았습니다. "
-                                            "이것이 그룹에 규칙이 없다는것을 의미하지는 않을겁니다!")
+        update.effective_message.reply_text("그룹의 관리자가 이 채팅에 어떠한 규칙도 적용하지 않았어요. "
+                                            "이것은 이그룹에 규칙이 없다는것을 의미하지는 않을거에요!")
 
 
 @run_async
@@ -94,11 +94,11 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- - /rules: 이 채팅의 규칙을 보여줍니다
+ - /rules: 이 채팅의 규칙을 보여줘요.
 
 *Admin only:*
- - /setrules <규칙>: 이 채팅의 규칙을 설정합니다.
- - /clearrules: 이 채팅의 규칙을 지웁니다.
+ - /setrules <규칙>: 이 채팅의 규칙을 설정해요.
+ - /clearrules: 이 채팅의 규칙을 지워요.
 """
 
 __mod_name__ = "Rules"
