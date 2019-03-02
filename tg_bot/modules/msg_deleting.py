@@ -32,7 +32,7 @@ def purge(bot: Bot, update: Update, args: List[str]) -> str:
                 except BadRequest as err:
                     if err.message == "Message can't be deleted":
                         bot.send_message(chat.id, "모든 메시지들을 제거할 수 없어요. 그 메시지들은 너무 오래되었어요."
-                                                  "제게 삭제 권한이 없거나 수퍼 그룹이 아닐 수 있어요.")
+                                                  "저에게 삭제 권한이 없거나 수퍼 그룹이 아닐 수 있어요.")
 
                     elif err.message != "Message to delete not found":
                         LOGGER.exception("채팅 메시지를 삭제하는 동안 오류가 발생했어요.")
@@ -42,7 +42,7 @@ def purge(bot: Bot, update: Update, args: List[str]) -> str:
             except BadRequest as err:
                 if err.message == "Message can't be deleted":
                     bot.send_message(chat.id, "모든 메시지들을 제거할 수 없어요. 그 메시지들은 너무 오래되었어요."
-                                              "제게 삭제 권한이 없거나 수퍼 그룹이 아닐 수 있어요.")
+                                              "제게 삭제 권한이 없거나 슈퍼 그룹이 아닐 수 있어요.")
 
                 elif err.message != "Message to delete not found":
                     LOGGER.exception("채팅 메시지를 삭제하는 동안 오류가 발생했어요.")
@@ -77,7 +77,7 @@ def del_message(bot: Bot, update: Update) -> str:
                    "\n메시지 제거.".format(html.escape(chat.title),
                                                mention_html(user.id, user.first_name))
     else:
-        update.effective_message.reply_text("Whadya want to delete?")
+        update.effective_message.reply_text("무엇을 삭제하고 싶니?")
 
     return ""
 
@@ -86,10 +86,10 @@ __help__ = """
 *Admin only:*
  - /del: 답장한 메시지를 제거해요.
  - /purge: 이 메시지와 답장한 메시지 사이의 모든 메시지를 삭제해요.
- - /purge <integer X>: deletes the replied message, and X messages following it.
+ - /purge <정수>: 답장한 메시지로부터 정수로 입력한 만큼 상위값이 삭제되요.
 """
 
-__mod_name__ = "Purges"
+__mod_name__ = "삭제"
 
 DELETE_HANDLER = CommandHandler("del", del_message, filters=Filters.group)
 PURGE_HANDLER = CommandHandler("purge", purge, filters=Filters.group, pass_args=True)
