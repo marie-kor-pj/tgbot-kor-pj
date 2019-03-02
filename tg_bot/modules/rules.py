@@ -33,22 +33,22 @@ def send_rules(update, chat_id, from_pm=False):
             raise
 
     rules = sql.get_rules(chat_id)
-    text = "The rules for *{}* are:\n\n{}".format(escape_markdown(chat.title), rules)
+    text = "*{}*를 위한 규칙은:\n\n{}".format(escape_markdown(chat.title), rules)
 
     if from_pm and rules:
         bot.send_message(user.id, text, parse_mode=ParseMode.MARKDOWN)
     elif from_pm:
-        bot.send_message(user.id, "The group admins haven't set any rules for this chat yet. "
-                                  "This probably doesn't mean it's lawless though...!")
+        bot.send_message(user.id, "그룹의 관리자가 이 채팅에 어떠한 규칙도 적용하지 않았습니다. "
+                                  "이것이 그룹에 규칙이 없다는것을 의미하지는 않을겁니다!")
     elif rules:
-        update.effective_message.reply_text("Contact me in PM to get this group's rules.",
+        update.effective_message.reply_text("이 그룹의 규칙을 확인하시려면 저에게 PM으로 연락해주세요.",
                                             reply_markup=InlineKeyboardMarkup(
-                                                [[InlineKeyboardButton(text="Rules",
+                                                [[InlineKeyboardButton(text="규칙",
                                                                        url="t.me/{}?start={}".format(bot.username,
                                                                                                      chat_id))]]))
     else:
-        update.effective_message.reply_text("The group admins haven't set any rules for this chat yet. "
-                                            "This probably doesn't mean it's lawless though...!")
+        update.effective_message.reply_text("그룹의 관리자가 이 채팅에 어떠한 규칙도 적용하지 않았습니다. "
+                                            "이것이 그룹에 규칙이 없다는것을 의미하지는 않을겁니다!")
 
 
 @run_async
@@ -64,7 +64,7 @@ def set_rules(bot: Bot, update: Update):
         markdown_rules = markdown_parser(txt, entities=msg.parse_entities(), offset=offset)
 
         sql.set_rules(chat_id, markdown_rules)
-        update.effective_message.reply_text("Successfully set rules for this group.")
+        update.effective_message.reply_text("이 그룹에 성공적으로 규칙을 적용함")
 
 
 @run_async
@@ -72,7 +72,7 @@ def set_rules(bot: Bot, update: Update):
 def clear_rules(bot: Bot, update: Update):
     chat_id = update.effective_chat.id
     sql.set_rules(chat_id, "")
-    update.effective_message.reply_text("Successfully cleared rules!")
+    update.effective_message.reply_text("규칙을 성공적으로 지움")
 
 
 def __stats__():
@@ -94,11 +94,11 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- - /rules: get the rules for this chat.
+ - /rules: 이 채팅의 규칙을 보여줍니다
 
 *Admin only:*
- - /setrules <your rules here>: set the rules for this chat.
- - /clearrules: clear the rules for this chat.
+ - /setrules <규칙>: 이 채팅의 규칙을 설정합니다.
+ - /clearrules: 이 채팅의 규칙을 지웁니다.
 """
 
 __mod_name__ = "Rules"
