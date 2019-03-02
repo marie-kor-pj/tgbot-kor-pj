@@ -25,11 +25,11 @@ def mute(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_id = extract_user(message, args)
     if not user_id:
-        message.reply_text("당신은 제게 Mute를 할 사용자 id를 주거나, 또는 Mute될 누군가를 답장으로 알려주세요.")
+        message.reply_text("음소거를 할 사용자 id를 주거나, 또는 음소거할 사용자를 답장으로 알려주세요.")
         return ""
 
     if user_id == bot.id:
-        message.reply_text("전 제 자신을 Mute할 수 없어요!")
+        message.reply_text("전 제 자신을 음소거할 수 없어요!")
         return ""
 
     member = chat.get_member(int(user_id))
@@ -40,16 +40,16 @@ def mute(bot: Bot, update: Update, args: List[str]) -> str:
 
         elif member.can_send_messages is None or member.can_send_messages:
             bot.restrict_chat_member(chat.id, user_id, can_send_messages=False)
-            message.reply_text("Mute되었습니다!")
+            message.reply_text("음소거되었습니다!")
             return "<b>{}:</b>" \
-                   "\n#MUTE" \
-                   "\n<b>Admin:</b> {}" \
-                   "\n<b>User:</b> {}".format(html.escape(chat.title),
+                   "\n#음소거" \
+                   "\n<b>관리자:</b> {}" \
+                   "\n<b>사용자:</b> {}".format(html.escape(chat.title),
                                               mention_html(user.id, user.first_name),
                                               mention_html(member.user.id, member.user.first_name))
 
         else:
-            message.reply_text("해당 유저는 이미 Mute 되어 있어요!")
+            message.reply_text("해당 유저는 이미 음소거 되어 있어요!")
     else:
         message.reply_text("해당 유저는 이 채팅방에 포함되어있지 않아요!")
 
@@ -67,7 +67,7 @@ def unmute(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_id = extract_user(message, args)
     if not user_id:
-        message.reply_text("You'll need to either give me a username to unmute, or reply to someone to be unmuted.")
+        message.reply_text("음소거를 해제하려면 사용자 이름을 알려주거나 답장으로 알려주세요")
         return ""
 
     member = chat.get_member(int(user_id))
@@ -80,7 +80,7 @@ def unmute(bot: Bot, update: Update, args: List[str]) -> str:
         elif member.status != 'kicked' and member.status != 'left':
             if member.can_send_messages and member.can_send_media_messages \
                     and member.can_send_other_messages and member.can_add_web_page_previews:
-                message.reply_text("This user already has the right to speak.")
+                message.reply_text("이 사용자는 이미 발언권을 가지고 있어요!")
                 return ""
             else:
                 bot.restrict_chat_member(chat.id, int(user_id),
@@ -88,16 +88,16 @@ def unmute(bot: Bot, update: Update, args: List[str]) -> str:
                                          can_send_media_messages=True,
                                          can_send_other_messages=True,
                                          can_add_web_page_previews=True)
-                message.reply_text("Mute가 해제되었어요!")
+                message.reply_text("음소거가 해제되었어요!")
                 return "<b>{}:</b>" \
-                       "\n#UNMUTE" \
-                       "\n<b>Admin:</b> {}" \
-                       "\n<b>User:</b> {}".format(html.escape(chat.title),
+                       "\n#음소거 해제" \
+                       "\n<b>관리자:</b> {}" \
+                       "\n<b>사용자:</b> {}".format(html.escape(chat.title),
                                                   mention_html(user.id, user.first_name),
                                                   mention_html(member.user.id, member.user.first_name))
     else:
-        message.reply_text("This user isn't even in the chat, unmuting them won't make them talk more than they "
-                           "already do!")
+        message.reply_text("이 사용자는 채팅에 참여하지 않아요. 이 사용자의 말을 무시해도 "
+                           "기존 대화보다 더 많은 대화를 할 수 없어요!")
 
     return ""
 
@@ -115,7 +115,7 @@ def temp_mute(bot: Bot, update: Update, args: List[str]) -> str:
     user_id, reason = extract_user_and_text(message, args)
 
     if not user_id:
-        message.reply_text("Mute 할 사용자를 선택하세요.")
+        message.reply_text("음소거 할 사용자를 선택하세요.")
         return ""
 
     try:
@@ -128,15 +128,15 @@ def temp_mute(bot: Bot, update: Update, args: List[str]) -> str:
             raise
 
     if is_user_admin(chat, user_id, member):
-        message.reply_text("관리자는 Mute할 수 없어요")
+        message.reply_text("관리자는 음소거할 수 없어요")
         return ""
 
     if user_id == bot.id:
-        message.reply_text("전 제 자신을 Mute할 수 없어요")
+        message.reply_text("전 제 자신을 음소거할 수 없어요")
         return ""
 
     if not reason:
-        message.reply_text("해당 사용자의 Mute 시간을 지정하지 않았습니다!")
+        message.reply_text("해당 사용자의 음소거 할 시간을 지정하지 않았어요!")
         return ""
 
     split_reason = reason.split(None, 1)
@@ -153,41 +153,41 @@ def temp_mute(bot: Bot, update: Update, args: List[str]) -> str:
         return ""
 
     log = "<b>{}:</b>" \
-          "\n#TEMP MUTED" \
-          "\n<b>Admin:</b> {}" \
-          "\n<b>User:</b> {}" \
-          "\n<b>Time:</b> {}".format(html.escape(chat.title), mention_html(user.id, user.first_name),
+          "\n#시간 음소거" \
+          "\n<b>관리자:</b> {}" \
+          "\n<b>사용자:</b> {}" \
+          "\n<b>시간:</b> {}".format(html.escape(chat.title), mention_html(user.id, user.first_name),
                                      mention_html(member.user.id, member.user.first_name), time_val)
     if reason:
-        log += "\n<b>Reason:</b> {}".format(reason)
+        log += "\n<b>이유:</b> {}".format(reason)
 
     try:
         if member.can_send_messages is None or member.can_send_messages:
             bot.restrict_chat_member(chat.id, user_id, until_date=mutetime, can_send_messages=False)
-            message.reply_text("Muted for {}!".format(time_val))
+            message.reply_text("{} 동안 음소거!".format(time_val))
             return log
         else:
-            message.reply_text("해당 유저는 이미 Mute 되어 있습니다.")
+            message.reply_text("해당 유저는 이미 음소거 되어 있습니다.")
 
     except BadRequest as excp:
         if excp.message == "Reply message not found":
             # Do not reply
-            message.reply_text("Muted for {}!".format(time_val), quote=False)
+            message.reply_text("음소거 : {}!".format(time_val), quote=False)
             return log
         else:
             LOGGER.warning(update)
             LOGGER.exception("ERROR muting user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
                              excp.message)
-            message.reply_text("Well damn, I can't mute that user.")
+            message.reply_text("이런!!! 전 그 사용자를 음소거 할 수 없어요.")
 
     return ""
 
 
 __help__ = """
 *Admin only:*
- - /mute <userhandle>: silences a user. Can also be used as a reply, muting the replied to user.
- - /tmute <userhandle> x(m/h/d): 해당 유저를 x 시간동안 Mute 합니다. (via handle, or reply). m = 분, h = 시간, d = 날짜.
- - /unmute <userhandle>: 해당유저의 Mute를 해제합니다. Can also be used as a reply, muting the replied to user.
+ - /mute <사용자명>: 사용자를 음소거 시켜요. 사용자명이 아닌 답장으로 음소거 시킬 수도 있어요.
+ - /tmute <사용자명> x(m/h/d): 해당 유저를 x 시간동안 음소거 해요. (핸들 또는 답장을 통해). m = 분, h = 시간, d = 날짜.
+ - /unmute <사용자명>: 해당유저의 음소거를 해제해요. 사용자명이 아닌 답장으로 음소거 시킬 수도 있어요.
 """
 
 __mod_name__ = "Muting"
