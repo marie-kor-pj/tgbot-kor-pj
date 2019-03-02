@@ -77,7 +77,7 @@ def set_flood(bot: Bot, update: Update, args: List[str]) -> str:
                        "\n도배방지가 비활성화 되었어요.".format(html.escape(chat.title), mention_html(user.id, user.first_name))
 
             elif amount < 3:
-                message.reply_text("Antiflood has to be either 0 (disabled), or a number bigger than 3!")
+                message.reply_text("도배 방지 기능은 0(비활성화) 또는 3보다 큰 숫자여야해요!")
                 return ""
 
             else:
