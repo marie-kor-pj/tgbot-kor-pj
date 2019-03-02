@@ -94,11 +94,11 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- - /rules: 이 채팅의 규칙을 보여줘요.
+ - /rules: 이 채팅방의 규칙을 보여줘요.
 
 *Admin only:*
- - /setrules <규칙>: 이 채팅의 규칙을 설정해요.
- - /clearrules: 이 채팅의 규칙을 지워요.
+ - /setrules <규칙>: 이 채팅방의 규칙을 설정해요.
+ - /clearrules: 이 채팅방의 규칙을 지워요.
 """
 
 __mod_name__ = "Rules"
