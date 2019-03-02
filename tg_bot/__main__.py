@@ -358,7 +358,7 @@ def get_settings(bot: Bot, update: Update):
     # 개인메시지로만 설정을 전송
     if chat.type != chat.PRIVATE:
         if is_user_admin(chat, user.id):
-            text = "클릭하면 채팅 설정을 열람가능합니다. 니꺼만큼 잘..."
+            text = "클릭하면 채팅 설정을 열람가능합니다."
             msg.reply_text(text,
                            reply_markup=InlineKeyboardMarkup(
                                [[InlineKeyboardButton(text="Settings",
