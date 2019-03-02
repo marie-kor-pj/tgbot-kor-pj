@@ -70,64 +70,64 @@ RUN_STRINGS = (
 )
 
 SLAP_TEMPLATES = (
-    "{user1} {hits} {user2} with a {item}.",
-    "{user1} {hits} {user2} in the face with a {item}.",
-    "{user1} {hits} {user2} around a bit with a {item}.",
-    "{user1} {throws} a {item} at {user2}.",
-    "{user1} grabs a {item} and {throws} it at {user2}'s face.",
-    "{user1} launches a {item} in {user2}'s general direction.",
-    "{user1} starts slapping {user2} silly with a {item}.",
-    "{user1} pins {user2} down and repeatedly {hits} them with a {item}.",
-    "{user1} grabs up a {item} and {hits} {user2} with it.",
-    "{user1} ties {user2} to a chair and {throws} a {item} at them.",
-    "{user1} gave a friendly push to help {user2} learn to swim in lava."
+    "{user1} 은(는) {user2} 을(를) {item}로 {hits}어요.",
+    "{user1} 은(는) {user2} 의 얼굴을 {item} 로 {hits}어요.",
+    "{user1} 은(는) {item} 으로 {user2} 를 조금  {hits}어요.",
+    "{user1} 은(는) {user2} 에게 {item} 을 {throws}어요.",
+    "{user1} 은(는) {item} 을(를) 잡고 {user2} 의 얼굴에 {throws}어요.",
+    "{user1} 은(는) {item} 을(를) {user2}의 정면으로 발사했어요.",
+    "{user1} 은(는) {item} 을(를) 사용하여 {user2} 의 뺨을 때리기 시작했어요.",
+    "{user1} 은(는) {user2} 를 묶고 {item} 으로 계속  {hits}어요.",
+    "{user1} 은(는) {item} 을 들었고 그걸로 {user2} 를 {hits}어요.",
+    "{user1} 은(는){user2} 의자에 묶었고 {item} 로 그들을  {throws}어요.",
+    "{user1} 은(는) {user2} 용암에서 수영하는 법을 배울 수 있도록 우호적으로 밀어주었어요."
 )
 
 ITEMS = (
-    "cast iron skillet",
-    "large trout",
+    "철냄비",
+    "큰 송어",
     "야구 방망이",
     "크리켓 방망이",
-    "wooden cane",
+    "나무 지팡이",
     "못",
     "프린터기",
     "삽",
-    "CRT monitor",
-    "physics textbook",
+    "CRT 모니터",
+    "물리학 교과서",
     "토스터기",
-    "portrait of Richard Stallman",
-    "television",
+    "Richard Stallman의 초상화",
+    "텔레비전",
     "5톤 트럭",
-    "roll of duct tape",
+    "강력 접착테이프",
     "책",
     "노트북",
-    "old television",
-    "sack of rocks",
-    "rainbow trout",
-    "rubber chicken",
-    "spiked bat",
-    "fire extinguisher",
-    "heavy rock",
-    "chunk of dirt",
-    "beehive",
-    "piece of rotten meat",
+    "오래된 텔레비전",
+    "돌무더기",
+    "무지개 송어",
+    "고무 치킨",
+    "뾰족한 방망이",
+    "소화기",
+    "무거운 바위",
+    "흙덩어리",
+    "벌집",
+    "썩은 고기 조각",
     "곰",
-    "ton of bricks",
+    "벽돌 1톤",
 )
 
 THROW = (
-    "throws",
-    "flings",
-    "chucks",
-    "hurls",
+    "때렸",
+    "던졌",
+	"화가나서 던졌",
+	"거칠게 던졌",
 )
 
 HIT = (
-    "hits",
-    "whacks",
-    "slaps",
-    "smacks",
-    "bashes",
+    "때렸",
+    "세게쳤",
+    "철석 때렸",
+    "손바닥으로 때렸",
+    "후려쳤",
 )
 
 GMAPS_LOC = "https://maps.googleapis.com/maps/api/geocode/json"
@@ -382,7 +382,7 @@ def stats(bot: Bot, update: Update):
 __help__ = """
  - /id: 현재 그룹 ID를 가져와요. 만약 다른 사용자의 메시지를 답장하면 해당 사용자의 ID를 가져와요.
  - /runs: 랜덤으로 아무 말을 해 드려요.
- - /slap: 사용자에게 뺨을 때리거나, 응답이 없을 경우 뺨을 맞아요.
+ - /slap: 사용자에게 뺨을 때리거나, 답장을 안했을 경우 뺨을 맞아요.
  - /info: 사용자에 대한 정보를 가져와줘요.
  - /gdpr: 봇 데이터베이스에서 정보를 삭제해요. (사적인 대화만)
 
