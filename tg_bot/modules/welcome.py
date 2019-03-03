@@ -36,39 +36,39 @@ def send(update, message, keyboard, backup_message):
         msg = update.effective_message.reply_text(message, parse_mode=ParseMode.MARKDOWN, reply_markup=keyboard)
     except IndexError:
         msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                  "\nNote: the current message was "
+                                                                  "\n메모: the current message was "
                                                                   "invalid due to markdown issues. Could be "
                                                                   "due to the user's name."),
                                                   parse_mode=ParseMode.MARKDOWN)
     except KeyError:
         msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                  "\nNote: the current message is "
+                                                                  "\n메모: the current message is "
                                                                   "invalid due to an issue with some misplaced "
                                                                   "curly brackets. Please update"),
                                                   parse_mode=ParseMode.MARKDOWN)
     except BadRequest as excp:
         if excp.message == "Button_url_invalid":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                      "\nNote: the current message has an invalid url "
+                                                                      "\n메모: the current message has an invalid url "
                                                                       "in one of its buttons. Please update."),
                                                       parse_mode=ParseMode.MARKDOWN)
         elif excp.message == "Unsupported url protocol":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                      "\nNote: the current message has buttons which "
+                                                                      "\n메모: the current message has buttons which "
                                                                       "use url protocols that are unsupported by "
                                                                       "telegram. Please update."),
                                                       parse_mode=ParseMode.MARKDOWN)
         elif excp.message == "Wrong url host":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                      "\nNote: the current message has some bad urls. "
+                                                                      "\n메모: the current message has some bad urls. "
                                                                       "Please update."),
                                                       parse_mode=ParseMode.MARKDOWN)
             LOGGER.warning(message)
             LOGGER.warning(keyboard)
-            LOGGER.exception("Could not parse! got invalid url host errors")
+            LOGGER.exception("구문 분석할 수 없어요! 잘못된 URL 호스트 오류가 발생했어요.")
         else:
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                      "\nNote: An error occured when sending the "
+                                                                      "\n메모: An error occured when sending the "
                                                                       "custom message. Please update."),
                                                       parse_mode=ParseMode.MARKDOWN)
             LOGGER.exception()
@@ -302,9 +302,9 @@ def set_welcome(bot: Bot, update: Update) -> str:
     msg.reply_text("Successfully set custom welcome message!")
 
     return "<b>{}:</b>" \
-           "\n#SET_WELCOME" \
-           "\n<b>Admin:</b> {}" \
-           "\nSet the welcome message.".format(html.escape(chat.title),
+           "\n#환영인사 메시지 설정" \
+           "\n<b>관리자:</b> {}" \
+           "\n환영인사 메시지를 설정했어요.".format(html.escape(chat.title),
                                                mention_html(user.id, user.first_name))
 
 
@@ -317,9 +317,9 @@ def reset_welcome(bot: Bot, update: Update) -> str:
     sql.set_custom_welcome(chat.id, sql.DEFAULT_WELCOME, sql.Types.TEXT)
     update.effective_message.reply_text("Successfully reset welcome message to default!")
     return "<b>{}:</b>" \
-           "\n#RESET_WELCOME" \
-           "\n<b>Admin:</b> {}" \
-           "\nReset the welcome message to default.".format(html.escape(chat.title),
+           "\n#환영인사 메시지 초기화" \
+           "\n<b>관리자:</b> {}" \
+           "\n환영인사 메시지를 초기화 했어요.".format(html.escape(chat.title),
                                                             mention_html(user.id, user.first_name))
 
 
@@ -339,9 +339,9 @@ def set_goodbye(bot: Bot, update: Update) -> str:
     sql.set_custom_gdbye(chat.id, content or text, data_type, buttons)
     msg.reply_text("Successfully set custom goodbye message!")
     return "<b>{}:</b>" \
-           "\n#SET_GOODBYE" \
-           "\n<b>Admin:</b> {}" \
-           "\nSet the goodbye message.".format(html.escape(chat.title),
+           "\n#작별인사 메시지 설정" \
+           "\n<b>관리자:</b> {}" \
+           "\n작별인사 메시지를 설정했어요.".format(html.escape(chat.title),
                                                mention_html(user.id, user.first_name))
 
 
@@ -354,9 +354,9 @@ def reset_goodbye(bot: Bot, update: Update) -> str:
     sql.set_custom_gdbye(chat.id, sql.DEFAULT_GOODBYE, sql.Types.TEXT)
     update.effective_message.reply_text("Successfully reset goodbye message to default!")
     return "<b>{}:</b>" \
-           "\n#RESET_GOODBYE" \
-           "\n<b>Admin:</b> {}" \
-           "\nReset the goodbye message.".format(html.escape(chat.title),
+           "\n#작별인사 메시지 초기화" \
+           "\n<b>관리자:</b> {}" \
+           "\n작별 메시지를 초기화 했어요.".format(html.escape(chat.title),
                                                  mention_html(user.id, user.first_name))
 
 
@@ -380,7 +380,7 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
         update.effective_message.reply_text("I'll try to delete old welcome messages!")
         return "<b>{}:</b>" \
                "\n#CLEAN_WELCOME" \
-               "\n<b>Admin:</b> {}" \
+               "\n<b>관리자:</b> {}" \
                "\nHas toggled clean welcomes to <code>ON</code>.".format(html.escape(chat.title),
                                                                          mention_html(user.id, user.first_name))
     elif args[0].lower() in ("off", "no"):
@@ -388,7 +388,7 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
         update.effective_message.reply_text("I won't delete old welcome messages.")
         return "<b>{}:</b>" \
                "\n#CLEAN_WELCOME" \
-               "\n<b>Admin:</b> {}" \
+               "\n<b>관리자:</b> {}" \
                "\nHas toggled clean welcomes to <code>OFF</code>.".format(html.escape(chat.title),
                                                                           mention_html(user.id, user.first_name))
     else:
@@ -455,8 +455,8 @@ __help__ = """
 {}
 
 *Admin only:*
- - /welcome <on/off>: enable/disable welcome messages.
- - /welcome: shows current welcome settings.
+ - /welcome <on/off>: 환영인사 메시지를 활성화 또는 비활성화해요.
+ - /welcome: 현재 환영인사 메시지를 알려줘요.
  - /welcome noformat: shows current welcome settings, without the formatting - useful to recycle your welcome messages!
  - /goodbye -> same usage and args as /welcome.
  - /setwelcome <sometext>: set a custom welcome message. If used replying to media, uses that media.
@@ -468,7 +468,7 @@ __help__ = """
  - /welcomehelp: view more formatting information for custom welcome/goodbye messages.
 """.format(WELC_HELP_TXT)
 
-__mod_name__ = "Welcomes/Goodbyes"
+__mod_name__ = "환영인사/작별인사"
 
 NEW_MEM_HANDLER = MessageHandler(Filters.status_update.new_chat_members, new_member)
 LEFT_MEM_HANDLER = MessageHandler(Filters.status_update.left_chat_member, left_member)
