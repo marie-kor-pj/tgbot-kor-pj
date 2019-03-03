@@ -49,8 +49,8 @@ def get(bot, update, notename, show_none=True, no_format=False):
                     bot.forward_message(chat_id=chat_id, from_chat_id=MESSAGE_DUMP, message_id=note.value)
                 except BadRequest as excp:
                     if excp.message == "Message to forward not found":
-                        message.reply_text("This message seems to have been lost - I'll remove it "
-                                           "from your notes list.")
+                        message.reply_text("이 메시지가 손실된 것 같아요. - 기록 목록에서 "
+                                           "제거할게요.")
                         sql.rm_note(chat_id, notename)
                     else:
                         raise
@@ -106,7 +106,7 @@ def get(bot, update, notename, show_none=True, no_format=False):
                     LOGGER.warning("Message was: %s", str(note.value))
         return
     elif show_none:
-        message.reply_text("This note doesn't exist")
+        message.reply_text("이 기록은 존재하지 않아요")
 
 
 @run_async
