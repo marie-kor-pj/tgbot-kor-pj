@@ -62,7 +62,7 @@ def broadcast(bot: Bot, update: Update):
                 LOGGER.warning("%s 의 그룹에 방송하지 못했습니다. 해당 그룹명은 %s 입니다.", str(chat.chat_id), str(chat.chat_name))
 
         update.effective_message.reply_text("완벽하게 방송되었습니다. 아마도 {} 그룹은 메시지를 받지 못했을 것입니다."
-                                            "추방되었기 때문이죠.".format(failed))
+                                            "제가 추방되었기 때문이죠.".format(failed))
 
 
 @run_async
@@ -89,7 +89,7 @@ def log_user(bot: Bot, update: Update):
 @run_async
 def chats(bot: Bot, update: Update):
     all_chats = sql.get_all_chats() or []
-    chatfile = 'List of chats.\n'
+    chatfile = '채팅 리스트.\n'
     for chat in all_chats:
         chatfile += "{} - ({})\n".format(chat.chat_name, chat.chat_id)
 
@@ -120,7 +120,7 @@ def __migrate__(old_chat_id, new_chat_id):
 
 __help__ = ""  # no help string
 
-__mod_name__ = "Users"
+__mod_name__ = "사용자"
 
 BROADCAST_HANDLER = CommandHandler("broadcast", broadcast, filters=Filters.user(OWNER_ID))
 USER_HANDLER = MessageHandler(Filters.all & Filters.group, log_user)
