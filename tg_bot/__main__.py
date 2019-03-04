@@ -149,7 +149,7 @@ def start(bot: Bot, update: Update, args: List[str]):
                 PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(bot.first_name), OWNER_ID),
                 parse_mode=ParseMode.MARKDOWN)
     else:
-        update.effective_message.reply_text("이봐, 왜 그래?")
+        update.effective_message.reply_text("저기, 왜 그러세요?")
 
 
 # 시험용
@@ -309,7 +309,7 @@ def settings_button(bot: Bot, update: Update):
             chat_id = prev_match.group(1)
             curr_page = int(prev_match.group(2))
             chat = bot.get_chat(chat_id)
-            query.message.reply_text("안녕! {}에 대한 설정이 꽤 있어요 - 골라봐요 "
+            query.message.reply_text("안녕하세요! {}에 대한 설정이 꽤 있어요 - 골라봐요 "
                                      "you're interested in.".format(chat.title),
                                      reply_markup=InlineKeyboardMarkup(
                                          paginate_modules(curr_page - 1, CHAT_SETTINGS, "stngs",
@@ -319,7 +319,7 @@ def settings_button(bot: Bot, update: Update):
             chat_id = next_match.group(1)
             next_page = int(next_match.group(2))
             chat = bot.get_chat(chat_id)
-            query.message.reply_text("안녕! 설정이 꽤나 있습니다. {} - 골라봐요 "
+            query.message.reply_text("안녕하세요! 설정이 꽤나 있어요. {} - 골라봐요 "
                                      "재미있어 보이는거로요.".format(chat.title),
                                      reply_markup=InlineKeyboardMarkup(
                                          paginate_modules(next_page + 1, CHAT_SETTINGS, "stngs",
@@ -328,8 +328,8 @@ def settings_button(bot: Bot, update: Update):
         elif back_match:
             chat_id = back_match.group(1)
             chat = bot.get_chat(chat_id)
-            query.message.reply_text(text="안녕! 설정이 꽤 있어요. {} - 골라봐요 "
-                                          "재밌어보이는걸로.".format(escape_markdown(chat.title)),
+            query.message.reply_text(text="안녕하세요! 설정이 꽤 있어요. {} - 골라봐요 "
+                                          "재미있어 보이는걸로요.".format(escape_markdown(chat.title)),
                                      parse_mode=ParseMode.MARKDOWN,
                                      reply_markup=InlineKeyboardMarkup(paginate_modules(0, CHAT_SETTINGS, "stngs",
                                                                                         chat=chat_id)))
