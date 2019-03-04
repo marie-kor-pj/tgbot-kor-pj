@@ -48,11 +48,14 @@ HELP_STRINGS = """
 And the following:
 """.format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\n모든 명령은 / 또는 !와 함께 사용할 수 있어요.\n")
 
-DONATE_STRING = """이야, 기부를하고 싶다니 기뻐요!
-제가 여기에 오기까지 많은 노력이 필요했고, 모든 기부는
-절 향상시키는데 도움을 줘요. 모든 기부금은 절 한글화한 개발자에게 갈거에요.
-저희들은 가난한 학생들이라서, 많은 도움이 필요해요!
-저에게 기부할 수 있는 방법이 있어요; [PayPal](https://www.paypal.me/winsub1106)"""
+DONATE_STRING = """이야, 기부를 하고 싶다니.. 정말 감사드려요!
+이 봇이 제작되는데 많은 노력이 필요했고, 모든 기부는
+봇이 더 향상되고 한글화가 완벽하게 진행되는데 많은 도움을 줘요.
+기부는 Marie 원 제작자와(해외), Marie 한글화 개발자(국내)
+두명중에 선택해서 기부할 수 있어요.
+기부하려면 링크를 통해 기부해 주세요.
+원 제작자(해외) : [PayPal](http://paypal.me/PaulSonOfLars)
+한글화 개발자 : [PayPal](https://www.paypal.me/winsub1106)"""
 
 IMPORTED = {}
 MIGRATEABLE = []
