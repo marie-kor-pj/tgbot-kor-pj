@@ -54,8 +54,8 @@ DONATE_STRING = """이야, 기부를 하고 싶다니.. 정말 감사드려요!
 기부는 Marie 원 제작자와(해외), Marie 한글화 개발자(국내)
 두명중에 선택해서 기부할 수 있어요.
 기부하려면 링크를 통해 기부해 주세요.
-원 제작자(해외) : [PayPal](https://www.paypal.me/PaulSonOfLars) 또는 [Monzo](http://monzo.me/paulnionvestergaardlarsen)
-한글화 개발자 : [PayPal](https://www.paypal.me/winsub1106)"""
+봇을 한글화한 개발자 : [PayPal](https://www.paypal.me/winsub1106) <--그냥 이 링크 누르시면 되요
+원 제작자(해외) : [PayPal](https://www.paypal.me/PaulSonOfLars) 또는 [Monzo](http://monzo.me/paulnionvestergaardlarsen)"""
 
 IMPORTED = {}
 MIGRATEABLE = []
