@@ -24,27 +24,26 @@ def report_setting(bot: Bot, update: Update, args: List[str]):
         if len(args) >= 1:
             if args[0] in ("yes", "on"):
                 sql.set_user_setting(chat.id, True)
-                msg.reply_text("report 기능을 켰습니다! You'll be notified whenever anyone reports something.")
+                msg.reply_text("신고 기능을 켰습니다! 관리자들은 누군가 /report 명령어를 쓰는 즉시 알림이 뜰 것 입니다!")
 
             elif args[0] in ("no", "off"):
                 sql.set_user_setting(chat.id, False)
-                msg.reply_text("report 기능을 껐습니다! 당신은 어떠한 report도 가질 수 없어요.")
+                msg.reply_text("신고 기능을 껐습니다! 당신은 어떠한 신고도 할 수 없어요.")
         else:
-            msg.reply_text("Your current report preference is: `{}`".format(sql.user_should_report(chat.id)),
+            msg.reply_text("현재 당신의 신고 기능 설정 : `{}`".format(sql.user_should_report(chat.id)),
                            parse_mode=ParseMode.MARKDOWN)
 
     else:
         if len(args) >= 1:
             if args[0] in ("yes", "on"):
                 sql.set_chat_setting(chat.id, True)
-                msg.reply_text("Turned on reporting! Admins who have turned on reports will be notified when /report "
-                               "or @admin are called.")
+                msg.reply_text("신고 기능을 켰습니다! 관리자들은 누군가 /report 명령어를 쓰는 즉시 알림이 뜰 것 입니다!")
 
             elif args[0] in ("no", "off"):
                 sql.set_chat_setting(chat.id, False)
-                msg.reply_text("Turned off reporting! No admins will be notified on /report or @admin.")
+                msg.reply_text("신고 기능을 껐습니다! 당신은 어떠한 신고도 할 수 없어요.")
         else:
-            msg.reply_text("This chat's current setting is: `{}`".format(sql.chat_should_report(chat.id)),
+            msg.reply_text("현재 당신의 신고 기능 설정 : `{}`".format(sql.chat_should_report(chat.id)),
                            parse_mode=ParseMode.MARKDOWN)
 
 
