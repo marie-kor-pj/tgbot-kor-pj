@@ -69,16 +69,16 @@ class Development(Config):
 
  - `SUDO_USERS`: Sudo 유저로 고려될 유저들의 분리된 리스트가 있는 공간.
  - `SUPPORT_USERS`: 서포트 유저로 고려되어야 할 유저 아이디들의 분리된 리스트가 있는 공간 (gban, ungban만 가능)
- - `WHITELIST_USERS`: A space separated list of user_ids which should be considered whitelisted - they can't be banned.
- - `DONATION_LINK`: Optional: link where you would like to receive donations.
- - `CERT_PATH`: Path to your webhook certificate
- - `PORT`: Port to use for your webhooks
+ - `WHITELIST_USERS`: A space separated list of user_ids which should be considered whitelisted - 그들은 밴할 수 없습니다.
+ - `DONATION_LINK`: 선택 사항 : 기부금을 받을 수 있는 링크.
+ - `CERT_PATH`: webhook 인증 경로
+ - `PORT`: webhook를 위해 사용할 포트
  - `DEL_CMDS`: Whether to delete commands from users which don't have rights to use that command
  - `STRICT_GBAN`: Enforce gbans across new groups as well as old groups. When a gbanned user talks, he will be banned.
  - `WORKERS`: Number of threads to use. 8 is the recommended (and default) amount, but your experience may vary.
  __Note__ that going crazy with more threads wont necessarily speed up your bot, given the large amount of sql data 
  accesses, and the way python asynchronous calls work.
- - `BAN_STICKER`: Which sticker to use when banning people.
+ - `BAN_STICKER`: 유저를 밴할 때 사용할 스티커.
  - `ALLOW_EXCL`: Whether to allow using exclamation marks ! for commands as well as /.
 
 ### Python 의존성
@@ -110,7 +110,7 @@ In the case of postgres, this is how you would set up a the database on a debian
 
 This will be followed by you needing to input your password.
 
-- create a new database table:
+- 새 데이터베이스 테이블 생성:
 
 `createdb -O YOUR_USER YOUR_DB_NAME`
 
@@ -120,7 +120,7 @@ Change YOUR_USER and YOUR_DB_NAME appropriately.
 
 `psql YOUR_DB_NAME -h YOUR_HOST YOUR_USER`
 
-This will allow you to connect to your database via your terminal.
+터미널을 통해 데이터베이스에 연결할 수 있습니다.
 By default, YOUR_HOST should be 0.0.0.0:5432.
 
 You should now be able to build your database URI. This will be:
