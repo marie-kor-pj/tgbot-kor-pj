@@ -76,8 +76,7 @@ class Development(Config):
  - `DEL_CMDS`: 명령어를 사용할 권한이 없는 유저들에게서 명령어를 삭제할 수 있습니다.
  - `STRICT_GBAN`: 새로운 그룹과 마찬가지로 오래된 그룹에서도 gban을 시행합니다. 만약 gban당한 유저가 말을 한다면, 그는 밴 당할 것입니다.
  - `WORKERS`: 사용할 스레드의 갯수입니다. 8개가 기본이자 권장하는 갯수이지만, 당신의 경험은 다를 수 .
- __Note__ that going crazy with more threads wont necessarily speed up your bot, given the large amount of sql data 
- accesses, and the way python asynchronous calls work.
+ __Note__ 미친듯이 스레드만 추가하는 것에 매달리는 것은 사실 봇 속도 향상에 큰 도움을 주지 못합니다. 많은 양의 sql 데이터 액세스와, 파이썬 asynchronous가 작동합니다. 
  - `BAN_STICKER`: 유저를 밴할 때 사용할 스티커.
  - `ALLOW_EXCL`: Whether to allow using exclamation marks ! for commands as well as /.
 
