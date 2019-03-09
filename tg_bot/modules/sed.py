@@ -63,17 +63,17 @@ def sed(bot: Bot, update: Update):
         repl, repl_with, flags = sed_result
 
         if not repl:
-            update.effective_message.reply_to_message.reply_text("You're trying to replace... "
-                                                                 "nothing with something?")
+            update.effective_message.reply_to_message.reply_text("님은 아마 아무것도 아닌걸... "
+                                                                 "어떤걸로 덮어쓰시려고요?")
             return
 
         try:
             check = re.match(repl, to_fix, flags=re.IGNORECASE)
 
             if check and check.group(0).lower() == to_fix.lower():
-                update.effective_message.reply_to_message.reply_text("안녕하세요 여러분, {} is trying to make "
-                                                                     "me say stuff I don't wanna "
-                                                                     "say!".format(update.effective_user.first_name))
+                update.effective_message.reply_to_message.reply_text("안녕하세요 여러분, {} 은 내가 하고싶지 "
+                                                                     "않은 말을 하게 하는 "
+                                                                     "거에요!".format(update.effective_user.first_name))
                 return
 
             if 'i' in flags and 'g' in flags:
@@ -86,8 +86,8 @@ def sed(bot: Bot, update: Update):
                 text = re.sub(repl, repl_with, to_fix, count=1).strip()
         except sre_constants.error:
             LOGGER.warning(update.effective_message.text)
-            LOGGER.exception("SRE constant error")
-            update.effective_message.reply_text("Do you even sed? Apparently not.")
+            LOGGER.exception("SRE constant 에러")
+            update.effective_message.reply_text("혹시 SED 해보셨나요? 아마 아닐듯.")
             return
 
         # empty string errors -_-
@@ -99,13 +99,13 @@ def sed(bot: Bot, update: Update):
 
 
 __help__ = """
- - s/<text1>/<text2>(/<flag>): Reply to a message with this to perform a sed operation on that message, replacing all \
+ - s/<text1>/<text2>(/<flag>): SED 작업을 하고 싶은 메시지에 , replacing all \
 occurrences of 'text1' with 'text2'. Flags are optional, and currently include 'i' for ignore case, 'g' for global, \
 or nothing. Delimiters include `/`, `_`, `|`, and `:`. Text grouping is supported. The resulting message cannot be \
 larger than {}.
 
-*Reminder:* Sed uses some special characters to make matching easier, such as these: `+*.?\\`
-If you want to use these characters, make sure you escape them!
+*한가지더* Sed는 좀 어려운 문자들은 쉽게 보려고 쓰여요. 예를 들어서 : `+*.?\\`
+이러한 문자를 쓰고 싶으시다면, make sure you escape them!
 eg: \\?.
 """.format(telegram.MAX_MESSAGE_LENGTH)
 
