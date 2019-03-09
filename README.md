@@ -78,11 +78,11 @@ class Development(Config):
  - `WORKERS`: 사용할 스레드의 갯수입니다. 8개가 기본이자 권장하는 갯수이지만, 당신의 경험은 다를 수 .
  __Note__ 미친듯이 스레드만 추가하는 것에 매달리는 것은 사실 봇 속도 향상에 큰 도움을 주지 못합니다. 많은 양의 sql 데이터 액세스와, 파이썬 asynchronous가 작동합니다. 
  - `BAN_STICKER`: 유저를 밴할 때 사용할 스티커.
- - `ALLOW_EXCL`: Whether to allow using exclamation marks ! for commands as well as /.
+ - `ALLOW_EXCL`: !를 /와 같이 사용할 수 있도록 허용할 지 결정하세요. 
 
 ### Python 의존성
 
-프로젝트 디렉토리로 가서 다음 명령어를 입력하여 필수 파이썬 의존성 페키지들을 설치할 수 있습니다:
+프로젝트 디렉토리로 가서 다음 명령어를 입력하여 필수 파이썬 의존성 패키지들을 설치할 수 있습니다:
 
 `pip3 install -r requirements.txt`.
 
