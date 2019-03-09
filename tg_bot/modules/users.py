@@ -59,9 +59,9 @@ def broadcast(bot: Bot, update: Update):
                 sleep(0.1)
             except TelegramError:
                 failed += 1
-                LOGGER.warning("%s 의 그룹에 방송하지 못했습니다. 해당 그룹명은 %s 입니다.", str(chat.chat_id), str(chat.chat_name))
+                LOGGER.warning("%s 의 그룹에 방송하지 못했어요. 해당 그룹명은 %s 에요.", str(chat.chat_id), str(chat.chat_name))
 
-        update.effective_message.reply_text("완벽하게 방송되었습니다. 아마도 {} 그룹은 메시지를 받지 못했을 것입니다."
+        update.effective_message.reply_text("완벽하게 방송되었어요. 아마도 {} 그룹은 메시지를 받지 못했을 거예요"
                                             "제가 추방되었기 때문이죠.".format(failed))
 
 
@@ -96,18 +96,18 @@ def chats(bot: Bot, update: Update):
     with BytesIO(str.encode(chatfile)) as output:
         output.name = "chatlist.txt"
         update.effective_message.reply_document(document=output, filename="chatlist.txt",
-                                                caption="제 데이터베이스의 채팅 목록입니다.")
+                                                caption="제 데이터베이스의 채팅 목록.")
 
 
 def __user_info__(user_id):
     if user_id == dispatcher.bot.id:
-        return """전 그들을 본 적이 있어요... 와. 그들이 저를 스토킹하고 있는거에요? They're in all the same places I am... 오, 그건 저에요."""
+        return """전 그들을 본 적이 있어요... 와. 그들이 저를 스토킹하고 있는거에요? 그들은 제가있는 모든 장소에있네요.... 오, 그건 저에요."""
     num_chats = sql.get_user_num_chats(user_id)
     return """<code>{}</code> 개의 채팅방에서 봤어요.""".format(num_chats)
 
 
 def __stats__():
-    return "{} users, across {} chats".format(sql.num_users(), sql.num_chats())
+    return "{} 사용자가, {} 개의 채팅에 걸쳐있어요.".format(sql.num_users(), sql.num_chats())
 
 
 def __gdpr__(user_id):
