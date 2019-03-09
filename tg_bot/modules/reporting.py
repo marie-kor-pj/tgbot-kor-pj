@@ -24,26 +24,26 @@ def report_setting(bot: Bot, update: Update, args: List[str]):
         if len(args) >= 1:
             if args[0] in ("yes", "on"):
                 sql.set_user_setting(chat.id, True)
-                msg.reply_text("신고 기능을 켰습니다! 관리자들은 누군가 /report 명령어를 쓰는 즉시 알림이 뜰 것 입니다!")
+                msg.reply_text("보고 기능을 켰어요! 관리자들은 누군가 /report 명령어를 쓰는 즉시 알림이 뜰 거예요!")
 
             elif args[0] in ("no", "off"):
                 sql.set_user_setting(chat.id, False)
-                msg.reply_text("신고 기능을 껐습니다! 당신은 어떠한 신고도 할 수 없어요.")
+                msg.reply_text("보고 기능을 껐어요! 당신은 아무것도 보고할 수 없어요.")
         else:
-            msg.reply_text("현재 당신의 신고 기능 설정 : `{}`".format(sql.user_should_report(chat.id)),
+            msg.reply_text("현재 당신의 보고 기능 설정 : `{}`".format(sql.user_should_report(chat.id)),
                            parse_mode=ParseMode.MARKDOWN)
 
     else:
         if len(args) >= 1:
             if args[0] in ("yes", "on"):
                 sql.set_chat_setting(chat.id, True)
-                msg.reply_text("신고 기능을 켰습니다! 관리자들은 누군가 /report 명령어를 쓰는 즉시 알림이 뜰 것 입니다!")
+                msg.reply_text("보고 기능을 켰어요! 관리자들은 누군가 /report 명령어를 쓰는 즉시 알림이 뜰 거예요!")
 
             elif args[0] in ("no", "off"):
                 sql.set_chat_setting(chat.id, False)
-                msg.reply_text("신고 기능을 껐습니다! 당신은 어떠한 신고도 할 수 없어요.")
+                msg.reply_text("보고 기능을 껐어요! 당신은 아무것도 보고할 수 없어요.")
         else:
-            msg.reply_text("현재 당신의 신고 기능 설정 : `{}`".format(sql.chat_should_report(chat.id)),
+            msg.reply_text("현재 당신의 보고 기능 설정 : `{}`".format(sql.chat_should_report(chat.id)),
                            parse_mode=ParseMode.MARKDOWN)
 
 
@@ -62,8 +62,8 @@ def report(bot: Bot, update: Update) -> str:
 
         if chat.username and chat.type == Chat.SUPERGROUP:
             msg = "<b>{}:</b>" \
-                  "\n<b>Reported user:</b> {} (<code>{}</code>)" \
-                  "\n<b>Reported by:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
+                  "\n<b>보고하는 유저:</b> {} (<code>{}</code>)" \
+                  "\n<b>보고 대상:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
                                                                       mention_html(
                                                                           reported_user.id,
                                                                           reported_user.first_name),
@@ -71,13 +71,13 @@ def report(bot: Bot, update: Update) -> str:
                                                                       mention_html(user.id,
                                                                                    user.first_name),
                                                                       user.id)
-            link = "\n<b>Link:</b> " \
-                   "<a href=\"http://telegram.me/{}/{}\">click here</a>".format(chat.username, message.message_id)
+            link = "\n<b>링크:</b> " \
+                   "<a href=\"http://telegram.me/{}/{}\">여기를 누르세요</a>".format(chat.username, message.message_id)
 
             should_forward = False
 
         else:
-            msg = "{} is calling for admins in \"{}\"!".format(mention_html(user.id, user.first_name),
+            msg = "{} 가 다음 방의 관리자에게 말해요 \"{}\"!".format(mention_html(user.id, user.first_name),
                                                                html.escape(chat_name))
             link = ""
             should_forward = True
@@ -110,26 +110,26 @@ def __migrate__(old_chat_id, new_chat_id):
 
 
 def __chat_settings__(chat_id, user_id):
-    return "This chat is setup to send user reports to admins, via /report and @admin: `{}`".format(
+    return "이 채팅은 /report 와 @admin 으로 사용자 보고서를 관리자에게 전송하도록 설정되있어요 `{}`".format(
         sql.chat_should_report(chat_id))
 
 
 def __user_settings__(user_id):
-    return "You receive reports from chats you're admin in: `{}`.\nToggle this with /reports in PM.".format(
+    return "당신이 관리자인 채팅으로부터 보고를 받아요: `{}`.\n개인채팅에서 /reports로 전환하실 수 있어요.".format(
         sql.user_should_report(user_id))
 
 
-__mod_name__ = "Reporting"
+__mod_name__ = "보고"
 
 __help__ = """
- - /report <reason>: reply to a message to report it to admins.
- - @admin: reply to a message to report it to admins.
-NOTE: neither of these will get triggered if used by admins
+ - /report <이유>: 메시지를 답장하면 관리자에게 보고할 수 있어요.
+ - @admin: /report와 같이 메시지를 답장하면 관리자에게 보고할 수 있어요.
+참고: 관리자들은 위 명령어를 사용하실 수 없으시고, 일반 유저만 위 명령어를 사용하실 수 있어요.
 
-*Admin only:*
- - /reports <on/off>: change report setting, or view current status.
-   - If done in pm, toggles your status.
-   - If in chat, toggles that chat's status.
+*관리자용 명령어*
+ - /reports <on/off>: 보고서 설정을 변경하거나 현재 상태를 봐요.
+   - 개인메시지가 완료되면, 상태를 전환해요.
+   - 채팅 중이면 해당 채팅의 상태를 전환해요.
 """
 
 REPORT_HANDLER = CommandHandler("report", report, filters=Filters.group)
