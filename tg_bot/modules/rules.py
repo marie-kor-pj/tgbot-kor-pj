@@ -26,8 +26,8 @@ def send_rules(update, chat_id, from_pm=False):
         chat = bot.get_chat(chat_id)
     except BadRequest as excp:
         if excp.message == "Chat not found" and from_pm:
-            bot.send_message(user.id, "The rules shortcut for this chat hasn't been set properly! Ask admins to "
-                                      "fix this.")
+            bot.send_message(user.id, "이 채팅의 규칙 바로 가기가 제대로 설정되지 않았어요! 관리자에게 이 문제를 해결하도록 "
+                                      "말해주세요.")
             return
         else:
             raise
@@ -39,9 +39,9 @@ def send_rules(update, chat_id, from_pm=False):
         bot.send_message(user.id, text, parse_mode=ParseMode.MARKDOWN)
     elif from_pm:
         bot.send_message(user.id, "그룹의 관리자가 이 채팅에 어떠한 규칙도 적용하지 않았어요. "
-                                  "이것은 이그룹에 규칙이 없다는것을 의미하지는 않을거에요!")
+                                  "이것은 이그룹에 규칙이 없다는것을 의미하지는 않을거예요!")
     elif rules:
-        update.effective_message.reply_text("이 그룹의 규칙을 확인하시려면 저에게 개인 메시지로 연락해줘요.",
+        update.effective_message.reply_text("이 그룹의 규칙을 확인하시려면 저에게 개인 메시지로 연락해요.",
                                             reply_markup=InlineKeyboardMarkup(
                                                 [[InlineKeyboardButton(text="규칙",
                                                                        url="t.me/{}?start={}".format(bot.username,
@@ -76,7 +76,7 @@ def clear_rules(bot: Bot, update: Update):
 
 
 def __stats__():
-    return "{} chats have rules set.".format(sql.num_chats())
+    return "{} 채팅에 규칙이 설정되어 있어요".format(sql.num_chats())
 
 
 def __import_data__(chat_id, data):
@@ -96,12 +96,12 @@ def __chat_settings__(chat_id, user_id):
 __help__ = """
  - /rules: 이 채팅방의 규칙을 보여줘요.
 
-*Admin only:*
+*관리자용 명령어*
  - /setrules <규칙>: 이 채팅방의 규칙을 설정해요.
  - /clearrules: 이 채팅방의 규칙을 지워요.
 """
 
-__mod_name__ = "Rules"
+__mod_name__ = ""
 
 GET_RULES_HANDLER = CommandHandler("rules", get_rules, filters=Filters.group)
 SET_RULES_HANDLER = CommandHandler("setrules", set_rules, filters=Filters.group)
