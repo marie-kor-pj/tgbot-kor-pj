@@ -101,13 +101,13 @@ def chats(bot: Bot, update: Update):
 
 def __user_info__(user_id):
     if user_id == dispatcher.bot.id:
-        return """전 그들을 본 적이 있어요... 와. 그들이 저를 스토킹하고 있는거에요? 그들은 제가있는 모든 장소에있네요.... 오, 그건 저에요."""
+        return """전 그들을 본 적이 있어요... 와. 그들이 저를 스토킹하고 있는거에요? 그들은 제가 있는 모든 장소에 있네요.... 오, 그건 저에요."""
     num_chats = sql.get_user_num_chats(user_id)
     return """<code>{}</code> 개의 채팅방에서 봤어요.""".format(num_chats)
 
 
 def __stats__():
-    return "{} 사용자가, {} 개의 채팅에 걸쳐있어요.".format(sql.num_users(), sql.num_chats())
+    return "{} 사용자가 {} 개의 채팅방에 저와 같이 있어요.".format(sql.num_users(), sql.num_chats())
 
 
 def __gdpr__(user_id):
