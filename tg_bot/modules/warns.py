@@ -27,7 +27,7 @@ CURRENT_WARNING_FILTER_STRING = "<b>현재 이 채팅방에서 경고 필터로 
 # Not async
 def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = None) -> str:
     if is_user_admin(chat, user.id):
-        message.reply_text("빌어먹을 관리들, 경고도 못 해!")
+        message.reply_text("빌어먹을 관리자들, 경고도 못 해!")
         return ""
 
     if warner:
@@ -41,11 +41,11 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
         sql.reset_warns(user.id, chat.id)
         if soft_warn:  # kick
             chat.unban_member(user.id)
-            reply = "{} warnings, {} has been kicked!".format(limit, mention_html(user.id, user.first_name))
+            reply = "{}번 경고, {} 가 강퇴되었습니다!".format(limit, mention_html(user.id, user.first_name))
 
         else:  # ban
             chat.kick_member(user.id)
-            reply = "{} warnings, {} has been banned!".format(limit, mention_html(user.id, user.first_name))
+            reply = "{}번 경고, {}가 ban당하였습니다!".format(limit, mention_html(user.id, user.first_name))
 
         for warn_reason in reasons:
             reply += "\n - {}".format(html.escape(warn_reason))
@@ -53,7 +53,7 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
         message.bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
         keyboard = []
         log_reason = "<b>{}:</b>" \
-                     "\n#WARN_BAN" \
+                     "\n#경고_BAN" \
                      "\n<b>관리자:</b> {}" \
                      "\n<b>유저:</b> {} (<code>{}</code>)" \
                      "\n<b>이유:</b> {}"\
@@ -66,13 +66,13 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
         keyboard = InlineKeyboardMarkup(
             [[InlineKeyboardButton("Remove warn", callback_data="rm_warn({})".format(user.id))]])
 
-        reply = "{} has {}/{} warnings... watch out!".format(mention_html(user.id, user.first_name), num_warns,
+        reply = "{} 가 {}/{} 경고입니다... 조심하세요!".format(mention_html(user.id, user.first_name), num_warns,
                                                              limit)
         if reason:
-            reply += "\nReason for last warn:\n{}".format(html.escape(reason))
+            reply += "\n마지막 경고 이유:\n{}".format(html.escape(reason))
 
         log_reason = "<b>{}:</b>" \
-                     "\n#WARN" \
+                     "\n#경고" \
                      "\n<b>관리자:</b> {}" \
                      "\n<b>유저:</b> {} (<code>{}</code>)" \
                      "\n<b>이유:</b> {}"\
@@ -110,15 +110,15 @@ def button(bot: Bot, update: Update) -> str:
                 parse_mode=ParseMode.HTML)
             user_member = chat.get_member(user_id)
             return "<b>{}:</b>" \
-                   "\n#UNWARN" \
-                   "\n<b>Admin:</b> {}" \
-                   "\n<b>User:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
+                   "\n#경고해제" \
+                   "\n<b>관리자:</b> {}" \
+                   "\n<b>사용자:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
                                                                 mention_html(user.id, user.first_name),
                                                                 mention_html(user_member.user.id, user_member.user.first_name),
                                                                 user_member.user.id)
         else:
             update.effective_message.edit_text(
-                "User has already has no warns.".format(mention_html(user.id, user.first_name)),
+                "그 사용자는 이미 경고가 없습니다.".format(mention_html(user.id, user.first_name)),
                 parse_mode=ParseMode.HTML)
 
     return ""
@@ -141,7 +141,7 @@ def warn_user(bot: Bot, update: Update, args: List[str]) -> str:
         else:
             return warn(chat.get_member(user_id).user, chat, reason, message, warner)
     else:
-        message.reply_text("No user was designated!")
+        message.reply_text("지정된 사용자가 없어요!")
     return ""
 
 
@@ -161,14 +161,14 @@ def reset_warns(bot: Bot, update: Update, args: List[str]) -> str:
         message.reply_text("Warnings have been reset!")
         warned = chat.get_member(user_id).user
         return "<b>{}:</b>" \
-               "\n#RESETWARNS" \
-               "\n<b>Admin:</b> {}" \
-               "\n<b>User:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
+               "\n#경고초기화" \
+               "\n<b>관리자:</b> {}" \
+               "\n<b>사용자:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
                                                             mention_html(user.id, user.first_name),
                                                             mention_html(warned.id, warned.first_name),
                                                             warned.id)
     else:
-        message.reply_text("No user has been designated!")
+        message.reply_text("지정된 사용자가 없어요!")
     return ""
 
 
@@ -184,7 +184,7 @@ def warns(bot: Bot, update: Update, args: List[str]):
         limit, soft_warn = sql.get_warn_setting(chat.id)
 
         if reasons:
-            text = "This user has {}/{} warnings, for the following reasons:".format(num_warns, limit)
+            text = "이 사용자는 {}/{} 경고 입니다. 이유:".format(num_warns, limit)
             for reason in reasons:
                 text += "\n - {}".format(reason)
 
@@ -193,9 +193,9 @@ def warns(bot: Bot, update: Update, args: List[str]):
                 update.effective_message.reply_text(msg)
         else:
             update.effective_message.reply_text(
-                "User has {}/{} warnings, but no reasons for any of them.".format(num_warns, limit))
+                "이 사용자는 {}/{} 경고입니다. 하지만 아무 이유가 없네요.".format(num_warns, limit))
     else:
-        update.effective_message.reply_text("This user hasn't got any warnings!")
+        update.effective_message.reply_text("이 사용자에게 경고가 없어요!")
 
 
 # Dispatcher handler stop - do not async
@@ -226,7 +226,7 @@ def add_warn_filter(bot: Bot, update: Update):
 
     sql.add_warn_filter(chat.id, keyword, content)
 
-    update.effective_message.reply_text("Warn handler added for '{}'!".format(keyword))
+    update.effective_message.reply_text("경고 조정기가 추가되었습니다. '{}'!".format(keyword))
     raise DispatcherHandlerStop
 
 
@@ -250,16 +250,16 @@ def remove_warn_filter(bot: Bot, update: Update):
     chat_filters = sql.get_chat_warn_triggers(chat.id)
 
     if not chat_filters:
-        msg.reply_text("No warning filters are active here!")
+        msg.reply_text("여기에는 활성 상태의 경고 필터가 없어요!")
         return
 
     for filt in chat_filters:
         if filt == to_remove:
             sql.remove_warn_filter(chat.id, to_remove)
-            msg.reply_text("Yep, I'll stop warning people for that.")
+            msg.reply_text("네, 그런 경고는 그만 할게요.")
             raise DispatcherHandlerStop
 
-    msg.reply_text("That's not a current warning filter - run /warnlist for all active warning filters.")
+    msg.reply_text("현재 경고 필터가 아니예요. 모든 활성 경고 필터를 위해 /warnlist 을 입력해보세요.")
 
 
 @run_async
@@ -268,7 +268,7 @@ def list_warn_filters(bot: Bot, update: Update):
     all_handlers = sql.get_chat_warn_triggers(chat.id)
 
     if not all_handlers:
-        update.effective_message.reply_text("No warning filters are active here!")
+        update.effective_message.reply_text("여기에는 활성 상태의 경고 필터가 없어요!")
         return
 
     filter_list = CURRENT_WARNING_FILTER_STRING
@@ -315,21 +315,21 @@ def set_warn_limit(bot: Bot, update: Update, args: List[str]) -> str:
     if args:
         if args[0].isdigit():
             if int(args[0]) < 3:
-                msg.reply_text("The minimum warn limit is 3!")
+                msg.reply_text("최소 경고 한도는 3이예요!")
             else:
                 sql.set_warn_limit(chat.id, int(args[0]))
                 msg.reply_text("Updated the warn limit to {}".format(args[0]))
                 return "<b>{}:</b>" \
-                       "\n#SET_WARN_LIMIT" \
-                       "\n<b>Admin:</b> {}" \
-                       "\nSet the warn limit to <code>{}</code>".format(html.escape(chat.title),
+                       "\n#경고_한계_설정" \
+                       "\n<b>관리자:</b> {}" \
+                       "\n경고 한계가 다음과 같이 설정되었습니다 : <code>{}</code>".format(html.escape(chat.title),
                                                                         mention_html(user.id, user.first_name), args[0])
         else:
             msg.reply_text("Give me a number as an arg!")
     else:
         limit, soft_warn = sql.get_warn_setting(chat.id)
 
-        msg.reply_text("The current warn limit is {}".format(limit))
+        msg.reply_text("현재 경고 한계는 {} 입니다.".format(limit))
     return ""
 
 
@@ -343,10 +343,10 @@ def set_warn_strength(bot: Bot, update: Update, args: List[str]):
     if args:
         if args[0].lower() in ("on", "yes"):
             sql.set_warn_strength(chat.id, False)
-            msg.reply_text("Too many warns will now result in a ban!")
+            msg.reply_text("경고가 너무 많으면 금지가 됩니다!")
             return "<b>{}:</b>\n" \
-                   "<b>Admin:</b> {}\n" \
-                   "Has enabled strong warns. Users will be banned.".format(html.escape(chat.title),
+                   "<b>관리자:</b> {}\n" \
+                   "강력한 경고를 활성화했어요. 사용자가 금지되요.".format(html.escape(chat.title),
                                                                             mention_html(user.id, user.first_name))
 
         elif args[0].lower() in ("off", "no"):
