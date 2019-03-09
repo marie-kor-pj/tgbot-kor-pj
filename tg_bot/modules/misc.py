@@ -179,8 +179,8 @@ def slap(bot: Bot, update: Update, args: List[str]):
 
 @run_async
 def get_bot_ip(bot: Bot, update: Update):
-    """ Sends the bot's IP address, so as to be able to ssh in if necessary.
-        OWNER ONLY.
+    """ 필요한 경우 SSH 접속을 하기 위해서 봇의 IP주소를 보낸다.
+        봇 주인만 .
     """
     res = requests.get("http://ipinfo.io/ip")
     update.message.reply_text(res.text)
