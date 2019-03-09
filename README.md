@@ -69,7 +69,7 @@ class Development(Config):
 
  - `SUDO_USERS`: Sudo 유저로 고려될 유저들의 분리된 리스트가 있는 공간.
  - `SUPPORT_USERS`: 서포트 유저로 고려되어야 할 유저 아이디들의 분리된 리스트가 있는 공간 (gban, ungban만 가능)
- - `WHITELIST_USERS`: A space separated list of user_ids which should be considered whitelisted - 그들은 밴할 수 없습니다.
+ - `WHITELIST_USERS`: 화이트리스트로 고려될 유저들의 분리된 리스트가 있는  - 그들은 밴할 수 없습니다.
  - `DONATION_LINK`: 선택 사항 : 기부금을 받을 수 있는 링크.
  - `CERT_PATH`: webhook 인증 경로.
  - `PORT`: webhook를 위해 사용할 포트.
