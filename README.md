@@ -90,8 +90,8 @@ class Development(Config):
 
 ### 데이터베이스
 
-If you wish to use a database-dependent module (eg: locks, notes, userinfo, users, filters, welcomes),
-you'll need to have a database installed on your system. I use postgres, so I recommend using it for optimal compatibility.
+만약 당신이 데이터베이스 기반 모듈을 만들고 싶다면 (eg: locks, notes, userinfo, users, filters, welcomes),
+당신의 시스템에는 데이터베이스가 설치되어 있어야 합니다. 전 potgres를 사용하므로, 이것을 더 추천합니다.
 
 In the case of postgres, this is how you would set up a the database on a debian/ubuntu system. Other distributions may vary.
 
