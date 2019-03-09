@@ -330,9 +330,9 @@ def gdpr(bot: Bot, update: Update):
         mod.__gdpr__(update.effective_user.id)
 
     update.effective_message.reply_text("개인 데이터가 삭제되었어요.\n\n참고,  저의 데이터가 아닌"
-                                        "Telegram 데이터이기 때문에 어느 채팅방에서도 당신을 unban하지 않을 거예요."
-                                        "도배방지, 경고, 그리고 GBAN도 계속 남아있을 거예요. "
-                                        "[this](https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-to-erasure/), "
+                                        "텔레그램의 데이터이기 때문에 어느 채팅방에서도 당신을 언밴하지 않을 거예요."
+                                        "도배방지, 경고, 그리고 글로벌밴도 계속 남아있을 거예요. "
+                                        "[참고하세요](https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-to-erasure/), "
                                         "which clearly states that the right to erasure does not apply "
                                         "\"for the performance of a task carried out in the public interest\", as is "
                                         "the case for the aforementioned pieces of data.",
@@ -340,7 +340,7 @@ def gdpr(bot: Bot, update: Update):
 
 
 MARKDOWN_HELP = """
-Markdown은 telegram에서 지원되는 매우 강력한 도구예요. {} 저장된 메시지가 올바르게 구문 분석되었는지 확인하고 \
+은 telegram에서 지원되는 매우 강력한 도구예요. {} 저장된 메시지가 올바르게 구문 분석되었는지 확인하고 \
 단추를 만들 수 있도록 몇 가지 향상된 기능이 있어요.
 
 - <code>_italic_</code>: '_' 로 텍스트를 감싸면 기울어진 글자가 작성될 거예요. 
