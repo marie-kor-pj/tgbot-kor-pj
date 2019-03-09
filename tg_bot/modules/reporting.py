@@ -99,7 +99,7 @@ def report(bot: Bot, update: Update) -> str:
                 except Unauthorized:
                     pass
                 except BadRequest as excp:  # TODO: cleanup exceptions
-                    LOGGER.exception("Exception while reporting user")
+                    LOGGER.exception("사용자를 보고하는 동안 예외 발생")
         return msg
 
     return ""
