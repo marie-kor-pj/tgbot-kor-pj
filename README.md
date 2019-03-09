@@ -71,9 +71,9 @@ class Development(Config):
  - `SUPPORT_USERS`: 서포트 유저로 고려되어야 할 유저 아이디들의 분리된 리스트가 있는 공간 (gban, ungban만 가능)
  - `WHITELIST_USERS`: A space separated list of user_ids which should be considered whitelisted - 그들은 밴할 수 없습니다.
  - `DONATION_LINK`: 선택 사항 : 기부금을 받을 수 있는 링크.
- - `CERT_PATH`: webhook 인증 경로
- - `PORT`: webhook를 위해 사용할 포트
- - `DEL_CMDS`: Whether to delete commands from users which don't have rights to use that command
+ - `CERT_PATH`: webhook 인증 경로.
+ - `PORT`: webhook를 위해 사용할 포트.
+ - `DEL_CMDS`: 명령어를 사용할 권한이 없는 유저들에게서 명령어를 삭제할 수 있습니다.
  - `STRICT_GBAN`: Enforce gbans across new groups as well as old groups. When a gbanned user talks, he will be banned.
  - `WORKERS`: Number of threads to use. 8 is the recommended (and default) amount, but your experience may vary.
  __Note__ that going crazy with more threads wont necessarily speed up your bot, given the large amount of sql data 
