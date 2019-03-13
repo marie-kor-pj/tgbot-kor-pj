@@ -75,13 +75,13 @@ if is_module_loaded(FILENAME):
 
             if disable_cmd in set(DISABLE_CMDS + DISABLE_OTHER):
                 sql.disable_command(chat.id, disable_cmd)
-                update.effective_message.reply_text("`{}`사용을 비활성화합니다.".format(disable_cmd),
+                update.effective_message.reply_text("`{}` 명령어의 사용을 비활성화 합니다.".format(disable_cmd),
                                                     parse_mode=ParseMode.MARKDOWN)
             else:
                 update.effective_message.reply_text("그 명령어는 비활성화 하실 수 없어요.")
 
         else:
-            update.effective_message.reply_text("비활성화 할 명령어를 입력해주세요")
+            update.effective_message.reply_text("비활성화할 명령어를 입력해 주세요")
 
 
     @run_async
@@ -94,13 +94,13 @@ if is_module_loaded(FILENAME):
                 enable_cmd = enable_cmd[1:]
 
             if sql.enable_command(chat.id, enable_cmd):
-                update.effective_message.reply_text("`{}`사용을 활성화합니다".format(enable_cmd),
+                update.effective_message.reply_text("`{}` 명령어의 사용을 활성화합니다".format(enable_cmd),
                                                     parse_mode=ParseMode.MARKDOWN)
             else:
                 update.effective_message.reply_text("이미 활성화 되어 있어요.")
 
         else:
-            update.effective_message.reply_text("활성화 할 명령어를 입력해주세요.")
+            update.effective_message.reply_text("활성화할 명령어를 입력해 주세요.")
 
 
     @run_async
@@ -135,7 +135,7 @@ if is_module_loaded(FILENAME):
 
 
     def __stats__():
-        return "{} 개의 비활성화된 항목, {} 개의 채팅.".format(sql.num_disabled(), sql.num_chats())
+        return "{} 개의 비활성화된 명령어, {} 개의 채팅.".format(sql.num_disabled(), sql.num_chats())
 
 
     def __migrate__(old_chat_id, new_chat_id):
@@ -149,11 +149,11 @@ if is_module_loaded(FILENAME):
     __mod_name__ = "명령어 비활성화"
 
     __help__ = """
- - /cmds: 비활성화된 명령어를 확인합니다.
+ - /cmds: 비활성화된 명령어를 확인해요.
 
 *Admin only:*
- - /enable <명령어>: 명령어를 활성화 합니다.
- - /disable <명령어>: 명령어를 비활성화 합니다.
+ - /enable <명령어>: 명령어를 활성화 해요.
+ - /disable <명령어>: 명령어를 비활성화 해요.
  - /listcmds: 사용가능한 모든 전환 가능한 명령어를 나열해요.
     """
 
