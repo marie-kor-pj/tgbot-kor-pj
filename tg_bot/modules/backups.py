@@ -16,8 +16,8 @@ from tg_bot.modules.helper_funcs.chat_status import user_admin
 def import_data(bot: Bot, update):
     msg = update.effective_message  # type: Optional[Message]
     chat = update.effective_chat  # type: Optional[Chat]
-    # TODO: allow uploading doc with command, not just as reply
-    # only work with a doc
+    # TODO: 답장뿐만 아니라 명령으로 문서 업로드 허용
+    # 문서 작업만!
     if msg.reply_to_message and msg.reply_to_message.document:
         try:
             file_info = bot.get_file(msg.reply_to_message.document.file_id)
@@ -36,7 +36,7 @@ def import_data(bot: Bot, update):
                            "- 가져올 항목을 선택하려면 제가 어떻게 해야 할까요?")
             return
 
-        # Select data source
+        # 데이터 소스 선택
         if str(chat.id) in data:
             data = data[str(chat.id)]['hashes']
         else:
@@ -50,7 +50,7 @@ def import_data(bot: Bot, update):
                            "이것에 문제가 있는 경우 문제 해결을 위해 @MarieSupport에 백업파일을 보내주세요. "
                            "제 주인은 이것을 꼭 해결해줄 것이고 오류를 보고해주시면 제가 좀 더 나아질거예요! "
                            "감사합니다 :)")
-            LOGGER.exception("아이디 : %s 이름 : %s 불러오기를 실패했어요.", str(chat.id), str(chat.title))
+            LOGGER.exception("아이디 : %s, 이름 : %s \n불러오기를 실패했어요.", str(chat.id), str(chat.title))
             return
 
         # TODO: some of that link logic
