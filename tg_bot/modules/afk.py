@@ -62,9 +62,9 @@ def reply_afk(bot: Bot, update: Update):
                 valid, reason = sql.check_afk_status(user_id)
                 if valid:
                     if not reason:
-                        res = "{}님은 현재 자리를 비운 상태예요!".format(fst_name)
+                        res = "{}님은 현재 자리를 비운 상태에요!".format(fst_name)
                     else:
-                        res = "{}님은 현재 자리를 비운 상태예요! 이유 :\n{}".format(fst_name, reason)
+                        res = "{}님은 현재 자리를 비운 상태에요! 이유 :\n{}".format(fst_name, reason)
                     message.reply_text(res)
 
 
@@ -74,7 +74,7 @@ def __gdpr__(user_id):
 
 __help__ = """
  - /afk <이유>: 잠시 자리를 비운다고 이유와 함께 알려주기.
- - brb <이유>: afk와 똑같지만 처음에 / 을 표시해야하는 명령어는 아니예요.
+ - brb <이유>: afk와 똑같지만 처음에 / 을 표시해야 하는 명령어는 아니에요.
 
 AFK 명령어를 사용했을 경우, 다른 사람이 부르면 제가 자리를 비웠다고 알려드릴게요!
 """
