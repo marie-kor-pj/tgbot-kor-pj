@@ -55,7 +55,7 @@ def import_data(bot: Bot, update):
 
         # TODO: some of that link logic
         # NOTE: consider default permissions stuff?
-        msg.reply_text("백업을 완전히 가져왔어요. 다시 돌아온걸 환영해요! :D)
+        msg.reply_text("백업을 완전히 가져왔어요. 다시 돌아온걸 환영해요! :D")
 
 
 @run_async
