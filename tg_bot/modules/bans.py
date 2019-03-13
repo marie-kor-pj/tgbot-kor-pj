@@ -35,23 +35,23 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
         member = chat.get_member(user_id)
     except BadRequest as excp:
         if excp.message == "User not found":
-            message.reply_text("해당 유저를 찾을수 없어요!")
+            message.reply_text("해당 유저를 찾을 수 없어요!")
             return ""
         else:
             raise
 
     if is_user_ban_protected(chat, user_id, member):
-        message.reply_text("관리자는 Ban할 수 없어요!")
+        message.reply_text("관리자는 Ban 할 수 없어요!")
         return ""
 
     if user_id == bot.id:
-        message.reply_text("저는 절 Ban할 수 없어요!")
+        message.reply_text("저는 절 Ban 할 수 없어요!")
         return ""
 
     log = "<b>{}:</b>" \
           "\n#BANNED" \
-          "\n<b>Admin:</b> {}" \
-          "\n<b>User:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
+          "\n<b>관리자:</b> {}" \
+          "\n<b>사용자:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
                                                        mention_html(user.id, user.first_name),
                                                        mention_html(member.user.id, member.user.first_name),
                                                        member.user.id)
@@ -104,15 +104,15 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
             raise
 
     if is_user_ban_protected(chat, user_id, member):
-        message.reply_text("관리자는 Ban할 수 없어요!")
+        message.reply_text("관리자는 Ban 할 수 없어요!")
         return ""
 
     if user_id == bot.id:
-        message.reply_text("저는 절 Ban할 수 없어요!")
+        message.reply_text("저는 절 Ban 할 수 없어요!")
         return ""
 
     if not reason:
-        message.reply_text("이 사용자를 Ban할 시간을 지정하지 않았어요!")
+        message.reply_text("이 사용자를 Ban 할 시간을 지정하지 않았어요!")
         return ""
 
     split_reason = reason.split(None, 1)
@@ -130,9 +130,9 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
 
     log = "<b>{}:</b>" \
           "\n#TEMP BANNED" \
-          "\n<b>Admin:</b> {}" \
-          "\n<b>User:</b> {} (<code>{}</code>)" \
-          "\n<b>Time:</b> {}".format(html.escape(chat.title),
+          "\n<b>관리자:</b> {}" \
+          "\n<b>사용자:</b> {} (<code>{}</code>)" \
+          "\n<b>시간:</b> {}".format(html.escape(chat.title),
                                      mention_html(user.id, user.first_name),
                                      mention_html(member.user.id, member.user.first_name),
                                      member.user.id,
@@ -197,9 +197,9 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
         bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
         message.reply_text("넌 추방이야!")
         log = "<b>{}:</b>" \
-              "\n#KICKED" \
-              "\n<b>Admin:</b> {}" \
-              "\n<b>User:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
+              "\n#추방" \
+              "\n<b>관리자:</b> {}" \
+              "\n<b>사용자:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
                                                            mention_html(user.id, user.first_name),
                                                            mention_html(member.user.id, member.user.first_name),
                                                            member.user.id)
@@ -263,17 +263,17 @@ def unban(bot: Bot, update: Update, args: List[str]) -> str:
         return ""
 
     chat.unban_member(user_id)
-    message.reply_text("예, 해당 유저는 이제 이 방에 들어올 수 있습니다!")
+    message.reply_text("이제, 해당 유저는 이제 이 방에 들어올 수 있습니다!")
 
     log = "<b>{}:</b>" \
-          "\n#UNBANNED" \
-          "\n<b>Admin:</b> {}" \
-          "\n<b>User:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
+          "\n#Ban 해제" \
+          "\n<b>관리자:</b> {}" \
+          "\n<b>사용자:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
                                                        mention_html(user.id, user.first_name),
                                                        mention_html(member.user.id, member.user.first_name),
                                                        member.user.id)
     if reason:
-        log += "\n<b>Reason:</b> {}".format(reason)
+        log += "\n<b>이유:</b> {}".format(reason)
 
     return log
 
