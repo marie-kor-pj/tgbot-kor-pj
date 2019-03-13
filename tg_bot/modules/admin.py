@@ -55,9 +55,9 @@ def promote(bot: Bot, update: Update, args: List[str]) -> str:
 
     message.reply_text("Successfully promoted!")
     return "<b>{}:</b>" \
-           "\n#PROMOTED" \
-           "\n<b>Admin:</b> {}" \
-           "\n<b>User:</b> {}".format(html.escape(chat.title),
+           "\n#복사됨" \
+           "\n<b>관리자:</b> {}" \
+           "\n<b>사용자:</b> {}".format(html.escape(chat.title),
                                       mention_html(user.id, user.first_name),
                                       mention_html(user_member.user.id, user_member.user.first_name))
 
@@ -100,16 +100,16 @@ def demote(bot: Bot, update: Update, args: List[str]) -> str:
                               can_restrict_members=False,
                               can_pin_messages=False,
                               can_promote_members=False)
-        message.reply_text("Successfully demoted!")
+        message.reply_text("성공적으로 강등되었어요!")
         return "<b>{}:</b>" \
-               "\n#DEMOTED" \
-               "\n<b>Admin:</b> {}" \
-               "\n<b>User:</b> {}".format(html.escape(chat.title),
+               "\n#강등" \
+               "\n<b>관리자:</b> {}" \
+               "\n<b>사용자:</b> {}".format(html.escape(chat.title),
                                           mention_html(user.id, user.first_name),
                                           mention_html(user_member.user.id, user_member.user.first_name))
 
     except BadRequest:
-        message.reply_text("강등햘수 없어요. promote 명령어로 권한을 주지 않았고, 다른사람이 관리자를 임명한 것 같아요. "
+        message.reply_text("강등햘 수 없어요. promote 명령어로 권한을 주지 않았고, 다른사람이 관리자를 임명한 것 같아요. "
                            "그래서 전 그분을 강등시킬 수 없어요.")
         return ""
 
@@ -140,8 +140,8 @@ def pin(bot: Bot, update: Update, args: List[str]) -> str:
             else:
                 raise
         return "<b>{}:</b>" \
-               "\n#PINNED" \
-               "\n<b>Admin:</b> {}".format(html.escape(chat.title), mention_html(user.id, user.first_name))
+               "\n#공지 등록" \
+               "\n<b>관리자:</b> {}".format(html.escape(chat.title), mention_html(user.id, user.first_name))
 
     return ""
 
@@ -164,8 +164,8 @@ def unpin(bot: Bot, update: Update) -> str:
             raise
 
     return "<b>{}:</b>" \
-           "\n#UNPINNED" \
-           "\n<b>Admin:</b> {}".format(html.escape(chat.title),
+           "\n#공지 등록 해제" \
+           "\n<b>관리자:</b> {}".format(html.escape(chat.title),
                                        mention_html(user.id, user.first_name))
 
 
@@ -202,7 +202,7 @@ def adminlist(bot: Bot, update: Update):
 
 
 def __chat_settings__(chat_id, user_id):
-    return "You are *admin*: `{}`".format(
+    return "당신은 *admin* 입니다: `{}`".format(
         dispatcher.bot.get_chat_member(chat_id, user_id).status in ("administrator", "creator"))
 
 
