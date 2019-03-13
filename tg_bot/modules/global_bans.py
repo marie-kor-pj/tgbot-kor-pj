@@ -143,12 +143,12 @@ def ungban(bot: Bot, update: Update, args: List[str]):
         return
 
     if not sql.is_user_gbanned(user_id):
-        message.reply_text("이 사용자는 GBAN상태가 아니예요!")
+        message.reply_text("이 사용자는 GBAN 상태가 아니예요!")
         return
 
     banner = update.effective_user  # type: Optional[User]
 
-    message.reply_text("제가 {} 님에게 글로벌밴으로 부터 기회를 한번더 드릴게요.".format(user_chat.first_name))
+    message.reply_text("제가 {} 님에게 글로벌밴으로부터 기회를 한번 더 드릴게요.".format(user_chat.first_name))
 
     send_to_list(bot, SUDO_USERS + SUPPORT_USERS,
                  "{} UNBAN 사용자. {}".format(mention_html(banner.id, banner.first_name),
@@ -172,8 +172,8 @@ def ungban(bot: Bot, update: Update, args: List[str]):
             if excp.message in UNGBAN_ERRORS:
                 pass
             else:
-                message.reply_text("다음 이유로 인해 BAN을 해제하실 수 없어요 : {}".format(excp.message))
-                bot.send_message(OWNER_ID, "다음 이유로 인해 BAN을 해제하실 수 없어요 : {}".format(excp.message))
+                message.reply_text("다음 이유로 인해 BAN 을 해제하실 수 없어요 : {}".format(excp.message))
+                bot.send_message(OWNER_ID, "다음 이유로 인해 BAN 을 해제하실 수 없어요 : {}".format(excp.message))
                 return
         except TelegramError:
             pass
@@ -202,7 +202,7 @@ def gbanlist(bot: Bot, update: Update):
     with BytesIO(str.encode(banfile)) as output:
         output.name = "gbanlist.txt"
         update.effective_message.reply_document(document=output, filename="gbanlist.txt",
-                                                caption="Here is the list of currently gbanned users.")
+                                                caption="여기에는 현재 글로벌밴을 당한 사용자의 목록이 있어요.")
 
 
 def check_and_ban(update, user_id, should_message=True):
@@ -249,8 +249,8 @@ def gbanstat(bot: Bot, update: Update, args: List[str]):
     else:
         update.effective_message.reply_text("설정을 주기위해서 on/off, yes/no!라고 해주세요.\n\n"
                                             "현재는 다음으로 설정되어 있어요: {}\n"
-                                            "True상대이면, 그룹에서 GBAN을 사용하실 수 있어요. "
-                                            "False상대이면, GBAN을 사용하실 수 없고, 스펨발송자로부터 메시지를 "
+                                            "True 상대이면, 그룹에서 GBAN을 사용하실 수 있어요. "
+                                            "False 상대이면, GBAN을 사용하실 수 없고, 스펨발송자로부터 메시지를 "
                                             "계속 받을 거예요!".format(sql.does_chat_gban(update.effective_chat.id)))
 
 
@@ -261,12 +261,12 @@ def __stats__():
 def __user_info__(user_id):
     is_gbanned = sql.is_user_gbanned(user_id)
 
-    text = "Globally banned: <b>{}</b>"
+    text = "글로벌밴 : <b>{}</b>"
     if is_gbanned:
         text = text.format("Yes")
         user = sql.get_gbanned_user(user_id)
         if user.reason:
-            text += "\nReason: {}".format(html.escape(user.reason))
+            text += "\n이유: {}".format(html.escape(user.reason))
     else:
         text = text.format("No")
     return text
@@ -277,19 +277,19 @@ def __migrate__(old_chat_id, new_chat_id):
 
 
 def __chat_settings__(chat_id, user_id):
-    return "This chat is enforcing *gbans*: `{}`.".format(sql.does_chat_gban(chat_id))
+    return "이 채팅방은 *gbans*을(를) 시행하고 있어요: `{}`.".format(sql.does_chat_gban(chat_id))
 
 
 __help__ = """
 *관리자용 명령어*
- - /gbanstat <on/off/yes/no>: 글로벌 Ban을 활성화 하거나 바활성화 해요.
+ - /gbanstat <on/off/yes/no>: 글로벌Ban 을 활성화 하거나 바활성화 해요.
 
 전 세계 사용자를 금지시킬 수 있는 Gbans는 모든 그룹의 스팸메일을 금지하기 위해 저를 만드신 분에 의해 사용되요. \
 그래서 스팸발송자를 최대한 빨리 제거하여 사용자와 그룹을 보호할 수 있는 기능이예요. 만약 GBAN을 사용하고 싶지 않으신 분은 \
 /gbanstat 명령어를 통해 GBAN을 비활성화 하실 수 있어요!
 """
 
-__mod_name__ = "글로벌 밴"
+__mod_name__ = "글로벌밴"
 
 GBAN_HANDLER = CommandHandler("gban", gban, pass_args=True,
                               filters=CustomFilters.sudo_filter | CustomFilters.support_filter)
