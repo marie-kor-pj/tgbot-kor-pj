@@ -18,7 +18,7 @@ from tg_bot.modules.helper_funcs.string_handling import split_quotes, button_mar
 from tg_bot.modules.sql import cust_filters_sql as sql
 
 HANDLER_GROUP = 10
-BASIC_FILTER_STRING = "*Filters in this chat:*\n"
+BASIC_FILTER_STRING = "*이 채팅방의 필터:*\n"
 
 
 @run_async
@@ -138,7 +138,7 @@ def stop_filter(bot: Bot, update: Update):
             update.effective_message.reply_text("네, 이 필터를 삭제할게요!")
             raise DispatcherHandlerStop
 
-    update.effective_message.reply_text("필터를 찾을 수 없어요 - 활성화 되있는 모든 필터를 보려면 /filters를 입력해주세요.")
+    update.effective_message.reply_text("필터를 찾을 수 없어요 - 활성화 되있는 모든 필터를 보려면 /filters 를 입력해주세요.")
 
 
 @run_async
@@ -176,7 +176,7 @@ def reply_filter(bot: Bot, update: Update):
                                        disable_web_page_preview=True,
                                        reply_markup=keyboard)
                 except BadRequest as excp:
-                    if excp.message == "URL프로토콜이 지원되지 않아요.":
+                    if excp.message == "URL 프로토콜이 지원되지 않아요.":
                         message.reply_text("지원되지 않는 URL프로토콜을 사용하시는것 같네요. tg:// "
                                            "와 같은 일부 프로토콜은 텔레그램에서 버튼을 지원하지 않아요. 다시 "
                                            "시도해보시거나, @MarieSupport 에 도움을 요청하세요.")
@@ -197,7 +197,7 @@ def reply_filter(bot: Bot, update: Update):
 
 
 def __stats__():
-    return "{} 필터는, {}번 채팅에서 사용됬어요.".format(sql.num_filters(), sql.num_chats())
+    return "{} 필터는, {} 번 채팅에서 사용됬어요.".format(sql.num_filters(), sql.num_chats())
 
 
 def __migrate__(old_chat_id, new_chat_id):
@@ -210,12 +210,12 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- - /filters: 활성화 되있는 모든 필터를 알려줘요.
+ - /filters: 활성화 되어있는 모든 필터를 알려줘요.
 
 *관리자용 명령어*
- - /filter <제목> <내용>: 이 채팅방에 필터를 추가해요. '제목'을 작성하시면 제가 그 메시지에 대해서 응답을 해드릴게요. \
-스티커를 제목으로 설정하시면 그 스티커로 답장해드려요. 참고: 모든 필터 제목은 소문자로 되어 있어요. \
-키워드를 문장으로 사용하려면 따옴표를 사용해주세요. 
+ - /filter <제목> <내용>: 해당 채팅방에 필터를 추가해요. '제목'을 작성하시면 제가 그 메시지에 대해서 응답을 해드릴게요. \
+스티커를 제목으로 설정하시면 그 스티커로 답장해드려요. 참고: 모든 필터 제목은 소문자로 설정하세요. \
+키워드를 문장으로 사용하려면 따옴표를 사용해 주세요. 
 예: /filter "hey there" How you \
 doin?
  - /stop <필터제목>: 필터를 삭제해요.
