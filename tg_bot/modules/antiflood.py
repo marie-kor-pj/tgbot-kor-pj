@@ -35,7 +35,7 @@ def check_flood(bot: Bot, update: Update) -> str:
 
     try:
         chat.kick_member(user.id)
-        msg.reply_text("메시지를 한번에 너무 많이 보낸 이유로 강퇴당하셨습니다!")
+        msg.reply_text("메시지를 한번에 너무 많이 보낸 이유로 강퇴 당하셨습니다!")
 
         return "<b>{}:</b>" \
                "\n#BANNED" \
@@ -77,7 +77,7 @@ def set_flood(bot: Bot, update: Update, args: List[str]) -> str:
                        "\n도배방지가 비활성화 되었어요.".format(html.escape(chat.title), mention_html(user.id, user.first_name))
 
             elif amount < 3:
-                message.reply_text("도배 방지 기능은 0(비활성화) 또는 3보다 큰 숫자여야해요!")
+                message.reply_text("도배 방지 기능은 0(비활성화) 또는 3보다 큰 숫자여야 해요!")
                 return ""
 
             else:
@@ -104,7 +104,7 @@ def flood(bot: Bot, update: Update):
         update.effective_message.reply_text("현재 도배방지 기능을 사용하지 않고 있어요. 먼저 /setflood를 이용하여 도배방지 기능을 활성화 해 주세요.")
     else:
         update.effective_message.reply_text(
-            "도배방지가 {}개로 설정되어있어요!".format(limit))
+            "도배방지가 {}개로 설정되어 있어요!".format(limit))
 
 
 def __migrate__(old_chat_id, new_chat_id):
@@ -114,7 +114,7 @@ def __migrate__(old_chat_id, new_chat_id):
 def __chat_settings__(chat_id, user_id):
     limit = sql.get_flood_limit(chat_id)
     if limit == 0:
-        return "현재 도배 방지 기능 실행중이 아니예요!"
+        return "현재 도배 방지 기능 실행중이 아니에요!"
     else:
         return "도배방지가 {}개로 설정되어있어요!".format(limit)
 
