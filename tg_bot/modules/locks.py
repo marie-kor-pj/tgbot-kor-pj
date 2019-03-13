@@ -106,12 +106,12 @@ def lock(bot: Bot, update: Update, args: List[str]) -> str:
         if len(args) >= 1:
             if args[0] in LOCK_TYPES:
                 sql.update_lock(chat.id, args[0], locked=True)
-                message.reply_text("Locked {} messages for all non-admins!".format(args[0]))
+                message.reply_text("모든 일반 사용자에 대해 {} 개의 메시지가 잠겼어요!".format(args[0]))
 
                 return "<b>{}:</b>" \
-                       "\n#LOCK" \
+                       "\n#잠금" \
                        "\n<b>관리자:</b> {}" \
-                       "\nLocked <code>{}</code>.".format(html.escape(chat.title),
+                       "\n잠금된 메시지: <code>{}</code>.".format(html.escape(chat.title),
                                                           mention_html(user.id, user.first_name), args[0])
 
             elif args[0] in RESTRICTION_TYPES:
@@ -122,12 +122,12 @@ def lock(bot: Bot, update: Update, args: List[str]) -> str:
 
                 message.reply_text("Locked {} for all non-admins!".format(args[0]))
                 return "<b>{}:</b>" \
-                       "\n#LOCK" \
+                       "\n#잠금" \
                        "\n<b>관리자:</b> {}" \
-                       "\nLocked <code>{}</code>.".format(html.escape(chat.title),
+                       "\n잠금된 메시지: <code>{}</code>.".format(html.escape(chat.title),
                                                           mention_html(user.id, user.first_name), args[0])
             else:
-                message.reply_text("무엇을 잠금 하시려는 거예요...? 락 활성화를 할 수 있는 목록을 확인하려면 /locktypes 를 입력해 보세요.")
+                message.reply_text("무엇을 잠금 하시려는 거예요...? 잠금 활성화를 할 수 있는 목록을 확인하려면 /locktypes 를 입력해 보세요.")
 
     else:
         message.reply_text("제가 관리자가 아니거나 메시지를 삭제할 권한이 없어요...")
@@ -177,7 +177,7 @@ def unlock(bot: Bot, update: Update, args: List[str]) -> str:
                 return "<b>{}:</b>" \
                        "\n#언락" \
                        "\n<b>관리자:</b> {}" \
-                       "\nUnlocked <code>{}</code>.".format(html.escape(chat.title),
+                       "\n잠금해제된 메시지: <code>{}</code>.".format(html.escape(chat.title),
                                                             mention_html(user.id, user.first_name), args[0])
             else:
                 message.reply_text("무엇의 잠금을 해제하시려는 건가요...? 잠금 목록을 보기위해 /locktypes 를 입력하세요")
@@ -214,7 +214,7 @@ def del_lockables(bot: Bot, update: Update):
                     if excp.message == "Message to delete not found":
                         pass
                     else:
-                        LOGGER.exception("ERROR in lockables")
+                        LOGGER.exception("잠금 모듈의 오류")
 
             break
 
@@ -232,7 +232,7 @@ def rest_handler(bot: Bot, update: Update):
                 if excp.message == "Message to delete not found":
                     pass
                 else:
-                    LOGGER.exception("ERROR in restrictions")
+                    LOGGER.exception("제한 오류")
             break
 
 
@@ -240,9 +240,9 @@ def build_lock_message(chat_id):
     locks = sql.get_locks(chat_id)
     restr = sql.get_restr(chat_id)
     if not (locks or restr):
-        res = "There are no current locks in this chat."
+        res = "이 채팅에는 현재 잠금된 메시지가 없어요."
     else:
-        res = "These are the locks in this chat:"
+        res = "이것들은 이 채팅의 잠긴 메시지들이예:"
         if locks:
             res += "\n - sticker = `{}`" \
                    "\n - audio = `{}`" \
@@ -298,8 +298,8 @@ __help__ = """
 
 잠금 기능을 사용해서 그룹의 사용자를 제한할 수 있어요.
 예:
-url을 잠그면 url이 있는 모든 메시지가 자동으로 삭제되고, \
-스티커를 잠그면 스티커가있는 모든 메시지가 삭제되요.
+url 을 잠그면 url 이 있는 모든 메시지가 자동으로 삭제되고, \
+스티커를 잠그면 스티커가 있는 모든 메시지가 삭제되요.
 봇을 잠그면 관리자가 아닌 사람이 채팅에 봇 추가하는 것을 막을 수 있어요.
 """
 
