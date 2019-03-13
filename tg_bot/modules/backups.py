@@ -48,7 +48,7 @@ def import_data(bot: Bot, update):
         except Exception:
             msg.reply_text("데이터를 복원하는 동안 오류가 발생하였어요. 절차가 완전하지 않을수도 있어요. 만약 "
                            "이것에 문제가 있는 경우 문제 해결을 위해 @MarieSupport에 백업파일을 보내주세요. "
-                           "제 주인은 이것을 꼭 해결해줄 것이고 오류를 보고해주시면 제가 좀 더 나아질거예요! "
+                           "제 주인은 이것을 꼭 해결해줄 것이고 오류를 보고해주시면 제가 좀 더 나아질거에요! "
                            "감사합니다 :)")
             LOGGER.exception("아이디 : %s, 이름 : %s \n불러오기를 실패했어요.", str(chat.id), str(chat.title))
             return
