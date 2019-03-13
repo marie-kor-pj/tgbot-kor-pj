@@ -37,7 +37,7 @@ def blacklist(bot: Bot, update: Update, args: List[str]):
     split_text = split_message(filter_list)
     for text in split_text:
         if text == BASE_BLACKLIST_STRING:
-            msg.reply_text("블랙리스트에 오른 메세지가 없어요!")
+            msg.reply_text("Blacklisted 에 오른 메세지가 없어요!")
             return
         msg.reply_text(text, parse_mode=ParseMode.HTML)
 
@@ -63,7 +63,7 @@ def add_blacklist(bot: Bot, update: Update):
                 "<code>{}</code> 가 Blacklist에 추가되었어요!".format(len(to_blacklist)), parse_mode=ParseMode.HTML)
 
     else:
-        msg.reply_text("블랙리스트에 추가할 단어를 알려주세요.")
+        msg.reply_text("Blacklist 에 추가할 단어를 알려주세요.")
 
 
 @run_async
@@ -95,12 +95,12 @@ def unblacklist(bot: Bot, update: Update):
 
         elif not successful:
             msg.reply_text(
-                "이 메시지들은 모두 존재하지 않기 때문에 제거되지 않았어요.".format(
+                "이 메시지들은 모두 Blacklist 에 존재하지 않기 때문에 제거되지 않았어요.".format(
                     successful, len(to_unblacklist) - successful), parse_mode=ParseMode.HTML)
 
         else:
             msg.reply_text(
-                "<code>{}</code> 가 Blacklist에서 제거되었어요. {} 라는 단어는 존재하지 않네요!"
+                "<code>{}</code> 가 Blacklist 에서 제거되었어요. {} 라는 단어는 Blacklist 에 존재하지 않네요!"
                 "그래서 삭제할 수 없어요.".format(successful, len(to_unblacklist) - successful),
                 parse_mode=ParseMode.HTML)
     else:
