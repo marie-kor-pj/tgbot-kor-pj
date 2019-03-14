@@ -70,17 +70,17 @@ RUN_STRINGS = (
 )
 
 SLAP_TEMPLATES = (
-    "{user1} 은(는) {user2} 을(를) {item}로 {hits}어요.",
-    "{user1} 은(는) {user2} 의 얼굴을 {item} 로 {hits}어요.",
-    "{user1} 은(는) {item} 으로 {user2} 를 조금  {hits}어요.",
-    "{user1} 은(는) {user2} 에게 {item} 을 {throws}어요.",
-    "{user1} 은(는) {item} 을(를) 잡고 {user2} 의 얼굴에 {throws}어요.",
-    "{user1} 은(는) {item} 을(를) {user2}의 정면으로 발사했어요.",
-    "{user1} 은(는) {item} 을(를) 사용하여 {user2} 의 뺨을 때리기 시작했어요.",
-    "{user1} 은(는) {user2} 를 묶고 {item} 으로 계속  {hits}어요.",
-    "{user1} 은(는) {item} 을 들었고 그걸로 {user2} 를 {hits}어요.",
-    "{user1} 은(는){user2} 의자에 묶었고 {item} 로 그들을  {throws}어요.",
-    "{user1} 은(는) {user2} 용암에서 수영하는 법을 배울 수 있도록 우호적으로 밀어주었어요."
+    "{user1} 님은(는) {user2} 을(를) {item}로 {hits}어요.",
+    "{user1} 님은(는) {user2} 의 얼굴을 {item} 로 {hits}어요.",
+    "{user1} 님은(는) {item} 으로 {user2} 를 조금 {hits}어요.",
+    "{user1} 님은(는) {user2} 에게 {item} 을 {throws}어요.",
+    "{user1} 님은(는) {item} 을(를) 잡고 {user2} 의 얼굴에 {throws}어요.",
+    "{user1} 님은(는) {item} 을(를) {user2}의 정면으로 발사했어요.",
+    "{user1} 님은(는) {item} 을(를) 사용하여 {user2} 의 뺨을 때리기 시작했어요.",
+    "{user1} 님은(는) {user2} 님을 묶고 {item} 으로 계속  {hits}어요.",
+    "{user1} 님은(는) {item} 을(를) 들었고 그걸로 {user2} 을(를) {hits}어요.",
+    "{user1} 님은(는){user2} 님을 의자에 묶었고 {item} 로 그들을 {throws}어요.",
+    "{user1} 님은(는) {user2} 님이 용암에서 수영하는 법을 배울 수 있도록 우호적으로 밀어주었어요."
 )
 
 ITEMS = (
@@ -274,7 +274,7 @@ def info(bot: Bot, update: Update, args: List[str]):
 def get_time(bot: Bot, update: Update, args: List[str]):
     location = " ".join(args)
     if location.lower() == bot.first_name.lower():
-        update.effective_message.reply_text("Its always banhammer time for me!")
+        update.effective_message.reply_text("누군가를 Ban 하는것은 저에게는 항상 즐거운 시간이에요!")
         bot.send_sticker(update.effective_chat.id, BAN_STICKER)
         return
 
@@ -333,9 +333,9 @@ def gdpr(bot: Bot, update: Update):
                                         "텔레그램의 데이터이기 때문에 어느 채팅방에서도 당신을 언밴하지 않을 거예요."
                                         "도배방지, 경고, 그리고 글로벌밴도 계속 남아있을 거예요. "
                                         "[참고하세요](https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-to-erasure/), "
-                                        "which clearly states that the right to erasure does not apply "
-                                        "\"for the performance of a task carried out in the public interest\", as is "
-                                        "the case for the aforementioned pieces of data.",
+                                        "상기 데이터 조각과 같이 공공의 이익을 위해 수행된  "
+                                        "\"과제에 대해 삭제권이 적용되지 않는다는 것을\" 명확히 "
+                                        "기술하고 있습니다.",
                                         parse_mode=ParseMode.MARKDOWN)
 
 
@@ -348,12 +348,12 @@ MARKDOWN_HELP = """
 - <code>`code`</code>: '`' 로 텍스트를 감싸면 'code'라고 하는 동일한 텍스트가 생성될 거예요.
 - <code>[보여질 메시지](URL)</code>: 링크를 만들어줘요. - 메시지는 <code>보여질 메시지</code> 라고 보여질 거지만, \
 그 메시지를 터치하면 <code>URL</code>로 들어가져요.
-예: <code>[test](example.com)</code>
+예: <code>[테스트](example.com)</code>
 
 - <code>[버튼에 보여질 메시지](URL)</code>: 이것은 telegram이 가지고 있는 특별한 \
 마크다운에서의 버튼 기능이예요. <code>버튼에 보여질 메시지</code> 가 버튼에 나타나고, 버튼을 누르면 <code>URL</code> \
 로 들어가져요.
-예: <code>[This is a button](buttonurl:example.com)</code>
+예: <code>[버튼](buttonurl:example.com)</code>
 
 같은 줄에 여러 개의 버튼을 사용하려면 :same을 사용하세요 :
 <code>[one](buttonurl://example.com)
