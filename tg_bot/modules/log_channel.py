@@ -25,7 +25,7 @@ if is_module_loaded(FILENAME):
             if result:
                 if chat.type == chat.SUPERGROUP and chat.username:
                     result += "\n<b>링크:</b> " \
-                              "<a href=\"http://telegram.me/{}/{}\"> 를 눌러주세요.</a>".format(chat.username,
+                              "<a href=\"http://telegram.me/{}/{}\">여기를 눌러주세요.</a>".format(chat.username,
                                                                                            message.message_id)
                 log_chat = sql.get_chat_log_channel(chat.id)
                 if log_chat:
@@ -79,7 +79,7 @@ if is_module_loaded(FILENAME):
         message = update.effective_message  # type: Optional[Message]
         chat = update.effective_chat  # type: Optional[Chat]
         if chat.type == chat.CHANNEL:
-            message.reply_text("이제, 이 채널을 연결할 그룹으로 /setlog를 전달해주세요!")
+            message.reply_text("이제, 이 채널을 연결할 그룹으로 /setlog 를 전달해주세요!")
 
         elif message.forward_from_chat:
             sql.set_chat_log_channel(chat.id, message.forward_from_chat.id)
@@ -97,17 +97,17 @@ if is_module_loaded(FILENAME):
                                      chat.title or chat.first_name))
             except Unauthorized as excp:
                 if excp.message == "Forbidden: bot is not a member of the channel chat":
-                    bot.send_message(chat.id, "로그채널 설정이 완료되었어요!")
+                    bot.send_message(chat.id, "로그 채널 설정이 완료되었어요!")
                 else:
-                    LOGGER.exception("로그채널을 설정하는데에 오류가 발생했어요!")
+                    LOGGER.exception("로그 채널을 설정하는데에 오류가 발생했어요!")
 
-            bot.send_message(chat.id, "로그채널 설정이 완료되었어요!")
+            bot.send_message(chat.id, "로그 채널 설정이 완료되었어요!")
 
         else:
             message.reply_text("로그 채널 설정하는 방법:\n"
                                " - 원하는 채널에 봇을 추가해주세요.\n"
                                " - 채널에 /setlog 를 입력해 주세요\n"
-                               " - 로그 채널을 설정하고자 하는 그룹에 채널에서 적었던 /setlog를 전달해주세요.\n")
+                               " - 로그 채널을 설정하고자 하는 그룹에 채널에서 적었던 /setlog 를 전달해 주세요.\n")
 
 
     @run_async
@@ -149,9 +149,9 @@ if is_module_loaded(FILENAME):
 - /unsetlog: 로그 채널을 비활성화해요.
 
 로그 채널 설정하는 방법 :
-- 원하는 채널에 봇을 추가해주세요. (봇은 관리자로 해주세요!)
-- 채널에 /setlog 를 입력해주세요.
-- 로그 채널을 설정하고자 하는 그룹에 채널에서 적었던 /setlog를 전달해주세요.
+- 원하는 채널에 봇을 추가해주세요. (봇에게 관리자권한을 주세요!)
+- 체널에 /setlog 를 입력해주세요.
+- 로그 채널을 설정하고자 하는 그룹에 채널에서 적었던 /setlog 를 전달해주세요.
 """
 
     __mod_name__ = "로그 채널"
