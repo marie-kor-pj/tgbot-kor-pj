@@ -95,9 +95,9 @@ def get(bot, update, notename, show_none=True, no_format=False):
                                        "정말로 그들에 대해 언급하고 싶다면, 그들의 메시지들 중 하나를 나에게 전달해주세요, "
                                        "그러면 저는 그들에게 태그를 붙일 수 있을 거예요!")
                 elif FILE_MATCHER.match(note.value):
-                    message.reply_text("This note was an incorrectly imported file from another bot - I can't use "
-                                       "it. If you really need it, you'll have to save it again. In "
-                                       "the meantime, I'll remove it from your notes list.")
+                    message.reply_text("이 노트는 다른 봇에서 잘못 가져온 파일이에요 - 전 그것을 "
+                                       "사용할 수 없어요. 만약 정말 필요하다면, 다시 저장할 수 있어요. "
+                                       "그동안에 그것을 메모 목록에서 삭제해 드릴게요.")
                     sql.rm_note(chat_id, notename)
                 else:
                     message.reply_text("이 노트의 형식이 잘못되었기 때문에 보낼 수 없어요."
@@ -149,15 +149,15 @@ def save(bot: Bot, update: Update):
 
     if msg.reply_to_message and msg.reply_to_message.from_user.is_bot:
         if text:
-            msg.reply_text("Seems like you're trying to save a message from a bot. Unfortunately, "
-                           "bots can't forward bot messages, so I can't save the exact message. "
-                           "\nI'll save all the text I can, but if you want more, you'll have to "
-                           "forward the message yourself, and then save it.")
+            msg.reply_text("저에게 메시지를 저장하려고 하는 것 같아요. 불행하게도, "
+                           "봇은 봇의 메시지를 전달할 수 없어요, 그래서 전 정확한 메시지를 저장할 수 없어요. "
+                           "\n가능한 한 모든 메시지들을 저장하겠지만, "
+                           "더 많은 내용을 원한다면 직접 메시지를 전달하고 저장해야 해요.")
         else:
-            msg.reply_text("Bots are kinda handicapped by telegram, making it hard for bots to "
-                           "interact with other bots, so I can't save this message "
-                           "like I usually would - do you mind forwarding it and "
-                           "then saving that new message? Thanks!")
+            msg.reply_text("봇들은 Telegram 으로 인한 장애가 있어서, 봇이 다른 봇과 상호작용하기 "
+                           "힘들기 때문에 이 메시지를 평소와 같이 "
+                           "저장하실 수 없어요 - 그메시지를 전달하고 나서 그 새로운 메시지를 저장해도 "
+                           "괜찮을까요? 고마워요!")
         return
 
 
@@ -169,9 +169,9 @@ def clear(bot: Bot, update: Update, args: List[str]):
         notename = args[0]
 
         if sql.rm_note(chat_id, notename):
-            update.effective_message.reply_text("Successfully removed note.")
+            update.effective_message.reply_text("노트를 성공적으로 제거했어요.")
         else:
-            update.effective_message.reply_text("That's not a note in my database!")
+            update.effective_message.reply_text("그 노트는 제 데이터베이스에 있는 메모가 아니에요!")
 
 
 @run_async
@@ -188,7 +188,7 @@ def list_notes(bot: Bot, update: Update):
         msg += note_name
 
     if msg == "*Notes in chat:*\n":
-        update.effective_message.reply_text("No notes in this chat!")
+        update.effective_message.reply_text("이 채팅방에는 노트가 없어요!")
 
     elif len(msg) != 0:
         update.effective_message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
@@ -230,19 +230,19 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- - /get <notename>: get the note with this notename
- - #<notename>: same as /get
- - /notes or /saved: list all saved notes in this chat
+ - /get <notename>: notename 이라는 이름을 사용하여 노트를 가져와요.
+ - #<notename>: /get 명령어와 같아요.
+ - /notes or /saved: 이 채팅방에서 저장된 모든 노트를 나열해요.
 
-If you would like to retrieve the contents of a note without any formatting, use `/get <notename> noformat`. This can \
-be useful when updating a current note.
+포맷 없이 노트의 내용을 검색하려면 '/get <notename> noformat'을 사용하세요.
+이 기능은 현재 노트를 업데이트할 때 유용해요.
 
 *Admin only:*
- - /save <notename> <notedata>: saves notedata as a note with name notename
+ - /save <notename> <notedata>: 이름이 note name인 노트를 nothedata 에 저장해요.
 A button can be added to a note by using standard markdown link syntax - the link should just be prepended with a \
-`buttonurl:` section, as such: `[somelink](buttonurl:example.com)`. Check /markdownhelp for more info.
+`buttonurl:` section, as such: `[somelink](buttonurl:example.com)`. 더 많은 정보를 얻고싶다면 /markdownhelp 명령어를 통해 알아보세요.
  - /save <notename>: save the replied message as a note with name notename
- - /clear <notename>: clear note with this name
+ - /clear <notename>: notename 이라는 이름의 노트를 제거해요.
 """
 
 __mod_name__ = "Notes"
