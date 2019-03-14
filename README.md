@@ -93,7 +93,7 @@ class Development(Config):
 만약 당신이 데이터베이스 기반 모듈을 만들고 싶다면 (eg: locks, notes, userinfo, users, filters, welcomes),
 당신의 시스템에는 데이터베이스가 설치되어 있어야 합니다. 전 potgres를 사용하므로, 이것을 더 추천합니다.
 
-In the case of postgres, this is how you would set up a the database on a debian/ubuntu system. Other distributions may vary.
+postgres 사용시의 방법입니다. 우분투/데비안에서의 방법이므로 다른 계열에선 다를 수 있습니다. 
 
 - postgresql 설치:
 
@@ -113,7 +113,7 @@ This will be followed by you needing to input your password.
 
 `createdb -O YOUR_USER YOUR_DB_NAME`
 
-Change YOUR_USER and YOUR_DB_NAME appropriately.
+YOUR_USER와 YOUR_DB_NAME 을 정확하게 바꾸세요.
 
 - 마지막으로:
 
@@ -122,12 +122,12 @@ Change YOUR_USER and YOUR_DB_NAME appropriately.
 터미널을 통해 데이터베이스에 연결할 수 있습니다.
 By default, YOUR_HOST should be 0.0.0.0:5432.
 
-You should now be able to build your database URI. This will be:
+이제 당신의 데이터베이스 URL을 빌드할 수 있게 되었습니다. 그것은 다음과 같습니다:
 
 `sqldbtype://username:pw@hostname:port/db_name`
 
-Replace sqldbtype with whichever db youre using (eg postgres, mysql, sqllite, etc)
-repeat for your username, password, hostname (localhost?), port (5432?), and db name.
+sqldbtype을 당신이 사용하는 db에 따라 바꾸세요. (eg postgres, mysql, sqllite, etc)
+당신의 유저네임, 비밀번호, 호스트 이름을 반복하세요 (localhost?), port (5432?), 그리고 db .
 
 ## 모듈들
 ### 로드 순서 설정.
