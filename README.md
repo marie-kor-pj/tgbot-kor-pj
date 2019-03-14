@@ -127,7 +127,7 @@ By default, YOUR_HOST should be 0.0.0.0:5432.
 `sqldbtype://username:pw@hostname:port/db_name`
 
 sqldbtype을 당신이 사용하는 db에 따라 바꾸세요. (eg postgres, mysql, sqllite, etc)
-당신의 유저네임, 비밀번호, 호스트 이름을 반복하세요 (localhost?), port (5432?), 그리고 db .
+당신의 유저네임, 비밀번호, 호스트 이름을 반복하세요 (localhost?), port (5432?), 그리고 db 이름을.
 
 ## 모듈들
 ### 로드 순서 설정.
