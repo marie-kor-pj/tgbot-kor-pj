@@ -59,10 +59,10 @@ def get(bot, update, notename, show_none=True, no_format=False):
                     bot.forward_message(chat_id=chat_id, from_chat_id=chat_id, message_id=note.value)
                 except BadRequest as excp:
                     if excp.message == "Message to forward not found":
-                        message.reply_text("Looks like the original sender of this note has deleted "
-                                           "their message - sorry! Get your bot admin to start using a "
-                                           "message dump to avoid this. I'll remove this note from "
-                                           "your saved notes.")
+                        message.reply_text("이 노트의 원래 발신인이 메시지를 삭제한 것 같아요. "
+                                           "미안해요! 이를 방지하기 위해 봇 관리자에게 메시지 덤프 사용을 "
+                                           "시작하도록 하세요. "
+                                           "저장된 노트에서 이 노트를 제거할게요.")
                         sql.rm_note(chat_id, notename)
                     else:
                         raise
@@ -91,17 +91,17 @@ def get(bot, update, notename, show_none=True, no_format=False):
 
             except BadRequest as excp:
                 if excp.message == "Entity_mention_user_invalid":
-                    message.reply_text("Looks like you tried to mention someone I've never seen before. If you really "
-                                       "want to mention them, forward one of their messages to me, and I'll be able "
-                                       "to tag them!")
+                    message.reply_text("전에 본 적이 없는 사람을 언급하려 했던 것 같군요. If you really "
+                                       "정말로 그들에 대해 언급하고 싶다면, 그들의 메시지들 중 하나를 나에게 전달해주세요, "
+                                       "그러면 저는 그들에게 태그를 붙일 수 있을 거예요!")
                 elif FILE_MATCHER.match(note.value):
                     message.reply_text("This note was an incorrectly imported file from another bot - I can't use "
                                        "it. If you really need it, you'll have to save it again. In "
                                        "the meantime, I'll remove it from your notes list.")
                     sql.rm_note(chat_id, notename)
                 else:
-                    message.reply_text("This note could not be sent, as it is incorrectly formatted. Ask in "
-                                       "@MarieSupport if you can't figure out why!")
+                    message.reply_text("이 노트의 형식이 잘못되었기 때문에 보낼 수 없어요."
+                                       "이유를 알 수 없다면 @MarieSupport 에 문의하세요!")
                     LOGGER.exception("Could not parse message #%s in chat %s", notename, str(chat_id))
                     LOGGER.warning("Message was: %s", str(note.value))
         return
@@ -136,7 +136,7 @@ def save(bot: Bot, update: Update):
     note_name, text, data_type, content, buttons = get_note_type(msg)
 
     if data_type is None:
-        msg.reply_text("Dude, there's no note")
+        msg.reply_text("메모가 존재하지 않아요!")
         return
     
     if len(text.strip()) == 0:
