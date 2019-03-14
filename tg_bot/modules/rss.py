@@ -23,9 +23,9 @@ def show_url(bot, update, args):
                 re.sub('<[^<]+?>', '', link_processed.feed.get("description", default="Unknown")))
             feed_link = link_processed.feed.get("link", default="Unknown")
 
-            feed_message = "<b>Feed Title:</b> \n{}" \
+            feed_message = "<b>Feed 제목:</b> \n{}" \
                            "\n\n<b>Feed Description:</b> \n{}" \
-                           "\n\n<b>Feed Link:</b> \n{}".format(html.escape(feed_title),
+                           "\n\n<b>Feed 링크:</b> \n{}".format(html.escape(feed_title),
                                                                feed_description,
                                                                html.escape(feed_link))
 
@@ -35,9 +35,9 @@ def show_url(bot, update, args):
                     re.sub('<[^<]+?>', '', link_processed.entries[0].get("description", default="Unknown")))
                 entry_link = link_processed.entries[0].get("link", default="Unknown")
 
-                entry_message = "\n\n<b>Entry Title:</b> \n{}" \
+                entry_message = "\n\n<b>Entry 제목:</b> \n{}" \
                                 "\n\n<b>Entry Description:</b> \n{}" \
-                                "\n\n<b>Entry Link:</b> \n{}".format(html.escape(entry_title),
+                                "\n\n<b>Entry 링크:</b> \n{}".format(html.escape(entry_title),
                                                                      entry_description,
                                                                      html.escape(entry_link))
                 final_message = feed_message + entry_message
@@ -63,9 +63,9 @@ def list_urls(bot, update):
 
     # check if the length of the message is too long to be posted in 1 chat bubble
     if len(final_content) == 0:
-        bot.send_message(chat_id=tg_chat_id, text="This chat is not subscribed to any links")
+        bot.send_message(chat_id=tg_chat_id, text="이 채팅방은 어떠한 링크도 구독하지 않았어요.")
     elif len(final_content) <= constants.MAX_MESSAGE_LENGTH:
-        bot.send_message(chat_id=tg_chat_id, text="This chat is subscribed to the following links:\n" + final_content)
+        bot.send_message(chat_id=tg_chat_id, text="이 채팅방은 다음 링크에 구독되어 있어요:\n" + final_content)
     else:
         bot.send_message(chat_id=tg_chat_id, parse_mode=ParseMode.HTML,
                          text="<b>위험:</b> 메시지가 너무 길어서 보낼 수 없어요")
@@ -98,7 +98,7 @@ def add_url(bot, update, args):
             else:
                 sql.add_url(tg_chat_id, tg_feed_link, tg_old_entry_link)
 
-                update.effective_message.reply_text("Added URL to subscription")
+                update.effective_message.reply_text("구독에 URL 을(를) 추가했어요")
         else:
             update.effective_message.reply_text("이 링크는 RSS 피드 링크가 아니에요")
     else:
@@ -120,9 +120,9 @@ def remove_url(bot, update, args):
             if user_data:
                 sql.remove_url(tg_chat_id, tg_feed_link)
 
-                update.effective_message.reply_text("Removed URL from subscription")
+                update.effective_message.reply_text("구독에서 URL이 제거되었어요")
             else:
-                update.effective_message.reply_text("You haven't subscribed to this URL yet")
+                update.effective_message.reply_text("아직 이 URL 을(를) 구독하지 않았어요")
         else:
             update.effective_message.reply_text("이 링크는 RSS 피드 링크가 아니에요")
     else:
@@ -181,7 +181,7 @@ def rss_update(bot, job):
                                      parse_mode=ParseMode.HTML)
 
             bot.send_message(chat_id=tg_chat_id, parse_mode=ParseMode.HTML,
-                             text="<b>위험: </b>{} occurrences have been left out to prevent spam"
+                             text="<b>위험:</b>{} 스팸을 방지하기 위해 발생이 누락되었어요"
                              .format(len(new_entry_links) - 5))
 
 
@@ -216,12 +216,12 @@ def rss_set(bot, job):
 
 
 __help__ = """
- - /addrss <link>: 구독에 RSS 링크를 추가해여.
- - /removerss <link>: removes the RSS link from the subscriptions.
+ - /addrss <link>: 구독에 RSS 링크를 추가해요.
+ - /removerss <link>: 구독에서 RSS 링크를 제거해요.
  - /rss <link>: shows the link's data and the last entry, for testing purposes.
  - /listrss: shows the list of rss feeds that the chat is currently subscribed to.
 
-추가: 그룹에서, 관리자만 그룹의 구독에 RSS 링크를 추가/제거할 수 있어요
+추가: 그룹에서, 관리자만 그룹의 구독에 RSS 링크를 추가/제거할 수 있어요.
 """
 
 __mod_name__ = "RSS Feed"
