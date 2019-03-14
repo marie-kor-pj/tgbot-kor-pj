@@ -24,26 +24,26 @@ def report_setting(bot: Bot, update: Update, args: List[str]):
         if len(args) >= 1:
             if args[0] in ("yes", "on"):
                 sql.set_user_setting(chat.id, True)
-                msg.reply_text("신고 기능을 켰어요! 관리자들은 누군가 /report 명령어를 쓰는 즉시 알림이 뜰 거예요!")
+                msg.reply_text("채팅방 관리자에게 신고 기능을 켰어요! 관리자들은 누군가 /report 명령어를 쓰는 즉시 알림이 뜰 거예요!")
 
             elif args[0] in ("no", "off"):
                 sql.set_user_setting(chat.id, False)
-                msg.reply_text("신고 기능을 껐어요! 당신은 아무것도 보고할 수 없어요.")
+                msg.reply_text("채팅방 관리자에게 신고 기능을 껐어요! 당신은 아무것도 보고할 수 없어요.")
         else:
-            msg.reply_text("현재 당신의 신고 기능 설정 : `{}`".format(sql.user_should_report(chat.id)),
+            msg.reply_text("현재 당신의 채팅방 관리자에게 신고 기능 설정 : `{}`".format(sql.user_should_report(chat.id)),
                            parse_mode=ParseMode.MARKDOWN)
 
     else:
         if len(args) >= 1:
             if args[0] in ("yes", "on"):
                 sql.set_chat_setting(chat.id, True)
-                msg.reply_text("신고 기능을 켰어요! 관리자들은 누군가 /report 명령어를 쓰는 즉시 알림이 뜰 거예요!")
+                msg.reply_text("채팅방 관리자에게 신고 기능을 켰어요! 관리자들은 누군가 /report 명령어를 쓰는 즉시 알림이 뜰 거예요!")
 
             elif args[0] in ("no", "off"):
                 sql.set_chat_setting(chat.id, False)
-                msg.reply_text("신고 기능을 껐어요! 당신은 아무것도 신고할 수 없어요.")
+                msg.reply_text("채팅방 관리자에게 신고 기능을 껐어요! 당신은 아무것도 신고할 수 없어요.")
         else:
-            msg.reply_text("현재 당신의 신고 기능 설정 : `{}`".format(sql.chat_should_report(chat.id)),
+            msg.reply_text("현재 당신의 채팅방 관리자에게 신고 기능 설정 : `{}`".format(sql.chat_should_report(chat.id)),
                            parse_mode=ParseMode.MARKDOWN)
 
 
@@ -77,7 +77,7 @@ def report(bot: Bot, update: Update) -> str:
             should_forward = False
 
         else:
-            msg = "{} 가 다음 방의 관리자에게 말해요 \"{}\"!".format(mention_html(user.id, user.first_name),
+            msg = "{} 이(가) 다음 방의 관리자에게 말해요 \"{}\"!".format(mention_html(user.id, user.first_name),
                                                                html.escape(chat_name))
             link = ""
             should_forward = True
@@ -99,7 +99,7 @@ def report(bot: Bot, update: Update) -> str:
                 except Unauthorized:
                     pass
                 except BadRequest as excp:  # TODO: cleanup exceptions
-                    LOGGER.exception("사용자를 신고하는 동안 예외 발생")
+                    LOGGER.exception("사용자를 채팅방 관리자에게 신고하는 동안 예외 발생")
         return msg
 
     return ""
@@ -115,15 +115,15 @@ def __chat_settings__(chat_id, user_id):
 
 
 def __user_settings__(user_id):
-    return "당신이 관리자인 채팅으로부터 신고를 받아요: `{}`.\n개인채팅에서 /reports로 전환하실 수 있어요.".format(
+    return "당신이 관리자인 채팅으로부터 신고를 받아요: `{}`.\n개인채팅에서 /reports 로 전환하실 수 있어요.".format(
         sql.user_should_report(user_id))
 
 
 __mod_name__ = "신고"
 
 __help__ = """
- - /report <이유>: 메시지를 답장하면 관리자에게 신고할 수 있어요.
- - @admin: /report와 같이 메시지를 답장하면 관리자에게 신고할 수 있어요.
+ - /report <이유>: 메시지를 답장하면 채팅방 관리자에게 신고할 수 있어요.
+ - @admin: /report와 같이 메시지를 답장하면 채팅방 관리자에게 신고할 수 있어요.
 참고: 관리자들은 위 명령어를 사용하실 수 없으시고, 일반 유저만 위 명령어를 사용하실 수 있어요.
 
 *관리자용 명령어*
