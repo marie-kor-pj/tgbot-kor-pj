@@ -74,7 +74,7 @@ def del_message(bot: Bot, update: Update) -> str:
             update.effective_message.reply_to_message.delete()
             update.effective_message.delete()
             return "<b>{}:</b>" \
-                   "\n#DEL" \
+                   "\n#메시지 제거" \
                    "\n<b>관리자:</b> {}" \
                    "\n메시지 제거.".format(html.escape(chat.title),
                                                mention_html(user.id, user.first_name))
