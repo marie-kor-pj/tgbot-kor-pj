@@ -184,13 +184,13 @@ def temp_mute(bot: Bot, update: Update, args: List[str]) -> str:
 
 
 __help__ = """
-*Admin only:*
+*관리자 전용 명령어:*
  - /mute <사용자명>: 사용자를 음소거 시켜요. 사용자명이 아닌 답장으로 음소거 시킬 수도 있어요.
  - /tmute <사용자명> x(m/h/d): 해당 유저를 x 시간동안 음소거 해요. (핸들 또는 답장을 통해). m = 분, h = 시간, d = 날짜.
  - /unmute <사용자명>: 해당유저의 음소거를 해제해요. 사용자명이 아닌 답장으로 음소거 시킬 수도 있어요.
 """
 
-__mod_name__ = "Muting"
+__mod_name__ = "음소거"
 
 MUTE_HANDLER = CommandHandler("mute", mute, pass_args=True, filters=Filters.group)
 UNMUTE_HANDLER = CommandHandler("unmute", unmute, pass_args=True, filters=Filters.group)
