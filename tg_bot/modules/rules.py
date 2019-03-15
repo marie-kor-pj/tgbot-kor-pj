@@ -101,7 +101,7 @@ __help__ = """
  - /clearrules: 이 채팅방의 규칙을 지워요.
 """
 
-__mod_name__ = ""
+__mod_name__ = "규칙"
 
 GET_RULES_HANDLER = CommandHandler("rules", get_rules, filters=Filters.group)
 SET_RULES_HANDLER = CommandHandler("setrules", set_rules, filters=Filters.group)
