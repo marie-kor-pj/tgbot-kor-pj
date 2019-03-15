@@ -63,7 +63,7 @@ def sed(bot: Bot, update: Update):
         repl, repl_with, flags = sed_result
 
         if not repl:
-            update.effective_message.reply_to_message.reply_text("님은 아마 아무것도 아닌걸... "
+            update.effective_message.reply_to_message.reply_text("당신은 아마 아무것도 아닌걸... "
                                                                  "어떤걸로 덮어쓰시려고요?")
             return
 
@@ -71,7 +71,7 @@ def sed(bot: Bot, update: Update):
             check = re.match(repl, to_fix, flags=re.IGNORECASE)
 
             if check and check.group(0).lower() == to_fix.lower():
-                update.effective_message.reply_to_message.reply_text("안녕하세요 여러분, {} 은 내가 하고싶지 "
+                update.effective_message.reply_to_message.reply_text("안녕하세요 여러분, {} 은(는) 제가 하고싶지 "
                                                                      "않은 말을 하게 하는 "
                                                                      "거에요!".format(update.effective_user.first_name))
                 return
@@ -87,13 +87,13 @@ def sed(bot: Bot, update: Update):
         except sre_constants.error:
             LOGGER.warning(update.effective_message.text)
             LOGGER.exception("SRE constant 에러")
-            update.effective_message.reply_text("혹시 SED 해보셨나요? 아마 아닐듯.")
+            update.effective_message.reply_text("혹시 SED 해보셨나요? 아마 아닌것 같아요.")
             return
 
         # empty string errors -_-
         if len(text) >= telegram.MAX_MESSAGE_LENGTH:
             update.effective_message.reply_text("The result of the sed command was too long for \
-                                                 telegram!")
+                                                telegram!")
         elif text:
             update.effective_message.reply_to_message.reply_text(text)
 
