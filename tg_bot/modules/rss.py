@@ -224,7 +224,7 @@ __help__ = """
 추가: 그룹에서, 관리자만 그룹의 구독에 RSS 링크를 추가/제거할 수 있어요.
 """
 
-__mod_name__ = "RSS 핃드"
+__mod_name__ = "RSS 피드"
 
 job = updater.job_queue
 
