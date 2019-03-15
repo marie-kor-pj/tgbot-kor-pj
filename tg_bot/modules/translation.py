@@ -48,7 +48,7 @@ def translate(bot: Bot, update: Update):
 
 
 __help__ = """
- - /t: 번역하고 싶은 내용을 답장하면, 제가 해석해드릴거예요!
+ - /t: 번역하고 싶은 내용을 답장하면, 제가 해석해 드릴게요!
 """
 
 __mod_name__ = "번역"
