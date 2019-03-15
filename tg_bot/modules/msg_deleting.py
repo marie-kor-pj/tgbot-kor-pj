@@ -51,9 +51,9 @@ def purge(bot: Bot, update: Update, args: List[str]) -> str:
 
             bot.send_message(chat.id, "완벽하게 제거했어요!")
             return "<b>{}:</b>" \
-                   "\n#PURGE" \
-                   "\n<b>Admin:</b> {}" \
-                   "\nPurged <code>{}</code> messages.".format(html.escape(chat.title),
+                   "\n#메시지 대량 제거" \
+                   "\n<b>관리자:</b> {}" \
+                   "\n<code>{}</code> 메시지들이 대량으로 제거되었어요.".format(html.escape(chat.title),
                                                                mention_html(user.id, user.first_name),
                                                                delete_to - message_id)
 
@@ -79,7 +79,7 @@ def del_message(bot: Bot, update: Update) -> str:
                    "\n메시지 제거.".format(html.escape(chat.title),
                                                mention_html(user.id, user.first_name))
     else:
-        update.effective_message.reply_text("무엇을 삭제하고 싶니?")
+        update.effective_message.reply_text("어떤 메시지를 삭제하고 싶나요?")
 
     return ""
 
