@@ -91,7 +91,7 @@ __help__ = """
  - /purge <정수>: 답장한 메세지로부터 정수만큼의 상위 메세지가 삭제되요
 """
 
-__mod_name__ = "삭제"
+__mod_name__ = "메시지 제거"
 
 DELETE_HANDLER = CommandHandler("del", del_message, filters=Filters.group)
 PURGE_HANDLER = CommandHandler("purge", purge, filters=Filters.group, pass_args=True)
