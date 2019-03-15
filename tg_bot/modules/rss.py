@@ -132,7 +132,7 @@ def remove_url(bot, update, args):
 def rss_update(bot, job):
     user_data = sql.get_all()
 
-    # this loop checks for every row in the DB
+    # 이 루프는 DB의 모든 행을 확인합니다.
     for row in user_data:
         row_id = row.id
         tg_chat_id = row.chat_id
@@ -218,9 +218,9 @@ def rss_set(bot, job):
 __help__ = """
  - /addrss <link>: 구독에 RSS 링크를 추가해요.
  - /removerss <link>: 구독에서 RSS 링크를 제거해요.
- - /rss <link>: shows the link's data and the last entry, for testing purposes.
- - /listrss: shows the list of rss feeds that the chat is currently subscribed to.
-
+ - /rss <link>: 테스트 목적으로, 링크의 데이터와 마지막 항목을 보여 줘요.
+ - /listrss: 현재 채팅방에서 구독되어 있는 rss 피드 목록을 알려줘요.
+ 
 추가: 그룹에서, 관리자만 그룹의 구독에 RSS 링크를 추가/제거할 수 있어요.
 """
 
