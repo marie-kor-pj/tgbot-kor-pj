@@ -245,7 +245,7 @@ __help__ = """
  - /clear <notename>: notename 이라는 이름의 노트를 제거해요.
 """
 
-__mod_name__ = "Notes"
+__mod_name__ = "메모"
 
 GET_HANDLER = CommandHandler("get", cmd_get, pass_args=True)
 HASH_GET_HANDLER = RegexHandler(r"^#[^\s]+", hash_get)
