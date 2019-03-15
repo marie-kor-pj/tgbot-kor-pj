@@ -102,8 +102,8 @@ def get(bot, update, notename, show_none=True, no_format=False):
                 else:
                     message.reply_text("이 노트의 형식이 잘못되었기 때문에 보낼 수 없어요."
                                        "이유를 알 수 없다면 @MarieSupport 에 문의하세요!")
-                    LOGGER.exception("Could not parse message #%s in chat %s", notename, str(chat_id))
-                    LOGGER.warning("Message was: %s", str(note.value))
+                    LOGGER.exception("메시지를 구문 분석할 수 없어요 #%s  - %s ", notename, str(chat_id))
+                    LOGGER.warning("메시지가 있었어요: %s", str(note.value))
         return
     elif show_none:
         message.reply_text("이 기록은 존재하지 않아요")
@@ -116,7 +116,7 @@ def cmd_get(bot: Bot, update: Update, args: List[str]):
     elif len(args) >= 1:
         get(bot, update, args[0], show_none=True)
     else:
-        update.effective_message.reply_text("Get rekt")
+        update.effective_message.reply_text("rekt 가져오기")
 
 
 @run_async
@@ -145,7 +145,7 @@ def save(bot: Bot, update: Update):
     sql.add_note_to_db(chat_id, note_name, text, data_type, buttons=buttons, file=content)
 
     msg.reply_text(
-        "Yas! Added {note_name}.\nGet it with /get {note_name}, or #{note_name}".format(note_name=note_name))
+        "{note_name} 을(를) 추가했어요.\n/get {note_name} 또는 #{note_name} 을(를) 이용하여 노트를 가져옵니다.".format(note_name=note_name))
 
     if msg.reply_to_message and msg.reply_to_message.from_user.is_bot:
         if text:
@@ -156,7 +156,7 @@ def save(bot: Bot, update: Update):
         else:
             msg.reply_text("봇들은 Telegram 으로 인한 장애가 있어서, 봇이 다른 봇과 상호작용하기 "
                            "힘들기 때문에 이 메시지를 평소와 같이 "
-                           "저장하실 수 없어요 - 그메시지를 전달하고 나서 그 새로운 메시지를 저장해도 "
+                           "저장하실 수 없어요 - 그 메시지를 전달하고 나서 그 새로운 메시지를 저장해도 "
                            "괜찮을까요? 고마워요!")
         return
 
@@ -211,13 +211,13 @@ def __import_data__(chat_id, data):
         with BytesIO(str.encode("\n".join(failures))) as output:
             output.name = "failed_imports.txt"
             dispatcher.bot.send_document(chat_id, document=output, filename="failed_imports.txt",
-                                         caption="These files/photos failed to import due to originating "
-                                                 "from another bot. This is a telegram API restriction, and can't "
-                                                 "be avoided. Sorry for the inconvenience!")
+                                         caption="이러한 파일/사진은 다른 봇이 보냈기 때문에 가져오지 못했어요."
+                                                 "이것은 Telegram API 제한사항이므로 피할 수 없어요. "
+                                                 "불편을 끼쳐드려 죄송합니다!")
 
 
 def __stats__():
-    return "{} notes, across {} chats.".format(sql.num_notes(), sql.num_chats())
+    return "{} 개의 채팅에 걸친 {} 개의 노트.".format(sql.num_chats(), sql.num_notes())
 
 
 def __migrate__(old_chat_id, new_chat_id):
@@ -226,7 +226,7 @@ def __migrate__(old_chat_id, new_chat_id):
 
 def __chat_settings__(chat_id, user_id):
     notes = sql.get_all_chat_notes(chat_id)
-    return "There are `{}` notes in this chat.".format(len(notes))
+    return "이 채팅방에는 '{}' 개의 노트가 있어요.".format(len(notes))
 
 
 __help__ = """
@@ -238,10 +238,10 @@ __help__ = """
 이 기능은 현재 노트를 업데이트할 때 유용해요.
 
 *Admin only:*
- - /save <notename> <notedata>: 이름이 note name인 노트를 nothedata 에 저장해요.
-A button can be added to a note by using standard markdown link syntax - the link should just be prepended with a \
-`buttonurl:` section, as such: `[somelink](buttonurl:example.com)`. 더 많은 정보를 얻고싶다면 /markdownhelp 명령어를 통해 알아보세요.
- - /save <notename>: save the replied message as a note with name notename
+ - /save <notename> <notedata>: 이름이 notename 인 노트를 nothedata 에 저장해요.
+표준 마크다운 링크 구문을 사용하여 노트에 버튼을 추가할 수 있어요 - 링크 앞에는 \
+`buttonurl:` 섹션이 있어야 해요, 예를 들어 `[somelink](buttonurl:example.com)` 처럼요. 더 많은 정보를 얻고싶다면 /markdownhelp 명령어를 통해 알아보세요.
+ - /save <notename>: 답장한 메시지를 name 이 아닌 notename (으)로 저장해요.
  - /clear <notename>: notename 이라는 이름의 노트를 제거해요.
 """
 
