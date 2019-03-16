@@ -259,7 +259,7 @@ def remove_warn_filter(bot: Bot, update: Update):
             msg.reply_text("네, 그런 경고는 그만 할게요.")
             raise DispatcherHandlerStop
 
-    msg.reply_text("현재 경고 필터가 아니예요. 모든 활성 경고 필터를 위해 /warnlist 을 입력해보세요.")
+    msg.reply_text("현재 경고 필터가 아니에요. 모든 활성 경고 필터를 위해 /warnlist 을 입력해보세요.")
 
 
 @run_async
@@ -351,29 +351,29 @@ def set_warn_strength(bot: Bot, update: Update, args: List[str]):
 
         elif args[0].lower() in ("off", "no"):
             sql.set_warn_strength(chat.id, True)
-            msg.reply_text("Too many warns will now result in a kick! Users will be able to join again after.")
+            msg.reply_text("경고가 너무 많아지면 강퇴당할거예요! 사용자들은 나중에 다시 들어올 수 있어요.")
             return "<b>{}:</b>\n" \
-                   "<b>Admin:</b> {}\n" \
-                   "Has disabled strong warns. Users will only be kicked.".format(html.escape(chat.title),
+                   "<b>관리자:</b> {}\n" \
+                   "강력한 경고가 비활성화되었어요. 사용자는 강퇴만 당할 수 있어요.".format(html.escape(chat.title),
                                                                                   mention_html(user.id,
                                                                                                user.first_name))
 
         else:
-            msg.reply_text("I only understand on/yes/no/off!")
+            msg.reply_text("저는 on/yes/no/off 만 알아들을 수 있어요!")
     else:
         limit, soft_warn = sql.get_warn_setting(chat.id)
         if soft_warn:
-            msg.reply_text("Warns are currently set to *kick* users when they exceed the limits.",
+            msg.reply_text("경고는 현재 사용자가 제한을 초과할 경우 *강퇴* 되도록 설정되어 있습니다.",
                            parse_mode=ParseMode.MARKDOWN)
         else:
-            msg.reply_text("Warns are currently set to *ban* users when they exceed the limits.",
+            msg.reply_text("경고는 현재 사용자가 제한을 초과할 경우 *BAN* 되도록 설정되어 있습니다.",
                            parse_mode=ParseMode.MARKDOWN)
     return ""
 
 
 def __stats__():
-    return "{} overall warns, across {} chats.\n" \
-           "{} warn filters, across {} chats.".format(sql.num_warns(), sql.num_warn_chats(),
+    return "{} 전체경고, 전체 {} 채팅.\n" \
+           "{} 경고필터, 전체 {} 채팅.".format(sql.num_warns(), sql.num_warn_chats(),
                                                       sql.num_warn_filters(), sql.num_warn_filter_chats())
 
 
@@ -390,25 +390,25 @@ def __migrate__(old_chat_id, new_chat_id):
 def __chat_settings__(chat_id, user_id):
     num_warn_filters = sql.num_warn_chat_filters(chat_id)
     limit, soft_warn = sql.get_warn_setting(chat_id)
-    return "This chat has `{}` warn filters. It takes `{}` warns " \
-           "before the user gets *{}*.".format(num_warn_filters, limit, "kicked" if soft_warn else "banned")
+    return "이 채팅에는 `{}` 경고 필터가 있어요. 그것은 `{}` 사용자가 가져오기 전에 " \
+           "경고해요 *{}*.".format(num_warn_filters, limit, "kicked" if soft_warn else "banned")
 
 
 __help__ = """
- - /warns <userhandle>: get a user's number, and reason, of warnings.
- - /warnlist: list of all current warning filters
+ - /warns <사용사명>: 경고 횟수 및 이유를 가져와요.
+ - /warnlist: 모든 현재 경고 필터 목록을 알려줘요.
 
-*Admin only:*
- - /warn <userhandle>: warn a user. After 3 warns, the user will be banned from the group. Can also be used as a reply.
- - /resetwarn <userhandle>: reset the warnings for a user. Can also be used as a reply.
- - /addwarn <keyword> <reply message>: set a warning filter on a certain keyword. If you want your keyword to \
-be a sentence, encompass it with quotes, as such: `/addwarn "very angry" This is an angry user`. 
- - /nowarn <keyword>: stop a warning filter
- - /warnlimit <num>: set the warning limit
- - /strongwarn <on/yes/off/no>: If set to on, exceeding the warn limit will result in a ban. Else, will just kick.
+*관리자용 명령어*
+ - /warn <사용자명>: 사용자를 경고해요. 경고를 3번 받으면, 그룹에서 사용자를 BAN해요. 사용자명 대신 답장해도 되요.
+ - /resetwarn <사용자명>: 사용자의 경고를 초기화해요. 사용자명 대신 답장해도 되요.
+ - /addwarn <키워드> <답장할 메시지 (경고 이유)>: 특정 키워드에 경고 필터를 설정해요. 키워드를 문장으로 지정하려면 \
+다음과 같이 작성해주세요: `/addwarn "very angry" 이 사용자는 화난 사용자예요`.
+ - /nowarn <키워드>: 경고 필터를 멈춰요.
+ - /warnlimit <숫자>: 경고의 횟수를 지정해요. 기본값인 3에서 다른 값으로 바꿀 수 있어요.
+ - /strongwarn <on/yes/off/no>: on으로 설정하고 경고 한계를 초과하면 BAN되요. 또한, 강퇴당할거예요.
 """
 
-__mod_name__ = "Warnings"
+__mod_name__ = "경고"
 
 WARN_HANDLER = CommandHandler("warn", warn_user, pass_args=True, filters=Filters.group)
 RESET_WARN_HANDLER = CommandHandler(["resetwarn", "resetwarns"], reset_warns, pass_args=True, filters=Filters.group)
