@@ -1,6 +1,6 @@
 # tgbot
 
-이 봇은 [Marie 봇](https://github.com/PaulSonOfLars/tgbot) 을 한글화한것 입니다.
+이 봇은 [Marie 봇](https://github.com/PaulSonOfLars/tgbot) 을 한글화한 것 입니다.
 
 * 원본 봇은 [Marie](https://t.me/BanhammerMarie_bot) 입니다.
 * 원본 Marie 봇에 대한 궁금한 점은 [support group](https://t.me/MarieSupport) 에서 물어주세요.
@@ -11,7 +11,9 @@
   1. [천상의나무](https://github.com/NewPremium)
   2. [KCPIT](https://github.com/kgu090716)
   3. [i0N](https://github.com/i0Ni0N)
-  4. [SongJH](https://github.com/KRSongJH)
+  4. [Hyun Cha](https://github.com/RIPAngel)
+  5. [SongJH](https://github.com/KRSongJH)
+  6. [kongwoojin](https://github.com/kongwoojin)
 
 ## 봇 시작.
 
