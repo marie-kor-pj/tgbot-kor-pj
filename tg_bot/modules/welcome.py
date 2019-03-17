@@ -36,40 +36,40 @@ def send(update, message, keyboard, backup_message):
         msg = update.effective_message.reply_text(message, parse_mode=ParseMode.MARKDOWN, reply_markup=keyboard)
     except IndexError:
         msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                  "\n메모: the current message was "
-                                                                  "invalid due to markdown issues. Could be "
-                                                                  "due to the user's name."),
+                                                                  "\n메모: 현재 메시지가 표시 문제로 인해 "
+                                                                  "유효하지 않습니다. 사용자 "
+                                                                  "이름 때문일 수 있어요."),
                                                   parse_mode=ParseMode.MARKDOWN)
     except KeyError:
         msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                  "\n메모: the current message is "
-                                                                  "invalid due to an issue with some misplaced "
-                                                                  "curly brackets. Please update"),
+                                                                  "\n메모: 중괄호가 잘못 배치되어 현재 메시지가 "
+                                                                  "유효하지 않아요"
+                                                                  "업데이트하세요"),
                                                   parse_mode=ParseMode.MARKDOWN)
     except BadRequest as excp:
         if excp.message == "Button_url_invalid":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                      "\n메모: the current message has an invalid url "
-                                                                      "in one of its buttons. Please update."),
+                                                                      "\n메모: 현재 메시지의 버튼 중 하나에 잘못된 URL 이 "
+                                                                      "있어요. 업데이트하세요."),
                                                       parse_mode=ParseMode.MARKDOWN)
         elif excp.message == "Unsupported url protocol":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                      "\n메모: the current message has buttons which "
-                                                                      "use url protocols that are unsupported by "
-                                                                      "telegram. Please update."),
+                                                                      "\n메모: 현재 메시지에는 Telegram 에서 지원하지 "
+                                                                      "않는 URL 프로토콜을 사용하는 버튼이 "
+                                                                      "있어요. 업데이트하세요."),
                                                       parse_mode=ParseMode.MARKDOWN)
         elif excp.message == "Wrong url host":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                      "\n메모: the current message has some bad urls. "
-                                                                      "Please update."),
+                                                                      "\n메모: 현재 메시지에 잘못된 URL 들이 있어요. "
+                                                                      "업데이트하세요."),
                                                       parse_mode=ParseMode.MARKDOWN)
             LOGGER.warning(message)
             LOGGER.warning(keyboard)
             LOGGER.exception("구문 분석할 수 없어요! 잘못된 URL 호스트 오류가 발생했어요.")
         else:
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                      "\n메모: An error occured when sending the "
-                                                                      "custom message. Please update."),
+                                                                      "\n메모: 사용자 지정 메시지를 보낼 때 오류가 발생했어요. "
+                                                                      "업데이트하세요."),
                                                       parse_mode=ParseMode.MARKDOWN)
             LOGGER.exception()
 
@@ -87,7 +87,7 @@ def new_member(bot: Bot, update: Update):
         for new_mem in new_members:
             # Give the owner a special welcome
             if new_mem.id == OWNER_ID:
-                update.effective_message.reply_text("Master is in the houseeee, let's get this party started!")
+                update.effective_message.reply_text("마스터는 집에 있어요, 파티를 시작합시다!")
                 continue
 
             # Don't welcome yourself
@@ -154,7 +154,7 @@ def left_member(bot: Bot, update: Update):
 
             # Give the owner a special goodbye
             if left_mem.id == OWNER_ID:
-                update.effective_message.reply_text("RIP Master")
+                update.effective_message.reply_text("RIP 마스터")
                 return
 
             # if media goodbye, use appropriate function for it
@@ -201,7 +201,7 @@ def welcome(bot: Bot, update: Update, args: List[str]):
         noformat = args and args[0].lower() == "noformat"
         pref, welcome_m, welcome_type = sql.get_welc_pref(chat.id)
         update.effective_message.reply_text(
-            "This chat has it's welcome setting set to: `{}`.\n*The welcome message "
+            "이 채팅방의 환영인사는 `{}` (으)로 설정되어 있습니다: `{}`\n"
             "(not filling the {{}}) is:*".format(pref),
             parse_mode=ParseMode.MARKDOWN)
 
@@ -227,15 +227,15 @@ def welcome(bot: Bot, update: Update, args: List[str]):
     elif len(args) >= 1:
         if args[0].lower() in ("on", "yes"):
             sql.set_welc_preference(str(chat.id), True)
-            update.effective_message.reply_text("I'll be polite!")
+            update.effective_message.reply_text("나는 예의바를거에요!")
 
         elif args[0].lower() in ("off", "no"):
             sql.set_welc_preference(str(chat.id), False)
-            update.effective_message.reply_text("I'm sulking, not saying hello anymore.")
+            update.effective_message.reply_text("더 이상 환영인사를 안할꺼에요! 흥!")
 
         else:
             # idek what you're writing, say yes or no
-            update.effective_message.reply_text("I understand 'on/yes' or 'off/no' only!")
+            update.effective_message.reply_text("전 'on/yes' 또는 'off/no'만 이해해요!")
 
 
 @run_async
@@ -273,7 +273,7 @@ def goodbye(bot: Bot, update: Update, args: List[str]):
     elif len(args) >= 1:
         if args[0].lower() in ("on", "yes"):
             sql.set_gdbye_preference(str(chat.id), True)
-            update.effective_message.reply_text("I'll be sorry when people leave!")
+            update.effective_message.reply_text("사람들이 떠나면 미안해요!")
 
         elif args[0].lower() in ("off", "no"):
             sql.set_gdbye_preference(str(chat.id), False)
@@ -281,7 +281,7 @@ def goodbye(bot: Bot, update: Update, args: List[str]):
 
         else:
             # idek what you're writing, say yes or no
-            update.effective_message.reply_text("I understand 'on/yes' or 'off/no' only!")
+            update.effective_message.reply_text("전 'on/yes' 또는 'off/no'만 이해해요!")
 
 
 @run_async
@@ -315,7 +315,7 @@ def reset_welcome(bot: Bot, update: Update) -> str:
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
     sql.set_custom_welcome(chat.id, sql.DEFAULT_WELCOME, sql.Types.TEXT)
-    update.effective_message.reply_text("Successfully reset welcome message to default!")
+    update.effective_message.reply_text("환영인사 메시지를 기본값으로 재설정했어요!")
     return "<b>{}:</b>" \
            "\n#환영인사 메시지 초기화" \
            "\n<b>관리자:</b> {}" \
@@ -333,11 +333,11 @@ def set_goodbye(bot: Bot, update: Update) -> str:
     text, data_type, content, buttons = get_welcome_type(msg)
 
     if data_type is None:
-        msg.reply_text("You didn't specify what to reply with!")
+        msg.reply_text("답장할 대상을 지정하지 않았어요!")
         return ""
 
     sql.set_custom_gdbye(chat.id, content or text, data_type, buttons)
-    msg.reply_text("Successfully set custom goodbye message!")
+    msg.reply_text("성공적으로 작별인사 메시지를 설정했어요!")
     return "<b>{}:</b>" \
            "\n#작별인사 메시지 설정" \
            "\n<b>관리자:</b> {}" \
@@ -352,11 +352,11 @@ def reset_goodbye(bot: Bot, update: Update) -> str:
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
     sql.set_custom_gdbye(chat.id, sql.DEFAULT_GOODBYE, sql.Types.TEXT)
-    update.effective_message.reply_text("Successfully reset goodbye message to default!")
+    update.effective_message.reply_text("성공적으로 작별인사 메시지를 기본값으로 초기화 했어요!")
     return "<b>{}:</b>" \
            "\n#작별인사 메시지 초기화" \
            "\n<b>관리자:</b> {}" \
-           "\n작별 메시지를 초기화 했어요.".format(html.escape(chat.title),
+           "\n작별인사 메시지를 초기화 했어요.".format(html.escape(chat.title),
                                                  mention_html(user.id, user.first_name))
 
 
