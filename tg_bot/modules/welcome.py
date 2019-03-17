@@ -295,11 +295,11 @@ def set_welcome(bot: Bot, update: Update) -> str:
     text, data_type, content, buttons = get_welcome_type(msg)
 
     if data_type is None:
-        msg.reply_text("You didn't specify what to reply with!")
+        msg.reply_text("답장할 대상을 지정하지 않았어요!")
         return ""
 
     sql.set_custom_welcome(chat.id, content or text, data_type, buttons)
-    msg.reply_text("Successfully set custom welcome message!")
+    msg.reply_text("성공적으로 환영인사 메시지를 설정했어요!")
 
     return "<b>{}:</b>" \
            "\n#환영인사 메시지 설정" \
@@ -377,7 +377,7 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
 
     if args[0].lower() in ("on", "yes"):
         sql.set_clean_welcome(str(chat.id), True)
-        update.effective_message.reply_text("I'll try to delete old welcome messages!")
+        update.effective_message.reply_text("오래된 환영 메시지를 삭제해 볼게요!")
         return "<b>{}:</b>" \
                "\n#CLEAN_WELCOME" \
                "\n<b>관리자:</b> {}" \
@@ -385,7 +385,7 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
                                                                          mention_html(user.id, user.first_name))
     elif args[0].lower() in ("off", "no"):
         sql.set_clean_welcome(str(chat.id), False)
-        update.effective_message.reply_text("I won't delete old welcome messages.")
+        update.effective_message.reply_text("너무 오래된 환영인사 메시지는 삭제하지 않아요.")
         return "<b>{}:</b>" \
                "\n#CLEAN_WELCOME" \
                "\n<b>관리자:</b> {}" \
