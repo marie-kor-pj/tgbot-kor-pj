@@ -134,14 +134,14 @@ sqldbtype을 당신이 사용하는 db에 따라 바꾸세요. (eg postgres, mys
 ## 모듈들
 ### 로드 순서 설정.
 
-The module load order can be changed via the `LOAD` and `NO_LOAD` configuration settings.
-These should both represent lists.
+이 모듈 로드 순서는 `LOAD` 와 `NO_LOAD` 환경 설정으로 변경이 가능합니다.
+이 모두는 리스트를 대표해야 합니다.
 
-If `LOAD` is an empty list, all modules in `modules/` will be selected for loading by default.
+만약 `LOAD` 가 빈 리스트라면, `modules/` 안에 있는 모든 것들은 기본 설정으로 로드될 것입니다.
 
-If `NO_LOAD` is not present, or is an empty list, all modules selected for loading will be loaded.
+만약 `NO_LOAD` 가 최신이 아니라면, 또는 빈 리스트라면, 로딩되기로 선택된 것들은 모두 로드될 것입니다.
 
-If a module is in both `LOAD` and `NO_LOAD`, the module will not be loaded - `NO_LOAD` takes priority.
+만약 모듈이 `LOAD` 와 `NO_LOAD`에 모두 존재할 경우, 모듈은 로딩되지 않습니다 - `NO_LOAD` 가 .
 
 ### 자신만의 모듈 만들기.
 
