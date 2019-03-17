@@ -37,11 +37,11 @@ HELP_STRINGS = """
 
 사용 가능한 *Main* Command:
  - /start: 봇을 시작해요.
- - /help: 개인메시지로 메시지를 보내요.
+ - /help: 개인메시지로 도움말 메시지를 보내요.
  - /help <module name>: 모듈에 대한 정보를 알려줘요.
  - /donate: 기부 방법에 대한 정보를 알려줘요.
  - /settings:
-   - in PM: 너에게 모든 지원가능한 세팅에대한 정보를 보내요.
+   - in PM: 당신에게 모든 지원가능한 설정에 대한 정보를 보내요.
    - in a group: 개인메시지로 다시 보내요.
 
 {}
@@ -322,7 +322,7 @@ def settings_button(bot: Bot, update: Update):
             chat_id = next_match.group(1)
             next_page = int(next_match.group(2))
             chat = bot.get_chat(chat_id)
-            query.message.reply_text("안녕하세요! 설정이 꽤나 있어요. {} - 골라봐요 "
+            query.message.reply_text("안녕하세요! 설정이 꽤 있어요. {} - 골라봐요 "
                                      "재미있어 보이는거로요.".format(chat.title),
                                      reply_markup=InlineKeyboardMarkup(
                                          paginate_modules(next_page + 1, CHAT_SETTINGS, "stngs",
@@ -361,7 +361,7 @@ def get_settings(bot: Bot, update: Update):
     # 개인메시지로만 설정을 전송
     if chat.type != chat.PRIVATE:
         if is_user_admin(chat, user.id):
-            text = "클릭하면 채팅 설정을 열람가능합니다."
+            text = "클릭하면 채팅 설정을 열람 가능합니다."
             msg.reply_text(text,
                            reply_markup=InlineKeyboardMarkup(
                                [[InlineKeyboardButton(text="Settings",
@@ -496,12 +496,12 @@ def process_update(self, update):
 
         # 다른 헨들러와 처리를 중단.
         except DispatcherHandlerStop:
-            self.logger.debug('DispatcherHandlerStop으로 인한 추가 핸들러가 중지되었어요.')
+            self.logger.debug('DispatcherHandlerStop 으로 인한 추가 핸들러가 중지되었어요.')
             break
 
         # 다른 오류에도 Dispatch 하십시오.
         except TelegramError as te:
-            self.logger.warning('업데이트를 처리하는 동안 텔레그램 에러가 발생했어요.)
+            self.logger.warning('업데이트를 처리하는 동안 Telegram 에러가 발생했어요.)
 
             try:
                 self.dispatch_error(update, te)
@@ -516,6 +516,6 @@ def process_update(self, update):
             self.logger.exception('업데이트를 처리하는 동안 오류가 발생했어요.')
 
 
-if __name__ == '__main__':
+if __name__ == '__메인__':
     LOGGER.info("모듈 로드 : " + str(ALL_MODULES))
     main()
