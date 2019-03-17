@@ -330,7 +330,7 @@ def gdpr(bot: Bot, update: Update):
         mod.__gdpr__(update.effective_user.id)
 
     update.effective_message.reply_text("개인 데이터가 삭제되었어요.\n\n참고,  저의 데이터가 아닌"
-                                        "텔레그램의 데이터이기 때문에 어느 채팅방에서도 당신을 언밴하지 않을 거예요."
+                                        "Telegram 의 데이터이기 때문에 어느 채팅방에서도 당신을 Unban 하지 않을 거에요."
                                         "도배방지, 경고, 그리고 글로벌밴도 계속 남아있을 거예요. "
                                         "[참고하세요](https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-to-erasure/), "
                                         "상기 데이터 조각과 같이 공공의 이익을 위해 수행된  "
@@ -343,9 +343,9 @@ MARKDOWN_HELP = """
 마크다운은 telegram에서 지원되는 매우 강력한 도구예요. {} 저장된 메시지가 올바르게 구문 분석되었는지 확인하고 \
 단추를 만들 수 있도록 몇 가지 향상된 기능이 있어요.
 
-- <code>_italic_</code>: '_' 로 텍스트를 감싸면 기울어진 글자가 작성될 거예요. 
-- <code>*bold*</code>: '*' 로 텍스트를 감싸면 굵은 글자가 작성될 거예요. 
-- <code>`code`</code>: '`' 로 텍스트를 감싸면 'code'라고 하는 동일한 텍스트가 생성될 거예요.
+- <code>_italic_</code>: '_' 로 텍스트를 감싸면 기울어진 글자가 작성될거에요. 
+- <code>*bold*</code>: '*' 로 텍스트를 감싸면 굵은 글자가 작성될거에요. 
+- <code>`code`</code>: '`' 로 텍스트를 감싸면 'code'라고 하는 동일한 텍스트가 생성될거에요.
 - <code>[보여질 메시지](URL)</code>: 링크를 만들어줘요. - 메시지는 <code>보여질 메시지</code> 라고 보여질 거지만, \
 그 메시지를 터치하면 <code>URL</code>로 들어가져요.
 예: <code>[테스트](example.com)</code>
@@ -367,7 +367,7 @@ MARKDOWN_HELP = """
 @run_async
 def markdown_help(bot: Bot, update: Update):
     update.effective_message.reply_text(MARKDOWN_HELP, parse_mode=ParseMode.HTML)
-    update.effective_message.reply_text("다음 메시지를 제게 전달해 보세요. 그러면 알게 될 거예요!")
+    update.effective_message.reply_text("다음 메시지를 제게 전달해 보세요. 그러면 알게 될 거에요!")
     update.effective_message.reply_text("/save 는 마크다운을 테스트 할 수 있어요. _기울어진 글자_, *굵은글자*, `code`, "
                                         "[URL](example.com) [button](buttonurl:github.com) "
                                         "[button2](buttonurl://google.com:same)")
