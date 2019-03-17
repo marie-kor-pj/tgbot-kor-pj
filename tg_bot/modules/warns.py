@@ -33,7 +33,7 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
     if warner:
         warner_tag = mention_html(warner.id, warner.first_name)
     else:
-        warner_tag = "Automated warn filter."
+        warner_tag = "자동 경고 필터."
 
     limit, soft_warn = sql.get_warn_setting(chat.id)
     num_warns, reasons = sql.warn_user(user.id, chat.id, reason)
@@ -64,7 +64,7 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
 
     else:
         keyboard = InlineKeyboardMarkup(
-            [[InlineKeyboardButton("Remove warn", callback_data="rm_warn({})".format(user.id))]])
+            [[InlineKeyboardButton("경고 제거", callback_data="rm_warn({})".format(user.id))]])
 
         reply = "{} 가 {}/{} 경고입니다... 조심하세요!".format(mention_html(user.id, user.first_name), num_warns,
                                                              limit)
@@ -106,11 +106,11 @@ def button(bot: Bot, update: Update) -> str:
         res = sql.remove_warn(user_id, chat.id)
         if res:
             update.effective_message.edit_text(
-                "Warn removed by {}.".format(mention_html(user.id, user.first_name)),
+                "{} 님에 의해 경고가 제거되었어요.".format(mention_html(user.id, user.first_name)),
                 parse_mode=ParseMode.HTML)
             user_member = chat.get_member(user_id)
             return "<b>{}:</b>" \
-                   "\n#경고해제" \
+                   "\n#경고 해제" \
                    "\n<b>관리자:</b> {}" \
                    "\n<b>사용자:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
                                                                 mention_html(user.id, user.first_name),
@@ -118,7 +118,7 @@ def button(bot: Bot, update: Update) -> str:
                                                                 user_member.user.id)
         else:
             update.effective_message.edit_text(
-                "그 사용자는 이미 경고가 없어요.".format(mention_html(user.id, user.first_name)),
+                "해당 사용자는 이미 경고가 없어요.".format(mention_html(user.id, user.first_name)),
                 parse_mode=ParseMode.HTML)
 
     return ""
@@ -158,10 +158,10 @@ def reset_warns(bot: Bot, update: Update, args: List[str]) -> str:
 
     if user_id:
         sql.reset_warns(user_id, chat.id)
-        message.reply_text("Warnings have been reset!")
+        message.reply_text("경고가 초기화 되었어요")
         warned = chat.get_member(user_id).user
         return "<b>{}:</b>" \
-               "\n#경고초기화" \
+               "\n#경고 초기화" \
                "\n<b>관리자:</b> {}" \
                "\n<b>사용자:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
                                                             mention_html(user.id, user.first_name),
@@ -343,10 +343,10 @@ def set_warn_strength(bot: Bot, update: Update, args: List[str]):
     if args:
         if args[0].lower() in ("on", "yes"):
             sql.set_warn_strength(chat.id, False)
-            msg.reply_text("경고가 너무 많으면 금지가 됩니다!")
+            msg.reply_text("경고가 너무 많으면 Ban 됩니다!")
             return "<b>{}:</b>\n" \
                    "<b>관리자:</b> {}\n" \
-                   "강력한 경고를 활성화했어요. 사용자가 금지되요.".format(html.escape(chat.title),
+                   "강력한 경고를 활성화했어요. 사용자가 Ban 되요.".format(html.escape(chat.title),
                                                                             mention_html(user.id, user.first_name))
 
         elif args[0].lower() in ("off", "no"):
@@ -399,13 +399,13 @@ __help__ = """
  - /warnlist: 모든 현재 경고 필터 목록을 알려줘요.
 
 *관리자용 명령어*
- - /warn <사용자명>: 사용자를 경고해요. 경고를 3번 받으면, 그룹에서 사용자를 BAN해요. 사용자명 대신 답장해도 되요.
+ - /warn <사용자명>: 사용자를 경고해요. 경고를 3번 받으면, 그룹에서 사용자를 BAN 해요. 사용자명 대신 답장해도 되요.
  - /resetwarn <사용자명>: 사용자의 경고를 초기화해요. 사용자명 대신 답장해도 되요.
  - /addwarn <키워드> <답장할 메시지 (경고 이유)>: 특정 키워드에 경고 필터를 설정해요. 키워드를 문장으로 지정하려면 \
 다음과 같이 작성해주세요: `/addwarn "very angry" 이 사용자는 화난 사용자예요`.
  - /nowarn <키워드>: 경고 필터를 멈춰요.
  - /warnlimit <숫자>: 경고의 횟수를 지정해요. 기본값인 3에서 다른 값으로 바꿀 수 있어요.
- - /strongwarn <on/yes/off/no>: on으로 설정하고 경고 한계를 초과하면 BAN되요. 또한, 강퇴당할거예요.
+ - /strongwarn <on/yes/off/no>: on으로 설정하고 경고 한계를 초과하면 BAN 되요. 또한, 강퇴당할거예요.
 """
 
 __mod_name__ = "경고"
