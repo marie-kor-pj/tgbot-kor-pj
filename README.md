@@ -141,29 +141,25 @@ sqldbtype을 당신이 사용하는 db에 따라 바꾸세요. (eg postgres, mys
 
 만약 `NO_LOAD` 가 최신이 아니라면, 또는 빈 리스트라면, 로딩되기로 선택된 것들은 모두 로드될 것입니다.
 
-만약 모듈이 `LOAD` 와 `NO_LOAD`에 모두 존재할 경우, 모듈은 로딩되지 않습니다 - `NO_LOAD` 가 .
+만약 모듈이 `LOAD` 와 `NO_LOAD`에 모두 존재할 경우, 모듈은 로딩되지 않습니다 - `NO_LOAD` 가 우선입니다.
 
 ### 자신만의 모듈 만들기.
 
-Creating a module has been simplified as much as possible - but do not hesitate to suggest further simplification.
+모듈을 만드는 것은 많이 심플해졌습니다 - 하지만 더 간단한 방법을 요구하지는 마십시오.
 
-All that is needed is that your .py file be in the modules folder.
+필요한 것은 .py 파일이 모듈 폴더 내에 있는 것 뿐입니다.
 
-To add commands, make sure to import the dispatcher via
-
+명령어를 추가하려면, 아래 명령어를 사용해 dispatcher을 불러오는 것을 잊지 마세요:
 `from tg_bot import dispatcher`.
 
-You can then add commands using the usual
-
+그럼 당신은 이제 전형적인 방법으로 명령어를 추가할 수 있습니다:
 `dispatcher.add_handler()`.
 
-Assigning the `__help__` variable to a string describing this modules' available
-commands will allow the bot to load it and add the documentation for
-your module to the `/help` command. Setting the `__mod_name__` variable will also allow you to use a nicer, user
-friendly name for a module.
+ `__help__` 변수에게 이 모듈을 설명하는 것을 맡겨도 됩니다.
+명령어가 봇이 이것을 로드할 수 있고, 기록을 추가 할 수 있게 해줄 것입니다.
+`__mod_name__` 변수를 설정하는 것은 더 좋고, 유저들에게 편리한 이름을 설정해 줍니다.
 
-The `__migrate__()` function is used for migrating chats - when a chat is upgraded to a supergroup, the ID changes, so 
-it is necessary to migrate it in the db.
+`__migrate__()` 기능은 그룹을 옮기는 곳에 사용됩니다 - 그룹이 super그룹으로 업그레이드될 경우, 아이디가 바뀌기 때문에,db안에서 이동시키는 것이 중요합니다.
 
-The `__stats__()` function is for retrieving module statistics, eg number of users, number of chats. This is accessed 
-through the `/stats` command, which is only available to the bot owner.
+`__stats__()` 기능은 모듈 통계를 되찾아 오는 곳에 사용됩니다. 
+봇 주인만 사용할 수 있는 `/stats` 명령어를 통해 사용할 수 있습니다.
