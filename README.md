@@ -71,14 +71,14 @@ class Development(Config):
 
  - `SUDO_USERS`: Sudo 유저로 고려될 유저들의 분리된 리스트가 있는 공간.
  - `SUPPORT_USERS`: 서포트 유저로 고려되어야 할 유저 아이디들의 분리된 리스트가 있는 공간 (gban, ungban만 가능)
- - `WHITELIST_USERS`: 화이트리스트로 고려될 유저들의 분리된 리스트가 있는  - 그들은 밴할 수 없습니다.
+ - `WHITELIST_USERS`: 화이트리스트로 고려될 유저들의 분리된 리스트가 있는 공간- 그들은 밴할 수 없습니다.
  - `DONATION_LINK`: 선택 사항 : 기부금을 받을 수 있는 링크.
  - `CERT_PATH`: webhook 인증 경로.
  - `PORT`: webhook를 위해 사용할 포트.
  - `DEL_CMDS`: 명령어를 사용할 권한이 없는 유저들에게서 명령어를 삭제할 수 있습니다.
  - `STRICT_GBAN`: 새로운 그룹과 마찬가지로 오래된 그룹에서도 gban을 시행합니다. 만약 gban당한 유저가 말을 한다면, 그는 밴 당할 것입니다.
  - `WORKERS`: 사용할 스레드의 개수입니다. 8개가 기본이자 권장하는 개수이지만, 당신의 경험은 다를 수 있으니 알아서 하시면 .
- __Note__ 미친듯이 스레드만 추가하는 것에 매달리는 것은 사실 봇 속도 향상에 큰 도움을 주지 못합니다. 많은 양의 sql 데이터 액세스와, 파이썬 asynchronous가 작동합니다. 
+ __Note__ 미친듯이 스레드만 추가하는 것에 매달리는 것은 사실 봇 속도 향상에 큰 도움을 주지 못합니다. 많은 양의 sql 데이터 액세스와, 파이썬 asynchronous가 더 큰 분량을 차지합니다. 
  - `BAN_STICKER`: 유저를 밴할 때 사용할 스티커.
  - `ALLOW_EXCL`: !를 /와 같이 사용할 수 있도록 허용할 지 결정하세요. 
 
@@ -109,7 +109,7 @@ postgres 사용시의 방법입니다. 우분투/데비안에서의 방법이므
 
 `createuser -P -s -e YOUR_USER`
 
-This will be followed by you needing to input your password.
+이 뒤에는 비밀번호를 입력해야 할 것입니다. 
 
 - 새 데이터베이스 테이블 생성:
 
@@ -122,7 +122,7 @@ YOUR_USER와 YOUR_DB_NAME 을 정확하게 바꾸세요.
 `psql YOUR_DB_NAME -h YOUR_HOST YOUR_USER`
 
 터미널을 통해 데이터베이스에 연결할 수 있습니다.
-By default, YOUR_HOST should be 0.0.0.0:5432.
+기본 설정은 0.0.0.0:5432 입니다.(YOUR_HOST)
 
 이제 당신의 데이터베이스 URL을 빌드할 수 있게 되었습니다. 그것은 다음과 같습니다:
 
