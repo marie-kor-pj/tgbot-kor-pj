@@ -27,7 +27,7 @@ PM_START_TEXT = """
 
 /help 를 사용하여 사용 가능한 명령 목록을 찾을 수 있어요.
 
-당신이 만약 저를 즐겁게 사용하셨다면, /donate를 통해 절 한글화한 개발자에게 기부하세요.
+당신이 만약 저를 즐겁게 사용하셨다면, /donate 명령어를 통해 절 한글화한 개발자에게 기부하세요.
 """
 
 HELP_STRINGS = """
@@ -54,7 +54,7 @@ DONATE_STRING = """이야, 기부를 하고 싶다니.. 정말 감사드려요!
 기부는 Marie 원 제작자와(해외), Marie 한글화 개발자(국내)
 두명중에 선택해서 기부할 수 있어요.
 기부하려면 링크를 통해 기부해 주세요.
-봇을 한글화한 개발자 : [PayPal](https://www.paypal.me/winsub1106) <--그냥 이 링크 누르시면 되요
+봇을 한글화한 개발자 : [PayPal](https://www.paypal.me/winsub1106) <--그냥 이 링크를 누르시면 되요
 원 제작자(해외) : [PayPal](https://www.paypal.me/PaulSonOfLars) 또는 [Monzo](http://monzo.me/paulnionvestergaardlarsen)"""
 
 IMPORTED = {}
@@ -312,7 +312,7 @@ def settings_button(bot: Bot, update: Update):
             chat_id = prev_match.group(1)
             curr_page = int(prev_match.group(2))
             chat = bot.get_chat(chat_id)
-            query.message.reply_text("안녕하세요! {}에 대한 설정이 꽤 있어요 - 골라봐요 "
+            query.message.reply_text("안녕하세요! {} 에 대한 설정이 꽤 있어요 - 골라봐요 "
                                      "you're interested in.".format(chat.title),
                                      reply_markup=InlineKeyboardMarkup(
                                          paginate_modules(curr_page - 1, CHAT_SETTINGS, "stngs",
