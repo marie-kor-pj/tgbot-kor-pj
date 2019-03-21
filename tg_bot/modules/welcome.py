@@ -370,9 +370,9 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
     if not args:
         clean_pref = sql.get_clean_pref(chat.id)
         if clean_pref:
-            update.effective_message.reply_text("I should be deleting welcome messages up to two days old.")
+            update.effective_message.reply_text("최대 이틀 전에 환영 메시지를 삭제해야 해요.")
         else:
-            update.effective_message.reply_text("I'm currently not deleting old welcome messages!")
+            update.effective_message.reply_text("저는 지금 오래된 환영 메시지를 삭제하고 있지 않아용!")
         return ""
 
     if args[0].lower() in ("on", "yes"):
@@ -381,7 +381,7 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
         return "<b>{}:</b>" \
                "\n#CLEAN_WELCOME" \
                "\n<b>관리자:</b> {}" \
-               "\nHas toggled clean welcomes to <code>ON</code>.".format(html.escape(chat.title),
+               "\n환영 메시지 삭제가 <code>켜졌어요</code>.".format(html.escape(chat.title),
                                                                          mention_html(user.id, user.first_name))
     elif args[0].lower() in ("off", "no"):
         sql.set_clean_welcome(str(chat.id), False)
@@ -389,11 +389,11 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
         return "<b>{}:</b>" \
                "\n#CLEAN_WELCOME" \
                "\n<b>관리자:</b> {}" \
-               "\nHas toggled clean welcomes to <code>OFF</code>.".format(html.escape(chat.title),
+               "\n환영 메시지 삭제가 <code>꺼졌어요</code>.".format(html.escape(chat.title),
                                                                           mention_html(user.id, user.first_name))
     else:
         # idek what you're writing, say yes or no
-        update.effective_message.reply_text("I understand 'on/yes' or 'off/no' only!")
+        update.effective_message.reply_text("저는 'on/yes' 나 'off/no' 만 알아들어요!")
         return ""
 
 
@@ -454,16 +454,16 @@ def __chat_settings__(chat_id, user_id):
 __help__ = """
 {}
 
-*Admin only:*
+*관리자용 명령어*
  - /welcome <on/off>: 환영인사 메시지를 활성화 또는 비활성화해요.
  - /welcome: 현재 환영인사 메시지를 알려줘요.
- - /welcome noformat: shows current welcome settings, without the formatting - useful to recycle your welcome messages!
- - /goodbye -> same usage and args as /welcome.
- - /setwelcome <sometext>: set a custom welcome message. If used replying to media, uses that media.
- - /setgoodbye <sometext>: set a custom goodbye message. If used replying to media, uses that media.
- - /resetwelcome: reset to the default welcome message.
- - /resetgoodbye: reset to the default goodbye message.
- - /cleanwelcome <on/off>: On new member, try to delete the previous welcome message to avoid spamming the chat.
+ - /welcome noformat: 포맷 없이 현재 환영 설정을 보여줘요 - 환영 메시지를 다시 사용하는데 유용해요!
+ - /goodbye -> /welcome 과 동일하게 사용되요.
+ - /setwelcome <환영하는 말>: 환영 인사를 설정해요. 만약 미디어를 답장하시면, 그 미디어가 환영인사로 사용되요.
+ - /setgoodbye <작별하는 말>: 작별 인사를 설정해요. 만약 미디어를 답장하시면, 그 미디어가 작별인사로 사용되요.
+ - /resetwelcome: 환영인사가 기본값으로 재설정되요.
+ - /resetgoodbye: 작별인사가 기본값으로 재설정되요.
+ - /cleanwelcome <on/off>: 새 멤버가 오면, 이전 환영 메시지를 삭제하여 스팸문자를 방지해요.
 
  - /welcomehelp: view more formatting information for custom welcome/goodbye messages.
 """.format(WELC_HELP_TXT)
