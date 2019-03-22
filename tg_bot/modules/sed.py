@@ -63,7 +63,7 @@ def sed(bot: Bot, update: Update):
         repl, repl_with, flags = sed_result
 
         if not repl:
-            update.effective_message.reply_to_message.reply_text("당신은 아마 아무것도 아닌걸... "
+            update.effective_message.reply_to_message.reply_text("당신은 아마 아무것도 아닌걸요... "
                                                                  "어떤걸로 덮어쓰시려고요?")
             return
 
@@ -92,8 +92,8 @@ def sed(bot: Bot, update: Update):
 
         # empty string errors -_-
         if len(text) >= telegram.MAX_MESSAGE_LENGTH:
-            update.effective_message.reply_text("The result of the sed command was too long for \
-                                                telegram!")
+            update.effective_message.reply_text("sed 명령의 결과가 Telegram 에게는 너무 \
+                                                길어요!")
         elif text:
             update.effective_message.reply_to_message.reply_text(text)
 
@@ -105,8 +105,9 @@ or nothing. Delimiters include `/`, `_`, `|`, and `:`. Text grouping is supporte
 larger than {}.
 
 *한가지더* Sed는 좀 어려운 문자들은 쉽게 보려고 쓰여요. 예를 들어서 : `+*.?\\`
-이러한 문자를 쓰고 싶으시다면, make sure you escape them!
-eg: \\?.
+만약 여러분이 이러한 문자들을 쓰고 싶으시다면, 
+그것들을 피하세요!
+예시: \\?.
 """.format(telegram.MAX_MESSAGE_LENGTH)
 
 __mod_name__ = "Sed/Regex"
