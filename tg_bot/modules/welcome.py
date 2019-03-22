@@ -277,7 +277,7 @@ def goodbye(bot: Bot, update: Update, args: List[str]):
 
         elif args[0].lower() in ("off", "no"):
             sql.set_gdbye_preference(str(chat.id), False)
-            update.effective_message.reply_text("They leave, they're dead to me.")
+            update.effective_message.reply_text("그들이 떠난다면 저에게 죽어요.")
 
         else:
             # idek what you're writing, say yes or no
@@ -372,7 +372,7 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
         if clean_pref:
             update.effective_message.reply_text("최대 이틀 전에 환영 메시지를 삭제해야 해요.")
         else:
-            update.effective_message.reply_text("저는 지금 오래된 환영 메시지를 삭제하고 있지 않아용!")
+            update.effective_message.reply_text("저는 지금 오래된 환영 메시지를 삭제하고 있지 않아요!")
         return ""
 
     if args[0].lower() in ("on", "yes"):
@@ -397,7 +397,7 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
         return ""
 
 
-WELC_HELP_TXT = "Your group's welcome/goodbye messages can be personalised in multiple ways. If you want the messages" \
+WELC_HELP_TXT = "그룹의 환영인사/작별인사 메시지는 여러 가지 방법으로 바꿀 수 있어요. If you want the messages" \
                 " to be individually generated, like the default welcome message is, you can use *these* variables:\n" \
                 " - `{{first}}`: this represents the user's *first* name\n" \
                 " - `{{last}}`: this represents the user's *last* name. Defaults to *first name* if user has no " \
@@ -465,7 +465,7 @@ __help__ = """
  - /resetgoodbye: 작별인사가 기본값으로 재설정되요.
  - /cleanwelcome <on/off>: 새 멤버가 오면, 이전 환영 메시지를 삭제하여 스팸문자를 방지해요.
 
- - /welcomehelp: view more formatting information for custom welcome/goodbye messages.
+ - /welcomehelp: view more formatting information for custom welcome/goodbye messages.커스텀 환영인사/작별인사 메시지에 대한 자세한 형식 정보를 봐요.
 """.format(WELC_HELP_TXT)
 
 __mod_name__ = "환영인사/작별인사"
