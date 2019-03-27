@@ -397,19 +397,19 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
         return ""
 
 
-WELC_HELP_TXT = "그룹의 환영인사/작별인사 메시지는 여러 가지 방법으로 바꿀 수 있어요. If you want the messages" \
-                " to be individually generated, like the default welcome message is, you can use *these* variables:\n" \
-                " - `{{first}}`: this represents the user's *first* name\n" \
-                " - `{{last}}`: this represents the user's *last* name. Defaults to *first name* if user has no " \
-                "last name.\n" \
-                " - `{{fullname}}`: this represents the user's *full* name. Defaults to *first name* if user has no " \
-                "last name.\n" \
-                " - `{{username}}`: this represents the user's *username*. Defaults to a *mention* of the user's " \
-                "first name if has no username.\n" \
-                " - `{{mention}}`: this simply *mentions* a user - tagging them with their first name.\n" \
-                " - `{{id}}`: this represents the user's *id*\n" \
-                " - `{{count}}`: this represents the user's *member number*.\n" \
-                " - `{{chatname}}`: this represents the *current chat name*.\n" \
+WELC_HELP_TXT = "그룹의 환영인사/작별인사 메시지는 여러 가지 방법으로 바꿀 수 있어요. 만약 당신이 사람마다 다른" \
+                " 환영 메시지를 원하시면, 당신은 *이러한* 변수들을 사용하실 수 있어요:\n" \
+                " - `{{first}}`: 사용자의 *이름* 을 말해줘요.\n" \
+                " - `{{last}}`: 사용자의 *성* 을 말해줘요. 만약 사용자가 성을 설정하지 않으면 *이름* 으로 " \
+                "말해줘요.\n" \
+                " - `{{fullname}}`: 이것은 사용자의 *전체* 이름을 말해줘요. 만약 사용자가 성을 설정하지 않으면 *이름* 으로 " \
+                "말해줘요.\n" \
+                " - `{{username}}`: 이것은 사용자의 *사용자명* 을 말해줘요. 사용자명을 설정하지 않으면, 사용자의 이름으로 " \
+                "말해줘요.\n" \
+                " - `{{mention}}`: 그들의 이름으로 태그를 붙여서 간단히 사용자를 *언급* 해요.\n" \
+                " - `{{id}}`: 사용자의 id를 말해줘요.\n" \
+                " - `{{count}}`: 이것은 사용자의 *회원번호*를 말해줘요.\n" \
+                " - `{{chatname}}`: 이것은 *현재 채팅 이름* 을 말해줘요.*.\n" \
                 "\nEach variable MUST be surrounded by `{{}}` to be replaced.\n" \
                 "Welcome messages also support markdown, so you can make any elements bold/italic/code/links. " \
                 "Buttons are also supported, so you can make your welcomes look awesome with some nice intro " \
