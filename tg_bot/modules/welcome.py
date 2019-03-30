@@ -44,24 +44,24 @@ def send(update, message, keyboard, backup_message):
         msg = update.effective_message.reply_text(markdown_parser(backup_message +
                                                                   "\n메모: 중괄호가 잘못 배치되어 현재 메시지가 "
                                                                   "유효하지 않아요"
-                                                                  "업데이트하세요"),
+                                                                  "업데이트 하세요"),
                                                   parse_mode=ParseMode.MARKDOWN)
     except BadRequest as excp:
         if excp.message == "Button_url_invalid":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
                                                                       "\n메모: 현재 메시지의 버튼 중 하나에 잘못된 URL 이 "
-                                                                      "있어요. 업데이트하세요."),
+                                                                      "있어요. 업데이트 하세요."),
                                                       parse_mode=ParseMode.MARKDOWN)
         elif excp.message == "Unsupported url protocol":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
                                                                       "\n메모: 현재 메시지에는 Telegram 에서 지원하지 "
                                                                       "않는 URL 프로토콜을 사용하는 버튼이 "
-                                                                      "있어요. 업데이트하세요."),
+                                                                      "있어요. 업데이트 하세요."),
                                                       parse_mode=ParseMode.MARKDOWN)
         elif excp.message == "Wrong url host":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
                                                                       "\n메모: 현재 메시지에 잘못된 URL 들이 있어요. "
-                                                                      "업데이트하세요."),
+                                                                      "업데이트 하세요."),
                                                       parse_mode=ParseMode.MARKDOWN)
             LOGGER.warning(message)
             LOGGER.warning(keyboard)
@@ -69,7 +69,7 @@ def send(update, message, keyboard, backup_message):
         else:
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
                                                                       "\n메모: 사용자 지정 메시지를 보낼 때 오류가 발생했어요. "
-                                                                      "업데이트하세요."),
+                                                                      "업데이트 하세요."),
                                                       parse_mode=ParseMode.MARKDOWN)
             LOGGER.exception()
 
@@ -87,7 +87,7 @@ def new_member(bot: Bot, update: Update):
         for new_mem in new_members:
             # Give the owner a special welcome
             if new_mem.id == OWNER_ID:
-                update.effective_message.reply_text("마스터는 집에 있어요, 파티를 시작합시다!")
+                update.effective_message.reply_text("관리지는 집에 있어요, 파티를 시작해요!")
                 continue
 
             # Don't welcome yourself
@@ -154,7 +154,7 @@ def left_member(bot: Bot, update: Update):
 
             # Give the owner a special goodbye
             if left_mem.id == OWNER_ID:
-                update.effective_message.reply_text("RIP 마스터")
+                update.effective_message.reply_text("관리자의 명복을 빕니다.")
                 return
 
             # if media goodbye, use appropriate function for it
@@ -201,7 +201,7 @@ def welcome(bot: Bot, update: Update, args: List[str]):
         noformat = args and args[0].lower() == "noformat"
         pref, welcome_m, welcome_type = sql.get_welc_pref(chat.id)
         update.effective_message.reply_text(
-            "이 채팅방의 환영인사는 `{}` (으)로 설정되어 있습니다: `{}`\n"
+            "이 채팅방의 환영인사는 `{}` (으)로 설정되어 있어요: `{}`\n"
             "(not filling the {{}}) is:*".format(pref),
             parse_mode=ParseMode.MARKDOWN)
 
@@ -227,7 +227,7 @@ def welcome(bot: Bot, update: Update, args: List[str]):
     elif len(args) >= 1:
         if args[0].lower() in ("on", "yes"):
             sql.set_welc_preference(str(chat.id), True)
-            update.effective_message.reply_text("나는 예의바를거에요!")
+            update.effective_message.reply_text("저는 앞으로 예의발라질게요!")
 
         elif args[0].lower() in ("off", "no"):
             sql.set_welc_preference(str(chat.id), False)
@@ -247,7 +247,7 @@ def goodbye(bot: Bot, update: Update, args: List[str]):
         noformat = args and args[0] == "noformat"
         pref, goodbye_m, goodbye_type = sql.get_gdbye_pref(chat.id)
         update.effective_message.reply_text(
-            "This chat has it's goodbye setting set to: `{}`.\n*The goodbye  message "
+            "이 방의 작별인사 메세지를 다음과 같이 설정했어요: `{}`.\n*The goodbye  message "
             "(not filling the {{}}) is:*".format(pref),
             parse_mode=ParseMode.MARKDOWN)
 
@@ -273,15 +273,15 @@ def goodbye(bot: Bot, update: Update, args: List[str]):
     elif len(args) >= 1:
         if args[0].lower() in ("on", "yes"):
             sql.set_gdbye_preference(str(chat.id), True)
-            update.effective_message.reply_text("사람들이 떠나면 미안해요!")
+            update.effective_message.reply_text("사람들이 떠났다면 미안해요!")
 
         elif args[0].lower() in ("off", "no"):
             sql.set_gdbye_preference(str(chat.id), False)
-            update.effective_message.reply_text("그들이 떠난다면 저에게 죽어요.")
+            update.effective_message.reply_text("그들이 떠난다면 저에게 죽을거예요.")
 
         else:
             # idek what you're writing, say yes or no
-            update.effective_message.reply_text("전 'on/yes' 또는 'off/no'만 이해해요!")
+            update.effective_message.reply_text("전 'on/yes' 또는 'off/no'만 이해할 수 있어요!")
 
 
 @run_async
@@ -385,7 +385,7 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
                                                                          mention_html(user.id, user.first_name))
     elif args[0].lower() in ("off", "no"):
         sql.set_clean_welcome(str(chat.id), False)
-        update.effective_message.reply_text("너무 오래된 환영인사 메시지는 삭제하지 않아요.")
+        update.effective_message.reply_text("너무 오래된 환영인사 메시지는 삭제하지 못해요.")
         return "<b>{}:</b>" \
                "\n#CLEAN_WELCOME" \
                "\n<b>관리자:</b> {}" \
@@ -398,7 +398,7 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
 
 
 WELC_HELP_TXT = "그룹의 환영인사/작별인사 메시지는 여러 가지 방법으로 바꿀 수 있어요. 만약 당신이 사람마다 다른" \
-                " 환영 메시지를 원하시면, 당신은 *이러한* 변수들을 사용하실 수 있어요:\n" \
+                " 환영 메시지를 원하신다면, 당신은 *이러한* 변수들을 사용하실 수 있어요:\n" \
                 " - `{{first}}`: 사용자의 *이름* 을 말해줘요.\n" \
                 " - `{{last}}`: 사용자의 *성* 을 말해줘요. 만약 사용자가 성을 설정하지 않으면 *이름* 으로 " \
                 "말해줘요.\n" \
@@ -409,7 +409,7 @@ WELC_HELP_TXT = "그룹의 환영인사/작별인사 메시지는 여러 가지 
                 " - `{{mention}}`: 그들의 이름으로 태그를 붙여서 간단히 사용자를 *언급* 해요.\n" \
                 " - `{{id}}`: 사용자의 id를 말해줘요.\n" \
                 " - `{{count}}`: 이것은 사용자의 *회원번호*를 말해줘요.\n" \
-                " - `{{chatname}}`: 이것은 *현재 채팅 이름* 을 말해줘요.*.\n" \
+                " - `{{chatname}}`: 이것은 *현재 채팅방 이름* 을 말해줘요.*.\n" \
                 "\nEach variable MUST be surrounded by `{{}}` to be replaced.\n" \
                 "Welcome messages also support markdown, so you can make any elements bold/italic/code/links. " \
                 "Buttons are also supported, so you can make your welcomes look awesome with some nice intro " \
