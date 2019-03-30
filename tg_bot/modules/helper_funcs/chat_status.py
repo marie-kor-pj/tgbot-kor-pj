@@ -54,8 +54,8 @@ def bot_can_delete(func):
         if can_delete(update.effective_chat, bot.id):
             return func(bot, update, *args, **kwargs)
         else:
-            update.effective_message.reply_text("I can't delete messages here! "
-                                                "Make sure I'm admin and can delete other user's messages.")
+            update.effective_message.reply_text("전 이곳에 있는 메시지를 지울 수 없어요! "
+                                                "제가 관리자인지 확인하고 다른 사용자의 메시지를 삭제할 수 있는지 확인하세요.")
 
     return delete_rights
 
@@ -66,7 +66,7 @@ def can_pin(func):
         if update.effective_chat.get_member(bot.id).can_pin_messages:
             return func(bot, update, *args, **kwargs)
         else:
-            update.effective_message.reply_text("I can't pin messages here! "
+            update.effective_message.reply_text("전 이곳에 있는 메시지를 지울 수 없어요! "
                                                 "Make sure I'm admin and can pin messages.")
 
     return pin_rights
@@ -102,7 +102,7 @@ def bot_admin(func):
         if is_bot_admin(update.effective_chat, bot.id):
             return func(bot, update, *args, **kwargs)
         else:
-            update.effective_message.reply_text("I'm not admin!")
+            update.effective_message.reply_text("전 관리자가 아니에요!")
 
     return is_admin
 
