@@ -99,10 +99,9 @@ def sed(bot: Bot, update: Update):
 
 
 __help__ = """
- - s/<text1>/<text2>(/<flag>): SED 작업을 하고 싶은 메시지에 , replacing all \
-occurrences of 'text1' with 'text2'. Flags are optional, and currently include 'i' for ignore case, 'g' for global, \
-or nothing. Delimiters include `/`, `_`, `|`, and `:`. Text grouping is supported. The resulting message cannot be \
-larger than {}.
+ - s/<text1>/<text2>(/<flag>): SED 작업을 하고 싶은 메시지에 , 'text1'의 \ 발생들을 모두 'text2'를 사용하여 대체합니다. 
+Flags는 선택이며, 현재는 'i' 는 ignore case, 'g'는 global, \
+또는 아무것도 뜻하지 않습니다. Delimiters는 `/`, `_`, `|`와, `:`를 포함합니다. Text grouping 은 지원됩니다. 결과 메세지는 \가 {}보다 커질 수 없습니다.
 
 *한가지더* Sed는 좀 어려운 문자들은 쉽게 보려고 쓰여요. 예를 들어서 : `+*.?\\`
 만약 여러분이 이러한 문자들을 쓰고 싶으시다면, 
