@@ -14,6 +14,7 @@
   4. [Hyun Cha](https://github.com/RIPAngel)
   5. [SongJH](https://github.com/KRSongJH)
   6. [kongwoojin](https://github.com/kongwoojin)
+  7. [Lee Kyong Hwan](https://github.com/TamTamBurin)
 
 ## 봇 시작.
 
