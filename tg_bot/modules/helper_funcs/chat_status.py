@@ -67,7 +67,7 @@ def can_pin(func):
             return func(bot, update, *args, **kwargs)
         else:
             update.effective_message.reply_text("전 이곳에 있는 메시지를 지울 수 없어요! "
-                                                "Make sure I'm admin and can pin messages.")
+                                                "제가 관리자로 설정되어 있는지 확인해보세요!")
 
     return pin_rights
 
@@ -78,8 +78,8 @@ def can_promote(func):
         if update.effective_chat.get_member(bot.id).can_promote_members:
             return func(bot, update, *args, **kwargs)
         else:
-            update.effective_message.reply_text("I can't promote/demote people here! "
-                                                "Make sure I'm admin and can appoint new admins.")
+            update.effective_message.reply_text("저는 그들을 등업시키거나 강등할 수 없어요! "
+                                                "제가 관리자이고, 관리자 임명 권한이 있는지 확인해 보세요!")
 
     return promote_rights
 
@@ -90,8 +90,8 @@ def can_restrict(func):
         if update.effective_chat.get_member(bot.id).can_restrict_members:
             return func(bot, update, *args, **kwargs)
         else:
-            update.effective_message.reply_text("I can't restrict people here! "
-                                                "Make sure I'm admin and can appoint new admins.")
+            update.effective_message.reply_text("저는 여기 있는 사람들을 제한할 수 없어요! "
+                                                "제가 관리자이고, 관리자 임명 권한이 있는지 확인해 보세요!")
 
     return promote_rights
 
@@ -121,7 +121,7 @@ def user_admin(func):
             update.effective_message.delete()
 
         else:
-            update.effective_message.reply_text("Who dis non-admin telling me what to do?")
+            update.effective_message.reply_text("어떤 관리자도 아닌 사람이 제게 이래라 저래라 하는 거죠?")
 
     return is_admin
 
