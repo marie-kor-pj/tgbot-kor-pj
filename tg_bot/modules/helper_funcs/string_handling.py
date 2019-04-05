@@ -240,7 +240,7 @@ def extract_time(message, time_val):
         unit = time_val[-1]
         time_num = time_val[:-1]  # type: str
         if not time_num.isdigit():
-            message.reply_text("Invalid time amount specified.")
+            message.reply_text("유효하지 않은 시간이 입력되었습니다.")
             return ""
 
         if unit == 'm':
@@ -254,5 +254,5 @@ def extract_time(message, time_val):
             return ""
         return bantime
     else:
-        message.reply_text("Invalid time type specified. Expected m,h, or d, got: {}".format(time_val[-1]))
+        message.reply_text("시간 설정이 잘못되었습니다. m,h, or d, got: {} 이 조건에 맞는 시간 포맷을 사용하세요.".format(time_val[-1]))
         return ""
