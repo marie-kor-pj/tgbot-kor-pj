@@ -154,7 +154,7 @@ def left_member(bot: Bot, update: Update):
 
             # Give the owner a special goodbye
             if left_mem.id == OWNER_ID:
-                update.effective_message.reply_text("관리자의 명복을 빕니다.")
+                update.effective_message.reply_text("제 주인님의 명복을 빕니다...")
                 return
 
             # if media goodbye, use appropriate function for it
