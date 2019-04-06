@@ -78,7 +78,7 @@ def can_promote(func):
         if update.effective_chat.get_member(bot.id).can_promote_members:
             return func(bot, update, *args, **kwargs)
         else:
-            update.effective_message.reply_text("저는 그들을 등업시키거나 강등할 수 없어요! "
+            update.effective_message.reply_text("저는 그들을 관리자로 임명하거나 일반유저로 강등할 수 없어요! "
                                                 "제가 관리자이고, 관리자 임명 권한이 있는지 확인해 보세요!")
 
     return promote_rights
@@ -121,7 +121,7 @@ def user_admin(func):
             update.effective_message.delete()
 
         else:
-            update.effective_message.reply_text("어떤 관리자도 아닌 사람이 제게 이래라 저래라 하는 거죠?")
+            update.effective_message.reply_text("무슨 관리자도 아닌 사람이 제게 이래라 저래라 하는 거죠?")
 
     return is_admin
 
