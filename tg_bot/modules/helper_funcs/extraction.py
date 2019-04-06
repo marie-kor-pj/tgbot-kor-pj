@@ -49,8 +49,8 @@ def extract_user_and_text(message: Message, args: List[str]) -> (Optional[int], 
         user = args[0]
         user_id = get_user_id(user)
         if not user_id:
-            message.reply_text("제 데이터베이스에 해당 사용자가 없습니다.. 그들과 상호작용하려면 "
-                               "대신 그 사람의 메시지에 답장하거나, forward 해주셔야 해요.")
+            message.reply_text("제 데이터베이스에 해당 사용자가 없습니다.. 그들과 상호작용하고  "
+                               "그 사람의 메시지에 답장하거나, forward 해주셔야 해요.")
             return None, None
 
         else:
