@@ -31,7 +31,7 @@ PM_START_TEXT = """
 """
 
 HELP_STRINGS = """
-안녕! 제 이름은 {} 이에요!
+안녕히세요! 제 이름은 {} 이에요!
 저는 몇가지 재밌는 모듈을 가진 그룹 관리 봇이에요! 도움을 얻으려면
 아래를 참조하세요.
 
@@ -312,8 +312,8 @@ def settings_button(bot: Bot, update: Update):
             chat_id = prev_match.group(1)
             curr_page = int(prev_match.group(2))
             chat = bot.get_chat(chat_id)
-            query.message.reply_text("안녕하세요! {} 에 대한 설정이 꽤 있어요 - 골라봐요 "
-                                     "you're interested in.".format(chat.title),
+            query.message.reply_text("안녕하세요! 설정이 꽤 있어요. {} - 골라봐요"
+                                     "재미있어 보이는걸로요.".format(chat.title),
                                      reply_markup=InlineKeyboardMarkup(
                                          paginate_modules(curr_page - 1, CHAT_SETTINGS, "stngs",
                                                           chat=chat_id)))
@@ -323,7 +323,7 @@ def settings_button(bot: Bot, update: Update):
             next_page = int(next_match.group(2))
             chat = bot.get_chat(chat_id)
             query.message.reply_text("안녕하세요! 설정이 꽤 있어요. {} - 골라봐요 "
-                                     "재미있어 보이는거로요.".format(chat.title),
+                                     "재미있어 보이는걸로요.".format(chat.title),
                                      reply_markup=InlineKeyboardMarkup(
                                          paginate_modules(next_page + 1, CHAT_SETTINGS, "stngs",
                                                           chat=chat_id)))
