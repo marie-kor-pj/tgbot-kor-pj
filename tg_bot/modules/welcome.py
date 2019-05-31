@@ -411,10 +411,10 @@ WELC_HELP_TXT = "그룹의 환영인사/작별인사 메시지는 여러 가지 
                 " - `{{count}}`: 이것은 사용자의 *회원번호*를 말해줘요.\n" \
                 " - `{{chatname}}`: 이것은 *현재 채팅방 이름* 을 말해줘요.*.\n" \
                 "\nEach variable MUST be surrounded by `{{}}` to be replaced.\n" \
-                "Welcome messages also support markdown, so you can make any elements bold/italic/code/links. " \
-                "Buttons are also supported, so you can make your welcomes look awesome with some nice intro " \
-                "buttons.\n" \
-                "To create a button linking to your rules, use this: `[Rules](buttonurl://t.me/{}?start=group_id)`. " \
+                "환영인사 메시지 또한 마크다운을 지원하므로 모든 요소를 굵은 글씨/이텔릭체/코드/링크로 만들 수 있습니다. " \
+                "버튼도 지원되므로 멋진 소개 버튼을 사용하여 환영인사를 멋지게 연출할 수 " \
+                "있습니다.\n" \
+                "규칙에 연결하는 단추를 만들려면 다음을 사용합니다.: `[규칙](buttonurl://t.me/{}?start=group_id)`. " \
                 "Simply replace `group_id` with your group's id, which can be obtained via /id, and you're good to " \
                 "go. Note that group ids are usually preceded by a `-` sign; this is required, so please don't " \
                 "remove it.\n" \
