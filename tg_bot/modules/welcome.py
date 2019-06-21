@@ -154,7 +154,7 @@ def left_member(bot: Bot, update: Update):
 
             # Give the owner a special goodbye
             if left_mem.id == OWNER_ID:
-                update.effective_message.reply_text("제 주인님의 명복을 빕니다...")
+                update.effective_message.reply_text("주인님 강퇴...ㅠㅠ")
                 return
 
             # if media goodbye, use appropriate function for it
@@ -410,16 +410,16 @@ WELC_HELP_TXT = "그룹의 환영인사/작별인사 메시지는 여러 가지 
                 " - `{{id}}`: 사용자의 id를 말해줘요.\n" \
                 " - `{{count}}`: 이것은 사용자의 *회원번호*를 말해줘요.\n" \
                 " - `{{chatname}}`: 이것은 *현재 채팅방 이름* 을 말해줘요.*.\n" \
-                "\nEach variable MUST be surrounded by `{{}}` to be replaced.\n" \
-                "환영인사 메시지 또한 마크다운을 지원하므로 모든 요소를 굵은 글씨/이텔릭체/코드/링크로 만들 수 있습니다. " \
+                "\n교체하려면 각 변수를 '{{}}'로 둘러싸야 해요.\n" \
+                "환영인사 메시지 또한 마크다운을 지원하므로 모든 요소를 굵은 글씨/이텔릭체/코드/링크로 만들 수 있어요. " \
                 "버튼도 지원되므로 멋진 소개 버튼을 사용하여 환영인사를 멋지게 연출할 수 " \
-                "있습니다.\n" \
-                "규칙에 연결하는 단추를 만들려면 다음을 사용합니다.: `[규칙](buttonurl://t.me/{}?start=group_id)`. " \
-                "Simply replace `group_id` with your group's id, which can be obtained via /id, and you're good to " \
-                "go. Note that group ids are usually preceded by a `-` sign; this is required, so please don't " \
-                "remove it.\n" \
-                "If you're feeling fun, you can even set images/gifs/videos/voice messages as the welcome message by " \
-                "replying to the desired media, and calling /setwelcome.".format(dispatcher.bot.username)
+                "있어요.\n" \
+                "규칙에 연결하는 단추를 만들려면 다음을 사용해요.: `[규칙](buttonurl://t.me/{}?start=group_id)`. " \
+                "group_id를 /id를 통해 얻을 수 있는 그룹 ID로 바꾸기만 하면 되요. " \
+                "그룹 ID에는 일반적으로 '-' 기호가 선행되요; 이 기호는 필수이므로 " \
+                "제거하지 마세요.\n" \
+                "재미있다면 원하는 미디어에 회신하고 /setwelcome을 눌러 이미지/gif/비디오/음성 메시지를 " \
+                "환영 메시지로 설정할 수도 있어요.".format(dispatcher.bot.username)
 
 
 @run_async
@@ -465,7 +465,7 @@ __help__ = """
  - /resetgoodbye: 작별인사가 기본값으로 재설정되요.
  - /cleanwelcome <on/off>: 새 멤버가 오면, 이전 환영 메시지를 삭제하여 스팸문자를 방지해요.
 
- - /welcomehelp: view more formatting information for custom welcome/goodbye messages.커스텀 환영인사/작별인사 메시지에 대한 자세한 형식 정보를 봐요.
+ - /welcomehelp: 커스텀 환영인사/작별인사 메시지에 대한 자세한 형식 정보를 봐요.
 """.format(WELC_HELP_TXT)
 
 __mod_name__ = "환영인사/작별인사"
