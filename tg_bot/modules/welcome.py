@@ -447,8 +447,8 @@ def __migrate__(old_chat_id, new_chat_id):
 def __chat_settings__(chat_id, user_id):
     welcome_pref, _, _ = sql.get_welc_pref(chat_id)
     goodbye_pref, _, _ = sql.get_gdbye_pref(chat_id)
-    return "This chat has it's welcome preference set to `{}`.\n" \
-           "It's goodbye preference is `{}`.".format(welcome_pref, goodbye_pref)
+    return "이 채팅의 환영인사 설정은 `{}` (으)로 설정되어 있어요.\n" \
+           "작별인사 설정은 `{}` 입니다.".format(welcome_pref, goodbye_pref)
 
 
 __help__ = """
