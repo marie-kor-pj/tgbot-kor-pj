@@ -10,7 +10,7 @@
 
   1. [천상의나무](https://github.com/NewPremium)
   2. [KCPIT](https://github.com/kgu090716)
-  3. [i0N](https://github.com/i0Ni0N)
+  3. [하정빈](https://github.com/Eli-sys)
   4. [Hyun Cha](https://github.com/RIPAngel)
   5. [SongJH](https://github.com/KRSongJH)
   6. [kongwoojin](https://github.com/kongwoojin)
