@@ -72,9 +72,9 @@ def set_rules(bot: Bot, update: Update):
 def clear_rules(bot: Bot, update: Update):
     chat_id = update.effective_chat.id
     sql.set_rules(chat_id, "")
-    update.effective_message.reply_text("규칙을 성공적으로 지어요요)
+    update.effective_message.reply_text("규칙을 성공적으로 제거했어요!")
 
-
+    
 def __stats__():
     return "{} 채팅에 규칙이 설정되어 있어요".format(sql.num_chats())
 
