@@ -501,7 +501,7 @@ def process_update(self, update):
 
         # 다른 오류에도 Dispatch 하십시오.
         except TelegramError as te:
-            self.logger.warning('업데이트를 처리하는 동안 Telegram 에러가 발생했어요.)
+            self.logger.warning('업데이트를 처리하는 동안 Telegram 에러가 발생했어요.')
 
             try:
                 self.dispatch_error(update, te)
