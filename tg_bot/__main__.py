@@ -516,6 +516,6 @@ def process_update(self, update):
             self.logger.exception('업데이트를 처리하는 동안 오류가 발생했어요.')
 
 
-if __name__ == '__메인__':
+if __name__ == '__main__':
     LOGGER.info("모듈 로드 : " + str(ALL_MODULES))
     main()
