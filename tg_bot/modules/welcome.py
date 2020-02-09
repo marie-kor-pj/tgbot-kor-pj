@@ -201,7 +201,7 @@ def welcome(bot: Bot, update: Update, args: List[str]):
         noformat = args and args[0].lower() == "noformat"
         pref, welcome_m, welcome_type = sql.get_welc_pref(chat.id)
         update.effective_message.reply_text(
-            "이 채팅방의 환영인사는 `{}` (으)로 설정되어 있어요: `{}`\n"
+            "이 채팅방의 환영인사는 `{}` (으)로 설정되어 있어요: `{}`\n*The welcome message "
             "(not filling the {{}}) is:*".format(pref),
             parse_mode=ParseMode.MARKDOWN)
 
