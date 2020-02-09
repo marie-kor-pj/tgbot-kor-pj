@@ -70,17 +70,17 @@ RUN_STRINGS = (
 )
 
 SLAP_TEMPLATES = (
-    "{user1} 님은(는) {user2} 을(를) {item}로 {hits}어요.",
-    "{user1} 님은(는) {user2} 의 얼굴을 {item} 로 {hits}어요.",
-    "{user1} 님은(는) {item} (으)로 {user2} 를 조금 {hits}어요.",
-    "{user1} 님은(는) {user2} 에게 {item} 을 {throws}어요.",
-    "{user1} 님은(는) {item} 을(를) 잡고 {user2} 의 얼굴에 {throws}어요.",
-    "{user1} 님은(는) {item} 을(를) {user2} 의 정면으로 발사했어요.",
-    "{user1} 님은(는) {item} 을(를) 사용하여 {user2} 의 뺨을 때리기 시작했어요.",
-    "{user1} 님은(는) {user2} 님을 묶고 {item}(으)로 계속 {hits}어요.",
-    "{user1} 님은(는) {item} 을(를) 들었고 그걸로 {user2} 을(를) {hits}어요.",
-    "{user1} 님은(는){user2} 님을 의자에 묶었고 {item} (으)로 그들을 {throws}어요.",
-    "{user1} 님은(는) {user2} 님이 용암에서 수영하는 법을 배울 수 있도록 우호적으로 밀어주었어요."
+    "{user1} 님은 {user2} 을(를) {item}로 {hits}어요.",
+    "{user1} 님은 {user2} 의 얼굴을 {item} 로 {hits}어요.",
+    "{user1} 님은 {item} (으)로 {user2} 를 조금 {hits}어요.",
+    "{user1} 님은 {user2} 에게 {item} 을 {throws}어요.",
+    "{user1} 님은 {item} 을(를) 잡고 {user2} 의 얼굴에 {throws}어요.",
+    "{user1} 님은 {item} 을(를) {user2} 의 정면으로 발사했어요.",
+    "{user1} 님은 {item} 을(를) 사용하여 {user2} 의 뺨을 때리기 시작했어요.",
+    "{user1} 님은 {user2} 님을 묶고 {item}(으)로 계속 {hits}어요.",
+    "{user1} 님은 {item} 을(를) 들었고 그걸로 {user2} 을(를) {hits}어요.",
+    "{user1} 님은 {user2} 님을 의자에 묶었고 {item} (으)로 그들을 {throws}어요.",
+    "{user1} 님은 {user2} 님이 용암에서 수영하는 법을 배울 수 있도록 우호적으로 밀어주었어요."
 )
 
 ITEMS = (
