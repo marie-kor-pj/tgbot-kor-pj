@@ -330,12 +330,12 @@ def gdpr(bot: Bot, update: Update):
     for mod in GDPR:
         mod.__gdpr__(update.effective_user.id)
 
-    update.effective_message.reply_text("개인 데이터가 삭제되었어요.\n\n참고,  저의 데이터가 아닌"
-                                        "Telegram 의 데이터이기 때문에 어느 채팅방에서도 당신을 Unban 하지 않을 거에요."
+    update.effective_message.reply_text("개인 데이터가 삭제되었어요.\n\n참고,  저의 데이터가 아닌 "
+                                        "Telegram 의 데이터이기 때문에 어느 채팅방에서도 당신을 Unban 하지 않을 거에요. "
                                         "도배방지, 경고, 그리고 글로벌밴도 계속 남아있을 거예요. "
                                         "[참고하세요](https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-to-erasure/), "
                                         "상기 데이터 조각과 같이 공공의 이익을 위해 수행된  "
-                                        "\"과제에 대해 삭제권이 적용되지 않는다는 것을\" 명확히 "
+                                        "\"과제에 대해 삭제권이 적용되지 않는다는 것\"을 명확히 "
                                         "기술하고 있습니다.",
                                         parse_mode=ParseMode.MARKDOWN)
 
