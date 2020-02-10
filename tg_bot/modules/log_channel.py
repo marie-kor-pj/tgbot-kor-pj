@@ -89,7 +89,7 @@ if is_module_loaded(FILENAME):
                 if excp.message == "Message to delete not found":
                     pass
                 else:
-                    LOGGER.exception("로그 채널에서 메시지를 삭제하는 동안 오류가 발생했어요. 어쨌든 잘 될거예요.")
+                    LOGGER.exception("로그 채널에서 메시지를 삭제하는 동안 오류가 발생했어요. 어쨌든 잘 될 거예요.")
 
             try:
                 bot.send_message(message.forward_from_chat.id,
@@ -99,7 +99,7 @@ if is_module_loaded(FILENAME):
                 if excp.message == "Forbidden: bot is not a member of the channel chat":
                     bot.send_message(chat.id, "로그 채널 설정이 완료되었어요!")
                 else:
-                    LOGGER.exception("로그 채널을 설정하는데에 오류가 발생했어요!")
+                    LOGGER.exception("로그 채널을 설정하는 데에 오류가 발생했어요!")
 
             bot.send_message(chat.id, "로그 채널 설정이 완료되었어요!")
 
@@ -149,9 +149,9 @@ if is_module_loaded(FILENAME):
 - /unsetlog: 로그 채널을 비활성화해요.
 
 로그 채널 설정하는 방법 :
-- 원하는 채널에 봇을 추가해주세요. (봇에게 관리자권한을 주세요!)
-- 채널에 /setlog 를 입력해주세요.
-- 로그 채널을 설정하고자 하는 그룹에 채널에서 적었던 /setlog 를 전달해주세요.
+- 원하는 채널에 봇을 추가해주세요. (봇에게 관리자 권한을 주세요!)
+- 채널에 /setlog 을(를) 입력해주세요.
+- 로그 채널을 설정하고자 하는 그룹에 채널에서 적었던 /setlog 을(를) 전달해주세요.
 """
 
     __mod_name__ = "로그 채널"
