@@ -18,7 +18,7 @@ from tg_bot.modules.helper_funcs.string_handling import split_quotes, button_mar
 from tg_bot.modules.sql import cust_filters_sql as sql
 
 HANDLER_GROUP = 10
-BASIC_FILTER_STRING = "*이 채팅방의 필터:*\n"
+BASIC_FILTER_STRING = "*이 채팅방의 필터 :*\n"
 
 
 @run_async
@@ -27,7 +27,7 @@ def list_handlers(bot: Bot, update: Update):
     all_handlers = sql.get_chat_triggers(chat.id)
 
     if not all_handlers:
-        update.effective_message.reply_text("여기 필터가 활성해 있지 않아요!")
+        update.effective_message.reply_text("필터가 활성화되어 있지 않아요!")
         return
 
     filter_list = BASIC_FILTER_STRING
@@ -113,7 +113,7 @@ def filters(bot: Bot, update: Update):
     sql.add_filter(chat.id, keyword, content, is_sticker, is_document, is_image, is_audio, is_voice, is_video,
                    buttons)
 
-    msg.reply_text("필터 '{}' 이 추가되었어요!".format(keyword))
+    msg.reply_text("필터 '{}' 이(가) 추가되었어요!".format(keyword))
     raise DispatcherHandlerStop
 
 
@@ -129,7 +129,7 @@ def stop_filter(bot: Bot, update: Update):
     chat_filters = sql.get_chat_triggers(chat.id)
 
     if not chat_filters:
-        update.effective_message.reply_text("여기 필터가 활성해 있지 않아요!")
+        update.effective_message.reply_text("필터가 활성화되어 있지 않아요!")
         return
 
     for keyword in chat_filters:
@@ -138,7 +138,7 @@ def stop_filter(bot: Bot, update: Update):
             update.effective_message.reply_text("네, 이 필터를 삭제할게요!")
             raise DispatcherHandlerStop
 
-    update.effective_message.reply_text("필터를 찾을 수 없어요 - 활성화 되있는 모든 필터를 보려면 /filters 를 입력해주세요.")
+    update.effective_message.reply_text("필터를 찾을 수 없어요 - 활성화되어 있는 모든 필터를 보려면 /filters 를 입력해주세요.")
 
 
 @run_async
@@ -177,7 +177,7 @@ def reply_filter(bot: Bot, update: Update):
                                        reply_markup=keyboard)
                 except BadRequest as excp:
                     if excp.message == "URL 프로토콜이 지원되지 않아요.":
-                        message.reply_text("지원되지 않는 URL프로토콜을 사용하시는것 같네요. tg:// "
+                        message.reply_text("지원되지 않는 URL 프로토콜을 사용하시는 것 같네요. tg:// "
                                            "와 같은 일부 프로토콜은 텔레그램에서 버튼을 지원하지 않아요. 다시 "
                                            "시도해보시거나, @MarieSupport 에 도움을 요청하세요.")
                     elif excp.message == "Reply message not found":
@@ -197,7 +197,7 @@ def reply_filter(bot: Bot, update: Update):
 
 
 def __stats__():
-    return "{} 필터는, {} 번 채팅에서 사용됬어요.".format(sql.num_filters(), sql.num_chats())
+    return "{} 필터는, {} 번 채팅에서 사용됐어요.".format(sql.num_filters(), sql.num_chats())
 
 
 def __migrate__(old_chat_id, new_chat_id):
@@ -210,7 +210,7 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- - /filters: 활성화 되어있는 모든 필터를 알려줘요.
+ - /filters: 활성화되어있는 모든 필터를 알려줘요.
 
 *관리자용 명령어*
  - /filter <제목> <내용>: 해당 채팅방에 필터를 추가해요. '제목'을 작성하시면 제가 그 메시지에 대해서 응답을 해드릴게요. \
@@ -218,7 +218,7 @@ __help__ = """
 키워드를 문장으로 사용하려면 따옴표를 사용해 주세요. 
 예: /filter "hey there" How you \
 doin?
- - /stop <필터제목>: 필터를 삭제해요.
+ - /stop <필터 제목>: 필터를 삭제해요.
 """
 
 __mod_name__ = "필터"
