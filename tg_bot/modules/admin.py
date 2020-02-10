@@ -37,7 +37,7 @@ def promote(bot: Bot, update: Update, args: List[str]) -> str:
         return ""
 
     if user_id == bot.id:
-        message.reply_text("저를 승급할 수 없어요! 방 관리자를 한명 불러주세요.")
+        message.reply_text("저는 저를 승급할 수 없어요! 방 관리자를 한 명 불러주세요.")
         return ""
 
     # set same perms as bot - bot can't assign higher perms than itself!
@@ -53,7 +53,7 @@ def promote(bot: Bot, update: Update, args: List[str]) -> str:
                           can_pin_messages=bot_member.can_pin_messages,
                           can_promote_members=bot_member.can_promote_members)
 
-    message.reply_text("Successfully promoted!")
+    message.reply_text("성공적으로 승급되었습니다!")
     return "<b>{}:</b>" \
            "\n#복사됨" \
            "\n<b>관리자:</b> {}" \
@@ -74,7 +74,7 @@ def demote(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_id = extract_user(message, args)
     if not user_id:
-        message.reply_text("원하는 사용자를 답장하기를 사용해 알려주세요.")
+        message.reply_text("원하는 사용자를 회신을 통해 알려주세요.")
         return ""
 
     user_member = chat.get_member(user_id)
@@ -87,7 +87,7 @@ def demote(bot: Bot, update: Update, args: List[str]) -> str:
         return ""
 
     if user_id == bot.id:
-        message.reply_text("저를 강등할 수 없어요! 방 관리자를 한명 불러주세요.")
+        message.reply_text("저는 저를 강등할 수 없어요! 방 관리자를 한 명 불러주세요.")
         return ""
 
     try:
@@ -109,7 +109,7 @@ def demote(bot: Bot, update: Update, args: List[str]) -> str:
                                           mention_html(user_member.user.id, user_member.user.first_name))
 
     except BadRequest:
-        message.reply_text("강등햘 수 없어요. promote 명령어로 권한을 주지 않았고, 다른사람이 관리자를 임명한 것 같아요. "
+        message.reply_text("강등할 수 없어요. promote 명령어로 권한을 주지 않았고, 다른 사람이 관리자를 임명한 것 같아요. "
                            "그래서 전 그분을 강등시킬 수 없어요.")
         return ""
 
@@ -210,11 +210,11 @@ __help__ = """
  - /adminlist: 채팅방의 관리자 목록을 알려줘요.
 
 *관리자용 명령어:*
- - /pin: 답장 처리된 메시지를 고정해요.- 'loud'나 'notify'로 유저들에게 알림을 표시할 수 있어요.
+ - /pin: 답장 처리된 메시지를 고정해요. - 'loud'나 'notify'로 유저들에게 알림을 표시할 수 있어요.
  - /unpin: 현재 고정된 메시지를 고정해제 시킬 수 있어요.
  - /invitelink: 초대 링크를 불러와요.
- - /promote: 답장처리된 메시지의 작성자를 관리자로 임명해요.
- - /demote: 답장처리된 메시지의 작성자를 관리자로부터 강등시켜요.
+ - /promote: 답장 처리된 메시지의 작성자를 관리자로 임명해요.
+ - /demote: 답장 처리된 메시지의 작성자를 관리자로부터 강등시켜요.
 """
 
 __mod_name__ = "관리자"
