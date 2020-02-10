@@ -33,8 +33,8 @@ def purge(bot: Bot, update: Update, args: List[str]) -> str:
                     bot.deleteMessage(chat.id, m_id)
                 except BadRequest as err:
                     if err.message == "Message can't be deleted":
-                        bot.send_message(chat.id, "모든 메시지들을 제거할 수 없어요. 그 메시지들은 너무 오래되었어요."
-                                                  "저에게 삭제 권한이 없거나 수퍼 그룹이 아닐 수 있어요.")
+                        bot.send_message(chat.id, "모든 메시지들을 제거할 수 없어요. 그 메시지들은 너무 오래되었어요. "
+                                                  "저에게 삭제 권한이 없거나 슈퍼 그룹이 아닐 수 있어요.")
 
                     elif err.message != "Message to delete not found":
                         LOGGER.exception("채팅 메시지를 삭제하는 동안 오류가 발생했어요.")
@@ -43,7 +43,7 @@ def purge(bot: Bot, update: Update, args: List[str]) -> str:
                 msg.delete()
             except BadRequest as err:
                 if err.message == "Message can't be deleted":
-                    bot.send_message(chat.id, "모든 메시지들을 제거할 수 없어요. 그 메시지들은 너무 오래되었어요."
+                    bot.send_message(chat.id, "모든 메시지들을 제거할 수 없어요. 그 메시지들은 너무 오래되었어요. "
                                               "제게 삭제 권한이 없거나 슈퍼 그룹이 아닐 수 있어요.")
 
                 elif err.message != "Message to delete not found":
@@ -58,7 +58,7 @@ def purge(bot: Bot, update: Update, args: List[str]) -> str:
                                                                delete_to - message_id)
 
     else:
-        msg.reply_text("답장기능으로 삭제를 시작할 위치를 선택해 주세요.")
+        msg.reply_text("답장 기능으로 삭제를 시작할 위치를 선택해 주세요.")
 
     return ""
 
@@ -85,10 +85,10 @@ def del_message(bot: Bot, update: Update) -> str:
 
 
 __help__ = """
-*Admin only:*
+*관리자용 명령어*
  - /del: 답장한 메시지를 제거해요.
  - /purge: 이 메시지와 답장한 메시지 사이의 모든 메시지를 삭제해요.
- - /purge <정수>: 답장한 메세지로부터 정수만큼의 상위 메세지가 삭제되요
+ - /purge <정수>: 답장한 메시지로부터 정수만큼의 상위 메시지가 삭제돼요
 """
 
 __mod_name__ = "메시지 제거"
