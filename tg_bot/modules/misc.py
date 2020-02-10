@@ -26,10 +26,10 @@ RUN_STRINGS = (
     "벽을 조심하세요!",
     "저를 내버려 두지 마세요!!",
     "도망치면 죽어요",
-    "농담이예요, 전 어디에나 있어요",
+    "농담이에요, 전 어디에나 있어요",
     "후회하게 될 거예요...",
     "/kickme 도 해 보세요. 재미있다고 들었어요.",
-    "가서 다른 사람 괴롭혀요. 여기선 아무도 신경 안써요",
+    "가서 다른 사람 괴롭혀요. 여기선 아무도 신경 안 써요",
     "도망칠 수는 있지만 숨을 수는 없어요.",
     "그게 네가 가진 전부예요?",
     "전 당신 뒤에 있어요...",
@@ -52,17 +52,17 @@ RUN_STRINGS = (
     "계속 뛰면 제2의 베이더(Vader)가 될지도 몰라요.",
     "여러 번 계산한 후에, 나는 당신의 속임수에 대한 나의 관심을 정확히 0으로 결정했어요.",
     "전설에 따르면, 그들은 여전히 달리고 있어요.",
-    "계속 하세요, 당신이 여기 오길 바라는지 모르겠어요.",
-    "당신은 마법사인 거예요 - 잠깐만, 당신은 해리가 아니예요. 계속 움직이세요.",
+    "계속하세요, 당신이 여기 오길 바라는지 모르겠어요.",
+    "당신은 마법사인 거예요 - 잠깐만, 당신은 해리가 아니에요. 계속 움직이세요.",
     "해프닝은 금지!",
     "안녕, 자기야?",
     "누가 개를 풀어줬나요?",
-    "아무도 신경 안써서 웃겨요.",
+    "아무도 신경 안 써서 웃겨요.",
     "아, 정말 아깝네요. 그거 마음에 들었어요.",
     "솔직히 말씀해서, 전 개의치 않아요.",
-    "제 밀크쉐이크가 모든 아이들을 마당으로 데려왔어요! 그러니 더 빨리 달려요!",
+    "제 밀크셰이크가 모든 아이들을 마당으로 데려왔어요! 그러니 더 빨리 달려요!",
     "당신은 진실을 감당하지 못해요!",
-    "오래 전에, 멀리 있는 은하계에서... 누군가 신경 썼을 거예요. 하지만 이젠 아니예요.",
+    "오래전에, 멀리 있는 은하계에서... 누군가 신경 썼을 거예요. 하지만 이젠 아니에요.",
     "저 사람들 좀 봐요! 그들은 피할 수 없는 망령에서 도망치고 있어요... 귀여워요.",
     "한 형이 먼저 쐈어요. 저도 그럴까요?",
     "흰 토끼야 뭘 쫓고 있는 거야?",
@@ -249,19 +249,19 @@ def info(bot: Bot, update: Update, args: List[str]):
     text += "\n영구 사용자 링크: {}".format(mention_html(user.id, "link"))
 
     if user.id == OWNER_ID:
-        text += "\n\n이 사람은 저의 주인이예요. - 전 그 상대로 아무것도 할 수가 없어요!"
+        text += "\n\n이 사람은 저의 주인이에요. - 전 그 상대로 아무것도 할 수가 없어요!"
     else:
         if user.id in SUDO_USERS:
             text += "\n이 사람은 저의 관리자들 중 한 명이예요! " \
                     "그들은 제 주인만큼 강력해요."
         else:
             if user.id in SUPPORT_USERS:
-                text += "\n이 사람은 제 후원자 중 한 명이에요! " \
-                        "해당 사용자가 관리자 아니지만, 글로벌밴을 할 수는 있어요."
+                text += "\n이 사람은 제 후원자 중 한 명이예요! " \
+                        "해당 사용자가 관리자 아니지만, 글로벌 밴을 할 수는 있어요."
 
             if user.id in WHITELIST_USERS:
-                text += "\n이 사람은 화이트리스트에 속해있으신 분이예요! " \
-                        "ban/kick 등의 멍령어는 이분에게 사용하실 수 없어요."
+                text += "\n이 사람은 화이트리스트에 속해있으신 분이에요! " \
+                        "ban/kick 등의 명령어는 이분에게 사용하실 수 없어요."
 
     for mod in USER_INFO:
         mod_info = mod.__user_info__(user.id).strip()
@@ -275,7 +275,7 @@ def info(bot: Bot, update: Update, args: List[str]):
 def get_time(bot: Bot, update: Update, args: List[str]):
     location = " ".join(args)
     if location.lower() == bot.first_name.lower():
-        update.effective_message.reply_text("누군가를 Ban 하는것은 저에게는 항상 즐거운 시간이에요!")
+        update.effective_message.reply_text("누군가를 Ban 하는 것은 저에게는 항상 즐거운 시간이에요!")
         bot.send_sticker(update.effective_chat.id, BAN_STICKER)
         return
 
@@ -331,8 +331,8 @@ def gdpr(bot: Bot, update: Update):
         mod.__gdpr__(update.effective_user.id)
 
     update.effective_message.reply_text("개인 데이터가 삭제되었어요.\n\n참고,  저의 데이터가 아닌 "
-                                        "Telegram 의 데이터이기 때문에 어느 채팅방에서도 당신을 Unban 하지 않을 거에요. "
-                                        "도배방지, 경고, 그리고 글로벌밴도 계속 남아있을 거예요. "
+                                        "Telegram 의 데이터이기 때문에 어느 채팅방에서도 당신을 Unban 하지 않을 거예요. "
+                                        "도배방지, 경고, 그리고 글로벌 밴도 계속 남아있을 거예요. "
                                         "[참고하세요](https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-to-erasure/), "
                                         "상기 데이터 조각과 같이 공공의 이익을 위해 수행된  "
                                         "\"과제에 대해 삭제권이 적용되지 않는다는 것\"을 명확히 "
@@ -344,22 +344,22 @@ MARKDOWN_HELP = """
 마크다운은 telegram에서 지원되는 매우 강력한 도구예요. {} 저장된 메시지가 올바르게 구문 분석되었는지 확인하고 \
 단추를 만들 수 있도록 몇 가지 향상된 기능이 있어요.
 
-- <code>_italic_</code>: '_' 로 텍스트를 감싸면 기울어진 글자가 작성될거에요. 
-- <code>*bold*</code>: '*' 로 텍스트를 감싸면 굵은 글자가 작성될거에요. 
-- <code>`code`</code>: '`' 로 텍스트를 감싸면 'code'라고 하는 동일한 텍스트가 생성될거에요.
+- <code>_italic_</code>: '_' 로 텍스트를 감싸면 기울어진 글자가 작성될 거예요. 
+- <code>*bold*</code>: '*' 로 텍스트를 감싸면 굵은 글자가 작성될 거예요. 
+- <code>`code`</code>: '`' 로 텍스트를 감싸면 'code'라고 하는 동일한 텍스트가 생성될 거예요.
 - <code>[보여질 메시지](URL)</code>: 링크를 만들어줘요. - 메시지는 <code>보여질 메시지</code> 라고 보여질 거지만, \
 그 메시지를 터치하면 <code>URL</code>로 들어가져요.
 예: <code>[테스트](example.com)</code>
 
 - <code>[버튼에 보여질 메시지](URL)</code>: 이것은 telegram이 가지고 있는 특별한 \
-마크다운에서의 버튼 기능이예요. <code>버튼에 보여질 메시지</code> 가 버튼에 나타나고, 버튼을 누르면 <code>URL</code> \
+마크다운에서의 버튼 기능이에요. <code>버튼에 보여질 메시지</code> 가 버튼에 나타나고, 버튼을 누르면 <code>URL</code> \
 로 들어가져요.
 예: <code>[버튼](buttonurl:example.com)</code>
 
 같은 줄에 여러 개의 버튼을 사용하려면 :same을 사용하세요 :
 <code>[one](buttonurl://example.com)
 [two](buttonurl://google.com:same)</code>
-이렇게 하면 한 줄에 한 버튼이 아니라 한 줄에 두 개의 버튼이 생성되요.
+이렇게 하면 한 줄에 한 버튼이 아니라 한 줄에 두 개의 버튼이 생성돼요.
 
 메시지에는 버튼이 아닌 텍스트가 포함되어야 해요!!!
 """.format(dispatcher.bot.first_name)
@@ -368,8 +368,8 @@ MARKDOWN_HELP = """
 @run_async
 def markdown_help(bot: Bot, update: Update):
     update.effective_message.reply_text(MARKDOWN_HELP, parse_mode=ParseMode.HTML)
-    update.effective_message.reply_text("다음 메시지를 제게 전달해 보세요. 그러면 알게 될 거에요!")
-    update.effective_message.reply_text("/save 는 마크다운을 테스트 할 수 있어요. _기울어진 글자_, *굵은글자*, `code`, "
+    update.effective_message.reply_text("다음 메시지를 제게 전달해 보세요. 그러면 알게 될 거예요!")
+    update.effective_message.reply_text("/save 은(는) 마크다운을 테스트 할 수 있어요. _기울어진 글자_, *굵은글자*, `code`, "
                                         "[URL](example.com) [button](buttonurl:github.com) "
                                         "[button2](buttonurl://google.com:same)")
 
@@ -383,7 +383,7 @@ def stats(bot: Bot, update: Update):
 __help__ = """
  - /id: 현재 그룹 ID를 가져와요. 만약 다른 사용자의 메시지를 답장하면 해당 사용자의 ID를 가져와요.
  - /runs: 랜덤으로 아무 말을 해 드려요.
- - /slap: 사용자에게 뺨을 때리거나, 답장을 안했을 경우 뺨을 맞아요.
+ - /slap: 사용자에게 뺨을 때리거나, 답장을 안 했을 경우 뺨을 맞아요.
  - /info: 사용자에 대한 정보를 가져와줘요.
  - /gdpr: 봇 데이터베이스에서 정보를 삭제해요. (사적인 대화만)
 
