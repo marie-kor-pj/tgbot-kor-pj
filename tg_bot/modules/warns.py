@@ -41,11 +41,11 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
         sql.reset_warns(user.id, chat.id)
         if soft_warn:  # kick
             chat.unban_member(user.id)
-            reply = "{}번 경고, {} 가 강퇴되었어요!".format(limit, mention_html(user.id, user.first_name))
+            reply = "{} 번 경고, {} 가 강퇴되었어요!".format(limit, mention_html(user.id, user.first_name))
 
         else:  # ban
             chat.kick_member(user.id)
-            reply = "{}번 경고, {}가 ban당하였어요!".format(limit, mention_html(user.id, user.first_name))
+            reply = "{} 번 경고, {}가 Ban 당하였어요!".format(limit, mention_html(user.id, user.first_name))
 
         for warn_reason in reasons:
             reply += "\n - {}".format(html.escape(warn_reason))
@@ -66,7 +66,7 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
         keyboard = InlineKeyboardMarkup(
             [[InlineKeyboardButton("경고 제거", callback_data="rm_warn({})".format(user.id))]])
 
-        reply = "{} 가 {}/{} 경고입니다... 조심하세요!".format(mention_html(user.id, user.first_name), num_warns,
+        reply = "{} (이)가 {}/{} 경고입니다... 조심하세요!".format(mention_html(user.id, user.first_name), num_warns,
                                                              limit)
         if reason:
             reply += "\n마지막 경고 이유:\n{}".format(html.escape(reason))
@@ -158,7 +158,7 @@ def reset_warns(bot: Bot, update: Update, args: List[str]) -> str:
 
     if user_id:
         sql.reset_warns(user_id, chat.id)
-        message.reply_text("경고가 초기화 되었어요")
+        message.reply_text("경고가 초기화되었어요")
         warned = chat.get_member(user_id).user
         return "<b>{}:</b>" \
                "\n#경고 초기화" \
@@ -259,7 +259,7 @@ def remove_warn_filter(bot: Bot, update: Update):
             msg.reply_text("네, 그런 경고는 그만 할게요.")
             raise DispatcherHandlerStop
 
-    msg.reply_text("현재 경고 필터가 아니에요. 모든 활성 경고 필터를 위해 /warnlist 을 입력해보세요.")
+    msg.reply_text("현재 경고 필터가 아니에요. 모든 활성 경고 필터를 위해 /warnlist 을(를) 입력해보세요.")
 
 
 @run_async
@@ -315,7 +315,7 @@ def set_warn_limit(bot: Bot, update: Update, args: List[str]) -> str:
     if args:
         if args[0].isdigit():
             if int(args[0]) < 3:
-                msg.reply_text("최소 경고 한도는 3이예요!")
+                msg.reply_text("최소 경고 한도는 3 이예요!")
             else:
                 sql.set_warn_limit(chat.id, int(args[0]))
                 msg.reply_text("Updated the warn limit to {}".format(args[0]))
@@ -346,12 +346,12 @@ def set_warn_strength(bot: Bot, update: Update, args: List[str]):
             msg.reply_text("경고가 너무 많으면 Ban 됩니다!")
             return "<b>{}:</b>\n" \
                    "<b>관리자:</b> {}\n" \
-                   "강력한 경고를 활성화했어요. 사용자가 Ban 되요.".format(html.escape(chat.title),
+                   "강력한 경고를 활성화했어요. 사용자가 Ban 돼요.".format(html.escape(chat.title),
                                                                             mention_html(user.id, user.first_name))
 
         elif args[0].lower() in ("off", "no"):
             sql.set_warn_strength(chat.id, True)
-            msg.reply_text("경고가 너무 많아지면 강퇴당할거예요! 사용자들은 나중에 다시 들어올 수 있어요.")
+            msg.reply_text("경고가 너무 많아지면 강퇴당할 거예요! 사용자들은 나중에 다시 들어올 수 있어요.")
             return "<b>{}:</b>\n" \
                    "<b>관리자:</b> {}\n" \
                    "강력한 경고가 비활성화되었어요. 사용자는 강퇴만 당할 수 있어요.".format(html.escape(chat.title),
@@ -372,8 +372,8 @@ def set_warn_strength(bot: Bot, update: Update, args: List[str]):
 
 
 def __stats__():
-    return "{} 전체경고, 전체 {} 채팅.\n" \
-           "{} 경고필터, 전체 {} 채팅.".format(sql.num_warns(), sql.num_warn_chats(),
+    return "{} 전체 경고, 전체 {} 채팅.\n" \
+           "{} 경고 필터, 전체 {} 채팅.".format(sql.num_warns(), sql.num_warn_chats(),
                                                       sql.num_warn_filters(), sql.num_warn_filter_chats())
 
 
@@ -395,17 +395,17 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- - /warns <사용사명>: 경고 횟수 및 이유를 가져와요.
+ - /warns <사용자명>: 경고 횟수 및 이유를 가져와요.
  - /warnlist: 모든 현재 경고 필터 목록을 알려줘요.
 
 *관리자용 명령어*
- - /warn <사용자명>: 사용자를 경고해요. 경고를 3번 받으면, 그룹에서 사용자를 BAN 해요. 사용자명 대신 답장해도 되요.
- - /resetwarn <사용자명>: 사용자의 경고를 초기화해요. 사용자명 대신 답장해도 되요.
+ - /warn <사용자명>: 사용자를 경고해요. 경고를 3번 받으면, 그룹에서 사용자를 BAN 해요. 사용자명 대신 답장해도 돼요.
+ - /resetwarn <사용자명>: 사용자의 경고를 초기화해요. 사용자명 대신 답장해도 돼요.
  - /addwarn <키워드> <답장할 메시지 (경고 이유)>: 특정 키워드에 경고 필터를 설정해요. 키워드를 문장으로 지정하려면 \
 다음과 같이 작성해주세요: `/addwarn "very angry" 이 사용자는 화난 사용자예요`.
  - /nowarn <키워드>: 경고 필터를 멈춰요.
  - /warnlimit <숫자>: 경고의 횟수를 지정해요. 기본값인 3에서 다른 값으로 바꿀 수 있어요.
- - /strongwarn <on/yes/off/no>: on으로 설정하고 경고 한계를 초과하면 BAN 되요. 또한, 강퇴당할거예요.
+ - /strongwarn <on/yes/off/no>: on으로 설정하고 경고 한계를 초과하면 BAN 돼요. 또한, 강퇴당할 거예요.
 """
 
 __mod_name__ = "경고"
