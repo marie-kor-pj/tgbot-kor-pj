@@ -21,7 +21,7 @@ def __list_all_modules():
             to_load = all_modules
 
         if NO_LOAD:
-            LOGGER.info("로딩이 되지 않음 : {}".format(NO_LOAD))
+            LOGGER.info("로드하지 않을 모듈 : {}".format(NO_LOAD))
             return [item for item in to_load if item not in NO_LOAD]
 
         return to_load
