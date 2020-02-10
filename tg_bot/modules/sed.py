@@ -64,16 +64,16 @@ def sed(bot: Bot, update: Update):
 
         if not repl:
             update.effective_message.reply_to_message.reply_text("당신은 아마 아무것도 아닌걸요... "
-                                                                 "어떤걸로 덮어쓰시려고요?")
+                                                                 "어떤 걸로 덮어쓰시려구요?")
             return
 
         try:
             check = re.match(repl, to_fix, flags=re.IGNORECASE)
 
             if check and check.group(0).lower() == to_fix.lower():
-                update.effective_message.reply_to_message.reply_text("안녕하세요 여러분, {} 은(는) 제가 하고싶지 "
+                update.effective_message.reply_to_message.reply_text("안녕하세요 여러분, {} 은(는) 제가 하고 싶지 "
                                                                      "않은 말을 하게 하는 "
-                                                                     "거에요!".format(update.effective_user.first_name))
+                                                                     "거예요!".format(update.effective_user.first_name))
                 return
 
             if 'i' in flags and 'g' in flags:
@@ -87,7 +87,7 @@ def sed(bot: Bot, update: Update):
         except sre_constants.error:
             LOGGER.warning(update.effective_message.text)
             LOGGER.exception("SRE constant 에러")
-            update.effective_message.reply_text("혹시 SED 해보셨나요? 아마 아닌것 같아요.")
+            update.effective_message.reply_text("혹시 SED 해보셨나요? 아마 아닌 것 같아요.")
             return
 
         # empty string errors -_-
@@ -101,9 +101,9 @@ def sed(bot: Bot, update: Update):
 __help__ = """
  - s/<text1>/<text2>(/<flag>): SED 작업을 하고 싶은 메시지에 , 'text1'의 \ 발생들을 모두 'text2'를 사용하여 대체합니다. 
 Flags는 선택이며, 현재는 'i' 는 ignore case, 'g'는 global, \
-또는 아무것도 뜻하지 않습니다. Delimiters는 `/`, `_`, `|`와, `:`를 포함합니다. Text grouping 은 지원됩니다. 결과 메세지는 \가 {}보다 커질 수 없습니다.
+또는 아무것도 뜻하지 않습니다. Delimiters는 `/`, `_`, `|`와, `:`를 포함합니다. Text grouping 은 지원됩니다. 결과 메시지는 \가 {}보다 커질 수 없습니다.
 
-*한가지더* Sed는 좀 어려운 문자들은 쉽게 보려고 쓰여요. 예를 들어서 : `+*.?\\`
+*한 가지 더* Sed는 좀 어려운 문자들은 쉽게 보려고 쓰여요. 예를 들어서 : `+*.?\\`
 만약 여러분이 이러한 문자들을 쓰고 싶으시다면, 
 그것들을 피하세요!
 예시: \\?.
