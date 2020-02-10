@@ -29,7 +29,7 @@ def about_me(bot: Bot, update: Update, args: List[str]):
                                             parse_mode=ParseMode.MARKDOWN)
     elif message.reply_to_message:
         username = message.reply_to_message.from_user.first_name
-        update.effective_message.reply_text(username + "님은 아직 me 메시지를 설정하지 않았어요!")
+        update.effective_message.reply_text(username + " 님은 아직 me 메시지를 설정하지 않았어요!")
     else:
         update.effective_message.reply_text("아직 자신에 대한 info 메시지를 설정하지 않았어요!")
 
@@ -43,10 +43,10 @@ def set_about_me(bot: Bot, update: Update):
     if len(info) == 2:
         if len(info[1]) < MAX_MESSAGE_LENGTH // 4:
             sql.set_user_me_info(user_id, info[1])
-            message.reply_text("info 을(를) 업데이트 했어요!")
+            message.reply_text("info 을(를) 업데이트했어요!")
         else:
             message.reply_text(
-                "me 의 글자수는 {} 자 아래여야 해요! 그러나 당신은 {} 자를 입력했어요.".format(MAX_MESSAGE_LENGTH // 4, len(info[1])))
+                "me 의 글자 수는 {} 자 아래여야 해요! 그러나 당신은 {} 자를 입력했어요.".format(MAX_MESSAGE_LENGTH // 4, len(info[1])))
 
 
 @run_async
@@ -66,7 +66,7 @@ def about_bio(bot: Bot, update: Update, args: List[str]):
                                             parse_mode=ParseMode.MARKDOWN)
     elif message.reply_to_message:
         username = user.first_name
-        update.effective_message.reply_text("아직 {} 님에 대한 메시지를 설정하지 못했습니다!".format(username))
+        update.effective_message.reply_text("아직 {} 님에 대한 메시지를 설정하지 못했어요!".format(username))
     else:
         update.effective_message.reply_text("아직 자신의 Bio 메시지를 가지고 있지 않아요!")
 
@@ -82,7 +82,7 @@ def set_about_bio(bot: Bot, update: Update):
             message.reply_text("자기 자신의 Bio 메시지를 설정할 수 없어요! 당신의 Bio 은(는) 다른 사람들의 마음대로입니다...")
             return
         elif user_id == bot.id and sender.id not in SUDO_USERS:
-            message.reply_text("음...저의 Bio 은(는) 오직 절 개발한 개발자만 설정 할 수 있어요.")
+            message.reply_text("음... 저의 Bio 은(는) 오직 절 개발한 개발자만 설정할 수 있어요.")
             return
 
         text = message.text
@@ -90,7 +90,7 @@ def set_about_bio(bot: Bot, update: Update):
         if len(bio) == 2:
             if len(bio[1]) < MAX_MESSAGE_LENGTH // 4:
                 sql.set_user_bio(user_id, bio[1])
-                message.reply_text("{} 님의 Bio 을(를) 업데이트 했어요!".format(repl_message.from_user.first_name))
+                message.reply_text("{} 님의 Bio 을(를) 업데이트했어요!".format(repl_message.from_user.first_name))
             else:
                 message.reply_text(
                     "Bio 은(는) {} 자 아래여야 해요! 그러나 당신은 {} 자를 입력했어요.".format(
