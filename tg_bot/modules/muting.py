@@ -49,7 +49,7 @@ def mute(bot: Bot, update: Update, args: List[str]) -> str:
                                               mention_html(member.user.id, member.user.first_name))
 
         else:
-            message.reply_text("해당 유저는 이미 음소거 되어 있어요!")
+            message.reply_text("해당 유저는 이미 음소거되어 있어요!")
     else:
         message.reply_text("해당 유저는 이 채팅방에 포함되어있지 않아요!")
 
@@ -67,7 +67,7 @@ def unmute(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_id = extract_user(message, args)
     if not user_id:
-        message.reply_text("음소거를 해제하려면 사용자 이름을 알려주거나 답장으로 알려주세요")
+        message.reply_text("음소거를 해제하려면 사용자 이름을 알려주거나 답장으로 알려주세요.")
         return ""
 
     member = chat.get_member(int(user_id))
@@ -115,7 +115,7 @@ def temp_mute(bot: Bot, update: Update, args: List[str]) -> str:
     user_id, reason = extract_user_and_text(message, args)
 
     if not user_id:
-        message.reply_text("음소거 할 사용자를 선택하세요.")
+        message.reply_text("음소거할 사용자를 선택하세요.")
         return ""
 
     try:
@@ -136,7 +136,7 @@ def temp_mute(bot: Bot, update: Update, args: List[str]) -> str:
         return ""
 
     if not reason:
-        message.reply_text("해당 사용자의 음소거 할 시간을 지정하지 않았어요!")
+        message.reply_text("해당 사용자의 음소거할 시간을 지정하지 않았어요!")
         return ""
 
     split_reason = reason.split(None, 1)
@@ -167,7 +167,7 @@ def temp_mute(bot: Bot, update: Update, args: List[str]) -> str:
             message.reply_text("{} 동안 음소거!".format(time_val))
             return log
         else:
-            message.reply_text("해당 유저는 이미 음소거 되어 있습니다.")
+            message.reply_text("해당 유저는 이미 음소거되어 있습니다.")
 
     except BadRequest as excp:
         if excp.message == "Reply message not found":
@@ -178,16 +178,16 @@ def temp_mute(bot: Bot, update: Update, args: List[str]) -> str:
             LOGGER.warning(update)
             LOGGER.exception("ERROR muting user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
                              excp.message)
-            message.reply_text("이런!!! 전 그 사용자를 음소거 할 수 없어요.")
+            message.reply_text("이런!!! 전 그 사용자를 음소거할 수 없어요.")
 
     return ""
 
 
 __help__ = """
-*관리자 전용 명령어:*
- - /mute <사용자명>: 사용자를 음소거 시켜요. 사용자명이 아닌 답장으로 음소거 시킬 수도 있어요.
- - /tmute <사용자명> x(m/h/d): 해당 유저를 x 시간동안 음소거 해요. (핸들 또는 답장을 통해). m = 분, h = 시간, d = 날짜.
- - /unmute <사용자명>: 해당유저의 음소거를 해제해요. 사용자명이 아닌 답장으로 음소거 시킬 수도 있어요.
+*관리자 전용 명령어*
+ - /mute <사용자명>: 사용자를 음소거시켜요. 사용자명이 아닌 답장으로 음소거시킬 수도 있어요.
+ - /tmute <사용자명> x(m/h/d): 해당 유저를 x 시간 동안 음소거해요. (핸들 또는 답장을 통해). m = 분, h = 시간, d = 날짜.
+ - /unmute <사용자명>: 해당 유저의 음소거를 해제해요. 사용자명이 아닌 답장으로 음소거시킬 수도 있어요.
 """
 
 __mod_name__ = "음소거"
