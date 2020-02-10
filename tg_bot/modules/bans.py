@@ -28,7 +28,7 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
     user_id, reason = extract_user_and_text(message, args)
 
     if not user_id:
-        message.reply_text("Ban할 사용자를 지칭하는 것 같지 않아요.")
+        message.reply_text("Ban 할 사용자를 지칭하는 것 같지 않아요.")
         return ""
 
     try:
@@ -61,19 +61,19 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
     try:
         chat.kick_member(user_id)
         bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
-        message.reply_text("넌 Ban이야!")
+        message.reply_text("넌 Ban 이야!")
         return log
 
     except BadRequest as excp:
         if excp.message == "Reply message not found":
             # Do not reply
-            message.reply_text('넌 Ban이야!', quote=False)
+            message.reply_text('넌 Ban 이야!', quote=False)
             return log
         else:
             LOGGER.warning(update)
             LOGGER.exception("ERROR banning user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
                              excp.message)
-            message.reply_text("이런...! 전 그 사용자를 Ban할 수 없어요!")
+            message.reply_text("이런...! 전 그 사용자를 Ban 할 수 없어요!")
 
     return ""
 
@@ -91,7 +91,7 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
     user_id, reason = extract_user_and_text(message, args)
 
     if not user_id:
-        message.reply_text("Ban할 사용자를 지칭하는 것 같지 않아요.")
+        message.reply_text("Ban 할 사용자를 지칭하는 것 같지 않아요.")
         return ""
 
     try:
@@ -220,7 +220,7 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
 def kickme(bot: Bot, update: Update):
     user_id = update.effective_message.from_user.id
     if is_user_admin(update.effective_chat, user_id):
-        update.effective_message.reply_text("제가 그럴수 있으면 좋겠네요... 그러나 당신은 관리자예요!")
+        update.effective_message.reply_text("제가 그럴 수 있으면 좋겠네요... 그러나 당신은 관리자예요!")
         return
 
     res = update.effective_chat.unban_member(user_id)  # unban on current user = kick
@@ -282,10 +282,10 @@ __help__ = """
  - /kickme: 명령을 실행한 사용자를 추방합니다.
 
 *관리자용 명령어*
- - /ban <사용자명>: 유저를 Ban해요. (@사용자명, 또는 답장을 통해서)
+ - /ban <사용자명>: 유저를 Ban 해요. (@사용자명, 또는 답장을 통해서)
  - /tban <사용자명> x(m/h/d): x시간 동안 사용자를 Ban해요. (@사용자명, 또는 답장을 통해서). m = 분, h = 시간, d = 날짜.
- - /unban <사용자명>: 유저의 Ban을 취소해요. (@사용자명, 또는 답장을 통해서)
- - /kick <사용자명>: 유저를 추방해요 (@사용자명, 또는 답장을 통해서)
+ - /unban <사용자명>: 유저의 Ban 을 취소해요. (@사용자명, 또는 답장을 통해서)
+ - /kick <사용자명>: 유저를 추방해요. (@사용자명, 또는 답장을 통해서)
 """
 
 __mod_name__ = "Bans"
