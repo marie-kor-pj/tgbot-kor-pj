@@ -43,33 +43,33 @@ def send(update, message, keyboard, backup_message):
     except KeyError:
         msg = update.effective_message.reply_text(markdown_parser(backup_message +
                                                                   "\n메모: 중괄호가 잘못 배치되어 현재 메시지가 "
-                                                                  "유효하지 않아요"
-                                                                  "업데이트 하세요"),
+                                                                  "유효하지 않아요. "
+                                                                  "업데이트하세요"),
                                                   parse_mode=ParseMode.MARKDOWN)
     except BadRequest as excp:
         if excp.message == "Button_url_invalid":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
                                                                       "\n메모: 현재 메시지의 버튼 중 하나에 잘못된 URL 이 "
-                                                                      "있어요. 업데이트 하세요."),
+                                                                      "있어요. 업데이트하세요."),
                                                       parse_mode=ParseMode.MARKDOWN)
         elif excp.message == "Unsupported url protocol":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
                                                                       "\n메모: 현재 메시지에는 Telegram 에서 지원하지 "
                                                                       "않는 URL 프로토콜을 사용하는 버튼이 "
-                                                                      "있어요. 업데이트 하세요."),
+                                                                      "있어요. 업데이트하세요."),
                                                       parse_mode=ParseMode.MARKDOWN)
         elif excp.message == "Wrong url host":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
                                                                       "\n메모: 현재 메시지에 잘못된 URL 들이 있어요. "
-                                                                      "업데이트 하세요."),
+                                                                      "업데이트하세요."),
                                                       parse_mode=ParseMode.MARKDOWN)
             LOGGER.warning(message)
             LOGGER.warning(keyboard)
-            LOGGER.exception("구문 분석할 수 없어요! 잘못된 URL 호스트 오류가 발생했어요.")
+            LOGGER.exception("구문을 분석할 수 없어요! 잘못된 URL 호스트 오류가 발생했어요.")
         else:
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
                                                                       "\n메모: 사용자 지정 메시지를 보낼 때 오류가 발생했어요. "
-                                                                      "업데이트 하세요."),
+                                                                      "업데이트하세요."),
                                                       parse_mode=ParseMode.MARKDOWN)
             LOGGER.exception()
 
@@ -87,7 +87,7 @@ def new_member(bot: Bot, update: Update):
         for new_mem in new_members:
             # Give the owner a special welcome
             if new_mem.id == OWNER_ID:
-                update.effective_message.reply_text("관리지는 집에 있어요, 파티를 시작해요!")
+                update.effective_message.reply_text("관리자는 집에 있어요, 파티를 시작해요!")
                 continue
 
             # Don't welcome yourself
@@ -201,7 +201,7 @@ def welcome(bot: Bot, update: Update, args: List[str]):
         noformat = args and args[0].lower() == "noformat"
         pref, welcome_m, welcome_type = sql.get_welc_pref(chat.id)
         update.effective_message.reply_text(
-            "이 방의 환영인사 메세지는 다음과 같이 설정되어 있어요: `{}`\n*환영인사 메시지"
+            "이 방의 환영인사 메시지는 다음과 같이 설정되어 있어요: `{}`\n*환영인사 메시지"
             "(not filling the {{}}) :*".format(pref),
             parse_mode=ParseMode.MARKDOWN)
 
@@ -227,11 +227,11 @@ def welcome(bot: Bot, update: Update, args: List[str]):
     elif len(args) >= 1:
         if args[0].lower() in ("on", "yes"):
             sql.set_welc_preference(str(chat.id), True)
-            update.effective_message.reply_text("저는 앞으로 예의발라질게요!")
+            update.effective_message.reply_text("저는 앞으로 예의 발라질게요!")
 
         elif args[0].lower() in ("off", "no"):
             sql.set_welc_preference(str(chat.id), False)
-            update.effective_message.reply_text("더 이상 환영인사를 안할꺼에요! 흥!")
+            update.effective_message.reply_text("더 이상 환영인사를 안 할 꺼예요! 흥!")
 
         else:
             # idek what you're writing, say yes or no
@@ -247,7 +247,7 @@ def goodbye(bot: Bot, update: Update, args: List[str]):
         noformat = args and args[0] == "noformat"
         pref, goodbye_m, goodbye_type = sql.get_gdbye_pref(chat.id)
         update.effective_message.reply_text(
-            "이 방의 작별인사 메세지는 다음과 같이 설정되어 있어요: `{}`.\n*작별인사 메시지"
+            "이 방의 작별인사 메시지는 다음과 같이 설정되어 있어요: `{}`.\n*작별인사 메시지"
             "(not filling the {{}}) :*".format(pref),
             parse_mode=ParseMode.MARKDOWN)
 
@@ -277,7 +277,7 @@ def goodbye(bot: Bot, update: Update, args: List[str]):
 
         elif args[0].lower() in ("off", "no"):
             sql.set_gdbye_preference(str(chat.id), False)
-            update.effective_message.reply_text("그들이 떠난다면 저에게 죽을거예요.")
+            update.effective_message.reply_text("그들이 떠난다면 저에게 죽을 거예요.")
 
         else:
             # idek what you're writing, say yes or no
@@ -319,7 +319,7 @@ def reset_welcome(bot: Bot, update: Update) -> str:
     return "<b>{}:</b>" \
            "\n#환영인사 메시지 초기화" \
            "\n<b>관리자:</b> {}" \
-           "\n환영인사 메시지를 초기화 했어요.".format(html.escape(chat.title),
+           "\n환영인사 메시지를 초기화했어요.".format(html.escape(chat.title),
                                                             mention_html(user.id, user.first_name))
 
 
@@ -352,11 +352,11 @@ def reset_goodbye(bot: Bot, update: Update) -> str:
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
     sql.set_custom_gdbye(chat.id, sql.DEFAULT_GOODBYE, sql.Types.TEXT)
-    update.effective_message.reply_text("성공적으로 작별인사 메시지를 기본값으로 초기화 했어요!")
+    update.effective_message.reply_text("성공적으로 작별인사 메시지를 기본값으로 초기화했어요!")
     return "<b>{}:</b>" \
            "\n#작별인사 메시지 초기화" \
            "\n<b>관리자:</b> {}" \
-           "\n작별인사 메시지를 초기화 했어요.".format(html.escape(chat.title),
+           "\n작별인사 메시지를 초기화했어요.".format(html.escape(chat.title),
                                                  mention_html(user.id, user.first_name))
 
 
@@ -377,7 +377,7 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
 
     if args[0].lower() in ("on", "yes"):
         sql.set_clean_welcome(str(chat.id), True)
-        update.effective_message.reply_text("오래된 환영 메시지를 삭제해 볼게요!")
+        update.effective_message.reply_text("오래된 환영 메시지를 삭제할게요!")
         return "<b>{}:</b>" \
                "\n#CLEAN_WELCOME" \
                "\n<b>관리자:</b> {}" \
@@ -400,9 +400,9 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
 WELC_HELP_TXT = "그룹의 환영인사/작별인사 메시지는 여러 가지 방법으로 바꿀 수 있어요. 만약 당신이 사람마다 다른" \
                 " 환영 메시지를 원하신다면, 당신은 *이러한* 변수들을 사용하실 수 있어요:\n" \
                 " - `{{first}}`: 사용자의 *이름* 을 말해줘요.\n" \
-                " - `{{last}}`: 사용자의 *성* 을 말해줘요. 만약 사용자가 성을 설정하지 않으면 *이름* 으로 " \
+                " - `{{last}}`: 사용자의 *성* 을 말해줘요. 만약 사용자가 성을 설정하지 않으면 *이름*으로 " \
                 "말해줘요.\n" \
-                " - `{{fullname}}`: 이것은 사용자의 *전체* 이름을 말해줘요. 만약 사용자가 성을 설정하지 않으면 *이름* 으로 " \
+                " - `{{fullname}}`: 이것은 사용자의 *전체* 이름을 말해줘요. 만약 사용자가 성을 설정하지 않으면 *이름*으로 " \
                 "말해줘요.\n" \
                 " - `{{username}}`: 이것은 사용자의 *사용자명* 을 말해줘요. 사용자명을 설정하지 않으면, 사용자의 이름으로 " \
                 "말해줘요.\n" \
@@ -410,13 +410,13 @@ WELC_HELP_TXT = "그룹의 환영인사/작별인사 메시지는 여러 가지 
                 " - `{{id}}`: 사용자의 id를 말해줘요.\n" \
                 " - `{{count}}`: 이것은 사용자의 *회원번호*를 말해줘요.\n" \
                 " - `{{chatname}}`: 이것은 *현재 채팅방 이름* 을 말해줘요.\n" \
-                "\n교체하려면 각 변수를 `{{}}` 로 둘러싸야 해요.\n" \
-                "환영인사 메시지 또한 마크다운을 지원하므로 모든 요소를 굵은 글씨/이텔릭체/코드/링크로 만들 수 있어요. " \
+                "\n교체하려면 각 변수를 `{{}}` 로 둘러싸야해요.\n" \
+                "환영인사 메시지 또한 마크다운을 지원하므로 모든 요소를 굵은 글씨/이탤릭체/코드/링크로 만들 수 있어요. " \
                 "버튼도 지원되므로 멋진 소개 버튼을 사용하여 환영인사를 멋지게 연출할 수 " \
                 "있어요.\n" \
                 "규칙에 연결하는 단추를 만들려면 다음을 사용해요.: `[Rules](buttonurl://t.me/{}?start=group_id)`. " \
-                "`group_id` 를  /id를 통해 얻을 수 있는 그룹 ID로 바꾸기만 하면 되요. " \
-                "그룹 ID에는 일반적으로 `-` 기호가 선행되요; 이 기호는 필수이므로 " \
+                "`group_id` 를  /id를 통해 얻을 수 있는 그룹 ID로 바꾸기만 하면 돼요. " \
+                "그룹 ID에는 일반적으로 `-` 기호가 선행돼요; 이 기호는 필수이므로 " \
                 "제거하지 마세요.\n" \
                 "재미있다면 원하는 미디어에 회신하고 /setwelcome 을 눌러 이미지/gif/비디오/음성 메시지를 " \
                 "환영 메시지로 설정할 수도 있어요.".format(dispatcher.bot.username)
@@ -458,11 +458,11 @@ __help__ = """
  - /welcome <on/off>: 환영인사 메시지를 활성화 또는 비활성화해요.
  - /welcome: 현재 환영인사 메시지를 알려줘요.
  - /welcome noformat: 포맷 없이 현재 환영 설정을 보여줘요 - 환영 메시지를 다시 사용하는데 유용해요!
- - /goodbye -> /welcome 과 동일하게 사용되요.
- - /setwelcome <환영하는 말>: 환영 인사를 설정해요. 만약 미디어를 답장하시면, 그 미디어가 환영인사로 사용되요.
- - /setgoodbye <작별하는 말>: 작별 인사를 설정해요. 만약 미디어를 답장하시면, 그 미디어가 작별인사로 사용되요.
- - /resetwelcome: 환영인사가 기본값으로 재설정되요.
- - /resetgoodbye: 작별인사가 기본값으로 재설정되요.
+ - /goodbye -> /welcome 과 동일하게 사용돼요.
+ - /setwelcome <환영하는 말>: 환영 인사를 설정해요. 만약 미디어를 답장하시면, 그 미디어가 환영인사로 사용돼요.
+ - /setgoodbye <작별하는 말>: 작별 인사를 설정해요. 만약 미디어를 답장하시면, 그 미디어가 작별인사로 사용돼요.
+ - /resetwelcome: 환영인사가 기본값으로 재설정돼요.
+ - /resetgoodbye: 작별인사가 기본값으로 재설정돼요.
  - /cleanwelcome <on/off>: 새 멤버가 오면, 이전 환영 메시지를 삭제하여 스팸문자를 방지해요.
  - /welcomehelp: 커스텀 환영인사/작별인사 메시지에 대한 자세한 형식 정보를 봐요.
 """.format(WELC_HELP_TXT)
