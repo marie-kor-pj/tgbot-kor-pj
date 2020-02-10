@@ -75,13 +75,13 @@ if is_module_loaded(FILENAME):
 
             if disable_cmd in set(DISABLE_CMDS + DISABLE_OTHER):
                 sql.disable_command(chat.id, disable_cmd)
-                update.effective_message.reply_text("`{}` 명령어의 사용을 비활성화 합니다.".format(disable_cmd),
+                update.effective_message.reply_text("`{}` 명령어의 사용을 비활성화합니다.".format(disable_cmd),
                                                     parse_mode=ParseMode.MARKDOWN)
             else:
-                update.effective_message.reply_text("그 명령어는 비활성화 하실 수 없어요.")
+                update.effective_message.reply_text("그 명령어는 비활성화하실 수 없어요.")
 
         else:
-            update.effective_message.reply_text("비활성화할 명령어를 입력해 주세요")
+            update.effective_message.reply_text("비활성화할 명령어를 입력해 주세요.")
 
 
     @run_async
@@ -94,10 +94,10 @@ if is_module_loaded(FILENAME):
                 enable_cmd = enable_cmd[1:]
 
             if sql.enable_command(chat.id, enable_cmd):
-                update.effective_message.reply_text("`{}` 명령어의 사용을 활성화합니다".format(enable_cmd),
+                update.effective_message.reply_text("`{}` 명령어의 사용을 활성화합니다.".format(enable_cmd),
                                                     parse_mode=ParseMode.MARKDOWN)
             else:
-                update.effective_message.reply_text("이미 활성화 되어 있어요.")
+                update.effective_message.reply_text("이미 활성화되어 있어요.")
 
         else:
             update.effective_message.reply_text("활성화할 명령어를 입력해 주세요.")
@@ -152,9 +152,9 @@ if is_module_loaded(FILENAME):
  - /cmds: 비활성화된 명령어를 확인해요.
 
 *Admin only:*
- - /enable <명령어>: 명령어를 활성화 해요.
- - /disable <명령어>: 명령어를 비활성화 해요.
- - /listcmds: 사용가능한 모든 전환 가능한 명령어를 나열해요.
+ - /enable <명령어>: 명령어를 활성화해요.
+ - /disable <명령어>: 명령어를 비활성화해요.
+ - /listcmds: 사용 가능한 모든 전환 가능한 명령어를 나열해요.
     """
 
     DISABLE_HANDLER = CommandHandler("disable", disable, pass_args=True, filters=Filters.group)
