@@ -76,7 +76,7 @@ def extract_user_and_text(message: Message, args: List[str]) -> (Optional[int], 
     except BadRequest as excp:
         if excp.message in ("User_id_invalid", "Chat not found"):
             message.reply_text("저는 이 유저와 상호작용한 기록이 없는 것 같아요... - 저에게 권한을 주시려면 그 사람들의 메시지를 "
-                               "forward하세요! (voodoo 인형처럼, 제가 일정 명령어를 시행하기 위해서는 "
+                               "forward 하세요! (voodoo 인형처럼, 제가 일정 명령어를 시행하기 위해서는 "
                                "그들의 일부분이 필요해요...)")
         else:
             LOGGER.exception("Exception %s on user %s", excp.message, user_id)
