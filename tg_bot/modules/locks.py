@@ -127,7 +127,7 @@ def lock(bot: Bot, update: Update, args: List[str]) -> str:
                        "\n잠금된 메시지: <code>{}</code>.".format(html.escape(chat.title),
                                                           mention_html(user.id, user.first_name), args[0])
             else:
-                message.reply_text("무엇을 잠금 하시려는 거예요...? 잠금 활성화를 할 수 있는 목록을 확인하려면 /locktypes 를 입력해 보세요.")
+                message.reply_text("무엇을 잠그시려는 거예요...? 잠금 활성화를 할 수 있는 목록을 확인하려면 /locktypes 을(를) 입력해 보세요.")
 
     else:
         message.reply_text("제가 관리자가 아니거나 메시지를 삭제할 권한이 없어요...")
@@ -180,7 +180,7 @@ def unlock(bot: Bot, update: Update, args: List[str]) -> str:
                        "\n잠금해제된 메시지: <code>{}</code>.".format(html.escape(chat.title),
                                                             mention_html(user.id, user.first_name), args[0])
             else:
-                message.reply_text("무엇의 잠금을 해제하시려는 건가요...? 잠금 목록을 보기위해 /locktypes 를 입력하세요")
+                message.reply_text("무엇의 잠금을 해제하시려는 건가요...? 잠금 목록을 보기 위해 /locktypes 를 입력하세요")
 
         else:
             bot.sendMessage(chat.id, "무엇의 잠금을 해제하시려는 건가요...?")
@@ -201,7 +201,7 @@ def del_lockables(bot: Bot, update: Update):
                 for new_mem in new_members:
                     if new_mem.is_bot:
                         if not is_bot_admin(chat, bot.id):
-                            message.reply_text("다른 봇이 들어오려고 하네요...들어오지 말라고 하고싶지만..."
+                            message.reply_text("다른 봇이 들어오려고 하네요... 들어오지 말라고 하고 싶지만... "
                                                "전 관리자가 아니에요!")
                             return
 
@@ -242,7 +242,7 @@ def build_lock_message(chat_id):
     if not (locks or restr):
         res = "이 채팅에는 현재 잠금된 메시지가 없어요."
     else:
-        res = "이것들은 이 채팅의 잠긴 메시지들이예:"
+        res = "이것들은 이 채팅에서 잠긴 메시지들이에요:"
         if locks:
             res += "\n - sticker = `{}`" \
                    "\n - audio = `{}`" \
@@ -292,14 +292,14 @@ __help__ = """
  - /locktypes: 잠글 수 있는 목록을 알려줘요
 
 *관리자용 명령어*
- - /lock <잠글 내용>: 특정 유형의 항목을 잠금해줘요. (사적으로 사용할 수는 없어요)
+ - /lock <잠글 내용>: 특정 유형의 항목을 잠금 해줘요. (사적으로 사용할 수는 없어요)
  - /unlock <잠금 해제할 내용>: 특정 유형의 항목을 잠금 해제해줘요. (사적으로 사용할 수는 없어요)
- - /locks: 현재 이 채팅방에서 잠금된 것이 무엇인지 알려줘요.
+ - /locks: 현재 이 채팅방에서 잠금 된 것이 무엇인지 알려줘요.
 
 잠금 기능을 사용해서 그룹의 사용자를 제한할 수 있어요.
 예:
 url 을 잠그면 url 이 있는 모든 메시지가 자동으로 삭제되고, \
-스티커를 잠그면 스티커가 있는 모든 메시지가 삭제되요.
+스티커를 잠그면 스티커가 있는 모든 메시지가 삭제돼요.
 봇을 잠그면 관리자가 아닌 사람이 채팅에 봇 추가하는 것을 막을 수 있어요.
 """
 
