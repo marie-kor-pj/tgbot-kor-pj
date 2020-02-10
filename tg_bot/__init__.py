@@ -13,7 +13,7 @@ LOGGER = logging.getLogger(__name__)
 
 # if version < 3.6, stop bot.
 if sys.version_info[0] < 3 or sys.version_info[1] < 6:
-    LOGGER.error("3.6 버전 이상의 Python이 있어야 합니다. 여러 기능이 해당 Python3.6 버전을 따릅니다. 봇종료.")
+    LOGGER.error("3.6 버전 이상의 Python 이 있어야 합니다. 여러 기능이 해당 Python3.6 버전을 따릅니다. 봇 종료.")
     quit(1)
 
 ENV = bool(os.environ.get('ENV', False))
@@ -41,7 +41,7 @@ if ENV:
     try:
         WHITELIST_USERS = set(int(x) for x in os.environ.get("WHITELIST_USERS", "").split())
     except ValueError:
-        raise Exception("화이트리스트에 올바른 정수가 없습니다..")
+        raise Exception("화이트리스트에 올바른 정수가 없습니다.")
 
     WEBHOOK = bool(os.environ.get('WEBHOOK', False))
     URL = os.environ.get('URL', "")  # Does not contain token
