@@ -91,7 +91,7 @@ def get(bot, update, notename, show_none=True, no_format=False):
 
             except BadRequest as excp:
                 if excp.message == "Entity_mention_user_invalid":
-                    message.reply_text("전에 본 적이 없는 사람을 언급하려 했던 것 같군요. If you really "
+                    message.reply_text("전에 본 적이 없는 사람을 언급하려 했던 것 같군요. "
                                        "정말로 그들에 대해 언급하고 싶다면, 그들의 메시지들 중 하나를 나에게 전달해주세요, "
                                        "그러면 저는 그들에게 태그를 붙일 수 있을 거예요!")
                 elif FILE_MATCHER.match(note.value):
@@ -100,13 +100,13 @@ def get(bot, update, notename, show_none=True, no_format=False):
                                        "그동안에 그것을 메모 목록에서 삭제해 드릴게요.")
                     sql.rm_note(chat_id, notename)
                 else:
-                    message.reply_text("이 노트의 형식이 잘못되었기 때문에 보낼 수 없어요."
+                    message.reply_text("이 노트의 형식이 잘못되었기 때문에 보낼 수 없어요. "
                                        "이유를 알 수 없다면 @MarieSupport 에 문의하세요!")
                     LOGGER.exception("메시지를 구문 분석할 수 없어요 #%s  - %s ", notename, str(chat_id))
                     LOGGER.warning("메시지가 있었어요: %s", str(note.value))
         return
     elif show_none:
-        message.reply_text("이 기록은 존재하지 않아요")
+        message.reply_text("이 기록은 존재하지 않아요.")
 
 
 @run_async
@@ -211,7 +211,7 @@ def __import_data__(chat_id, data):
         with BytesIO(str.encode("\n".join(failures))) as output:
             output.name = "failed_imports.txt"
             dispatcher.bot.send_document(chat_id, document=output, filename="failed_imports.txt",
-                                         caption="이러한 파일/사진은 다른 봇이 보냈기 때문에 가져오지 못했어요."
+                                         caption="이러한 파일/사진은 다른 봇이 보냈기 때문에 가져오지 못했어요. "
                                                  "이것은 Telegram API 제한사항이므로 피할 수 없어요. "
                                                  "불편을 끼쳐드려 죄송합니다!")
 
@@ -240,7 +240,7 @@ __help__ = """
 *Admin only:*
  - /save <notename> <notedata>: 이름이 notename 인 노트를 nothedata 에 저장해요.
 표준 마크다운 링크 구문을 사용하여 노트에 버튼을 추가할 수 있어요 - 링크 앞에는 \
-`buttonurl:` 섹션이 있어야 해요, 예를 들어 `[somelink](buttonurl:example.com)` 처럼요. 더 많은 정보를 얻고싶다면 /markdownhelp 명령어를 통해 알아보세요.
+`buttonurl:` 섹션이 있어야 해요, 예를 들어 `[somelink](buttonurl:example.com)` 처럼요. 더 많은 정보를 얻고 싶다면 /markdownhelp 명령어를 통해 알아보세요.
  - /save <notename>: 답장한 메시지를 name 이 아닌 notename (으)로 저장해요.
  - /clear <notename>: notename 이라는 이름의 노트를 제거해요.
 """
