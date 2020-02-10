@@ -33,13 +33,13 @@ def send_rules(update, chat_id, from_pm=False):
             raise
 
     rules = sql.get_rules(chat_id)
-    text = "*{}*를 위한 규칙은:\n\n{} 에요.".format(escape_markdown(chat.title), rules)
+    text = "*{}* 을(를) 위한 규칙은:\n\n{} 에요.".format(escape_markdown(chat.title), rules)
 
     if from_pm and rules:
         bot.send_message(user.id, text, parse_mode=ParseMode.MARKDOWN)
     elif from_pm:
         bot.send_message(user.id, "그룹의 관리자가 이 채팅에 어떠한 규칙도 적용하지 않았어요. "
-                                  "이것은 이그룹에 규칙이 없다는것을 의미하지는 않을거에요!")
+                                  "이것은 이 그룹에 규칙이 없다는 것을 의미하지는 않을 거예요!")
     elif rules:
         update.effective_message.reply_text("이 그룹의 규칙을 확인하시려면 저에게 개인 메시지로 연락하세요.",
                                             reply_markup=InlineKeyboardMarkup(
@@ -48,7 +48,7 @@ def send_rules(update, chat_id, from_pm=False):
                                                                                                      chat_id))]]))
     else:
         update.effective_message.reply_text("그룹의 관리자가 이 채팅에 어떠한 규칙도 적용하지 않았어요. "
-                                            "이것은 이 그룹에 규칙이 없다는것을 의미하지는 않을거에요!")
+                                            "이것은 이 그룹에 규칙이 없다는 것을 의미하지는 않을 거예요!")
 
 
 @run_async
@@ -64,7 +64,7 @@ def set_rules(bot: Bot, update: Update):
         markdown_rules = markdown_parser(txt, entities=msg.parse_entities(), offset=offset)
 
         sql.set_rules(chat_id, markdown_rules)
-        update.effective_message.reply_text("이 그룹에 성공적으로 규칙을 적용했어요")
+        update.effective_message.reply_text("이 그룹에 성공적으로 규칙을 적용했어요!")
 
 
 @run_async
@@ -76,7 +76,7 @@ def clear_rules(bot: Bot, update: Update):
 
     
 def __stats__():
-    return "{} 채팅에 규칙이 설정되어 있어요".format(sql.num_chats())
+    return "{} 채팅에 규칙이 설정되어 있어요.".format(sql.num_chats())
 
 
 def __import_data__(chat_id, data):
