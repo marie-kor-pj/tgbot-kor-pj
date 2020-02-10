@@ -96,7 +96,7 @@ def unmute(bot: Bot, update: Update, args: List[str]) -> str:
                                                   mention_html(user.id, user.first_name),
                                                   mention_html(member.user.id, member.user.first_name))
     else:
-        message.reply_text("이 사용자는 채팅에 참여하지 않아요. 이 사용자의 말을 무시해도 "
+        message.reply_text("이 사용자는 채팅에 참여하지 않아요. 이 사용자의 말을 음소거해도 "
                            "기존 대화보다 더 많은 대화를 할 수 없어요!")
 
     return ""
