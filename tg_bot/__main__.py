@@ -19,30 +19,30 @@ from tg_bot.modules.helper_funcs.chat_status import is_user_admin
 from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 PM_START_TEXT = """
-안녕하세요! {} 님, 제 이름은 {}입니다! 만약 당신이 저를 사용하는데 문제가 있다면, /help - 를 읽어주세요.
+안녕하세요! {} 님, 제 이름은 {}입니다! 만약 저를 사용하는데 궁금한 점이 있다면, /help 를 읽어주세요.
 만약 해결이 불가능하다면,  @MarieSupport 로 와주세요.
 
-저는 Pytyon3.6 으로 빌드된 그룹 관리자 봇입니다. pytyon-telegram 라이브러리를 사용하며, 그리고 전 오픈소스예요!
-당신은 저의 소스코드를 [here](https://github.com/marie-kor-pj/tgbot-kor-pj) 여기서 볼 수 있어요!
+저는 Pytyon3.6 으로 빌드된 그룹 관리자 봇입니다. pytyon-telegram 라이브러리를 사용해요. 그리고 전 오픈소스예요!
+저의 소스코드를 [here](https://github.com/marie-kor-pj/tgbot-kor-pj) 여기서 볼 수 있어요!
 
-/help 를 사용하여 사용 가능한 명령 목록을 찾을 수 있어요.
+/help 를 사용하면 사용 가능한 명령들을 찾을 수 있어요.
 
 당신이 만약 저를 즐겁게 사용하셨다면, /donate 명령어를 통해 절 한글화 한 개발자에게 기부하세요.
 """
 
 HELP_STRINGS = """
-안녕하세요! 제 이름은 {} 이에요!
-저는 몇 가지 재밌는 모듈을 가진 그룹 관리 봇이에요! 도움을 얻으려면
+안녕하세요! 제 이름은 {}입니다!
+저는 몇 가지 재밌는 기능을 가진 그룹 관리 봇이에요! 도움을 얻으려면
 아래를 참조하세요.
 
-사용 가능한 *Main* Command:
+사용 가능한 주요 명령어:
  - /start: 봇을 시작해요.
- - /help: 개인 메시지로 도움말 메시지를 보내요.
- - /help <module name>: 모듈에 대한 정보를 알려줘요.
- - /donate: 기부 방법에 대한 정보를 알려줘요.
+ - /help: 지금처럼 개인 메시지로 여러 명령어를 알려줘요.
+ - /help <명령어 이름>: 질문하신 명령어에 대해 자세히 알려줘요.
+ - /donate: 기부 방법에 대해 알려줘요.
  - /settings:
-   - in PM: 당신에게 모든 지원 가능한 설정에 대한 정보를 보내요.
-   - in a group: 개인 메시지로 다시 보내요.
+   - 개인메시지에서 사용하시면 지원하는 모든 명령어에 대한 설정을 알려줘요.
+   - 그룹에서 사용하면 개인 메시지로 다시 보내줄게요.
 
 {}
 그리고 다른 명령어들:
