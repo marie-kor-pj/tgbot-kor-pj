@@ -279,7 +279,7 @@ def unban(bot: Bot, update: Update, args: List[str]) -> str:
 
 
 __help__ = """
- - /kickme: 명령을 실행한 사용자를 추방합니다.
+ - /kickme: 명령을 실행한 대상을 추방해요.
 
 *관리자용 명령어*
  - /ban <사용자명>: 유저를 Ban 해요. (@사용자명, 또는 답장을 통해서)
