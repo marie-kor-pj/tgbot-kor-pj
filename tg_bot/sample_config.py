@@ -34,7 +34,7 @@ class Config(object):
     DEL_CMDS = False  # Whether or not you should delete "blue text must click" commands
     STRICT_GBAN = False
     WORKERS = 8  # Number of subthreads to use. This is the recommended amount - see for yourself what works best!
-    BAN_STICKER = 'CAADBQADEgADtkm2Dfj6kuyK8frDAg'  # banhammer marie sticker
+    BAN_STICKER = 'CAACAgUAAxkBAAED4zteQjLO2MumgWq17cyreRjorpVq7wACEQAD7vamIRlwRuKSNQPbGAQ'  # banhammer marie sticker
     ALLOW_EXCL = False  # Allow ! commands as well as /
 
 
