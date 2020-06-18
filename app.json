@@ -28,7 +28,7 @@
     },
     "WEBHOOK": {
       "description": "ANYTHING 으로 설정하면 env 모드 메시지에서 웹 후크가 활성화됩니다.",
-      "value": "false"
+      "value": false
     },
     "URL": {
       "description": "https://<앱이름>.herokuapp.com/ 같은 Heroku 앱 URL 을 입력하세요.",
