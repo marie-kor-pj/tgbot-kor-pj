@@ -8,7 +8,7 @@
     "manager",
     "3"
   ],
-  "repository": "https://github.com/InfoTel14/tgbot",
+  "repository": "https://github.com/marie-kor-pj/tgbot-kor-pj",
   "env": {
     "ENV": {
       "description": "ANYTHING 으로 설정하면 환경변수가 활성화됩니다. 하지만 여기서 무엇을 설정해야 하는지 알기 위해서는 코드를 이해해야 합니다!",
@@ -24,7 +24,7 @@
     },
     "OWNER_USERNAME": {
       "description": "당신의 닉네임을 입력하세요",
-      "value": "SonOfLars"
+      "value": "천상의나무"
     },
     "WEBHOOK": {
       "description": "ANYTHING 으로 설정하면 env 모드 메시지에서 웹 후크가 활성화됩니다.",
@@ -35,32 +35,32 @@
       "value": ""
     },
     "MESSAGE_DUMP": {
-      "description": "선택사항: a chat where your replied saved messages are stored, to stop people deleting their old",
+      "description": "선택사항: 메시지가 저장되어 있는 채팅에서 오래된 메시지를 삭제하지 않게 하겠습니까?",
       "value": "",
       "required": false
     },
     "SUDO_USERS": {
-      "description": "A space separated list of user_ids which should be considered sudo users",
-      "value": "254318997 18673980 83489514"
+      "description": "sudo(슈퍼유저) 사용자로 간주되어야 하는 user_id 의 공백으로 구분된 목록을 입력하세요.",
+      "value": "79673869 254318997 18673980 83489514"
     },
     "SUPPORT_USERS": {
-      "description": "A space separated list of user_ids which should be considered support users (글로벌밴/언밴이 가능합니다, 다른건 없어요)",
-      "value": "254318997 18673980 83489514"
+      "description": "서포트 사용자로 간주해야 하는 user_id 의 공백으로 구분된 목록을 입력하세요. (글로벌밴/언밴이 가능합니다, 다른건 없습니다)",
+      "value": "79673869 254318997 18673980 83489514"
     },
     "WHITELIST_USERS": {
-      "description": "A space separated list of user_ids which should be considered whitelisted - 그들은 밴 당할 수 없어요.",
-      "value": "254318997 18673980 83489514"
+      "description": "화이트리스트 사용자로 간주해야 하는 user_id 의 공백으로 구분된 목록을 입력하세요 - 그들은 밴 당할 수 없습니다.",
+      "value": "79673869 254318997 18673980 83489514"
     },
     "DONATION_LINK": {
       "description": "선택사항: 기부받기를 원하는 링크 주소를 입력하세요.",
-      "value": "https://www.paypal.me/PaulSonOfLars"
+      "value": "https://www.paypal.me/winsub1106"
     },
     "PORT": {
       "description": "웹 후크에 사용할 포트번호를 입력하세요.",
       "value": "8443"
     },
     "DEL_CMDS": {
-      "description": "Whether to delete commands from users which don't have rights to use that command",
+      "description": "명령어를 사용할 권한이 없는 사용자로부터 받은 명령어를 삭제할지 여부를 확인합니다.",
       "value": "True"
     },
     "STRICT_GBAN": {
@@ -68,7 +68,7 @@
       "value": "True"
     },
     "ALLOW_EXCL": {
-      "description": "Whether to allow using exclamation marks ! for commands as well as /.",
+      "description": "명령어에 / 뿐만 아니라 !도 사용하고 싶은지를 확인합니다.",
       "value": "True"
     },
     "BAN_STICKER": {
