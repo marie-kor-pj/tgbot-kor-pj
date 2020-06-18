@@ -97,34 +97,34 @@ class Development(Config):
 만약 당신이 데이터베이스 기반 모듈을 만들고 싶다면 (eg: locks, notes, userinfo, users, filters, welcomes),<br>
 당신의 시스템에는 데이터베이스가 설치되어 있어야 합니다. 전 potgres를 사용하므로, 이것을 더 추천합니다.<br><br>
 
-postgres 사용시의 방법입니다. 우분투/데비안에서의 방법이므로 다른 계열에선 다를 수 있습니다. <br><br>
+postgres 사용시의 방법입니다. 우분투/데비안에서의 방법이므로 다른 계열에선 다를 수 있습니다. <br>
 
 - postgresql 설치:
 
-`sudo apt-get update && sudo apt-get install postgresql`<br><br>
+`sudo apt-get update && sudo apt-get install postgresql`<br>
 
 - postgres 사용자 변경:
 
-`sudo su - postgres`<br><br>
+`sudo su - postgres`<br>
 
 - 새 데이터베이스 사용자 생성(적절하게 YOUR_USER 변경):
 
-`createuser -P -s -e YOUR_USER`<br>
+`createuser -P -s -e YOUR_USER`
 
 이 뒤에는 비밀번호를 입력해야 할 것입니다. <br>
 
 - 새 데이터베이스 테이블 생성:
 
-`createdb -O YOUR_USER YOUR_DB_NAME`<br><br>
+`createdb -O YOUR_USER YOUR_DB_NAME`<br>
 
 YOUR_USER와 YOUR_DB_NAME 을 정확하게 바꾸세요.<br>
 
 - 마지막으로:
 
-`psql YOUR_DB_NAME -h YOUR_HOST YOUR_USER`<br><br>
+`psql YOUR_DB_NAME -h YOUR_HOST YOUR_USER`
 
 터미널을 통해 데이터베이스에 연결할 수 있습니다.<br>
-기본 설정은 0.0.0.0:5432 입니다.(YOUR_HOST)
+기본 설정은 0.0.0.0:5432 입니다.(YOUR_HOST)<br><br>
 
 이제 당신의 데이터베이스 URL을 빌드할 수 있게 되었습니다. 그것은 다음과 같습니다:
 
@@ -147,15 +147,15 @@ sqldbtype 을(를) 당신이 사용하는 DB에 따라 바꾸세요. (eg postgre
 
 ### 자신만의 모듈 만들기.
 
-모듈을 만드는 것은 많이 간단해졌습니다 - 하지만 더 간단한 방법을 요구하지는 마십시오.<br><br>
+모듈을 만드는 것은 많이 간단해졌습니다 - 그러니 더 간단한 방법을 요구하지는 마십시오.<br><br>
 
 필요한 것은 .py 파일이 모듈 폴더 내에 있는 것 뿐입니다.<br><br>
 
 명령어를 추가하려면, 아래 명령어를 사용해 dispatcher 을(를) 불러오는 것을 잊지 마세요:
-`from tg_bot import dispatcher`.
+`from tg_bot import dispatcher`.<br>
 
 그럼 당신은 이제 전형적인 방법으로 명령어를 추가할 수 있습니다:
-`dispatcher.add_handler()`.
+`dispatcher.add_handler()`<br>
 
  `__help__` 변수에게 이 모듈을 설명하는 것을 맡겨도 됩니다.<br>
 명령어가 봇이 이것을 로드할 수 있고, 기록을 추가 할 수 있게 해줄 것입니다.<br>
