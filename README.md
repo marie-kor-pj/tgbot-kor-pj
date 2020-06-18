@@ -21,9 +21,9 @@ Heroku Deploy<br>
 
 ## 봇 시작.
 
-데이터베이스 설정과 환경 설정을 끝마쳤다면, (하단 참고), 이 명령어를 실행하세요:
+데이터베이스 설정과 환경 설정을 끝마쳤다면, (하단 참고), 이 명령어를 실행하세요:<br><br>
 
-`python3 -m tg_bot`
+`python3 -m tg_bot`<br>
 
 
 ## 봇 설정 (사용하기 전에 이 내용을 읽어보십시오!):
@@ -58,8 +58,8 @@ class Development(Config):
     NO_LOAD = ['translation']
 ```
 
-당신이 config.py 파일을 가지고 있지 않다면 (EG on heroku), 환경 변수를 사용하는 방법도 사용이 가능합니다.
-다음 환경 변수들이 사용 가능합니다:
+당신이 config.py 파일을 가지고 있지 않다면 (EG on heroku), 환경 변수를 사용하는 방법도 사용이 가능합니다.<br>
+다음 환경 변수들이 사용 가능합니다:<br>
  - `ENV`: 이것을 무엇으로든 설정하는 것으로 환경 변수를 활성화할 수 있습니다.
 
  - `TOKEN`: 당신의 봇 토큰입니다.
@@ -88,42 +88,42 @@ class Development(Config):
 
 ### Python 의존성
 
-프로젝트 디렉토리로 가서 다음 명령어를 입력하여 필수 파이썬 의존성 패키지들을 설치할 수 있습니다:
+프로젝트 디렉토리로 가서 다음 명령어를 입력하여 필수 파이썬 의존성 패키지들을 설치할 수 있습니다:<br><br>
 
-`pip3 install -r requirements.txt`.
+`pip3 install -r requirements.txt`.<br><br>
 
 이 명령어가 모든 필수 파이썬 패키지들을 설치할 것입니다. 
 
 ### 데이터베이스
 
 만약 당신이 데이터베이스 기반 모듈을 만들고 싶다면 (eg: locks, notes, userinfo, users, filters, welcomes),<br>
-당신의 시스템에는 데이터베이스가 설치되어 있어야 합니다. 전 potgres를 사용하므로, 이것을 더 추천합니다.
+당신의 시스템에는 데이터베이스가 설치되어 있어야 합니다. 전 potgres를 사용하므로, 이것을 더 추천합니다.<br><br>
 
-postgres 사용시의 방법입니다. 우분투/데비안에서의 방법이므로 다른 계열에선 다를 수 있습니다. 
+postgres 사용시의 방법입니다. 우분투/데비안에서의 방법이므로 다른 계열에선 다를 수 있습니다. <br><br>
 
-- postgresql 설치:
+- postgresql 설치:<br>
 
-`sudo apt-get update && sudo apt-get install postgresql`
+`sudo apt-get update && sudo apt-get install postgresql`<br><br>
 
-- postgres 사용자 변경:
+- postgres 사용자 변경:<br>
 
-`sudo su - postgres`
+`sudo su - postgres`<br><br>
 
-- 새 데이터베이스 사용자 생성(적절하게 YOUR_USER 변경):
+- 새 데이터베이스 사용자 생성(적절하게 YOUR_USER 변경):<br>
 
-`createuser -P -s -e YOUR_USER`
+`createuser -P -s -e YOUR_USER`<br><br>
 
-이 뒤에는 비밀번호를 입력해야 할 것입니다. 
+이 뒤에는 비밀번호를 입력해야 할 것입니다. <br>
 
-- 새 데이터베이스 테이블 생성:
+- 새 데이터베이스 테이블 생성:<br>
 
-`createdb -O YOUR_USER YOUR_DB_NAME`
+`createdb -O YOUR_USER YOUR_DB_NAME`<br><br>
 
-YOUR_USER와 YOUR_DB_NAME 을 정확하게 바꾸세요.
+YOUR_USER와 YOUR_DB_NAME 을 정확하게 바꾸세요.<br>
 
-- 마지막으로:
+- 마지막으로:<br>
 
-`psql YOUR_DB_NAME -h YOUR_HOST YOUR_USER`
+`psql YOUR_DB_NAME -h YOUR_HOST YOUR_USER`<br><br>
 
 터미널을 통해 데이터베이스에 연결할 수 있습니다.<br>
 기본 설정은 0.0.0.0:5432 입니다.(YOUR_HOST)
