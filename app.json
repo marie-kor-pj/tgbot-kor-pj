@@ -44,11 +44,11 @@
       "value": "254318997 18673980 83489514"
     },
     "SUPPORT_USERS": {
-      "description": "A space separated list of user_ids which should be considered support users (can gban/ungban, nothing else)",
+      "description": "A space separated list of user_ids which should be considered support users (글로벌밴/언밴이 가능합니다, 다른건 없어요)",
       "value": "254318997 18673980 83489514"
     },
     "WHITELIST_USERS": {
-      "description": "A space separated list of user_ids which should be considered whitelisted - they can't be banned.",
+      "description": "A space separated list of user_ids which should be considered whitelisted - 그들은 밴 당할 수 없어요.",
       "value": "254318997 18673980 83489514"
     },
     "DONATION_LINK": {
@@ -64,7 +64,7 @@
       "value": "True"
     },
     "STRICT_GBAN": {
-      "description": "Enforce gbans across new groups as well as old groups. When a gbanned user talks, he will be banned.",
+      "description": "이전 그룹뿐만 아니라 새 그룹에도 Gbans를 적용합니다. 글로벌밴된 사용자가 말할 때, 그는 밴될 것입니다.",
       "value": "True"
     },
     "ALLOW_EXCL": {
