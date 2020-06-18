@@ -442,9 +442,9 @@ def main():
     # add antiflood processor
     Dispatcher.process_update = process_update
 
-    if WEBHOOK == "ANYTHING":
+    if WEBHOOK:
         LOGGER.info("webhooks 사용.")
-        updater.start_webhook(listen="127.0.0.1",
+        updater.start_webhook(listen="0.0.0.0",
                               port=PORT,
                               url_path=TOKEN)
 
