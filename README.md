@@ -1,10 +1,8 @@
 # tgbot
 
-Heroku Deploy<br>
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/marie-kor-pj/tgbot-kor-pj)
 
-이 봇은 [Marie 봇](https://github.com/PaulSonOfLars/tgbot) 을 한글화한 것 입니다.
-
+* 이 봇은 [Marie 봇](https://github.com/PaulSonOfLars/tgbot) 을 한글화한 것 입니다.
 * 원본 봇은 [Marie](https://t.me/BanhammerMarie_bot) 입니다.
 * 원본 Marie 봇에 대한 궁금한 점은 [support group](https://t.me/MarieSupport) 에서 물어주세요.
 * Marie 봇에 대한 새 소식은 [news channel](https://t.me/MarieNews) 에서 확인하세요.
@@ -26,7 +24,7 @@ Heroku Deploy<br>
 `python3 -m tg_bot`<br>
 
 
-## 봇 설정 (사용하기 전에 이 내용을 읽어보십시오!):
+## 봇 설정 (사용하기 전에 이 내용을 읽어보십시오!):<br>
 파이썬 3.6 사용을 권장합니다. 구버전 파이썬에서 모든것이 정상 작동하리라고는 장담할 수 없어요!<br>
 이건 마크다운 파싱이 dict를 통해 진행되었기 때문입니다. dict는 파이썬 3.6 을 기본으로 합니다.
 
@@ -81,7 +79,7 @@ class Development(Config):
  - `PORT`: webhook를 위해 사용할 포트.
  - `DEL_CMDS`: 명령어를 사용할 권한이 없는 유저들에게서 명령어를 삭제할 수 있습니다.
  - `STRICT_GBAN`: 새로운 그룹과 마찬가지로 오래된 그룹에서도 gban을 시행합니다. 만약 gban 당한 유저가 말을 한다면, 그는 밴 당할 것입니다.
- - `WORKERS`: 사용할 스레드의 개수입니다. 8개가 기본이자 권장하는 개수이지만, 당신의 경험은 다를 수 있으니 알아서 하시면 .
+ - `WORKERS`: 사용할 스레드의 개수입니다. 8개가 기본이자 권장하는 개수이지만, 당신의 경험은 다를 수 있으니 알아서 하시면 됩니다.
  __Note__ 미친듯이 스레드만 추가하는 것에 매달리는 것은 사실 봇 속도 향상에 큰 도움을 주지 못합니다. 많은 양의 sql 데이터 액세스와, 파이썬 asynchronous가 더 큰 분량을 차지합니다. 
  - `BAN_STICKER`: 유저를 밴할 때 사용할 스티커.
  - `ALLOW_EXCL`: !를 /와 같이 사용할 수 있도록 허용할지 결정하세요.
@@ -101,27 +99,27 @@ class Development(Config):
 
 postgres 사용시의 방법입니다. 우분투/데비안에서의 방법이므로 다른 계열에선 다를 수 있습니다. <br><br>
 
-- postgresql 설치:<br>
+- postgresql 설치:
 
 `sudo apt-get update && sudo apt-get install postgresql`<br><br>
 
-- postgres 사용자 변경:<br>
+- postgres 사용자 변경:
 
 `sudo su - postgres`<br><br>
 
-- 새 데이터베이스 사용자 생성(적절하게 YOUR_USER 변경):<br>
+- 새 데이터베이스 사용자 생성(적절하게 YOUR_USER 변경):
 
-`createuser -P -s -e YOUR_USER`<br><br>
+`createuser -P -s -e YOUR_USER`<br>
 
 이 뒤에는 비밀번호를 입력해야 할 것입니다. <br>
 
-- 새 데이터베이스 테이블 생성:<br>
+- 새 데이터베이스 테이블 생성:
 
 `createdb -O YOUR_USER YOUR_DB_NAME`<br><br>
 
 YOUR_USER와 YOUR_DB_NAME 을 정확하게 바꾸세요.<br>
 
-- 마지막으로:<br>
+- 마지막으로:
 
 `psql YOUR_DB_NAME -h YOUR_HOST YOUR_USER`<br><br>
 
@@ -138,12 +136,12 @@ sqldbtype 을(를) 당신이 사용하는 DB에 따라 바꾸세요. (eg postgre
 ## 모듈들
 ### 로드 순서 설정.
 
-이 모듈 로드 순서는 `LOAD` 와 `NO_LOAD` 환경 설정으로 변경이 가능합니다.
-이 모두는 리스트를 대표해야 합니다.
+이 모듈 로드 순서는 `LOAD` 와 `NO_LOAD` 환경 설정으로 변경이 가능합니다.<br>
+이 모두는 리스트를 대표해야 합니다.<br><br>
 
-만약 `LOAD` 가 빈 리스트라면, `modules/` 안에 있는 모든 것들은 기본 설정으로 로드될 것입니다.<br><br>
+만약 `LOAD` 가 빈 리스트라면, `modules/` 안에 있는 모든 것들은 기본 설정으로 로드될 것입니다.<br>
 
-만약 `NO_LOAD` 가 최신이 아니라면, 또는 빈 리스트라면, 로딩되기로 선택된 것들은 모두 로드될 것입니다.<br><br>
+만약 `NO_LOAD` 가 최신이 아니라면, 또는 빈 리스트라면, 로딩되기로 선택된 것들은 모두 로드될 것입니다.<br>
 
 만약 모듈이 `LOAD` 와 `NO_LOAD`에 모두 존재할 경우, 모듈은 로딩되지 않습니다 - `NO_LOAD` 가 우선입니다.
 
