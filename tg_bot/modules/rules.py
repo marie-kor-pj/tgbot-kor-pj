@@ -76,7 +76,7 @@ def clear_rules(bot: Bot, update: Update):
 
     
 def __stats__():
-    return "{} 채팅에 규칙이 설정되어 있어요.".format(sql.num_chats())
+    return "{}개의 채팅방에 규칙이 설정되어 있어요.".format(sql.num_chats())
 
 
 def __import_data__(chat_id, data):
