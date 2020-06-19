@@ -455,7 +455,7 @@ def main():
             updater.bot.set_webhook(url=URL + TOKEN)
 
     else:
-        LOGGER.info("긴 폴링 사용.")
+        LOGGER.info("롱 폴링 사용.")
         updater.start_polling(timeout=15, read_latency=4)
 
     updater.idle()
