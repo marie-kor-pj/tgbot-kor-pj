@@ -140,8 +140,8 @@ def __chat_settings__(chat_id, user_id):
 
 
 def __stats__():
-    return "{}개의 단어가 {}개의 채팅방에서 Blacklist 단어예요.".format(sql.num_blacklist_filter_chats(), 
-                                                            sql.num_blacklist_filters())
+    return "{}개의 채팅방에서 {}개의 단어가 Blacklist 단어예요.".format(sql.num_blacklist_filters(), 
+                                                            sql.num_blacklist_filter_chats())
 
 
 __mod_name__ = "블랙리스트"
