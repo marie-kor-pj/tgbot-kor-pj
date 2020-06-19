@@ -372,9 +372,9 @@ def set_warn_strength(bot: Bot, update: Update, args: List[str]):
 
 
 def __stats__():
-    return "{}개의 전체 경고, {}개의 전체 채팅.\n" \
-           "{}개의 경고 필터, {}개의 전체 채팅.".format(sql.num_warns(), sql.num_warn_chats(),
-                                                      sql.num_warn_filters(), sql.num_warn_filter_chats())
+    return "{}개의 채팅방에서 {}번의 경고를 했어요.\n" \
+           "{}개의 채팅방에서 {}개의 경고 필터가 있어요.".format(sql.num_warn_chats(), sql.num_warns(),
+                                                      sql.num_warn_filter_chats(), sql.num_warn_filters())
 
 
 def __import_data__(chat_id, data):
