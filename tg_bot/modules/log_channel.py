@@ -126,7 +126,7 @@ if is_module_loaded(FILENAME):
 
 
     def __stats__():
-        return "{} 로그 채널 설정.".format(sql.num_logchannels())
+        return "{}개의 채팅방에서 로그 채널을 설정했어요.".format(sql.num_logchannels())
 
 
     def __migrate__(old_chat_id, new_chat_id):
