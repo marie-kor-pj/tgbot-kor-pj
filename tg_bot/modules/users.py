@@ -107,7 +107,7 @@ def __user_info__(user_id):
 
 
 def __stats__():
-    return "{} 사용자가 {} 개의 채팅방에 저와 같이 있어요.".format(sql.num_users(), sql.num_chats())
+    return "{}명의 사용자가 {}개의 채팅방에서 저와 같이 있어요.".format(sql.num_users(), sql.num_chats())
 
 
 def __gdpr__(user_id):
