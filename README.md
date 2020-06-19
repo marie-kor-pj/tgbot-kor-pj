@@ -91,7 +91,7 @@ class Development(Config):
 
 프로젝트 폴더로 가서 다음 명령어를 입력하여 필수 파이썬 패키지들을 설치할 수 있습니다:<br>
 
-`pip3 install -r requirements.txt`.<br><br>
+`pip3 install -r requirements.txt`.<br>
 
 이 명령어가 모든 필수 파이썬 패키지들을 설치할 것입니다. 
 
