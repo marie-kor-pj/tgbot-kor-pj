@@ -217,7 +217,7 @@ def __import_data__(chat_id, data):
 
 
 def __stats__():
-    return "{} 개의 채팅에 걸친 {} 개의 노트.".format(sql.num_chats(), sql.num_notes())
+    return "{}개의 채팅방에 {}개의 노트가 있어요.".format(sql.num_chats(), sql.num_notes())
 
 
 def __migrate__(old_chat_id, new_chat_id):
