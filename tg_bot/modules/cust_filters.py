@@ -197,7 +197,7 @@ def reply_filter(bot: Bot, update: Update):
 
 
 def __stats__():
-    return "{}개의 필터는, {}개의 채팅에서 사용됐어요.".format(sql.num_filters(), sql.num_chats())
+    return "{}개의 채팅방에서 {}개의 필터가 사용되고 있어요.".format(sql.num_chats(), sql.num_filters())
 
 
 def __migrate__(old_chat_id, new_chat_id):
