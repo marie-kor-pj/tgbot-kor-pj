@@ -41,11 +41,11 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
         sql.reset_warns(user.id, chat.id)
         if soft_warn:  # kick
             chat.unban_member(user.id)
-            reply = "{} 번 경고, {} 가 강퇴되었어요!".format(limit, mention_html(user.id, user.first_name))
+            reply = "{} 번 경고, {} 님이 강퇴되었어요!".format(limit, mention_html(user.id, user.first_name))
 
         else:  # ban
             chat.kick_member(user.id)
-            reply = "{} 번 경고, {}가 Ban 당하였어요!".format(limit, mention_html(user.id, user.first_name))
+            reply = "{} 번 경고, {} 님이 Ban 당했어요!".format(limit, mention_html(user.id, user.first_name))
 
         for warn_reason in reasons:
             reply += "\n - {}".format(html.escape(warn_reason))
@@ -256,7 +256,7 @@ def remove_warn_filter(bot: Bot, update: Update):
     for filt in chat_filters:
         if filt == to_remove:
             sql.remove_warn_filter(chat.id, to_remove)
-            msg.reply_text("네, 그런 경고는 그만 할게요.")
+            msg.reply_text("네, 그런 경고는 그만할게요.")
             raise DispatcherHandlerStop
 
     msg.reply_text("현재 경고 필터가 아니에요. 모든 활성 경고 필터를 위해 /warnlist 을(를) 입력해보세요.")
@@ -315,7 +315,7 @@ def set_warn_limit(bot: Bot, update: Update, args: List[str]) -> str:
     if args:
         if args[0].isdigit():
             if int(args[0]) < 3:
-                msg.reply_text("최소 경고 한도는 3 이예요!")
+                msg.reply_text("최소 경고 한도는 3 이에요!")
             else:
                 sql.set_warn_limit(chat.id, int(args[0]))
                 msg.reply_text("Updated the warn limit to {}".format(args[0]))
@@ -372,8 +372,8 @@ def set_warn_strength(bot: Bot, update: Update, args: List[str]):
 
 
 def __stats__():
-    return "{} 전체 경고, 전체 {} 채팅.\n" \
-           "{} 경고 필터, 전체 {} 채팅.".format(sql.num_warns(), sql.num_warn_chats(),
+    return "{}개의 전체 경고, {}개의 전체 채팅.\n" \
+           "{}개의 경고 필터, {}개의 전체 채팅.".format(sql.num_warns(), sql.num_warn_chats(),
                                                       sql.num_warn_filters(), sql.num_warn_filter_chats())
 
 
