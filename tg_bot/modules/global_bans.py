@@ -255,7 +255,7 @@ def gbanstat(bot: Bot, update: Update, args: List[str]):
 
 
 def __stats__():
-    return "{} 님은 글로벌 밴 당한 사용자예요.".format(sql.num_gbanned_users())
+    return "{}명이 글로벌 밴 당했어요.".format(sql.num_gbanned_users())
 
 
 def __user_info__(user_id):
