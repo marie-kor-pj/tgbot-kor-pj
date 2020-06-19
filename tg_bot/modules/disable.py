@@ -135,7 +135,7 @@ if is_module_loaded(FILENAME):
 
 
     def __stats__():
-        return "{} 개의 비활성화된 명령어, {} 개의 채팅.".format(sql.num_disabled(), sql.num_chats())
+        return "{}개의 채팅방에서 {}개의 명령어가 비활성화 되었습니다.".format(sql.num_chats(), sql.num_disabled())
 
 
     def __migrate__(old_chat_id, new_chat_id):
