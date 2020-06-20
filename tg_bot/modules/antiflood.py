@@ -38,8 +38,8 @@ def check_flood(bot: Bot, update: Update) -> str:
         msg.reply_text("메시지를 한 번에 너무 많이 보낸 이유로 강퇴 당하셨습니다!")
 
         return "<b>{}:</b>" \
-               "\n#BANNED" \
-               "\n<b>User:</b> {}" \
+               "\n#밴" \
+               "\n<b>사용자:</b> {}" \
                "\nFlooded the group.".format(html.escape(chat.title),
                                              mention_html(user.id, user.first_name))
 
@@ -47,7 +47,7 @@ def check_flood(bot: Bot, update: Update) -> str:
         msg.reply_text("강퇴시킬 수 없어요! 저에게 권한을 주실 때까지 도배 방지 기능은 사용할 수 없어요.")
         sql.set_flood(chat.id, 0)
         return "<b>{}:</b>" \
-               "\n#INFO" \
+               "\n#정보" \
                "\n저에게 사용자 차단 권한이 없기 때문에 도배 방지 기능이 자동으로 비활성화됩니다!".format(chat.title)
 
 
@@ -72,8 +72,8 @@ def set_flood(bot: Bot, update: Update, args: List[str]) -> str:
                 sql.set_flood(chat.id, 0)
                 message.reply_text("도배 방지가 비활성화되었어요.")
                 return "<b>{}:</b>" \
-                       "\n#SETFLOOD" \
-                       "\n<b>Admin:</b> {}" \
+                       "\n#도배_방지_설정" \
+                       "\n<b>관리자:</b> {}" \
                        "\n도배 방지가 비활성화되었어요.".format(html.escape(chat.title), mention_html(user.id, user.first_name))
 
             elif amount < 3:
@@ -82,11 +82,11 @@ def set_flood(bot: Bot, update: Update, args: List[str]) -> str:
 
             else:
                 sql.set_flood(chat.id, amount)
-                message.reply_text("도배 방지가 업데이트 되었고, {} 로 설정되었어요.".format(amount))
+                message.reply_text("도배 방지가 {}개로 설정되었어요.".format(amount))
                 return "<b>{}:</b>" \
-                       "\n#SETFLOOD" \
-                       "\n<b>Admin:</b> {}" \
-                       "\nSet 도배 방지가 업데이트 되었어요! : <code>{}</code>.".format(html.escape(chat.title),
+                       "\n#도배_방지_설정" \
+                       "\n<b>관리자:</b> {}" \
+                       "\n도배 방지가 업데이트되었어요! : <code>{}</code>.".format(html.escape(chat.title),
                                                                     mention_html(user.id, user.first_name), amount)
 
         else:
@@ -101,7 +101,7 @@ def flood(bot: Bot, update: Update):
 
     limit = sql.get_flood_limit(chat.id)
     if limit == 0:
-        update.effective_message.reply_text("현재 도배 방지 기능을 사용하지 않고 있어요. 먼저 /setflood 를 이용하여 도배방지 기능을 활성화해 주세요.")
+        update.effective_message.reply_text("현재 도배 방지 기능을 사용하지 않고 있어요. 먼저 /setflood 명령어를 이용하여 도배방지 기능을 활성화해 주세요.")
     else:
         update.effective_message.reply_text(
             "도배 방지가 {} 개로 설정되어 있어요!".format(limit))
@@ -120,7 +120,7 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- - /flood: 현재 설정된 도배방지 관련 내용을 확인하실 수 있어요.
+ - /flood: 현재 설정된 도배 방지 관련 내용을 확인하실 수 있어요.
 
 *관리자용 명령어*
  - /setflood <숫자/'no'/'off'>: 도배 방지를 활성화하거나 비활성화하실 수 있어요.
