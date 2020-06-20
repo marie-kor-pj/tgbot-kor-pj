@@ -93,7 +93,7 @@ if is_module_loaded(FILENAME):
 
             try:
                 bot.send_message(message.forward_from_chat.id,
-                                 "이 채널이 로그 채널로 설정되었어요. {}.".format(
+                                 "{} 채널이 로그 채널로 설정되었어요.".format(
                                      chat.title or chat.first_name))
             except Unauthorized as excp:
                 if excp.message == "Forbidden: bot is not a member of the channel chat":
