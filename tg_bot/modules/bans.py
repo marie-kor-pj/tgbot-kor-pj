@@ -143,13 +143,13 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
     try:
         chat.kick_member(user_id, until_date=bantime)
         bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
-        message.reply_text("넌 Ban이야! {} 까지.".format(time_val))
+        message.reply_text("넌 {} 까지 Ban이야!".format(time_val))
         return log
 
     except BadRequest as excp:
         if excp.message == "Reply message not found":
             # Do not reply
-            message.reply_text("넌 Ban이야! {} 까지.".format(time_val), quote=False)
+            message.reply_text("넌 {} 까지 Ban이야!".format(time_val), quote=False)
             return log
         else:
             LOGGER.warning(update)
@@ -209,7 +209,7 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
         return log
 
     else:
-        message.reply_text("이런...! 전  사용자를 추방할 수 없어요!")
+        message.reply_text("이런...! 전 사용자를 추방할 수 없어요!")
 
     return ""
 
