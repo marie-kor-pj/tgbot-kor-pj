@@ -302,7 +302,7 @@ def set_welcome(bot: Bot, update: Update) -> str:
     msg.reply_text("성공적으로 환영인사 메시지를 설정했어요!")
 
     return "<b>{}:</b>" \
-           "\n#환영인사 메시지 설정" \
+           "\n#환영인사_메시지_설정" \
            "\n<b>관리자:</b> {}" \
            "\n환영인사 메시지를 설정했어요.".format(html.escape(chat.title),
                                                mention_html(user.id, user.first_name))
@@ -317,7 +317,7 @@ def reset_welcome(bot: Bot, update: Update) -> str:
     sql.set_custom_welcome(chat.id, sql.DEFAULT_WELCOME, sql.Types.TEXT)
     update.effective_message.reply_text("환영인사 메시지를 기본값으로 재설정했어요!")
     return "<b>{}:</b>" \
-           "\n#환영인사 메시지 초기화" \
+           "\n#환영인사_메시지_초기화" \
            "\n<b>관리자:</b> {}" \
            "\n환영인사 메시지를 초기화했어요.".format(html.escape(chat.title),
                                                             mention_html(user.id, user.first_name))
@@ -339,7 +339,7 @@ def set_goodbye(bot: Bot, update: Update) -> str:
     sql.set_custom_gdbye(chat.id, content or text, data_type, buttons)
     msg.reply_text("성공적으로 작별인사 메시지를 설정했어요!")
     return "<b>{}:</b>" \
-           "\n#작별인사 메시지 설정" \
+           "\n#작별인사_메시지_설정" \
            "\n<b>관리자:</b> {}" \
            "\n작별인사 메시지를 설정했어요.".format(html.escape(chat.title),
                                                mention_html(user.id, user.first_name))
@@ -354,7 +354,7 @@ def reset_goodbye(bot: Bot, update: Update) -> str:
     sql.set_custom_gdbye(chat.id, sql.DEFAULT_GOODBYE, sql.Types.TEXT)
     update.effective_message.reply_text("성공적으로 작별인사 메시지를 기본값으로 초기화했어요!")
     return "<b>{}:</b>" \
-           "\n#작별인사 메시지 초기화" \
+           "\n#작별인사_메시지_초기화" \
            "\n<b>관리자:</b> {}" \
            "\n작별인사 메시지를 초기화했어요.".format(html.escape(chat.title),
                                                  mention_html(user.id, user.first_name))
@@ -379,7 +379,7 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
         sql.set_clean_welcome(str(chat.id), True)
         update.effective_message.reply_text("오래된 환영 메시지를 삭제할게요!")
         return "<b>{}:</b>" \
-               "\n#CLEAN_WELCOME" \
+               "\n#오래된_환영인사_메시지_제거_여부" \
                "\n<b>관리자:</b> {}" \
                "\n환영 메시지 삭제가 <code>켜졌어요</code>.".format(html.escape(chat.title),
                                                                          mention_html(user.id, user.first_name))
@@ -387,7 +387,7 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
         sql.set_clean_welcome(str(chat.id), False)
         update.effective_message.reply_text("너무 오래된 환영인사 메시지는 삭제하지 못해요.")
         return "<b>{}:</b>" \
-               "\n#CLEAN_WELCOME" \
+               "\n#오래된_환영인사_메시지_제거_여부" \
                "\n<b>관리자:</b> {}" \
                "\n환영 메시지 삭제가 <code>꺼졌어요</code>.".format(html.escape(chat.title),
                                                                           mention_html(user.id, user.first_name))
