@@ -129,7 +129,7 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
         return ""
 
     log = "<b>{}:</b>" \
-          "\n#TEMP BANNED" \
+          "\n#TEMP_BANNED" \
           "\n<b>관리자:</b> {}" \
           "\n<b>사용자:</b> {} (<code>{}</code>)" \
           "\n<b>시간:</b> {}".format(html.escape(chat.title),
@@ -266,7 +266,7 @@ def unban(bot: Bot, update: Update, args: List[str]) -> str:
     message.reply_text("이제, 해당 유저는 이제 이 방에 들어올 수 있습니다!")
 
     log = "<b>{}:</b>" \
-          "\n#Ban 해제" \
+          "\n#Ban_해제" \
           "\n<b>관리자:</b> {}" \
           "\n<b>사용자:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
                                                        mention_html(user.id, user.first_name),
