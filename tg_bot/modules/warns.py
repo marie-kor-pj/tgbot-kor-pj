@@ -110,7 +110,7 @@ def button(bot: Bot, update: Update) -> str:
                 parse_mode=ParseMode.HTML)
             user_member = chat.get_member(user_id)
             return "<b>{}:</b>" \
-                   "\n#경고 해제" \
+                   "\n#경고_해제" \
                    "\n<b>관리자:</b> {}" \
                    "\n<b>사용자:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
                                                                 mention_html(user.id, user.first_name),
@@ -161,7 +161,7 @@ def reset_warns(bot: Bot, update: Update, args: List[str]) -> str:
         message.reply_text("경고가 초기화되었어요")
         warned = chat.get_member(user_id).user
         return "<b>{}:</b>" \
-               "\n#경고 초기화" \
+               "\n#경고_초기화" \
                "\n<b>관리자:</b> {}" \
                "\n<b>사용자:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
                                                             mention_html(user.id, user.first_name),
@@ -184,7 +184,7 @@ def warns(bot: Bot, update: Update, args: List[str]):
         limit, soft_warn = sql.get_warn_setting(chat.id)
 
         if reasons:
-            text = "이 사용자는 {}/{} 경고예요. 이유:".format(num_warns, limit)
+            text = "이 사용자의 경고 횟수는 {}/{} 예요. 이유:".format(num_warns, limit)
             for reason in reasons:
                 text += "\n - {}".format(reason)
 
@@ -193,7 +193,7 @@ def warns(bot: Bot, update: Update, args: List[str]):
                 update.effective_message.reply_text(msg)
         else:
             update.effective_message.reply_text(
-                "이 사용자는 {}/{} 경고예요. 하지만 아무 이유가 없네요.".format(num_warns, limit))
+                "이 사용자의 경고 횟수는 {}/{} 예요. 하지만 아무 이유가 없네요.".format(num_warns, limit))
     else:
         update.effective_message.reply_text("이 사용자에게 경고가 없어요!")
 
@@ -325,11 +325,11 @@ def set_warn_limit(bot: Bot, update: Update, args: List[str]) -> str:
                        "\n경고 한계가 다음과 같이 설정되었습니다 : <code>{}</code>".format(html.escape(chat.title),
                                                                         mention_html(user.id, user.first_name), args[0])
         else:
-            msg.reply_text("arg 숫자를 주세요!")
+            msg.reply_text("경고 한계 숫자를 입력해 주세요!")
     else:
         limit, soft_warn = sql.get_warn_setting(chat.id)
 
-        msg.reply_text("현재 경고 한계는 {} 입니다.".format(limit))
+        msg.reply_text("현재 경고 한계는 {}회 입니다.".format(limit))
     return ""
 
 
