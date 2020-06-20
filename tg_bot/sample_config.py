@@ -9,12 +9,12 @@ if not __name__.endswith("sample_config"):
 class Config(object):
     LOGGER = True
 
-    # REQUIRED
+    # 필수
     API_KEY = "봇 토큰"
-    OWNER_ID = "당신의 ID"  # 잘 모르겠다면, 봇을 실행하여 DM으로 /id in your private chat with it
+    OWNER_ID = "당신의 ID"  # 잘 모르겠다면, 봇을 실행하여 DM으로 /id 를 보내보세요
     OWNER_USERNAME = "당신의 닉네임"
 
-    # RECOMMENDED
+    # 추천
     SQLALCHEMY_DATABASE_URI = 'sqldbtype://username:pw@hostname:port/db_name'  # DB를 사용하는 모듈들에게 필요합니다.
     MESSAGE_DUMP = None  # needed to make sure 'save from' messages persist
     LOAD = []
@@ -32,14 +32,14 @@ class Config(object):
     # [1234, 5678, 9123] 형식으로 사용하시면 됩니다!
     
     SUDO_USERS = []  # 봇의 관리자 권한을 가지는 유저들의 id 의 리스트(닉네임 아닙니다).
-    SUPPORT_USERS = []  # List of id's (닉네임 아닙니다) for users which are allowed to gban, but can also be banned.
-    WHITELIST_USERS = []  # List of id's (닉네임 아닙니다) for users which WONT be banned/kicked by the bot.
+    SUPPORT_USERS = []  # 글로벌밴 권한을 줄 유저들의 id 의 리스트(닉네임 아닙니다), 그러나 밴 당할수는 있어요.
+    WHITELIST_USERS = []  # 봇에 의해 밴/강퇴 당하지 않을 권한을 줄 유저들의 id 의 리스트(닉네임 아닙니다).
     DONATION_LINK = None  # EG, paypal
     CERT_PATH = None
     PORT = 5000
     DEL_CMDS = False  # Whether or not you should delete "blue text must click" commands
     STRICT_GBAN = False
-    WORKERS = 8  # Number of subthreads to use. This is the recommended amount - see for yourself what works best!
+    WORKERS = 8  # 사용할 쓰레드의 개수. 이것은 권장량입니다. - 몇개의 쓰레드를 사용하는 것이 가장 효과가 좋은지 직접 확인해 보세요!
     BAN_STICKER = 'CAACAgQAAxkBAAED4_FeQq0f3uGjymyvbnn9he5hJCJOTgAC0wIAAqN9MRWXv1dilHR9NhgE'  # 밴 스티커 ID
     ALLOW_EXCL = False  # / 커맨드 뿐만 아닌 ! 커맨드도 쓰기 위해서는 Allow 로 변경하세요
 
