@@ -3,8 +3,9 @@
 * 이 봇은 [Marie 봇](https://github.com/PaulSonOfLars/tgbot) 을 한글화한 것 입니다.
 * 공식 사이트 : [https://marie-kor-pj.github.io/](https://marie-kor-pj.github.io/)
 * 원본 봇은 [Marie](https://t.me/BanhammerMarie_bot) 입니다.
-* 원본 Marie 봇에 대한 궁금한 점은 [support group](https://t.me/MarieSupport) 에서 물어주세요.
-* Marie 봇에 대한 새 소식은 [news channel](https://t.me/MarieNews) 에서 확인하세요.
+* 원본 [Marie](https://t.me/BanhammerMarie_bot) 봇에 대한 궁금한 점은 [support group](https://t.me/MarieSupport) 에서 물어주세요.
+* [Marie](https://t.me/BanhammerMarie_bot) 봇에 대한 새 소식은 [news channel](https://t.me/MarieNews) 에서 확인하세요.
+* 원본 [Marie](https://t.me/BanhammerMarie_bot) 봇은 업데이트가 중지되었습니다.
 
 ## Heroku Deploy
 
