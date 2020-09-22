@@ -59,10 +59,10 @@ def broadcast(bot: Bot, update: Update):
                 sleep(0.1)
             except TelegramError:
                 failed += 1
-                LOGGER.warning("%s 의 그룹에 방송하지 못했어요. 해당 그룹명은 %s 에요.", str(chat.chat_id), str(chat.chat_name))
+                LOGGER.warning("%s 그룹에 방송하지 못했어요. 해당 그룹명은 %s 에요.", str(chat.chat_id), str(chat.chat_name))
 
-        update.effective_message.reply_text("완벽하게 방송되었어요. 아마도 {} 그룹은 메시지를 받지 못했을 거예요"
-                                            "제가 추방되었기 때문이죠.".format(failed))
+        update.effective_message.reply_text(f"완벽하게 방송되었어요. 아마도 {failed}개의 그룹에서는 메시지를 받지 못했을 거예요\n"
+                                            "제가 추방되었기 때문이죠.")
 
 
 @run_async
@@ -107,7 +107,7 @@ def __user_info__(user_id):
 
 
 def __stats__():
-    return "{}개의 채팅방에서 {}명의 사용자가 저와 같이 있어요.".format(sql.num_chats(), sql.num_users())
+    return f"{sql.num_chats()}개의 채팅방에서 {sql.num_users()}명의 사용자가 저와 같이 있어요."
 
 
 def __gdpr__(user_id):
