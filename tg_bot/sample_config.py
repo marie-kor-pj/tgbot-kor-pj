@@ -5,7 +5,7 @@ if not __name__.endswith("sample_config"):
     quit(1)
 
 
-# Create a new config.py file in same dir and import, then extend this class.
+# 같은 폴더에 config.py 파일을 만들고, 이 클래스를 import 하여 이 클래스를 확장합니다.
 class Config(object):
     LOGGER = True
 
@@ -39,7 +39,7 @@ class Config(object):
     PORT = 5000
     DEL_CMDS = False  # Whether or not you should delete "blue text must click" commands
     STRICT_GBAN = False
-    WORKERS = 8  # 사용할 쓰레드의 개수. 이것은 권장량입니다. - 몇개의 쓰레드를 사용하는 것이 가장 효과가 좋은지 직접 확인해 보세요!
+    WORKERS = 8  # 사용할 쓰레드의 개수. 이것은 권장량입니다. - 몇 개의 쓰레드를 사용하는 것이 가장 효과가 좋은지 직접 확인해 보세요!
     BAN_STICKER = 'CAACAgQAAxkBAAED4_FeQq0f3uGjymyvbnn9he5hJCJOTgAC0wIAAqN9MRWXv1dilHR9NhgE'  # 밴 스티커 ID
     ALLOW_EXCL = False  # / 커맨드 뿐만 아닌 ! 커맨드도 쓰기 위해서는 Allow 로 변경하세요
 
