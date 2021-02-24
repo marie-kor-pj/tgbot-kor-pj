@@ -1,5 +1,7 @@
 # tgbot
 
+[![CodeFactor](https://www.codefactor.io/repository/github/marie-kor-pj/tgbot-kor-pj/badge/master)](https://www.codefactor.io/repository/github/marie-kor-pj/tgbot-kor-pj/overview/master)
+
 * 이 봇은 [Marie 봇](https://github.com/PaulSonOfLars/tgbot) 을 한글화한 것 입니다.
 * 공식 사이트 : [https://marie-kor-pj.github.io/](https://marie-kor-pj.github.io/)
 * ~~원본 봇은 [Marie](https://t.me/BanhammerMarie_bot) 입니다.~~ - 봇 지원종료됨, 업데이트 종료
