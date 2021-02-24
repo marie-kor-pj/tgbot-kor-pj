@@ -37,8 +37,7 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
         if excp.message == "User not found":
             message.reply_text("해당 유저를 찾을 수 없어요!")
             return ""
-        else:
-            raise
+        raise
 
     if is_user_ban_protected(chat, user_id, member):
         message.reply_text("관리자는 Ban 할 수 없어요!")
@@ -69,11 +68,11 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
             # Do not reply
             message.reply_text('넌 Ban 이야!', quote=False)
             return log
-        else:
-            LOGGER.warning(update)
-            LOGGER.exception("ERROR banning user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
-                             excp.message)
-            message.reply_text("이런...! 전 그 사용자를 Ban 할 수 없어요!")
+        
+        LOGGER.warning(update)
+        LOGGER.exception("ERROR banning user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
+                         excp.message)
+        message.reply_text("이런...! 전 그 사용자를 Ban 할 수 없어요!")
 
     return ""
 
@@ -100,8 +99,7 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
         if excp.message == "User not found":
             message.reply_text("해당 유저를 찾을 수 없어요!")
             return ""
-        else:
-            raise
+        raise
 
     if is_user_ban_protected(chat, user_id, member):
         message.reply_text("관리자는 Ban 할 수 없어요!")
@@ -151,11 +149,11 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
             # Do not reply
             message.reply_text("넌 {} 까지 Ban이야!".format(time_val), quote=False)
             return log
-        else:
-            LOGGER.warning(update)
-            LOGGER.exception("ERROR banning user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
-                             excp.message)
-            message.reply_text("이런...! 전 그 사용자를 Ban할 수 없어요!")
+        
+        LOGGER.warning(update)
+        LOGGER.exception("ERROR banning user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
+                         excp.message)
+        message.reply_text("이런...! 전 그 사용자를 Ban할 수 없어요!")
 
     return ""
 
@@ -181,8 +179,7 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
         if excp.message == "User not found":
             message.reply_text("해당 유저를 찾을 수 없어요.")
             return ""
-        else:
-            raise
+        raise
 
     if is_user_ban_protected(chat, user_id):
         message.reply_text("관리자는 추방할 수 없어요!")
@@ -208,8 +205,7 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
 
         return log
 
-    else:
-        message.reply_text("이런...! 전 사용자를 추방할 수 없어요!")
+    message.reply_text("이런...! 전 사용자를 추방할 수 없어요!")
 
     return ""
 
@@ -251,8 +247,7 @@ def unban(bot: Bot, update: Update, args: List[str]) -> str:
         if excp.message == "User not found":
             message.reply_text("해당 유저를 찾을 수 없어요!")
             return ""
-        else:
-            raise
+        raise
 
     if user_id == bot.id:
         message.reply_text("저는 절 Unban 할 수 없어요.")
